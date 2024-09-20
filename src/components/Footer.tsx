@@ -6,7 +6,7 @@ export default function Footer() {
         ©
         <Link
           href="https://github.com/kyyril/"
-          className="ml-1 text-violet-700"
+          className="ml-1 text-violet-500"
         >
           kyyril
         </Link>
