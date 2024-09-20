@@ -3,10 +3,19 @@ import { useFormStatus } from "react-dom";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { Loader2 } from "lucide-react";
+import { postData } from "@/app/actions";
+import { useRef } from "react";
 
 export function Form() {
+  const formRef = useRef<HTMLFormElement>(null);
   return (
-    <form className="flex justify-between gap-4 flex-col md:flex-row">
+    <form
+      action={async (formData) => {
+        await postData(formData);
+        formRef.current?.reset();
+      }}
+      className="flex justify-between gap-4 flex-col md:flex-row"
+    >
       <Input
         type="text"
         name="message"
@@ -30,7 +39,7 @@ export function SubmitForm() {
           Wait..
         </Button>
       ) : (
-        <Button type="submit">SignUp</Button>
+        <Button type="submit">Submit</Button>
       )}
     </>
   );
