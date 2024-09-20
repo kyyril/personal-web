@@ -10,9 +10,21 @@ datasource db {
 }
 
 model User {
-  id             String    @id unique
+  id             String    @id @unique
   email          String
   firstName      String
   lastName       String
   profileimage   String?
+  GuestBookEntry GuestBookEntry[]
+
+}
+
+model GuestBookEntry {
+  id              String    @id @default(uuid())
+  message         String
+
+  createdAt        DateTime  @default(now())
+  User    User? @relation(fields: [userId], references: [id])
+  userId String?
+
 }
