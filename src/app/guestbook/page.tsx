@@ -34,7 +34,7 @@ async function getGuestBookEntry() {
 export default function GuestBook() {
   return (
     <section className="max-w-7xl w-full px-4 md:px-8 mx-auto">
-      <h1 className="text-4xl font-semibold lg:text-5xl flex items-end justify-end pt-5 pb-2">
+      <h1 className="text-3xl font-semibold lg:text-4xl flex items-end justify-end pt-3 pb-2">
         GuestBook
       </h1>
       <p className="text-lg font-semibold lg:text-lg pt-3">

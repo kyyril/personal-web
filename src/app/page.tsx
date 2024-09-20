@@ -32,7 +32,7 @@ export default function Home() {
               Tenetur eos inventore reprehenderit beatae possimus placeat
               perferendis fuga nobis enim totam.
             </p>
-            <div className="space-x-4">
+            <div className="space-x-4 mt-2">
               <Link target="_blank" href="gitgub" prefetch={false}>
                 <Button variant="secondary" size="icon">
                   <Github />
@@ -40,7 +40,7 @@ export default function Home() {
               </Link>
 
               <Link target="_blank" href="linkedin" prefetch={false}>
-                <Button variant="secondary" size="icon">
+                <Button variant="secondary" size="sm">
                   <LinkedinIcon />
                 </Button>
               </Link>
