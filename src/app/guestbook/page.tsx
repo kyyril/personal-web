@@ -71,7 +71,7 @@ async function GuestBookEntries() {
   return data.map((item) => (
     <li key={item.id}>
       <div className="flex items-start flex-col">
-        <p className="text-muted-foreground rounded-3xl pl-1 break-words">
+        <p className="text-muted-foreground rounded-3xl from-accent pl-1 break-words">
           {item.User?.firstName} {item.User?.lastName} :{" "}
           <span className="text-foreground">{item.message}</span>
         </p>

@@ -11,7 +11,7 @@ export default function MobileMenu() {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant={"outline"} size={"icon"}>
+        <Button variant={"ghost"} size={"icon"}>
           <Menu className="h-4 w-4" />
         </Button>
       </SheetTrigger>

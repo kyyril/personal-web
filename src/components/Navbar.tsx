@@ -10,6 +10,7 @@ import {
 import { usePathname } from "next/navigation";
 import { Button } from "./ui/button";
 import MobileMenu from "./MobileMenu";
+import ThemeToggler from "./ThemeToggle";
 
 export const navigationItems = [
   {
@@ -31,11 +32,7 @@ export function Navigation() {
   return (
     <nav className="max-w-7xl mx-auto px-4 md:px-8 py-5 grid grid-cols-12">
       <div className="col-span-6 flex md:col-span-3">
-        <Link href={"/"}>
-          <h1 className="text-3xl font-semibold text-blue-600">
-            kiril <span className="text-purple-700">apa</span>
-          </h1>
-        </Link>
+        <ThemeToggler />
       </div>
       <div className="hidden sm:flex justify-center items-center col-span-6">
         <NavigationMenu>

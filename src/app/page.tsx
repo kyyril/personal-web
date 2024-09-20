@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { Github, GithubIcon, LinkedinIcon } from "lucide-react";
 
 export default function Home() {
   return (
@@ -19,7 +20,7 @@ export default function Home() {
               className="mx-auto aspect-square overflow-hidden object-cover object-center rounded-full"
             />
           </div>
-          <div className="w-full lg:w-2/3 space-y-4">
+          <div className="max-w-7xl w-full px-4 md:px-8 mx-auto">
             <div className="space-y-2">
               <h1 className="text-4xl md:text-5xl font-bold tracking-tighter ">
                 Hey 👋, I&apos;m Khairil
@@ -34,13 +35,13 @@ export default function Home() {
             <div className="space-x-4">
               <Link target="_blank" href="gitgub" prefetch={false}>
                 <Button variant="secondary" size="icon">
-                  github
+                  <Github />
                 </Button>
               </Link>
 
               <Link target="_blank" href="linkedin" prefetch={false}>
                 <Button variant="secondary" size="icon">
-                  Linked
+                  <LinkedinIcon />
                 </Button>
               </Link>
             </div>
