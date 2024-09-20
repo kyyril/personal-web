@@ -3,7 +3,6 @@ import { GuestBookLoadingForm, LoadingMessage } from "@/components/Loading";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import prisma from "@/lib/db";
 import { RegisterLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
@@ -15,7 +14,6 @@ async function getGuestBookEntry() {
       User: {
         select: {
           firstName: true,
-          profileimage: true,
         },
       },
       message: true,

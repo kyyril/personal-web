@@ -39,7 +39,7 @@ export function SubmitForm() {
           Wait..
         </Button>
       ) : (
-        <Button type="submit">Submit</Button>
+        <Button type="submit">Send</Button>
       )}
     </>
   );
