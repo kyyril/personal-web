@@ -7,6 +7,7 @@ import prisma from "@/lib/db";
 import { RegisterLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { Suspense } from "react";
+import { formatDistanceToNow } from "date-fns";
 
 async function getGuestBookEntry() {
   const data = await prisma.guestBookEntry.findMany({
@@ -14,10 +15,12 @@ async function getGuestBookEntry() {
       User: {
         select: {
           firstName: true,
+          lastName: true,
         },
       },
       message: true,
       id: true,
+      createdAt: true,
     },
     orderBy: {
       createdAt: "desc",
@@ -55,10 +58,13 @@ async function GuestBookEntries() {
   }
   return data.map((item) => (
     <li key={item.id}>
-      <div className="flex items-center">
-        <p className="text-muted-foreground pl-3 break-words">
-          {item.User?.firstName}:{" "}
+      <div className="flex items-start flex-col">
+        <p className="text-muted-foreground bg-primary-foreground rounded-3xl bg-opacity-25 pl-3 break-words">
+          {item.User?.firstName} {item.User?.lastName} :{" "}
           <span className="text-foreground">{item.message}</span>
+        </p>
+        <p className="text-muted-foreground pl-3 break-words text-xs">
+          {formatDistanceToNow(new Date(item.createdAt), { addSuffix: true })}
         </p>
       </div>
     </li>
