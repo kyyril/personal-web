@@ -1,4 +1,4 @@
-import { Menu } from "lucide-react";
+import { AlignJustify } from "lucide-react";
 import { Button } from "./ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
 import Link from "next/link";
@@ -12,11 +12,11 @@ export default function MobileMenu() {
     <Sheet>
       <SheetTrigger asChild>
         <Button variant={"ghost"} size={"icon"}>
-          <Menu className="h-4 w-4" />
+          <AlignJustify className="h-5 w-5" />
         </Button>
       </SheetTrigger>
-      <SheetContent>
-        <div className="mt-5 flex px-2 space-y-1 flex-col">
+      <SheetContent className="w-[50%] outline-none border-none backdrop-blur-none bg-primary-foreground/30">
+        <div className="mt-7 flex px-1 space-y-1 flex-col">
           {navigationItems.map((item, index) => (
             <Link
               key={index}
