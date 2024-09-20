@@ -34,8 +34,20 @@ async function getGuestBookEntry() {
 export default function GuestBook() {
   return (
     <section className="max-w-7xl w-full px-4 md:px-8 mx-auto">
-      <h1 className="text-4xl font-semibold lg:text-5xl pt-5">GuestBook</h1>
-      <Card className="mt-10">
+      <h1 className="text-4xl font-semibold lg:text-5xl flex items-end justify-end pt-5 pb-2">
+        GuestBook
+      </h1>
+      <p className="text-lg font-semibold lg:text-lg pt-3">
+        <span className="bg-primary-foreground rounded-full">
+          💬Hey, Sobat!
+        </span>
+      </p>
+      <p className="text-sm lg:text-sm pt-2">
+        Ingin menyapa atau memberi salam? Silakan tinggalkan pesan di guestbook
+        saya! Apa pun yang kamu tulis, saya akan dengan senang hati
+        membacanya.😁
+      </p>
+      <Card className="mt-8">
         <CardHeader className="flex flex-col w-full">
           <Suspense fallback={<GuestBookLoadingForm />}>
             <GuestBookForm />
@@ -59,11 +71,11 @@ async function GuestBookEntries() {
   return data.map((item) => (
     <li key={item.id}>
       <div className="flex items-start flex-col">
-        <p className="text-muted-foreground bg-primary-foreground rounded-3xl bg-opacity-25 pl-3 break-words">
+        <p className="text-muted-foreground rounded-3xl pl-1 break-words">
           {item.User?.firstName} {item.User?.lastName} :{" "}
           <span className="text-foreground">{item.message}</span>
         </p>
-        <p className="text-muted-foreground pl-3 break-words text-xs">
+        <p className="text-muted-foreground pl-1 break-words text-xs bg-primary-foreground rounded-full ">
           {formatDistanceToNow(new Date(item.createdAt), { addSuffix: true })}
         </p>
       </div>
