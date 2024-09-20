@@ -30,7 +30,7 @@ export const navigationItems = [
 export function Navigation() {
   const pathname = usePathname();
   return (
-    <nav className="sticky top-0 z-50 max-w-7xl mx-auto px-4 md:px-8 py-3 grid grid-cols-12 outline-none border-none backdrop-blur-sm bg-primary-foreground/10">
+    <nav className="sticky top-0 z-50 max-w-7xl mx-auto px-4 md:px-8 py-3 grid grid-cols-12 outline-none border-none backdrop-blur-sm bg-primary-foreground/0.5">
       <div className="col-span-6 flex md:col-span-3">
         <ThemeToggler />
       </div>
@@ -53,7 +53,6 @@ export function Navigation() {
         </NavigationMenu>
       </div>
       <div className="flex items-center justify-end md:col-span-3 col-span-6">
-        <Button className="hidden sm:block">Contact</Button>
         <div className="sm:hidden">
           <MobileMenu />
         </div>

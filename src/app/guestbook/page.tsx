@@ -39,7 +39,7 @@ export default function GuestBook() {
       </h1>
       <p className="text-lg font-semibold lg:text-lg pt-3">
         <span className="bg-primary-foreground rounded-full">
-          💬Hey, Sobat!
+          Hey, Sobat!👋🏻
         </span>
       </p>
       <p className="text-sm lg:text-sm pt-2">
