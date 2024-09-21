@@ -8,7 +8,6 @@ import {
   navigationMenuTriggerStyle,
 } from "./ui/navigation-menu";
 import { usePathname } from "next/navigation";
-import { Button } from "./ui/button";
 import MobileMenu from "./MobileMenu";
 import ThemeToggler from "./ThemeToggle";
 
