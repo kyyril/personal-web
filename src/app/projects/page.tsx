@@ -17,7 +17,7 @@ export default async function ProjectPage() {
   const data = await getJSONData();
 
   return (
-    <section className="max-w-7xl w-full mt-6 px-4 md:px-16 mx-auto">
+    <section className="max-w-7xl w-full mt-10 px-4 md:px-16 mx-auto">
       <div className="flex flex-col justify-center">
         <ul className="grid grid-cols-1 gap-4">
           {data.projects.map((project) => (
@@ -28,7 +28,7 @@ export default async function ProjectPage() {
                   alt={project.title}
                   height={200}
                   width={300}
-                  className="rounded-md object-cover"
+                  className="rounded-md object-cover my-4"
                 />
               </div>
 
@@ -57,7 +57,7 @@ export default async function ProjectPage() {
                       href={project.live_url}
                       prefetch={false}
                     >
-                      <Button size="sm">
+                      <Button size="sm" className="hover:text-violet-500">
                         <GlobeIcon className="h-3 w-3 mr-1" />
                         Demo
                       </Button>
@@ -67,7 +67,11 @@ export default async function ProjectPage() {
                       href={project.code_repo_url}
                       prefetch={false}
                     >
-                      <Button size="sm" variant="outline">
+                      <Button
+                        size="sm"
+                        className="hover:text-violet-500"
+                        variant="outline"
+                      >
                         <Github className="h-3 w-3 mr-1" />
                         Repo
                       </Button>

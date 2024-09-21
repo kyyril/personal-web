@@ -37,7 +37,11 @@ export default async function Home() {
                 href={data.contactInfo.github}
                 prefetch={false}
               >
-                <Button variant="secondary" size="icon">
+                <Button
+                  className="hover:text-violet-500"
+                  variant="secondary"
+                  size="icon"
+                >
                   <Github />
                 </Button>
               </Link>
@@ -47,7 +51,11 @@ export default async function Home() {
                 href={data.contactInfo.linkedin}
                 prefetch={false}
               >
-                <Button variant="secondary" size="sm">
+                <Button
+                  className="hover:text-violet-500"
+                  variant="secondary"
+                  size="sm"
+                >
                   <LinkedinIcon />
                 </Button>
               </Link>
@@ -56,7 +64,11 @@ export default async function Home() {
                 href={`mailto:${data.contactInfo.email}`}
                 prefetch={false}
               >
-                <Button variant="secondary" size="sm">
+                <Button
+                  className="hover:text-violet-500"
+                  variant="secondary"
+                  size="sm"
+                >
                   <MailIcon />
                 </Button>
               </Link>
