@@ -1,0 +1,49 @@
+{
+  "personalInfo": {
+    "name": "Khairil rahman",
+    "title": "FrontEnd Develover",
+    "location": "indonesian",
+    "bio": "I am an Information Systems student with a strong interest in web development, committed to improving my skills and staying up to date with technology."
+  },
+  "contactInfo": {
+    "email": "khairilrahmanhakiki04@gmail.com",
+    "phone": "+6282274360915",
+    "linkedin": "https://www.linkedin.com/in/khairil-rahman-hakiki",
+    "github": "https://github.com/kyyril",
+    "website": ""
+  },
+  "skills": {
+    "languages": ["JavaScript", "Typescript"],
+    "frameworks": ["React", "Node.js", "NextJs"],
+    "tools": ["git", "postman", "vercel"]
+  },
+  "projects": [
+    {
+      "id": "1",
+      "title": "Sobat Takwa",
+      "description": "Is a web app providing prayer schedules, Quran reading with audio, and daily prayers with search functionality, designed for ease and convenience.",
+      "technologies": ["Typescript", "Next.js", "TailwindCSS", "ShadcnUI"],
+      "live_url": "https://sobat-takwa.vercel.app/",
+      "code_repo_url": "https://github.com/kyyril/sobatTakwa",
+      "cover": "/assets/sobatTakwa.png"
+    },
+    {
+      "id": "2",
+      "title": "Cari Data Mahasigma",
+      "description": "A web app for searching and viewing student data from universities across Indonesia, offering a user-friendly and efficient interface.",
+      "technologies": ["Typescript", "Next.js", "TailwindCSS", "ShadcnUI"],
+      "live_url": "https://akumahasigma.vercel.app/mhs",
+      "code_repo_url": "https://github.com/kyyril/cari-data-mahasigma",
+      "cover": "/assets/akuMahasigma.png"
+    },
+    {
+      "id": "3",
+      "title": "Age Calculator",
+      "description": "This is a basic web application that allows users to calculate their age based on their birthdate.",
+      "technologies": ["Javascript", "TailwindCSS", "React"],
+      "live_url": "https://age-calculator-kiril.vercel.app/",
+      "code_repo_url": "https://github.com/kyyril/age-calculator",
+      "cover": "/assets/birthDate.png"
+    }
+  ]
+}
