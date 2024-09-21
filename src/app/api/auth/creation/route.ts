@@ -6,13 +6,14 @@ export async function GET() {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
 
-  if (!user || !user.id) {
-    console.error("User session is invalid or user ID is missing.", user);
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  if (!user || !user.id || user === null || user === undefined) {
+    throw new Error("Something went wrong!");
   }
 
   let dbUser = await prisma.user.findUnique({
-    where: { id: user.id },
+    where: {
+      id: user.id,
+    },
   });
 
   if (!dbUser) {
@@ -25,6 +26,5 @@ export async function GET() {
       },
     });
   }
-
   return NextResponse.redirect("/guestbook");
 }
