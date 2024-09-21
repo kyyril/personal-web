@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Github, GithubIcon, LinkedinIcon } from "lucide-react";
+import { Github, LinkedinIcon } from "lucide-react";
 
 export default function Home() {
   return (

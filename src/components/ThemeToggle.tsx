@@ -22,7 +22,7 @@ export default function ThemeToggler() {
 
   return (
     <Button
-      className="rounded-full"
+      className="rounded-full hover:bg-transparent"
       variant={"ghost"}
       size="icon"
       onClick={toggleTheme}
