@@ -18,7 +18,7 @@ export default async function ProjectPage() {
 
   return (
     <section className="max-w-7xl w-full mt-10 px-4 md:px-16 mx-auto">
-      <h2 className="font-bold text-3xl md:text-5xl mb-12">Projects</h2>
+      <h2 className="font-bold text-3xl md:text-5xl mb-6">Projects</h2>
       <div className="flex flex-col justify-center">
         <ul className="grid grid-cols-1 gap-4">
           {data.projects.map((project) => (

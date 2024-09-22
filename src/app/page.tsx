@@ -79,7 +79,7 @@ export default async function Home() {
 
       <section
         id="education"
-        className="container max-w-5xl mx-auto py-12 md:py-16 lg:py-20"
+        className="max-w-7xl w-full mt-10 px-4 md:px-16 mx-auto"
       >
         <h2 className="font-bold text-3xl md:text-5xl mb-12">Education</h2>
         <div className="relative pl-6 after:absolute after:inset-y-0 after:left-0 after:w-px after:bg-gray-500/20 dark:after:bg-gray-400/20 grid gap-10">
