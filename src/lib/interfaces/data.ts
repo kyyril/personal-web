@@ -28,10 +28,19 @@ export interface Project {
   cover: string;
 }
 
+export interface Education {
+  id: string;
+  institution: string;
+  degree: string;
+  description: string;
+  startDate: string;
+  endDate: string;
+}
+
 export interface Data {
   personalInfo: PersonalInfo;
   contactInfo: ContactInfo;
   skills: Skills;
   projects: Project[];
-  hobbies: string[];
+  education: Education[];
 }

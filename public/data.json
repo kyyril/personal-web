@@ -17,6 +17,7 @@
     "frameworks": ["React", "Node.js", "NextJs"],
     "tools": ["git", "postman", "vercel"]
   },
+
   "projects": [
     {
       "id": "1",
@@ -29,7 +30,7 @@
     },
     {
       "id": "2",
-      "title": "Cari Data Mahasigma",
+      "title": "Aku Mahasigma",
       "description": "A web app for searching and viewing student data from universities across Indonesia, offering a user-friendly and efficient interface.",
       "technologies": ["Typescript", "Next.js", "TailwindCSS", "ShadcnUI"],
       "live_url": "https://akumahasigma.vercel.app/mhs",
@@ -44,6 +45,23 @@
       "live_url": "https://age-calculator-kiril.vercel.app/",
       "code_repo_url": "https://github.com/kyyril/age-calculator",
       "cover": "/assets/birthDate.png"
+    }
+  ],
+
+  "education": [
+    {
+      "id": "1",
+      "institution": "State Islamic University Imam Bonjol Padang",
+      "degree": "Information System",
+      "description": "Completed curriculum in information systems, including courses in data structures, algorithms, software engineering, ui/ux design. Worked on several projects, including a web application to manage inbound and outbound warehousing data.",
+      "startDate": "2022",
+      "endDate": "Present"
+    },
+    {
+      "id": "2",
+      "institution": "Dicoding Academy",
+      "degree": "Web Development",
+      "description": "Completed a Coursera specialization focused on building front-end web applications using javascript, React, and Node.js. Learned best practices for designing and implementing responsive, scalable, and secure web applications."
     }
   ]
 }
