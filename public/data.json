@@ -3,7 +3,7 @@
     "name": "Khairil rahman",
     "title": "FrontEnd Develover",
     "location": "indonesian",
-    "bio": "I am an Information Systems student with a strong interest in web development, committed to improving my skills and staying up to date with technology."
+    "bio": "I'm an Information Systems student who loves programming, especially web development. I'm committed to improving my skills and knowledge to keep up with the latest technology."
   },
   "contactInfo": {
     "email": "khairilrahmanhakiki04@gmail.com",
@@ -22,7 +22,7 @@
     {
       "id": "1",
       "title": "Sobat Takwa",
-      "description": "Is a web app providing prayer schedules, Quran reading with audio, and daily prayers with search functionality, designed for ease and convenience.",
+      "description": "The web application provides a user-friendly interface with access to prayer schedules, Quran reading with audio support, and daily prayers, all featuring a search function.",
       "technologies": ["Typescript", "Next.js", "TailwindCSS", "ShadcnUI"],
       "live_url": "https://sobat-takwa.vercel.app/",
       "code_repo_url": "https://github.com/kyyril/sobatTakwa",
@@ -31,7 +31,7 @@
     {
       "id": "2",
       "title": "Aku Mahasigma",
-      "description": "A web app for searching and viewing student data from universities across Indonesia, offering a user-friendly and efficient interface.",
+      "description": "A web-based application for searching and displaying student information from universities across Indonesia, featuring a user-friendly and efficient interface.",
       "technologies": ["Typescript", "Next.js", "TailwindCSS", "ShadcnUI"],
       "live_url": "https://akumahasigma.vercel.app/mhs",
       "code_repo_url": "https://github.com/kyyril/cari-data-mahasigma",
@@ -40,7 +40,7 @@
     {
       "id": "3",
       "title": "Age Calculator",
-      "description": "This is a basic web application that allows users to calculate their age based on their birthdate.",
+      "description": "This is a simple web application that allows users to calculate their age by entering their date of birth.",
       "technologies": ["Javascript", "TailwindCSS", "React"],
       "live_url": "https://age-calculator-kiril.vercel.app/",
       "code_repo_url": "https://github.com/kyyril/age-calculator",
@@ -51,9 +51,9 @@
   "education": [
     {
       "id": "1",
-      "institution": "State Islamic University Imam Bonjol Padang",
-      "degree": "Information System",
-      "description": "Completed curriculum in information systems, including courses in data structures, algorithms, software engineering, ui/ux design. Worked on several projects, including a web application to manage inbound and outbound warehousing data.",
+      "institution": "Islamic State University Imam Bonjol Padang",
+      "degree": "Information Systems",
+      "description": "I have partially completed my studies in information systems, covering data structures, algorithms, software engineering, and UI/UX design. I've worked with a team on several projects, including developing a web application to manage warehouse operations data.",
       "startDate": "2022",
       "endDate": "Present"
     },
@@ -61,7 +61,7 @@
       "id": "2",
       "institution": "Dicoding Academy",
       "degree": "Web Development",
-      "description": "Completed a Coursera specialization focused on building front-end web applications using javascript, React, and Node.js. Learned best practices for designing and implementing responsive, scalable, and secure web applications."
+      "description": "I completed a specialized course at Dicoding Academy focused on creating front-end web applications with JavaScript, React, and Node.js. For my final project, I developed a web-based to-do list and note application, and I learned how to design and implement responsive, scalable, and secure web applications."
     }
   ]
 }
