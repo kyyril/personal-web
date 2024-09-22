@@ -8,8 +8,10 @@ import { RegisterLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { Suspense } from "react";
 import { formatDistanceToNow } from "date-fns";
+import { unstable_noStore as noStore } from "next/cache";
 
 async function getGuestBookEntry() {
+  noStore();
   const data = await prisma.guestBookEntry.findMany({
     select: {
       User: {

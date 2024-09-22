@@ -1,12 +1,14 @@
 import prisma from "@/lib/db";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { NextResponse } from "next/server";
+import { unstable_noStore as noStore } from "next/cache";
 
 export async function GET() {
+  noStore();
   const { getUser } = getKindeServerSession();
   const user = await getUser();
 
-  if (!user || !user.id || user === null || user === undefined) {
+  if (!user || !user.id || user === null) {
     throw new Error("Something went wrong!");
   }
 
@@ -26,5 +28,5 @@ export async function GET() {
       },
     });
   }
-  return NextResponse.redirect("/guestbook");
+  return NextResponse.redirect("http://localhost:3000/guestbook");
 }
