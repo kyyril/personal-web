@@ -15,7 +15,7 @@ type Message = {
 
 export default function Chat() {
   const [messages, setMessages] = useState<Message[]>([
-    { text: "Hey! What can I do for you today?", isUser: false },
+    { text: "Hey! How can I help you today? 😁", isUser: false },
   ]);
   const [input, setInput] = useState<string>("");
   const [history, setHistory] = useState<{ user: string; ai: string }[]>([]); // Menyimpan riwayat percakapan
