@@ -17,12 +17,16 @@ export const navigationItems = [
     href: "/",
   },
   {
+    name: "Projects",
+    href: "/projects",
+  },
+  {
     name: "Guestbooks",
     href: "/guestbook",
   },
   {
-    name: "Projects",
-    href: "/projects",
+    name: "Chat",
+    href: "/chat",
   },
 ];
 
