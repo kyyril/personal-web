@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import Link from "next/link";
-import { GlobeIcon, Github } from "lucide-react";
+import { GlobeIcon, GitHubLogoIcon } from "@radix-ui/react-icons";
 import { Suspense } from "react";
 import { ProjectCardSkeleton } from "@/components/Loading";
 
@@ -20,7 +20,7 @@ export default async function ProjectPage() {
 
   return (
     <section className="max-w-7xl w-full mt-10 px-4 md:px-16 mx-auto">
-      <h2 className="font-bold text-3xl md:text-5xl mb-6">Projects</h2>
+      <h2 className="font-semibold text-3xl md:text-5xl mb-6">Projects</h2>
       <div className="flex flex-col justify-center">
         <ul className="grid grid-cols-1 gap-4">
           {data.projects.map((project) => (
@@ -37,7 +37,7 @@ export default async function ProjectPage() {
                 </div>
                 <div className="w-full lg:w-2/3">
                   <CardHeader className="py-2 px-6">
-                    <CardTitle className="text-lg pt-3 font-semibold">
+                    <CardTitle className="text-2xl pt-3 font-semibold">
                       {project.title}
                     </CardTitle>
                     <div className="flex flex-wrap gap-1 mt-1">
@@ -58,7 +58,10 @@ export default async function ProjectPage() {
                         href={project.live_url}
                         prefetch={false}
                       >
-                        <Button size="sm" className="hover:text-violet-500">
+                        <Button
+                          size="sm"
+                          className="hover:text-violet-500 font-normal"
+                        >
                           <GlobeIcon className="h-3 w-3 mr-1" />
                           Demo
                         </Button>
@@ -70,10 +73,10 @@ export default async function ProjectPage() {
                       >
                         <Button
                           size="sm"
-                          className="hover:text-violet-500"
+                          className="hover:text-violet-500 font-normal"
                           variant="outline"
                         >
-                          <Github className="h-3 w-3 mr-1" />
+                          <GitHubLogoIcon className="h-3 w-3 mr-1" />
                           Repo
                         </Button>
                       </Link>

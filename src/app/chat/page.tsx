@@ -61,11 +61,11 @@ export default function Chat() {
   };
 
   return (
-    <main className="w-full flex justify-center items-start mt-5">
+    <main className="w-full flex justify-center items-start mt-1">
       <section className="w-full max-w-3xl flex justify-center flex-col">
-        <Card className="outline-dashed m-3 outline-1">
+        <Card className=" m-3 outline-1">
           {/* Header sticky */}
-          <header className="flex m-3 bg-violet-500 p-1 rounded-full bg-opacity-10 sticky top-0 z-10">
+          <header className="flex m-3 bg-violet-500 py-1 rounded-full bg-opacity-10 sticky top-0 z-10">
             <Image
               src="/assets/kaoru.jpg"
               width={50}
@@ -83,7 +83,7 @@ export default function Chat() {
           </header>
 
           {/* Chat area with scrolling enabled */}
-          <div className="mx-3 mt-5 h-80 overflow-y-auto">
+          <div className="mx-3 mt-5 h-[360px] overflow-y-auto">
             {messages.map((msg, index) => (
               <div
                 key={index}
@@ -110,7 +110,7 @@ export default function Chat() {
               className="w-full border rounded px-3 py-2"
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="ask something.."
+              placeholder="Ask something.."
               onKeyPress={(e) => e.key === "Enter" && sendMessage()}
             />
             <Button className="mt-2 flex items-center" onClick={sendMessage}>

@@ -32,7 +32,7 @@ export default function MobileMenu() {
                 pathname === item.href
                   ? "bg-muted"
                   : "hover:bg-muted hover:bg-opacity-80",
-                "group flex items-center px-2 py-2 text-sm font-semibold rounded-md"
+                "group flex items-center px-2 py-2 text-sm font-normal rounded-md"
               )}
             >
               {item.name}

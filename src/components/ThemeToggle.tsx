@@ -1,9 +1,9 @@
 "use client";
 
 import * as React from "react";
-import { MoonIcon, SunIcon } from "lucide-react";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
+import { SunIcon, MoonIcon } from "@radix-ui/react-icons";
 
 export default function ThemeToggler() {
   const { theme, setTheme, resolvedTheme } = useTheme(); // Use resolvedTheme to ensure the theme is correctly detected
