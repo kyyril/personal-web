@@ -30,6 +30,24 @@
     },
     {
       "id": "2",
+      "title": "Saas NotesApp",
+      "description": "This SaaS app, built with Next.js, Stripe, Kinde, Prisma, Supabase, and Tailwind CSS with Shadcn UI, lets users manage notes and subscribe to premium services. Free users can create up to 5 notes before subscribing for unlimited access. Features include a Stripe Customer Portal, Stripe Checkout, server-side implementation, full CRUD for notes, and customizable color themes.",
+      "technologies": [
+        "Typescript",
+        "Next.js",
+        "TailwindCSS",
+        "ShadcnUI",
+        "Stripe",
+        "Kinde",
+        "Prisma",
+        "Supabase"
+      ],
+      "live_url": "https://saas-noteapp.vercel.app",
+      "code_repo_url": "https://github.com/kyyril/saas-noteapp",
+      "cover": "/assets/notes.png"
+    },
+    {
+      "id": "3",
       "title": "Aku Mahasigma",
       "description": "A web-based application for searching and displaying student information from universities across Indonesia, featuring a user-friendly and efficient interface.",
       "technologies": ["Typescript", "Next.js", "TailwindCSS", "ShadcnUI"],
@@ -38,7 +56,7 @@
       "cover": "/assets/akuMahasigma.png"
     },
     {
-      "id": "3",
+      "id": "4",
       "title": "Age Calculator",
       "description": "This is a simple web application that allows users to calculate their age by entering their date of birth.",
       "technologies": ["Javascript", "TailwindCSS", "React"],

@@ -61,64 +61,58 @@ export default function Chat() {
   };
 
   return (
-    <main className="w-full flex justify-center items-start mt-1">
-      <section className="w-full max-w-3xl flex justify-center flex-col">
-        <Card className=" m-3 outline-1">
-          {/* Header sticky */}
-          <header className="flex m-3 bg-violet-500 py-1 rounded-full bg-opacity-10 sticky top-0 z-10">
-            <Image
-              src="/assets/kaoru.jpg"
-              width={50}
-              height={50}
-              alt="image"
-              className="aspect-square mx-2 overflow-hidden object-cover object-center rounded-full"
-            />
-            <div className="flex flex-col">
-              <h1 className="text-center font-sans text-2xl">Gemini chan</h1>
-              <p className="text-start font-sans text-sm text-green-600 font-light">
-                Online.
-              </p>
-            </div>
-            <hr />
-          </header>
+    <Card className="mt-6 outline-1 mx-auto xs:mx-2 max-w-3xl">
+      {/* Header sticky */}
+      <header className="flex m-3 bg-violet-500 py-1 rounded-full bg-opacity-10 sticky top-0 z-10">
+        <Image
+          src="/assets/kaoru.jpg"
+          width={50}
+          height={50}
+          alt="image"
+          className="aspect-square mx-2 overflow-hidden object-cover object-center rounded-full"
+        />
+        <div className="flex flex-col">
+          <h1 className="text-center font-sans text-2xl">Gemini chan</h1>
+          <p className="text-start font-sans text-sm text-green-600 font-light">
+            Online.
+          </p>
+        </div>
+        <hr />
+      </header>
 
-          {/* Chat area with scrolling enabled */}
-          <div className="mx-3 mt-5 h-[360px] overflow-y-auto">
-            {messages.map((msg, index) => (
-              <div
-                key={index}
-                className={`flex ${
-                  msg.isUser ? "justify-end" : "justify-start"
-                }`}
-              >
-                <p
-                  className={`${
-                    msg.isUser
-                      ? "bg-violet-500 rounded-l-sm rounded-b-md p-1 my-2"
-                      : "bg-secondary rounded-r-sm rounded-b-md p-1"
-                  }`}
-                >
-                  {msg.text}
-                </p>
-              </div>
-            ))}
+      {/* Chat area with scrolling enabled */}
+      <div className="mx-3 mt-5 h-[360px] overflow-y-auto">
+        {messages.map((msg, index) => (
+          <div
+            key={index}
+            className={`flex ${msg.isUser ? "justify-end" : "justify-start"}`}
+          >
+            <p
+              className={`${
+                msg.isUser
+                  ? "bg-violet-500 rounded-l-sm rounded-b-md p-1 my-2"
+                  : "bg-secondary rounded-r-sm rounded-b-md p-1"
+              }`}
+            >
+              {msg.text}
+            </p>
           </div>
+        ))}
+      </div>
 
-          {/* Input area */}
-          <div className="m-3 flex flex-col">
-            <Input
-              className="w-full border rounded px-3 py-2"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              placeholder="Ask something.."
-              onKeyPress={(e) => e.key === "Enter" && sendMessage()}
-            />
-            <Button className="mt-2 flex items-center" onClick={sendMessage}>
-              Send
-            </Button>
-          </div>
-        </Card>
-      </section>
-    </main>
+      {/* Input area */}
+      <div className="m-3 flex flex-col">
+        <Input
+          className="w-full border rounded px-3 py-2"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          placeholder="Ask something.."
+          onKeyPress={(e) => e.key === "Enter" && sendMessage()}
+        />
+        <Button className="mt-2 flex items-center" onClick={sendMessage}>
+          Send
+        </Button>
+      </div>
+    </Card>
   );
 }

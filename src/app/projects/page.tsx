@@ -30,6 +30,7 @@ export default async function ProjectPage() {
                   <Image
                     src={project.cover}
                     alt={project.title}
+                    quality={100}
                     height={200}
                     width={300}
                     className="rounded-md object-cover my-4"
