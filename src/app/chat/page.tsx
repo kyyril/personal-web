@@ -61,8 +61,8 @@ export default function Chat() {
   };
 
   return (
-    <section className="mx-2">
-      <Card className="mt-6 px-1 mx-auto max-w-3xl">
+    <section className="max-w-7xl mt-5 w-full px-4 md:px-16 mx-auto">
+      <Card className="px-1 mx-auto max-w-3xl">
         {/* Header sticky */}
         <header className="flex m-3 bg-violet-500 py-1 rounded-full bg-opacity-10 sticky top-0 z-10">
           <Image

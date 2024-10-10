@@ -44,7 +44,7 @@ export default async function Home() {
                 <Button
                   className="hover:text-violet-500"
                   variant="secondary"
-                  size="icon"
+                  size="sm"
                 >
                   <GitHubLogoIcon />
                 </Button>
