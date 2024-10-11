@@ -4,6 +4,7 @@ import { Card } from "@/components/ui/card";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { SendIcon } from "lucide-react";
 
 const GEMINI_URL = process.env.NEXT_PUBLIC_GEMINI;
 
@@ -18,37 +19,47 @@ export default function Chat() {
     { text: "Hey! How can I help you today? 😁", isUser: false },
   ]);
   const [input, setInput] = useState<string>("");
-  const [history, setHistory] = useState<{ user: string; ai: string }[]>([]); // Menyimpan riwayat percakapan
+  const [pending, setPending] = useState<boolean>(false); // State untuk melacak status pending
+  const [history, setHistory] = useState<{ user: string; ai: string }[]>([]);
+
+  const formatResponse = (responseText: string): string => {
+    return responseText
+      .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+      .replace(/\*(.*?)/g, "<strong>-</strong>")
+      .replace(/\*(.*?)\*/g, "<em>$1</em>")
+      .replace(/\n\s*\n/g, "<br />")
+      .replace(/\n/g, "<br />");
+  };
 
   const sendMessage = async () => {
     if (input.trim()) {
-      // Tambahkan pesan pengguna ke dalam state
       setMessages((prevMessages) => [
         ...prevMessages,
         { text: input, isUser: true },
       ]);
 
-      // Gabungkan riwayat percakapan dengan pertanyaan baru
-      const context = history
-        .map((entry) => `User: ${entry.user}, AI: ${entry.ai}`)
-        .join(" ");
-      const questionWithContext = context ? `${context} User: ${input}` : input;
+      const lastHistory =
+        history.length > 0 ? history[history.length - 1] : null;
+      const questionWithContext = lastHistory
+        ? `${lastHistory.user},${lastHistory.ai} ${input}`
+        : input;
+
+      setPending(true); // Set status pending ke true
 
       try {
-        // Kirim pertanyaan dengan konteks ke API
         const response = await fetch(
           `${GEMINI_URL}${encodeURIComponent(questionWithContext)}`
         );
         const data = await response.json();
 
-        // Tambahkan respons AI ke dalam state pesan
+        const formattedResponse = formatResponse(data.text);
+
         setMessages((prevMessages) => [
           ...prevMessages,
-          { text: data.text, isUser: false },
+          { text: formattedResponse, isUser: false },
         ]);
 
-        // Simpan riwayat percakapan
-        setHistory([...history, { user: input, ai: data.text }]);
+        setHistory([...history, { user: input, ai: formattedResponse }]);
       } catch (error) {
         setMessages((prevMessages) => [
           ...prevMessages,
@@ -56,7 +67,8 @@ export default function Chat() {
         ]);
       }
 
-      setInput(""); // Kosongkan input setelah dikirim
+      setPending(false); // Set status pending ke false setelah selesai
+      setInput("");
     }
   };
 
@@ -73,9 +85,9 @@ export default function Chat() {
             className="aspect-square mx-2 overflow-hidden object-cover object-center rounded-full"
           />
           <div className="flex flex-col">
-            <h1 className="text-center font-sans text-2xl">Gemini chan</h1>
+            <h1 className="text-center font-sans text-2xl">Gemini Chan</h1>
             <p className="text-start font-sans text-sm text-green-600 font-light">
-              Online.
+              online.
             </p>
           </div>
           <hr />
@@ -94,9 +106,8 @@ export default function Chat() {
                     ? "bg-violet-500 rounded-l-sm rounded-b-md p-1 my-2"
                     : "bg-secondary rounded-r-sm rounded-b-md p-1"
                 }`}
-              >
-                {msg.text}
-              </p>
+                dangerouslySetInnerHTML={{ __html: msg.text }}
+              ></p>
             </div>
           ))}
         </div>
@@ -107,11 +118,16 @@ export default function Chat() {
             className="w-full border rounded px-3 py-2"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Ask something.."
+            placeholder="Ask something..."
             onKeyPress={(e) => e.key === "Enter" && sendMessage()}
+            disabled={pending} // Nonaktifkan input saat pending
           />
-          <Button className="mt-2 flex items-center" onClick={sendMessage}>
-            Send
+          <Button
+            className="mt-2 flex items-center"
+            onClick={sendMessage}
+            disabled={pending} // Nonaktifkan tombol saat pending
+          >
+            {pending ? "Was thinking.." : <SendIcon />}
           </Button>
         </div>
       </Card>

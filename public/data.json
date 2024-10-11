@@ -71,7 +71,7 @@
       "id": "1",
       "institution": "Islamic State University Imam Bonjol Padang",
       "degree": "Information Systems",
-      "description": "I have partially completed my studies in information systems.",
+      "description": "Relevant Coursework: Data structures, algorithms, software engineering, databases, and UI/UX design.",
       "startDate": "2022",
       "endDate": "Present"
     },
@@ -79,7 +79,7 @@
       "id": "2",
       "institution": "Dicoding Academy",
       "degree": "Web Development",
-      "description": "I completed a specialized course at Dicoding Academy focused on creating front-end web applications with JavaScript, React, and Node.js. For my final project, I developed a web-based to-do list and note application, and I learned how to design and implement responsive, scalable, and secure web applications."
+      "description": "I completed a specialized course at Dicoding Academy focused on creating front-end web applications. For my final project, I developed a web-based to-do list and note application, and I learned how to design and implement responsive, scalable, and secure web applications."
     }
   ]
 }
