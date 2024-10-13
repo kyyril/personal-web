@@ -36,7 +36,7 @@ export default async function ProjectPage() {
                     quality={100}
                     height={200}
                     width={300}
-                    className="rounded-md "
+                    className="rounded-md w-full"
                   />
                 </div>
                 <div className="w-full lg:w-2/3">

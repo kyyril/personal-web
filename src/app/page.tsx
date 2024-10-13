@@ -85,7 +85,7 @@ export default async function Home() {
                   size="sm"
                 >
                   <ResumeIcon />
-                  <span className="ml-1 font-light mb-0.5">Resume</span>
+                  <span className="ml-1 font-light">Resume</span>
                 </Button>
               </Link>
             </div>

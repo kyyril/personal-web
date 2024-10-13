@@ -30,7 +30,7 @@
     {
       "id": "2",
       "title": "Saas NotesApp",
-      "description": "This SaaS app, built with Next.js, Stripe, Kinde, Prisma, Supabase, and Tailwind CSS with Shadcn UI, lets users manage notes and subscribe to premium services. Free users can create up to 5 notes before subscribing for unlimited access. Features include a Stripe Customer Portal, Stripe Checkout, server-side implementation, full CRUD for notes, and customizable color themes.",
+      "description": "This SaaS app built with Next.js, Stripe, Kinde, Prisma, Supabase, and Tailwind CSS lets users manage notes and subscribe to premium services. Free users can create up to 5 notes before needing a subscription for unlimited access. Key features include a Stripe Customer Portal, Stripe Checkout, server-side implementation, full CRUD for notes, and customizable color themes.",
       "technologies": [
         "Typescript",
         "Next.js",

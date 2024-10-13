@@ -130,7 +130,7 @@ export default function Chat() {
             {pending ? (
               "Was thinking.."
             ) : (
-              <div className="flex items-center gap-1 text-lg text-secondary font-mono">
+              <div className="flex items-center gap-1 text-secondary">
                 <span>Send</span>
                 <SendIcon className="h-4 w-4 text-violet-500" />
               </div>
