@@ -7,7 +7,7 @@ export interface PersonalInfo {
 
 export interface ContactInfo {
   email: string;
-  phone: string;
+  cv: string;
   linkedin: string;
   github: string;
   website: string;

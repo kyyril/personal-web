@@ -41,7 +41,7 @@ export default function Chat() {
       const lastHistory =
         history.length > 0 ? history[history.length - 1] : null;
       const questionWithContext = lastHistory
-        ? `${lastHistory.user},${lastHistory.ai} ${input}`
+        ? `history user:${lastHistory.user}, history ai:${lastHistory.ai}, now question:${input}`
         : input;
 
       setPending(true); // Set status pending ke true
@@ -127,7 +127,14 @@ export default function Chat() {
             onClick={sendMessage}
             disabled={pending} // Nonaktifkan tombol saat pending
           >
-            {pending ? "Was thinking.." : <SendIcon />}
+            {pending ? (
+              "Was thinking.."
+            ) : (
+              <div className="flex items-center gap-1 text-lg text-secondary font-mono">
+                <span>Send</span>
+                <SendIcon className="h-4 w-4 text-violet-500" />
+              </div>
+            )}
           </Button>
         </div>
       </Card>

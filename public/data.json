@@ -7,10 +7,9 @@
   },
   "contactInfo": {
     "email": "khairil.4hrp@gmail.com",
-    "phone": "+6282274360915",
+    "cv": "https://drive.google.com/file/d/1mydBZo6vk4ty8cFkgZt2gLtN5kn4RBih/view",
     "linkedin": "https://www.linkedin.com/in/khairilrahman",
-    "github": "https://github.com/kyyril",
-    "website": ""
+    "github": "https://github.com/kyyril"
   },
   "skills": {
     "languages": ["JavaScript", "Typescript"],
@@ -78,8 +77,10 @@
     {
       "id": "2",
       "institution": "Dicoding Academy",
-      "degree": "Web Development",
-      "description": "I completed a specialized course at Dicoding Academy focused on creating front-end web applications. For my final project, I developed a web-based to-do list and note application, and I learned how to design and implement responsive, scalable, and secure web applications."
+      "degree": "Front-End Web Development",
+      "description": "I completed a specialized course at Dicoding Academy focused on creating front-end web applications. For my final project, I developed a web-based to-do list and note application, and I learned how to design and implement responsive, scalable, and secure web applications.",
+      "startDate": "2022",
+      "endDate": "Present"
     }
   ]
 }

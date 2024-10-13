@@ -24,7 +24,10 @@ export default async function ProjectPage() {
       <div className="flex flex-col justify-center">
         <ul className="grid grid-cols-1 gap-4">
           {data.projects.map((project) => (
-            <Card key={project.title} className="flex flex-col lg:flex-row">
+            <Card
+              key={project.title}
+              className="flex bg-primary-foreground flex-col lg:flex-row"
+            >
               <Suspense fallback={<ProjectCardSkeleton />}>
                 <div className="w-full lg:w-1/3 flex justify-center items-center">
                   <Image
@@ -33,7 +36,7 @@ export default async function ProjectPage() {
                     quality={100}
                     height={200}
                     width={300}
-                    className="rounded-md object-cover my-4"
+                    className="rounded-md "
                   />
                 </div>
                 <div className="w-full lg:w-2/3">

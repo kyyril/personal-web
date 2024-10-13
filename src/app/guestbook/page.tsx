@@ -40,14 +40,11 @@ export default function GuestBook() {
         Guest<span className="font-bold text-primary font-mono">Books📑</span>
       </h1>
       <p className="text-lg font-semibold lg:text-lg pt-3">
-        <span className="bg-primary-foreground rounded-full">
-          Hai, Sobat!👋🏻
-        </span>
+        <span className="bg-primary-foreground rounded-full">Hey!👋🏻</span>
       </p>
       <p className="text-sm lg:text-sm pt-2">
-        Ingin menyapa atau memberi salam? Silakan tinggalkan pesan di guestbook
-        saya! Apa pun yang kamu tulis, saya akan dengan senang hati
-        membacanya.😁
+        Would you like to say hello or leave a greeting? Feel free to leave a
+        message in my guestbook! I will be happy to read whatever you write. 😁
       </p>
       <Card className="mt-8">
         <CardHeader className="flex flex-col w-full">
