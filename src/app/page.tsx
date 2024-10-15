@@ -5,7 +5,7 @@ import {
   GitHubLogoIcon,
   LinkedInLogoIcon,
   EnvelopeClosedIcon,
-  ResumeIcon,
+  Link1Icon,
 } from "@radix-ui/react-icons";
 import { getJSONData } from "@/lib/server";
 
@@ -84,7 +84,7 @@ export default async function Home() {
                   variant="secondary"
                   size="sm"
                 >
-                  <ResumeIcon />
+                  <Link1Icon />
                   <span className="ml-1 font-light">Resume</span>
                 </Button>
               </Link>

@@ -43,8 +43,8 @@ export default function GuestBook() {
         <span className="bg-primary-foreground rounded-full">Hey!👋🏻</span>
       </p>
       <p className="text-sm lg:text-sm pt-2">
-        Would you like to say hello or leave a greeting? Feel free to leave a
-        message in my guestbook! I will be happy to read whatever you write. 😁
+        Feel free to leave a message in my guestbook! I will be happy to read
+        whatever you write. 😁
       </p>
       <Card className="mt-8">
         <CardHeader className="flex flex-col w-full">

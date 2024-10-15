@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import Link from "next/link";
-import { GlobeIcon, GitHubLogoIcon } from "@radix-ui/react-icons";
+import { GlobeIcon, GitHubLogoIcon, PlayIcon } from "@radix-ui/react-icons";
 import { Suspense } from "react";
 import { ProjectCardSkeleton } from "@/components/Loading";
 import {
@@ -19,21 +19,19 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { Play } from "lucide-react";
 
 export default async function ProjectPage() {
   const data = await getJSONData();
 
   return (
     <section className="max-w-7xl w-full mt-10 px-4 md:px-16 mx-auto">
-      <h2 className="font-semibold text-3xl md:text-5xl mb-6">Projects</h2>
+      <h1 className="text-violet-500 mb-6 text-3xl font-semibold lg:text-4xl flex items-end justify-end pb-4 pt-2">
+        Pro<span className="font-bold text-primary font-mono">jects🛠️</span>
+      </h1>
       <div className="flex flex-col justify-center">
         <ul className="grid grid-cols-1 gap-4">
           {data.projects.map((project) => (
-            <Card
-              key={project.title}
-              className="flex bg-primary-foreground flex-col lg:flex-row"
-            >
+            <Card key={project.title} className="flex flex-col lg:flex-row">
               <Suspense fallback={<ProjectCardSkeleton />}>
                 <div className="w-full lg:w-1/3 flex justify-center items-center relative group">
                   {/* Popover for YouTube Embed */}
@@ -47,12 +45,12 @@ export default async function ProjectPage() {
                         width={300}
                         className="rounded-md w-full"
                       />
-                      <Play className="absolute text-violet-500 h-10 w-10 hidden group-hover:block" />
+                      <PlayIcon className="absolute text-violet-500 h-10 w-10 hidden group-hover:block" />
                     </PopoverTrigger>
                     <PopoverContent className="w-auto p-2">
                       <div className="flex justify-center items-center">
                         <iframe
-                          width="370"
+                          width="300"
                           height="200"
                           src="https://www.youtube.com/embed/Iqr3XIhSnUQ?si=FUbB_mBDMHAkDSR2"
                           frameBorder="0"
