@@ -26,7 +26,8 @@ export default async function ProjectPage() {
   return (
     <section className="max-w-7xl w-full mt-10 px-4 md:px-16 mx-auto">
       <h1 className="text-violet-500 mb-6 text-3xl font-bold lg:text-4xl flex items-end pb-4 pt-2">
-        Pro<span className="font-semibold text-primary font-mono">jects🛠️</span>
+        Pro
+        <span className="font-extrabold text-primary font-mono">jects🛠️</span>
       </h1>
       <div className="flex flex-col justify-center">
         <ul className="grid grid-cols-1 gap-4">
