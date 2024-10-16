@@ -68,9 +68,9 @@
   "education": [
     {
       "id": "1",
-      "institution": "Islamic State University Imam Bonjol Padang",
+      "institution": "State Islamic University of Imam Bonjol Padang",
       "degree": "Information Systems",
-      "description": "Relevant Coursework: Data structures, algorithms, software engineering, databases, and UI/UX design.",
+      "description": "",
       "startDate": "2022",
       "endDate": "Present"
     },
