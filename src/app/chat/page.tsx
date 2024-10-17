@@ -4,7 +4,7 @@ import { Card } from "@/components/ui/card";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { SendIcon } from "lucide-react";
+import { SendIcon, Loader } from "lucide-react";
 
 const GEMINI_URL = process.env.NEXT_PUBLIC_GEMINI;
 
@@ -73,7 +73,7 @@ export default function Chat() {
   };
 
   return (
-    <section className="max-w-7xl mt-4 w-full px-4 md:px-16 mx-auto">
+    <section className="max-w-7xl mt-2 w-full px-4 md:px-16 mx-auto">
       <Card className="px-1 mx-auto max-w-3xl">
         {/* Header sticky */}
         <header className="flex m-3 bg-violet-500 py-1 rounded-full bg-opacity-10 sticky top-0 z-10">
@@ -128,7 +128,10 @@ export default function Chat() {
             disabled={pending} // Nonaktifkan tombol saat pending
           >
             {pending ? (
-              "Was thinking.."
+              <div className="w-fit flex flex-row">
+                think hard..
+                <Loader className="ml-2 animate-spin w-4 h-4" />
+              </div>
             ) : (
               <div className="flex items-center gap-1 text-secondary">
                 <span>Send</span>

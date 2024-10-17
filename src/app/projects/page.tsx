@@ -35,33 +35,14 @@ export default async function ProjectPage() {
             <Card key={project.title} className="flex flex-col lg:flex-row">
               <Suspense fallback={<ProjectCardSkeleton />}>
                 <div className="w-full lg:w-1/3 flex justify-center items-center relative group">
-                  {/* Popover for YouTube Embed */}
-                  <Popover>
-                    <PopoverTrigger className="transition transform hover:opacity-80 hover:scale-95 duration-200 ease-in-out relative flex justify-center items-center w-full h-full">
-                      <Image
-                        src={project.cover}
-                        alt={project.title}
-                        quality={100}
-                        height={200}
-                        width={300}
-                        className="rounded-md w-full"
-                      />
-                      <PlayIcon className="absolute text-violet-500 h-10 w-10 hidden group-hover:block" />
-                    </PopoverTrigger>
-                    <PopoverContent className="w-auto p-2">
-                      <div className="flex justify-center items-center">
-                        <iframe
-                          width="300"
-                          height="200"
-                          src="https://www.youtube.com/embed/Iqr3XIhSnUQ?si=FUbB_mBDMHAkDSR2"
-                          frameBorder="0"
-                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                          referrerPolicy="strict-origin-when-cross-origin"
-                          allowFullScreen
-                        ></iframe>
-                      </div>
-                    </PopoverContent>
-                  </Popover>
+                  <Image
+                    src={project.cover}
+                    alt={project.title}
+                    loading="lazy"
+                    height={200}
+                    width={300}
+                    className="rounded-md w-full"
+                  />
                 </div>
                 <div className="w-full lg:w-2/3">
                   <CardHeader className="py-2 px-6">
