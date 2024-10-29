@@ -38,7 +38,7 @@ export default async function ProjectPage() {
 
               <div className="w-full lg:w-2/3">
                 <CardHeader className="py-2 px-6">
-                  <Link href={`/projects/${project.title}`}>
+                  <Link href={`/projects/${project.id}`}>
                     <CardTitle className="text-2xl pt-3 font-semibold hover:underline hover:text-violet-500 ">
                       {project.title}
                     </CardTitle>

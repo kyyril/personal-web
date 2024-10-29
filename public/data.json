@@ -25,7 +25,13 @@
       "technologies": ["Typescript", "Next.js", "TailwindCSS", "ShadcnUI"],
       "live_url": "https://sobat-takwa.vercel.app/",
       "code_repo_url": "https://github.com/kyyril/sobatTakwa",
-      "cover": "https://res.cloudinary.com/da5ggxk01/image/upload/v1730253628/sobatTakwa_mey8yu.jpg"
+      "cover": "https://res.cloudinary.com/da5ggxk01/image/upload/v1730253628/sobatTakwa_mey8yu.jpg",
+      "details": {
+        "date": "2023-06-10",
+        "description": "lorem ipsum dolor sit amet description",
+        "features": ["feat1", "feat2", "feat3"],
+        "image": ["image1", "image2", "image3"]
+      }
     },
     {
       "id": "2",
@@ -42,7 +48,13 @@
       ],
       "live_url": "https://cihuymovie.vercel.app",
       "code_repo_url": "https://github.com/kyyril/cihuymovie",
-      "cover": "https://res.cloudinary.com/da5ggxk01/image/upload/v1730253665/cihuymovie_x6ztrc.png"
+      "cover": "https://res.cloudinary.com/da5ggxk01/image/upload/v1730253665/cihuymovie_x6ztrc.png",
+      "details": {
+        "date": "2023-06-10",
+        "description": "lorem ipsum dolor sit amet description",
+        "features": ["feat1", "feat2", "feat3"],
+        "image": ["image1", "image2", "image3"]
+      }
     },
     {
       "id": "3",
@@ -60,7 +72,13 @@
       ],
       "live_url": "https://saas-noteapp.vercel.app",
       "code_repo_url": "https://github.com/kyyril/saas-noteapp",
-      "cover": "https://res.cloudinary.com/da5ggxk01/image/upload/v1730253624/notes_wrvhmi.png"
+      "cover": "https://res.cloudinary.com/da5ggxk01/image/upload/v1730253624/notes_wrvhmi.png",
+      "details": {
+        "date": "2023-06-10",
+        "description": "lorem ipsum dolor sit amet description",
+        "features": ["feat1", "feat2", "feat3"],
+        "image": ["image1", "image2", "image3"]
+      }
     },
     {
       "id": "4",
@@ -69,7 +87,13 @@
       "technologies": ["Typescript", "Next.js", "TailwindCSS", "ShadcnUI"],
       "live_url": "https://akumahasigma.vercel.app/mhs",
       "code_repo_url": "https://github.com/kyyril/cari-data-mahasigma",
-      "cover": "https://res.cloudinary.com/da5ggxk01/image/upload/v1730253623/akuMahasigma_mksoo2.png"
+      "cover": "https://res.cloudinary.com/da5ggxk01/image/upload/v1730253623/akuMahasigma_mksoo2.png",
+      "details": {
+        "date": "2023-06-10",
+        "description": "lorem ipsum dolor sit amet description",
+        "features": ["feat1", "feat2", "feat3"],
+        "image": ["image1", "image2", "image3"]
+      }
     },
     {
       "id": "5",
@@ -78,7 +102,13 @@
       "technologies": ["Javascript", "TailwindCSS", "React"],
       "live_url": "https://age-calculator-kiril.vercel.app/",
       "code_repo_url": "https://github.com/kyyril/age-calculator",
-      "cover": "https://res.cloudinary.com/da5ggxk01/image/upload/v1730253624/birthDate_sbric0.png"
+      "cover": "https://res.cloudinary.com/da5ggxk01/image/upload/v1730253624/birthDate_sbric0.png",
+      "details": {
+        "date": "2023-06-10",
+        "description": "lorem ipsum dolor sit amet description",
+        "features": ["feat1", "feat2", "feat3"],
+        "image": ["image1", "image2", "image3"]
+      }
     }
   ],
 
