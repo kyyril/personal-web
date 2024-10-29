@@ -25,10 +25,27 @@
       "technologies": ["Typescript", "Next.js", "TailwindCSS", "ShadcnUI"],
       "live_url": "https://sobat-takwa.vercel.app/",
       "code_repo_url": "https://github.com/kyyril/sobatTakwa",
-      "cover": "/assets/sobatTakwa.png"
+      "cover": "/assets/sobatTakwa.jpg"
     },
     {
       "id": "2",
+      "title": "Cihuy Movie",
+      "description": "Cihuy Movie is a web app for discovering and organizing popular movies and TV shows, featuring daily and weekly trending lists. Built with TypeScript, React-router, Vite, and ChakraUI, it includes discovery pages with pagination, a search function, and Firebase Authentication, allowing users to create a personalized watchlist.",
+      "technologies": [
+        "Typescript",
+        "React-router",
+        "Context",
+        "Vite",
+        "ChakraUI",
+        "Firebase-auth",
+        "Axios"
+      ],
+      "live_url": "https://cihuymovie.vercel.app",
+      "code_repo_url": "https://github.com/kyyril/cihuymovie",
+      "cover": "/assets/cihuymovie.png"
+    },
+    {
+      "id": "3",
       "title": "Saas NotesApp",
       "description": "This SaaS app lets users manage notes and subscribe to premium services. Free users can create up to 5 notes before needing a subscription. Key features include a Stripe Customer Portal, Stripe Checkout, server-side implementation, full CRUD for notes, and customizable color themes.",
       "technologies": [
@@ -46,7 +63,7 @@
       "cover": "/assets/notes.png"
     },
     {
-      "id": "3",
+      "id": "4",
       "title": "Aku Mahasigma",
       "description": "A web app for searching and displaying student info from Indonesian universities.",
       "technologies": ["Typescript", "Next.js", "TailwindCSS", "ShadcnUI"],
@@ -55,7 +72,7 @@
       "cover": "/assets/akuMahasigma.png"
     },
     {
-      "id": "4",
+      "id": "5",
       "title": "Age Calculator",
       "description": "This web app lets you calculate your age by entering your date of birth.",
       "technologies": ["Javascript", "TailwindCSS", "React"],

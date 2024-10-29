@@ -11,14 +11,9 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import Link from "next/link";
-import { GlobeIcon, GitHubLogoIcon, PlayIcon } from "@radix-ui/react-icons";
+import { GlobeIcon, GitHubLogoIcon } from "@radix-ui/react-icons";
 import { Suspense } from "react";
 import { ProjectCardSkeleton } from "@/components/Loading";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
 
 export default async function ProjectPage() {
   const data = await getJSONData();
@@ -38,9 +33,9 @@ export default async function ProjectPage() {
                   <Image
                     src={project.cover}
                     alt={project.title}
+                    height={"200"}
                     loading="lazy"
-                    height={200}
-                    width={300}
+                    width={"300"}
                     className="rounded-md w-full"
                   />
                 </div>
@@ -72,7 +67,7 @@ export default async function ProjectPage() {
                           className="hover:text-violet-500 font-normal"
                         >
                           <GlobeIcon className="h-3 w-3 mr-1" />
-                          Demo
+                          Visit
                         </Button>
                       </Link>
                       <Link

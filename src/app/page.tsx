@@ -23,6 +23,7 @@ export default async function Home() {
               src="/assets/profile.jpeg"
               width={280}
               height={280}
+              loading="lazy"
               alt="image"
               className="mx-auto aspect-square overflow-hidden object-cover object-center rounded-full"
             />

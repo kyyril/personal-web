@@ -82,6 +82,7 @@ export default function Chat() {
             width={50}
             height={50}
             alt="image"
+            loading="lazy"
             className="aspect-square mx-2 overflow-hidden object-cover object-center rounded-full"
           />
           <div className="flex flex-col">
