@@ -15,7 +15,7 @@ export default async function Home() {
     <main>
       <section
         id="home"
-        className="container max-w-5xl mx-auto py-12 md:py-16 lg:py-20"
+        className="container max-w-5xl mx-auto py-12 md:py-16 lg:py-20 h-[90vh]"
       >
         <div className="flex flex-col lg:flex-row items-center justify-center gap-12">
           <div className="w-1/2 mx-auto lg:w-1/3">
