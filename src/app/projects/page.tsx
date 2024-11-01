@@ -32,7 +32,7 @@ export default async function ProjectPage() {
                   height={100}
                   loading="lazy"
                   width={500}
-                  className="rounded-md w-full"
+                  className="rounded-xl w-full"
                 />
               </div>
 
@@ -65,7 +65,7 @@ export default async function ProjectPage() {
                         size="sm"
                         className="hover:text-violet-500 font-normal"
                       >
-                        <GlobeIcon className="h-3 w-3 mr-1" />
+                        <GlobeIcon className="h-3 w-3 mr-0.5" />
                         Visit
                       </Button>
                     </Link>
@@ -79,7 +79,7 @@ export default async function ProjectPage() {
                         className="hover:text-violet-500 font-normal"
                         variant="outline"
                       >
-                        <GitHubLogoIcon className="h-3 w-3 mr-1" />
+                        <GitHubLogoIcon className="h-3 w-3 mr-0.5" />
                         Repo
                       </Button>
                     </Link>

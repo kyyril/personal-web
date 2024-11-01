@@ -21,22 +21,36 @@
     {
       "id": "1",
       "title": "Sobat Takwa",
-      "description": "A web app offers a user-friendly interface with access to prayer schedules, Quran reading with audio support, and daily prayers, all with a search function.",
+      "description": "A web app offers a user-friendly interface with access to prayer schedules, Quran reading with audio support, and daily prayers, all with a search function...",
       "technologies": ["Typescript", "Next.js", "TailwindCSS", "ShadcnUI"],
       "live_url": "https://sobat-takwa.vercel.app/",
       "code_repo_url": "https://github.com/kyyril/sobatTakwa",
-      "cover": "https://res.cloudinary.com/da5ggxk01/image/upload/v1730253628/sobatTakwa_mey8yu.jpg",
+      "cover": "https://res.cloudinary.com/da5ggxk01/image/upload/v1730290596/1home_wtsi7p.png",
+      "type": "CaseStudy",
+      "type_app": "Web",
       "details": {
         "date": "2023-06-10",
-        "description": "lorem ipsum dolor sit amet description",
-        "features": ["feat1", "feat2", "feat3"],
-        "image": ["image1", "image2", "image3"]
+        "description": "Sobat Takwa Is a web app providing prayer schedules, Quran reading with audio, and daily prayers with search functionality, designed for ease and convenience.",
+        "features": [
+          "Search and select a city to view prayer times.",
+          "Prayer times based on the selected location.",
+          "Search for verse by verse name.",
+          "Listen to the audio of each verse.",
+          "daily prayer list.",
+          "Search for prayers by prayer name."
+        ],
+        "image": [
+          "https://res.cloudinary.com/da5ggxk01/image/upload/v1730290596/1home_wtsi7p.png",
+          "https://res.cloudinary.com/da5ggxk01/image/upload/v1730290545/2surah_ayb3kx.png",
+          "https://res.cloudinary.com/da5ggxk01/image/upload/v1730290545/3duo_had3wh.png",
+          "https://res.cloudinary.com/da5ggxk01/image/upload/v1730453159/ffa2993e-cae4-461f-accd-b4aa1d912bd8.png"
+        ]
       }
     },
     {
       "id": "2",
       "title": "Cihuy Movie",
-      "description": "Cihuy Movie is a web app for discovering and organizing popular movies and TV shows, featuring daily and weekly trending lists. Built with TypeScript, React-router, Vite, and ChakraUI, it includes discovery pages with pagination, a search function, and Firebase Authentication, allowing users to create a personalized watchlist.",
+      "description": "Cihuy Movie is a web app for discovering and organizing popular movies and TV shows, featuring daily and weekly trending lists. Built with TypeScript, React-router, Vite, and ChakraUI, it includes discovery pages with pagination...",
       "technologies": [
         "Typescript",
         "React-router",
@@ -48,18 +62,32 @@
       ],
       "live_url": "https://cihuymovie.vercel.app",
       "code_repo_url": "https://github.com/kyyril/cihuymovie",
-      "cover": "https://res.cloudinary.com/da5ggxk01/image/upload/v1730253665/cihuymovie_x6ztrc.png",
+      "cover": "https://res.cloudinary.com/da5ggxk01/image/upload/v1730292014/1home_2_cegeif.png",
+      "type": "CaseStudy",
+      "type_app": "Web",
       "details": {
         "date": "2023-06-10",
-        "description": "lorem ipsum dolor sit amet description",
-        "features": ["feat1", "feat2", "feat3"],
-        "image": ["image1", "image2", "image3"]
+        "description": "Cihuy Movie is a web app for discovering and organizing popular movies and TV shows, featuring daily and weekly trending lists. Built with TypeScript, React-router, Vite, and ChakraUI, it includes discovery pages with pagination, a search function, and Firebase Authentication, allowing users to create a personalized watchlist.",
+        "features": [
+          "Trending Lists: Daily/weekly popular movies and shows.",
+          "Discovery Pages: Browse content with pagination.",
+          "Search: Quickly find movies or shows.",
+          "Watchlist: Save favorites to a personalized list."
+        ],
+        "image": [
+          "https://res.cloudinary.com/da5ggxk01/image/upload/v1730292014/1home_2_cegeif.png",
+          "https://res.cloudinary.com/da5ggxk01/image/upload/v1730292012/Video_Screen1730266542360_fkebhs.png",
+          "https://res.cloudinary.com/da5ggxk01/image/upload/v1730292012/Video_Screen1730266542360_fkebhs.png",
+          "https://res.cloudinary.com/da5ggxk01/image/upload/v1730291994/Video_Screen1730266576448_fbeatf.png",
+          "https://res.cloudinary.com/da5ggxk01/image/upload/v1730291952/Video_Screen1730266594686_hfznyo.png",
+          "https://res.cloudinary.com/da5ggxk01/image/upload/v1730453517/57065083-6cfe-48cd-9331-23f72389fda1.png"
+        ]
       }
     },
     {
       "id": "3",
       "title": "Saas NotesApp",
-      "description": "This SaaS app lets users manage notes and subscribe to premium services. Free users can create up to 5 notes before needing a subscription. Key features include a Stripe Customer Portal, Stripe Checkout, server-side implementation, full CRUD for notes, and customizable color themes.",
+      "description": "This SaaS app lets users manage notes and subscribe to premium services. Free users can create up to 5 notes before needing a subscription. Key features include a Stripe Customer Portal, Stripe Checkout, server-side...",
       "technologies": [
         "Typescript",
         "Next.js",
@@ -72,12 +100,24 @@
       ],
       "live_url": "https://saas-noteapp.vercel.app",
       "code_repo_url": "https://github.com/kyyril/saas-noteapp",
-      "cover": "https://res.cloudinary.com/da5ggxk01/image/upload/v1730253624/notes_wrvhmi.png",
+      "cover": "https://res.cloudinary.com/da5ggxk01/image/upload/v1730293831/1home_3_jsr5ge.png",
+      "type": "CaseStudy",
+      "type_app": "Web",
       "details": {
         "date": "2023-06-10",
-        "description": "lorem ipsum dolor sit amet description",
-        "features": ["feat1", "feat2", "feat3"],
-        "image": ["image1", "image2", "image3"]
+        "description": "This project is a SaaS application built with a modern tech stack including Next.js 14, Stripe for payments, Kinde for authentication, Prisma for database management, Supabase for backend functionality, and Tailwind CSS for styling. The application allows users to subscribe to premium services and manage their notes. Free-tier users are limited to creating a maximum of 5 notes, after which they need to subscribe for unlimited access.",
+        "features": [
+          "CRUD for Notes (Add, View, Edit, Delete Notes)",
+          "Server-side Implementation",
+          "Stripe Customer Portal",
+          "theme color can be customized"
+        ],
+        "image": [
+          "https://res.cloudinary.com/da5ggxk01/image/upload/v1730293831/1home_3_jsr5ge.png",
+          "https://res.cloudinary.com/da5ggxk01/image/upload/v1730448744/Video_Screen1730448720255_eiwe4h.png",
+          "https://res.cloudinary.com/da5ggxk01/image/upload/v1730448799/Video_Screen1730448777220_qvqgfa.png",
+          "https://res.cloudinary.com/da5ggxk01/image/upload/v1730450907/e060a763-6a49-4f82-8140-6691a486effe.png"
+        ]
       }
     },
     {
@@ -88,6 +128,8 @@
       "live_url": "https://akumahasigma.vercel.app/mhs",
       "code_repo_url": "https://github.com/kyyril/cari-data-mahasigma",
       "cover": "https://res.cloudinary.com/da5ggxk01/image/upload/v1730253623/akuMahasigma_mksoo2.png",
+      "type": "CaseStudy",
+      "type_app": "Web",
       "details": {
         "date": "2023-06-10",
         "description": "lorem ipsum dolor sit amet description",
@@ -103,6 +145,8 @@
       "live_url": "https://age-calculator-kiril.vercel.app/",
       "code_repo_url": "https://github.com/kyyril/age-calculator",
       "cover": "https://res.cloudinary.com/da5ggxk01/image/upload/v1730253624/birthDate_sbric0.png",
+      "type": "CaseStudy",
+      "type_app": "Web",
       "details": {
         "date": "2023-06-10",
         "description": "lorem ipsum dolor sit amet description",
