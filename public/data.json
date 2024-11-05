@@ -134,7 +134,7 @@
         "date": "2023-06-10",
         "description": "lorem ipsum dolor sit amet description",
         "features": ["feat1", "feat2", "feat3"],
-        "image": ["image1", "image2", "image3"]
+        "image": []
       }
     },
     {
@@ -151,7 +151,7 @@
         "date": "2023-06-10",
         "description": "lorem ipsum dolor sit amet description",
         "features": ["feat1", "feat2", "feat3"],
-        "image": ["image1", "image2", "image3"]
+        "image": []
       }
     }
   ],

@@ -1,5 +1,6 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 import {
   Carousel,
   CarouselContent,
@@ -30,75 +31,116 @@ export default async function Detailproject({
   }
 
   return (
-    <main className="flex justify-center min-h-screen mt-16">
-      <section className="w-full max-w-4xl flex flex-col items-center mx-5">
-        <Carousel>
-          <CarouselContent>
-            {project.details.image.map((img, index) => (
-              <CarouselItem className="lg:basis-1/2" key={index}>
-                <Image
-                  src={img}
-                  alt={`Image ${index + 1}`}
-                  height={200}
-                  width={500}
-                  loading="lazy"
-                  className="rounded-sm"
-                />
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <CarouselPrevious />
-          <CarouselNext />
-        </Carousel>
+    <section className="max-w-7xl w-full mt-10 px-4 md:px-16 mx-auto">
+      <Card className="border-none shadow-none">
+        {project && project.details && project.details.image.length > 0 ? (
+          <Carousel>
+            <CarouselContent>
+              {project.details.image.map((img, index) => (
+                <CarouselItem className="lg:basis-1/2" key={index}>
+                  <Image
+                    src={img}
+                    alt={`Image ${index + 1}`}
+                    height={200}
+                    width={500}
+                    loading="lazy"
+                    className="rounded-sm"
+                  />
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="absolute left-2 top-1/2" />
+            <CarouselNext className="absolute right-2 top-1/2" />
+          </Carousel>
+        ) : (
+          <div className="text-center py-10">
+            <p className="text-xl text-muted-foreground">
+              No images available.
+            </p>
+          </div>
+        )}
 
         <div className="flex flex-col mt-6 w-full">
-          <h1 className=" text-3xl font-bold lg:text-4xl underline">
-            {project.title}
+          <h1 className="text-3xl font-bold lg:text-4xl underline">
+            {project.title || "Project Title Not Available"}
           </h1>
           <p className="mt-2 text-muted-foreground">
-            {project.details.description}
+            {project.details.description || "Description not available."}
           </p>
+
           <div className="flex flex-wrap gap-1 my-4">
-            {project.technologies.map((tech) => (
-              <Badge
-                className="w-auto h-7 text-sm"
-                key={tech}
-                variant="secondary"
-              >
-                {tech}
-              </Badge>
-            ))}
+            {project.technologies && project.technologies.length > 0 ? (
+              project.technologies.map((tech) => (
+                <Badge
+                  className="w-auto h-7 text-sm"
+                  key={tech}
+                  variant="secondary"
+                >
+                  {tech}
+                </Badge>
+              ))
+            ) : (
+              <p className="text-muted-foreground">No technologies listed.</p>
+            )}
           </div>
+
           <div className="w-full">
-            <ul className="list-disc">
-              {project.details.features.map((feature, index) => (
-                <li key={index} className="ml-6">
-                  {feature}
-                </li>
-              ))}
-            </ul>
+            {project.details.features && project.details.features.length > 0 ? (
+              <ul className="list-disc">
+                {project.details.features.map((feature, index) => (
+                  <li key={index} className="ml-6">
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className="text-muted-foreground">No features available.</p>
+            )}
           </div>
 
           <div className="flex space-x-2 mt-4">
-            <Link target="_blank" href={project.live_url} prefetch={false}>
-              <Button size="sm" className="hover:text-violet-500 font-normal">
+            {project.live_url ? (
+              <Link target="_blank" href={project.live_url} prefetch={false}>
+                <Button size="sm" className="hover:text-violet-500 font-normal">
+                  <GlobeIcon className="h-3 w-3 mr-0.5" />
+                  Visit
+                </Button>
+              </Link>
+            ) : (
+              <Button size="sm" disabled className="font-normal">
                 <GlobeIcon className="h-3 w-3 mr-0.5" />
-                Visit
+                Visit (Unavailable)
               </Button>
-            </Link>
-            <Link target="_blank" href={project.code_repo_url} prefetch={false}>
+            )}
+            {project.code_repo_url ? (
+              <Link
+                target="_blank"
+                href={project.code_repo_url}
+                prefetch={false}
+              >
+                <Button
+                  size="sm"
+                  className="hover:text-violet-500 font-normal"
+                  variant="outline"
+                >
+                  <GitHubLogoIcon className="h-3 w-3 mr-0.5" />
+                  Repo
+                </Button>
+              </Link>
+            ) : (
               <Button
                 size="sm"
-                className="hover:text-violet-500 font-normal"
+                disabled
+                className="font-normal"
                 variant="outline"
               >
                 <GitHubLogoIcon className="h-3 w-3 mr-0.5" />
-                Repo
+                Repo (Unavailable)
               </Button>
-            </Link>
+            )}
           </div>
         </div>
-      </section>
-    </main>
+      </Card>
+    </section>
   );
 }
