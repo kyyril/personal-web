@@ -60,7 +60,7 @@ export default async function Detailproject({
           </div>
         )}
 
-        <div className="flex flex-col mt-6 w-full">
+        <div className="flex flex-col mt-6 w-full mx-2 gap-2">
           <h1 className="text-3xl font-bold lg:text-4xl underline">
             {project.title || "Project Title Not Available"}
           </h1>
@@ -88,7 +88,7 @@ export default async function Detailproject({
             {project.details.features && project.details.features.length > 0 ? (
               <ul className="list-disc">
                 {project.details.features.map((feature, index) => (
-                  <li key={index} className="ml-6">
+                  <li key={index} className="ml-4">
                     {feature}
                   </li>
                 ))}
