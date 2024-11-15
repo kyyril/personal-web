@@ -1,4 +1,4 @@
-"use client"; // File: pages/chat.tsx
+"use client";
 import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import Image from "next/image";
@@ -6,9 +6,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { SendIcon, Loader } from "lucide-react";
 
-const GEMINI_URL = process.env.NEXT_PUBLIC_GEMINI;
+const XAI_API_URL = "https://api.x.ai/v1/chat/completions";
+const XAI_API_KEY = process.env.NEXT_PUBLIC_XAI_API_KEY; // API Key dari environment
 
-// Tipe untuk pesan dalam chat
 type Message = {
   text: string;
   isUser: boolean;
@@ -16,20 +16,20 @@ type Message = {
 
 export default function Chat() {
   const [messages, setMessages] = useState<Message[]>([
-    { text: "Hey! How can I help you today? 😁", isUser: false },
+    {
+      text: "Hey! I'm Eri, a chatbot created by Kiril. How can I help you today? 😁",
+      isUser: false,
+    },
   ]);
   const [input, setInput] = useState<string>("");
-  const [pending, setPending] = useState<boolean>(false); // State untuk melacak status pending
-  const [history, setHistory] = useState<{ user: string; ai: string }[]>([]);
-
-  const formatResponse = (responseText: string): string => {
-    return responseText
-      .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
-      .replace(/\*(.*?)/g, "<strong>-</strong>")
-      .replace(/\*(.*?)\*/g, "<em>$1</em>")
-      .replace(/\n\s*\n/g, "<br />")
-      .replace(/\n/g, "<br />");
-  };
+  const [pending, setPending] = useState<boolean>(false);
+  const [history, setHistory] = useState<{ role: string; content: string }[]>([
+    {
+      role: "system",
+      content:
+        "You are Eri, a chatbot created by Kiril and inspired by the oddities of the universe! 🌌 Whether you need a quick solution, a fun fact, or just someone to help you navigate the chaos of everyday life, I’m here for you. Like the Hitchhiker’s Guide, I offer a mix of wisdom, wit, and just the right amount of randomness. Don’t panic—ask me anything, and let’s explore the unknown together! 🚀💬",
+    },
+  ]);
 
   const sendMessage = async () => {
     if (input.trim()) {
@@ -38,36 +38,53 @@ export default function Chat() {
         { text: input, isUser: true },
       ]);
 
-      const lastHistory =
-        history.length > 0 ? history[history.length - 1] : null;
-      const questionWithContext = lastHistory
-        ? `history user:${lastHistory.user}, history ai:${lastHistory.ai}, now question:${input}`
-        : input;
+      setHistory((prevHistory) => [
+        ...prevHistory,
+        { role: "user", content: input },
+      ]);
 
-      setPending(true); // Set status pending ke true
+      setPending(true);
 
       try {
-        const response = await fetch(
-          `${GEMINI_URL}${encodeURIComponent(questionWithContext)}`
-        );
-        const data = await response.json();
+        const response = await fetch(XAI_API_URL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${XAI_API_KEY}`,
+          },
+          body: JSON.stringify({
+            messages: [
+              ...history,
+              { role: "user", content: input }, // Tambahkan input terakhir
+            ],
+            model: "grok-beta",
+            stream: false,
+            temperature: 0,
+          }),
+        });
 
-        const formattedResponse = formatResponse(data.text);
+        const data = await response.json();
+        const aiResponse =
+          data?.choices?.[0]?.message?.content || "No response.";
 
         setMessages((prevMessages) => [
           ...prevMessages,
-          { text: formattedResponse, isUser: false },
+          { text: aiResponse, isUser: false },
         ]);
 
-        setHistory([...history, { user: input, ai: formattedResponse }]);
+        setHistory((prevHistory) => [
+          ...prevHistory,
+          { role: "assistant", content: aiResponse },
+        ]);
       } catch (error) {
+        console.error("Error fetching data:", error);
         setMessages((prevMessages) => [
           ...prevMessages,
           { text: "Terjadi kesalahan, coba lagi.", isUser: false },
         ]);
       }
 
-      setPending(false); // Set status pending ke false setelah selesai
+      setPending(false);
       setInput("");
     }
   };
@@ -75,10 +92,9 @@ export default function Chat() {
   return (
     <section className="max-w-7xl mt-2 w-full px-4 md:px-16 mx-auto">
       <Card className="px-1 mx-auto max-w-3xl">
-        {/* Header sticky */}
         <header className="flex m-3 bg-violet-500 py-1 rounded-full bg-opacity-10 sticky top-0 z-10">
           <Image
-            src="/assets/kaoru.jpg"
+            src="/assets/erii.jpg"
             width={50}
             height={50}
             alt="image"
@@ -86,15 +102,13 @@ export default function Chat() {
             className="aspect-square mx-2 overflow-hidden object-cover object-center rounded-full"
           />
           <div className="flex flex-col">
-            <h1 className="text-center font-sans text-2xl">Gemini Chan</h1>
+            <h1 className="text-center font-sans text-2xl">Eri</h1>
             <p className="text-start font-sans text-sm text-green-600 font-light">
               online.
             </p>
           </div>
-          <hr />
         </header>
 
-        {/* Chat area with scrolling enabled */}
         <div className="mx-3 mt-5 h-[360px] overflow-y-auto">
           {messages.map((msg, index) => (
             <div
@@ -107,13 +121,13 @@ export default function Chat() {
                     ? "bg-violet-500 rounded-l-sm rounded-b-md p-1 my-2"
                     : "bg-secondary rounded-r-sm rounded-b-md p-1"
                 }`}
-                dangerouslySetInnerHTML={{ __html: msg.text }}
-              ></p>
+              >
+                {msg.text}
+              </p>
             </div>
           ))}
         </div>
 
-        {/* Input area */}
         <div className="m-3 flex flex-col">
           <Input
             className="w-full border rounded px-3 py-2"
@@ -121,12 +135,12 @@ export default function Chat() {
             onChange={(e) => setInput(e.target.value)}
             placeholder="Ask something..."
             onKeyPress={(e) => e.key === "Enter" && sendMessage()}
-            disabled={pending} // Nonaktifkan input saat pending
+            disabled={pending}
           />
           <Button
             className="mt-2 flex items-center"
             onClick={sendMessage}
-            disabled={pending} // Nonaktifkan tombol saat pending
+            disabled={pending}
           >
             {pending ? (
               <div className="w-fit flex flex-row">
