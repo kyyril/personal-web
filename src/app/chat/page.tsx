@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { SendIcon, Loader } from "lucide-react";
 import ReactMarkdown from "react-markdown";
+import { AnimatePresence, motion } from "framer-motion";
 
 const XAI_API_URL = "https://api.x.ai/v1/chat/completions";
 const XAI_API_KEY = process.env.NEXT_PUBLIC_XAI_API_KEY;
@@ -98,38 +99,54 @@ export default function Chat() {
 
         {/* Chat Messages */}
         <div className="mx-3 mt-5 h-[360px] overflow-y-auto">
-          {messages.map((msg, index) => (
-            <div
-              key={index}
-              className={`flex ${msg.isUser ? "justify-end" : "justify-start"}`}
-            >
-              <div
-                className={`${
-                  msg.isUser
-                    ? "bg-violet-500 text-white rounded-l-sm rounded-b-md p-2 my-2"
-                    : "bg-secondary text-primary rounded-r-sm rounded-b-md p-2 my-2"
-                }`}
+          <AnimatePresence>
+            {messages.map((msg, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, height: 0, scale: 0.8 }}
+                animate={{ opacity: 1, height: "auto", scale: 1 }}
+                exit={{ opacity: 0, height: 0, scale: 0.8 }}
+                transition={{
+                  opacity: { duration: 0.5 },
+                  height: { duration: 0.5 },
+                  scale: { duration: 0.3 },
+                }}
               >
-                <ReactMarkdown
-                  components={{
-                    code({ inline, children }: any) {
-                      return inline ? (
-                        <code className="bg-purple-500 bg-opacity-10 text-red-600 px-1 rounded">
-                          {children}
-                        </code>
-                      ) : (
-                        <pre className="bg-purple-500 bg-opacity-10 dark:text-primary p-2 rounded overflow-x-auto">
-                          <code>{children}</code>
-                        </pre>
-                      );
-                    },
-                  }}
+                <div
+                  key={index}
+                  className={`flex ${
+                    msg.isUser ? "justify-end" : "justify-start"
+                  }`}
                 >
-                  {msg.text}
-                </ReactMarkdown>
-              </div>
-            </div>
-          ))}
+                  <div
+                    className={`${
+                      msg.isUser
+                        ? "bg-violet-500 text-white rounded-l-sm rounded-b-md p-2 my-2"
+                        : "bg-secondary text-primary rounded-r-sm rounded-b-md p-2 my-2"
+                    }`}
+                  >
+                    <ReactMarkdown
+                      components={{
+                        code({ inline, children }: any) {
+                          return inline ? (
+                            <code className="bg-purple-500 bg-opacity-10 text-red-600 px-1 rounded">
+                              {children}
+                            </code>
+                          ) : (
+                            <pre className="bg-purple-500 bg-opacity-10 dark:text-primary p-2 rounded overflow-x-auto">
+                              <code>{children}</code>
+                            </pre>
+                          );
+                        },
+                      }}
+                    >
+                      {msg.text}
+                    </ReactMarkdown>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </AnimatePresence>
         </div>
 
         {/* Input Section */}
