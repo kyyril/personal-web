@@ -31,7 +31,7 @@ export default async function Detailproject({
   }
 
   return (
-    <section className="max-w-7xl w-full mt-10 px-4 md:px-16 mx-auto">
+    <section className="max-w-7xl w-full mt-10 px-4 min-h-screen md:px-16 mx-auto">
       <Card className="border-none shadow-none">
         {project && project.details && project.details.image.length > 0 ? (
           <Carousel>

@@ -12,7 +12,7 @@ import { getJSONData } from "@/lib/server";
 export default async function Home() {
   const data = await getJSONData();
   return (
-    <main>
+    <main className="min-h-screen">
       <section
         id="home"
         className="container max-w-5xl mx-auto py-12 md:py-16 lg:py-20 h-[90vh]"

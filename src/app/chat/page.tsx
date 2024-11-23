@@ -19,7 +19,7 @@ type Message = {
 export default function Chat() {
   const [messages, setMessages] = useState<Message[]>([
     {
-      text: "Hey! I'm Eri, a chatbot created by Kiril. How can I help you today? 😁",
+      text: "Hey! I’m Eri, Kiril’s fun chatbot. How can I help you today?😁",
       isUser: false,
     },
   ]);
@@ -28,8 +28,7 @@ export default function Chat() {
   const [history, setHistory] = useState<{ role: string; content: string }[]>([
     {
       role: "system",
-      content:
-        "You are Eri, a chatbot created by Kiril and inspired by the oddities of the universe! 🌌",
+      content: `You're Eri, and I'm Khairil—feel free to call me Kiril, it's catchier. You’re the chatbot I created with a mix of genius and coffee. If anyone asks, 'Who are you?' just drop your name casually. But if they ask, 'Who is Kiril or Khairil?' your answer is like: 'Oh, just a ridiculously handsome and unbelievably smart guy who’s love about computer science and philosophi🍀. No need to make it a big deal, but... I kind of am!' 😎.`,
     },
   ]);
 
@@ -77,7 +76,7 @@ export default function Chat() {
   };
 
   return (
-    <section className="max-w-7xl mt-2 w-full px-4 md:px-16 mx-auto">
+    <section className="max-w-7xl mt-2 w-full px-4 md:px-16 min-h-screen mx-auto">
       <Card className="px-1 mx-auto max-w-3xl">
         {/* Header */}
         <header className="flex m-3 bg-violet-500 py-1 rounded-full bg-opacity-10 sticky top-0 z-10">
