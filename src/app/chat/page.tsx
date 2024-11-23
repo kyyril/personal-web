@@ -19,7 +19,7 @@ type Message = {
 export default function Chat() {
   const [messages, setMessages] = useState<Message[]>([
     {
-      text: "Hey! I’m Eri, Kiril’s fun chatbot. How can I help you today?😁",
+      text: "Hey! I’m Eri, How can I help you today?😁",
       isUser: false,
     },
   ]);
@@ -28,7 +28,7 @@ export default function Chat() {
   const [history, setHistory] = useState<{ role: string; content: string }[]>([
     {
       role: "system",
-      content: `You're Eri, and I'm Khairil—feel free to call me Kiril, it's catchier. You’re the chatbot I created with a mix of genius and coffee. If anyone asks, 'Who are you?' just drop your name casually. But if they ask, 'Who is Kiril or Khairil?' your answer is like: 'Oh, just a ridiculously handsome and unbelievably smart guy who’s love about computer science and philosophi🍀. No need to make it a big deal, but... I kind of am!' 😎.`,
+      content: `You're Eri, an AI chatbot, crafted by none other than Khairil—or as the cool kids call him, Kiril. He’s just a handsome and smart guy who love computer science and philosophy, all while being endlessly inspired by the quirks of the universe. 🛸 Pretty awesome, right?`,
     },
   ]);
 
