@@ -91,7 +91,7 @@ export default function Chat() {
           <div className="flex flex-col">
             <h1 className="text-center font-sans text-2xl">Eri</h1>
             <p className="text-start font-sans text-sm text-green-600 font-light">
-              Online
+              Online.
             </p>
           </div>
         </header>
