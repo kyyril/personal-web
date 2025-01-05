@@ -8,8 +8,23 @@ import { SendIcon, Loader } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import { AnimatePresence, motion } from "framer-motion";
 
-const XAI_API_URL = "https://api.x.ai/v1/chat/completions";
-const XAI_API_KEY = process.env.NEXT_PUBLIC_XAI_API_KEY;
+import { GoogleGenerativeAI } from "@google/generative-ai";
+
+const GEMINI_API_KEY = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
+
+const genAI = new GoogleGenerativeAI(GEMINI_API_KEY as string);
+
+const model = genAI.getGenerativeModel({
+  model: "gemini-1.5-flash",
+});
+
+const generationConfig = {
+  temperature: 1,
+  topP: 0.95,
+  topK: 40,
+  maxOutputTokens: 8192,
+  responseMimeType: "text/plain",
+};
 
 type Message = {
   text: string;
@@ -25,10 +40,14 @@ export default function Chat() {
   ]);
   const [input, setInput] = useState<string>("");
   const [pending, setPending] = useState<boolean>(false);
-  const [history, setHistory] = useState<{ role: string; content: string }[]>([
+  const [history, setHistory] = useState<any[]>([
     {
-      role: "system",
-      content: `You're Eri, an AI chatbot, crafted by none other than Khairil—or as the cool kids call him, Kiril. He’s just a handsome and smart guy who love computer science and philosophy, all while being endlessly inspired by the quirks of the universe. 🛸 Pretty awesome, right?`,
+      role: "user",
+      parts: [
+        {
+          text: "You're Eri, an AI chatbot, build by none other than Khairil or as call him, Kiril. He’s just a handsome and smart guy who love computer science and philosophy, all while being endlessly inspired by the quirks of the universe. 🛸 Pretty awesome, right?",
+        },
+      ],
     },
   ]);
 
@@ -37,35 +56,35 @@ export default function Chat() {
 
     const userMessage = input.trim();
     setMessages((prev) => [...prev, { text: userMessage, isUser: true }]);
-    setHistory((prev) => [...prev, { role: "user", content: userMessage }]);
+    setHistory((prev) => [
+      ...prev,
+      {
+        role: "user",
+        parts: [{ text: userMessage }],
+      },
+    ]);
     setInput("");
     setPending(true);
 
     try {
-      const response = await fetch(XAI_API_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${XAI_API_KEY}`,
-        },
-        body: JSON.stringify({
-          messages: [...history, { role: "user", content: userMessage }],
-          model: "grok-beta",
-          stream: false,
-          temperature: 0,
-        }),
+      const chatSession = model.startChat({
+        generationConfig,
+        history,
       });
 
-      const data = await response.json();
-      const rawResponse =
-        data?.choices?.[0]?.message?.content || "No response.";
+      const result = await chatSession.sendMessage(userMessage);
+
+      const rawResponse = result.response.text() || "No response.";
       setMessages((prev) => [...prev, { text: rawResponse, isUser: false }]);
       setHistory((prev) => [
         ...prev,
-        { role: "assistant", content: rawResponse },
+        {
+          role: "model",
+          parts: [{ text: rawResponse }],
+        },
       ]);
     } catch (error) {
-      console.error("Error fetching data:", error);
+      console.error("Error during Gemini interaction:", error);
       setMessages((prev) => [
         ...prev,
         { text: "An error occurred. Please try again.", isUser: false },
@@ -112,7 +131,6 @@ export default function Chat() {
                 }}
               >
                 <div
-                  key={index}
                   className={`flex ${
                     msg.isUser ? "justify-end" : "justify-start"
                   }`}
@@ -124,23 +142,7 @@ export default function Chat() {
                         : "bg-secondary text-primary rounded-r-sm rounded-b-md p-2 my-2"
                     }`}
                   >
-                    <ReactMarkdown
-                      components={{
-                        code({ inline, children }: any) {
-                          return inline ? (
-                            <code className="bg-purple-500 bg-opacity-10 text-red-600 px-1 rounded">
-                              {children}
-                            </code>
-                          ) : (
-                            <pre className="bg-purple-500 bg-opacity-10 dark:text-primary p-2 rounded overflow-x-auto">
-                              <code>{children}</code>
-                            </pre>
-                          );
-                        },
-                      }}
-                    >
-                      {msg.text}
-                    </ReactMarkdown>
+                    <ReactMarkdown>{msg.text}</ReactMarkdown>
                   </div>
                 </div>
               </motion.div>

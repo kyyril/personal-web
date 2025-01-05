@@ -10,6 +10,7 @@
     "postinstall": "prisma generate"
   },
   "dependencies": {
+    "@google/generative-ai": "^0.21.0",
     "@kinde-oss/kinde-auth-nextjs": "^2.3.8",
     "@prisma/client": "^5.19.1",
     "@radix-ui/react-dialog": "^1.1.1",
