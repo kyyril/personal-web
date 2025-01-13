@@ -96,7 +96,8 @@
         "Stripe",
         "Kinde",
         "Prisma",
-        "Supabase"
+        "Supabase",
+        "postgreSQL"
       ],
       "live_url": "https://saas-noteapp.vercel.app",
       "code_repo_url": "https://github.com/kyyril/saas-noteapp",
