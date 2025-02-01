@@ -26,13 +26,7 @@ export interface Project {
   technologies: string[];
   live_url: string;
   code_repo_url: string;
-  cover: string;
-  details: DetailsProjects;
-}
-
-export interface DetailsProjects {
   date: string;
-  description: string;
   features: string[];
   image: string[];
 }

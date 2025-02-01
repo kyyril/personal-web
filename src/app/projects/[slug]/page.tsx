@@ -1,3 +1,4 @@
+import ProjectCarousel from "@/components/Project/ProjectCarousel";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -33,25 +34,8 @@ export default async function Detailproject({
   return (
     <section className="max-w-7xl w-full mt-10 px-4 min-h-screen md:px-16 mx-auto">
       <Card className="border-none shadow-none">
-        {project && project.details && project.details.image.length > 0 ? (
-          <Carousel>
-            <CarouselContent>
-              {project.details.image.map((img, index) => (
-                <CarouselItem className="lg:basis-1/2" key={index}>
-                  <Image
-                    src={img}
-                    alt={`Image ${index + 1}`}
-                    height={200}
-                    width={500}
-                    loading="lazy"
-                    className="rounded-sm"
-                  />
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            <CarouselPrevious className="absolute left-2 top-1/2" />
-            <CarouselNext className="absolute right-2 top-1/2" />
-          </Carousel>
+        {project && project.image.length > 0 ? (
+          <ProjectCarousel images={project.image} />
         ) : (
           <div className="text-center py-10">
             <p className="text-xl text-muted-foreground">
@@ -65,7 +49,7 @@ export default async function Detailproject({
             {project.title || "Project Title Not Available"}
           </h1>
           <p className="mt-2 text-muted-foreground">
-            {project.details.description || "Description not available."}
+            {project.description || "Description not available."}
           </p>
 
           <div className="flex flex-wrap gap-1 my-4">
@@ -85,9 +69,9 @@ export default async function Detailproject({
           </div>
 
           <div className="w-full">
-            {project.details.features && project.details.features.length > 0 ? (
+            {project.features && project.features.length > 0 ? (
               <ul className="list-disc">
-                {project.details.features.map((feature, index) => (
+                {project.features.map((feature, index) => (
                   <li key={index} className="ml-4">
                     {feature}
                   </li>
