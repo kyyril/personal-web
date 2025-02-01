@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 import {
   Card,
@@ -11,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { GlobeIcon, GitHubLogoIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
+import { useState } from "react";
 
 interface ProjectProps {
   project: {
@@ -25,17 +27,25 @@ interface ProjectProps {
 }
 
 export default function CardProject({ project }: ProjectProps) {
+  const [imageLoading, setImageLoading] = useState(true);
+
   return (
     <Card className="flex flex-col lg:flex-row">
       <div className="w-full lg:w-1/3 flex justify-center items-center relative group">
+        {imageLoading && (
+          <div className="absolute w-full h-full animate-pulse rounded-xl" />
+        )}
         <Image
           src={project?.image[0]}
           alt={project?.title}
-          width={400} // Atur ukuran tetap
+          width={400}
           height={250}
           quality={100}
-          className="rounded-xl object-cover w-full h-full"
+          className={`rounded-xl object-cover w-full h-full transition-opacity duration-500 ${
+            imageLoading ? "opacity-0" : "opacity-100"
+          }`}
           loading="lazy"
+          onLoad={() => setImageLoading(false)}
         />
       </div>
 
