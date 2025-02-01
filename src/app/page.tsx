@@ -44,7 +44,7 @@ export default async function Home() {
                 prefetch={false}
               >
                 <Button
-                  className="hover:text-violet-500"
+                  className="hover:text-custom"
                   variant="secondary"
                   size="sm"
                 >
@@ -58,7 +58,7 @@ export default async function Home() {
                 prefetch={false}
               >
                 <Button
-                  className="hover:text-violet-500"
+                  className="hover:text-custom"
                   variant="secondary"
                   size="sm"
                 >
@@ -71,7 +71,7 @@ export default async function Home() {
                 prefetch={false}
               >
                 <Button
-                  className="hover:text-violet-500"
+                  className="hover:text-custom"
                   variant="secondary"
                   size="sm"
                 >
@@ -81,7 +81,7 @@ export default async function Home() {
 
               <Link target="_blank" href={data.contactInfo.cv} prefetch={false}>
                 <Button
-                  className="hover:text-violet-500"
+                  className="hover:text-custom"
                   variant="secondary"
                   size="sm"
                 >
@@ -96,7 +96,7 @@ export default async function Home() {
 
       <section
         id="education"
-        className="max-w-7xl w-full mt-10 px-4 md:px-16 mx-auto"
+        className="max-w-6xl w-full mt-10 px-4 md:px-16 mx-auto"
       >
         <h2 className="font-semibold text-3xl md:text-5xl mb-12">Education</h2>
         <div className="relative pl-6 after:absolute after:inset-y-0 after:left-0 after:w-px after:bg-gray-500/20 dark:after:bg-gray-400/20 grid gap-10">
@@ -106,10 +106,12 @@ export default async function Home() {
 
               <h4 className="text-xl font-semibold">{ed.degree}</h4>
               <h5>{ed.institution}</h5>
-              <div className="text-gray-500 dark:text-gray-400">
+              <div className="">
                 {ed.startDate} - {ed.endDate}
               </div>
-              <p className="mt-2 text-sm text-gray-500">{ed.description}</p>
+              <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
+                {ed.description}
+              </p>
             </div>
           ))}
         </div>

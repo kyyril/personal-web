@@ -34,7 +34,7 @@ export default function CardProject({ project }: ProjectProps) {
           width={400} // Atur ukuran tetap
           height={250}
           quality={100}
-          className="rounded-xl object-cover w-full h-auto"
+          className="rounded-xl object-cover w-full h-full"
           loading="lazy"
         />
       </div>
@@ -42,13 +42,17 @@ export default function CardProject({ project }: ProjectProps) {
       <div className="w-full lg:w-2/3">
         <CardHeader className="py-2 px-6">
           <Link href={`/projects/${project.id}`}>
-            <CardTitle className="text-2xl pt-3 font-semibold hover:underline hover:text-violet-500">
+            <CardTitle className="text-2xl pt-3 font-semibold hover:underline hover:text-custom">
               {project.title}
             </CardTitle>
           </Link>
           <div className="flex flex-wrap gap-1 mt-1">
             {project.technologies.map((tech) => (
-              <Badge key={tech} variant="secondary" className="p-0.5 text-xs">
+              <Badge
+                key={tech}
+                variant="secondary"
+                className="p-0.5 text-xs line-clamp-1"
+              >
                 {tech}
               </Badge>
             ))}
@@ -62,7 +66,7 @@ export default function CardProject({ project }: ProjectProps) {
         <CardFooter className="py-2 pb-4">
           <div className="flex space-x-2">
             <Link target="_blank" href={project.live_url} prefetch={false}>
-              <Button size="sm" className="hover:text-violet-500 font-normal">
+              <Button size="sm" className="hover:text-custom font-normal">
                 <GlobeIcon className="h-3 w-3 mr-0.5" />
                 Visit
               </Button>
@@ -70,7 +74,7 @@ export default function CardProject({ project }: ProjectProps) {
             <Link target="_blank" href={project.code_repo_url} prefetch={false}>
               <Button
                 size="sm"
-                className="hover:text-violet-500 font-normal"
+                className="hover:text-custom font-normal"
                 variant="outline"
               >
                 <GitHubLogoIcon className="h-3 w-3 mr-0.5" />

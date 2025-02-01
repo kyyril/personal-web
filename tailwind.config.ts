@@ -15,6 +15,7 @@ const config: Config = {
         lg: "12px",
       },
       colors: {
+        custom: "#0052ff",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {

@@ -7,7 +7,7 @@ export default function Footer() {
         ©
         <Link
           href="https://github.com/kyyril/"
-          className="ml-1 text-violet-500 hover:underline"
+          className="ml-1 text-custom underline hover:opacity-50"
         >
           kyyril
         </Link>

@@ -3,6 +3,7 @@ import "./globals.css";
 import { Navigation } from "@/components/Navbar";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import Footer from "@/components/Footer";
+import FooterWrapper from "@/components/FooterWrapper";
 
 export const metadata: Metadata = {
   title: "kyyril",
@@ -25,7 +26,7 @@ export default function RootLayout({
         >
           <Navigation />
           {children}
-          <Footer />
+          <FooterWrapper />
         </ThemeProvider>
       </body>
     </html>

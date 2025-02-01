@@ -2,17 +2,8 @@ import ProjectCarousel from "@/components/Project/ProjectCarousel";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
-
 import { getJSONData } from "@/lib/server";
 import { GitHubLogoIcon, GlobeIcon } from "@radix-ui/react-icons";
-import Image from "next/image";
 import Link from "next/link";
 
 export default async function Detailproject({
@@ -32,7 +23,7 @@ export default async function Detailproject({
   }
 
   return (
-    <section className="max-w-7xl w-full mt-10 px-4 min-h-screen md:px-16 mx-auto">
+    <section className="max-w-5xl w-full mt-10 px-4 min-h-screen md:px-16 mx-auto">
       <Card className="border-none shadow-none">
         {project && project.image.length > 0 ? (
           <ProjectCarousel images={project.image} />
@@ -85,7 +76,7 @@ export default async function Detailproject({
           <div className="flex space-x-2 mt-4">
             {project.live_url ? (
               <Link target="_blank" href={project.live_url} prefetch={false}>
-                <Button size="sm" className="hover:text-violet-500 font-normal">
+                <Button size="sm" className="hover:text-custom font-normal">
                   <GlobeIcon className="h-3 w-3 mr-0.5" />
                   Visit
                 </Button>
@@ -104,7 +95,7 @@ export default async function Detailproject({
               >
                 <Button
                   size="sm"
-                  className="hover:text-violet-500 font-normal"
+                  className="hover:text-cus font-normal"
                   variant="outline"
                 >
                   <GitHubLogoIcon className="h-3 w-3 mr-0.5" />

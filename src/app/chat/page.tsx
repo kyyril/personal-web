@@ -95,10 +95,10 @@ export default function Chat() {
   };
 
   return (
-    <section className="max-w-7xl mt-2 w-full px-4 md:px-16 min-h-screen mx-auto">
+    <section className="max-w-7xl mt-2 w-full h-full px-4 md:px-16 overflow-hidden mx-auto">
       <Card className="px-1 mx-auto max-w-3xl">
         {/* Header */}
-        <header className="flex m-3 bg-violet-500 py-1 rounded-full bg-opacity-10 sticky top-0 z-10">
+        <header className="flex m-3 bg-custom py-1 rounded-full bg-opacity-10 sticky top-0 z-10">
           <Image
             src="/assets/erii.jpg"
             width={50}
@@ -138,7 +138,7 @@ export default function Chat() {
                   <div
                     className={`${
                       msg.isUser
-                        ? "bg-violet-500 text-white rounded-l-sm rounded-b-md p-2 my-2"
+                        ? "bg-custom text-white rounded-l-sm rounded-b-md p-2 my-2"
                         : "bg-secondary text-primary rounded-r-sm rounded-b-md p-2 my-2"
                     }`}
                   >
@@ -168,12 +168,12 @@ export default function Chat() {
             {pending ? (
               <div className="flex items-center text-secondary">
                 Thinking...
-                <Loader className="ml-2 animate-spin w-4 h-4 text-purple-500" />
+                <Loader className="ml-2 animate-spin w-4 h-4 text-custom" />
               </div>
             ) : (
               <div className="flex items-center gap-1 text-secondary">
                 <span>Send</span>
-                <SendIcon className="h-4 w-4 text-violet-500" />
+                <SendIcon className="h-4 w-4 text-custom" />
               </div>
             )}
           </Button>

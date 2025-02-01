@@ -35,8 +35,8 @@ async function getGuestBookEntry() {
 
 export default function GuestBook() {
   return (
-    <section className="max-w-7xl w-full mt-8 px-4 min-h-screen md:px-16 mx-auto">
-      <h1 className="text-violet-500 text-3xl font-semibold lg:text-4xl flex items-end justify-end pt-4 pb-2">
+    <section className="max-w-6xl w-full mt-8 px-4 min-h-screen md:px-16 mx-auto">
+      <h1 className="text-custom text-3xl font-semibold lg:text-4xl flex items-end justify-end pt-4 pb-2">
         Guest<span className="font-bold text-primary font-mono">Books📑</span>
       </h1>
       <p className="text-lg font-semibold lg:text-lg pt-3">
@@ -70,7 +70,7 @@ async function GuestBookEntries() {
   return data.map((item) => (
     <li key={item.id}>
       <div className="flex items-start flex-col">
-        <p className="text-violet-500 rounded-3xl from-accent pl-1 break-words">
+        <p className="text-custom rounded-3xl from-accent pl-1 break-words">
           {item.User?.firstName} {item.User?.lastName} :{" "}
           <span className="text-foreground">{item.message}</span>
         </p>
