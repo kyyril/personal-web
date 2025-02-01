@@ -31,9 +31,10 @@ export default function CardProject({ project }: ProjectProps) {
         <Image
           src={project?.image[0]}
           alt={project?.title}
-          fill
+          width={400} // Atur ukuran tetap
+          height={250}
           quality={100}
-          className="rounded-xl object-cover"
+          className="rounded-xl object-cover w-full h-auto"
           loading="lazy"
         />
       </div>
@@ -47,7 +48,7 @@ export default function CardProject({ project }: ProjectProps) {
           </Link>
           <div className="flex flex-wrap gap-1 mt-1">
             {project.technologies.map((tech) => (
-              <Badge key={tech} variant="secondary">
+              <Badge key={tech} variant="secondary" className="p-0.5 text-xs">
                 {tech}
               </Badge>
             ))}
