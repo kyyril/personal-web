@@ -79,7 +79,7 @@ export default async function Home() {
                 </Button>
               </Link>
 
-              <Link target="_blank" href={data.contactInfo.cv} prefetch={false}>
+              {/* <Link target="_blank" href={data.contactInfo.cv} prefetch={false}>
                 <Button
                   className="hover:text-custom"
                   variant="secondary"
@@ -88,15 +88,38 @@ export default async function Home() {
                   <Link1Icon />
                   <span className="ml-1 font-light">Resume</span>
                 </Button>
-              </Link>
+              </Link> */}
             </div>
           </div>
         </div>
       </section>
 
       <section
+        id="experience"
+        className="max-w-6xl w-full px-4 md:px-16 mx-auto "
+      >
+        <h2 className="font-semibold text-3xl md:text-5xl mb-12">Experience</h2>
+        <div className="relative pl-6 after:absolute after:inset-y-0 after:left-0 after:w-px after:bg-gray-500/20 dark:after:bg-gray-400/20 grid gap-10">
+          {data.experiences.map((ex) => (
+            <div key={ex.id} className="grid gap-1 relative">
+              <div className="aspect-square w-3 bg-gray-900 rounded-full absolute left-0 translate-x-[-29.5px] z-10 top-2 dark:bg-gray-50" />
+
+              <h4 className="text-xl font-semibold">{ex.job}</h4>
+              <h5>{ex.institution}</h5>
+              <div className="">
+                {ex.startDate} - {ex.endDate}
+              </div>
+              <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
+                {ex.description}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section
         id="education"
-        className="max-w-6xl w-full mt-10 px-4 md:px-16 mx-auto"
+        className="max-w-6xl w-full mt-20 px-4 md:px-16 mx-auto"
       >
         <h2 className="font-semibold text-3xl md:text-5xl mb-12">Education</h2>
         <div className="relative pl-6 after:absolute after:inset-y-0 after:left-0 after:w-px after:bg-gray-500/20 dark:after:bg-gray-400/20 grid gap-10">

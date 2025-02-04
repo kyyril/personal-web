@@ -190,6 +190,17 @@
       "degree": "Front-End Web Development",
       "description": "I took a course at Dicoding Academy to learn how to create web apps. For my final project, I made a web-based to-do list and note application. I also learned how to make web apps that are responsive, scalable, and secure.",
       "startDate": "2022",
+      "endDate": "2024"
+    }
+  ],
+
+  "experiences": [
+    {
+      "id": "1",
+      "institution": "PT Astra International Tbk - TSO Auto2000",
+      "job": "Web Develover",
+      "description": "I built the Toyota Labuhanbatu website. It allows easy content updates, so non-technical users can manage text and images. The site has dynamic content and uses SSG. This project improved my API integration and user experience skills.",
+      "startDate": "2025",
       "endDate": "Present"
     }
   ]

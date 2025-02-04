@@ -39,6 +39,14 @@ export interface Education {
   startDate: string;
   endDate: string;
 }
+export interface Experience {
+  id: string;
+  institution: string;
+  job: string;
+  description: string;
+  startDate: string;
+  endDate: string;
+}
 
 export interface Data {
   personalInfo: PersonalInfo;
@@ -46,4 +54,5 @@ export interface Data {
   skills: Skills;
   projects: Project[];
   education: Education[];
+  experiences: Experience[];
 }
