@@ -48,6 +48,8 @@ export interface Experience {
   description: string;
   startDate: string;
   endDate: string;
+  status: string;
+  working: string;
 }
 
 export interface Data {

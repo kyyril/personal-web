@@ -5,12 +5,14 @@ import {
   GitHubLogoIcon,
   LinkedInLogoIcon,
   EnvelopeClosedIcon,
-  Link1Icon,
 } from "@radix-ui/react-icons";
 import { getJSONData } from "@/lib/server";
+import Education from "@/components/Education";
+import { Data } from "@/lib/interfaces/data";
+import Experience from "@/components/Experience";
 
 export default async function Home() {
-  const data = await getJSONData();
+  const data: Data = await getJSONData();
   return (
     <main className="min-h-screen">
       <section
@@ -34,7 +36,7 @@ export default async function Home() {
                 Hey👋, I&apos;m {data.personalInfo.name}
               </h1>
             </div>
-            <p className="max-w-[600px] lg:text-lg text-gray-500 font-light dark:text-gray-400">
+            <p className="max-w-[600px] lg:text-lg font-light opacity-70">
               {data.personalInfo.bio}
             </p>
             <div className="space-x-4 mt-2">
@@ -99,35 +101,7 @@ export default async function Home() {
         className="max-w-6xl w-full px-4 md:px-16 mx-auto "
       >
         <h2 className="font-semibold text-3xl md:text-5xl mb-12">Experience</h2>
-        <div className="relative pl-6 after:absolute after:inset-y-0 after:left-0 after:w-px after:bg-gray-500/20 dark:after:bg-gray-400/20 grid gap-10">
-          {data.experiences.map((ex) => (
-            <div key={ex.id} className="grid gap-1 relative">
-              <div className="aspect-square w-3 bg-gray-900 rounded-full absolute left-0 translate-x-[-29.5px] z-10 top-2 dark:bg-gray-50" />
-
-              <h4 className="text-xl font-semibold">{ex.job}</h4>
-              <div className="flex flex-row">
-                <span>
-                  <Image
-                    src={ex.image}
-                    width={30}
-                    height={30}
-                    alt="auto"
-                    loading="lazy"
-                    className="aspect-square mr-2 overflow-hidden object-cover object-center rounded-full"
-                  />
-                </span>
-                <h5>{ex.institution}</h5>
-              </div>
-              <p>{ex.location}</p>
-              <div className="text-sm">
-                {ex.startDate} - {ex.endDate}
-              </div>
-              <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
-                {ex.description}
-              </p>
-            </div>
-          ))}
-        </div>
+        <Experience data={data} />
       </section>
 
       <section
@@ -135,22 +109,7 @@ export default async function Home() {
         className="max-w-6xl w-full mt-20 px-4 md:px-16 mx-auto"
       >
         <h2 className="font-semibold text-3xl md:text-5xl mb-12">Education</h2>
-        <div className="relative pl-6 after:absolute after:inset-y-0 after:left-0 after:w-px after:bg-gray-500/20 dark:after:bg-gray-400/20 grid gap-10">
-          {data.education.map((ed) => (
-            <div key={ed.id} className="grid gap-1 relative">
-              <div className="aspect-square w-3 bg-gray-900 rounded-full absolute left-0 translate-x-[-29.5px] z-10 top-2 dark:bg-gray-50" />
-
-              <h4 className="text-xl font-semibold">{ed.degree}</h4>
-              <h5>{ed.institution}</h5>
-              <div className="text-sm">
-                {ed.startDate} - {ed.endDate}
-              </div>
-              <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
-                {ed.description}
-              </p>
-            </div>
-          ))}
-        </div>
+        <Education data={data} />
       </section>
     </main>
   );

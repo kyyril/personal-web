@@ -198,11 +198,13 @@
     {
       "id": "1",
       "institution": "PT Astra International Tbk - TSO Auto2000",
-      "job": "Web Develover",
+      "job": "Web Developer",
+      "status": "Internship",
       "image": "/assets/auto.png",
       "location": "Kab. Labuhanbatu, Indonesia",
+      "working": "On-site",
       "description": "I built the Toyota Labuhanbatu website. It allows easy content updates, so non-technical users can manage text and images. The site has dynamic content and uses SSG. This project improved my API integration and user experience skills.",
-      "startDate": "2025",
+      "startDate": "2025-01-02",
       "endDate": "Present"
     }
   ]
