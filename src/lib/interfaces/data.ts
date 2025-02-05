@@ -43,6 +43,8 @@ export interface Experience {
   id: string;
   institution: string;
   job: string;
+  image: string;
+  location: string;
   description: string;
   startDate: string;
   endDate: string;

@@ -105,8 +105,21 @@ export default async function Home() {
               <div className="aspect-square w-3 bg-gray-900 rounded-full absolute left-0 translate-x-[-29.5px] z-10 top-2 dark:bg-gray-50" />
 
               <h4 className="text-xl font-semibold">{ex.job}</h4>
-              <h5>{ex.institution}</h5>
-              <div className="">
+              <div className="flex flex-row">
+                <span>
+                  <Image
+                    src={ex.image}
+                    width={30}
+                    height={30}
+                    alt="auto"
+                    loading="lazy"
+                    className="aspect-square mr-2 overflow-hidden object-cover object-center rounded-full"
+                  />
+                </span>
+                <h5>{ex.institution}</h5>
+              </div>
+              <p>{ex.location}</p>
+              <div className="text-sm">
                 {ex.startDate} - {ex.endDate}
               </div>
               <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
@@ -129,7 +142,7 @@ export default async function Home() {
 
               <h4 className="text-xl font-semibold">{ed.degree}</h4>
               <h5>{ed.institution}</h5>
-              <div className="">
+              <div className="text-sm">
                 {ed.startDate} - {ed.endDate}
               </div>
               <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
