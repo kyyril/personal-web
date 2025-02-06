@@ -29,7 +29,7 @@
     {
       "id": "2",
       "institution": "Dicoding Academy",
-      "degree": "Front-End Web Development",
+      "degree": "Frontend Development",
       "description": "I took a course at Dicoding Academy to learn how to create web apps. For my final project, I made a web-based to-do list and note application. I also learned how to make web apps that are responsive, scalable, and secure.",
       "startDate": "2022",
       "endDate": "2024"
