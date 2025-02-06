@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Navigation } from "@/components/Navbar";
 import { ThemeProvider } from "@/components/ThemeProvider";
-import Footer from "@/components/Footer";
 import FooterWrapper from "@/components/FooterWrapper";
 
 export const metadata: Metadata = {
