@@ -22,7 +22,7 @@ export default async function Home() {
         <div className="flex flex-col lg:flex-row items-center justify-center gap-12">
           <div className="w-1/2 mx-auto lg:w-1/3">
             <Image
-              src="/assets/profile.jpeg"
+              src={"/assets/profile.webp"}
               width={280}
               height={280}
               loading="lazy"
@@ -96,20 +96,20 @@ export default async function Home() {
         </div>
       </section>
 
-      <section
-        id="experience"
-        className="max-w-6xl w-full px-4 md:px-16 mx-auto "
-      >
-        <h2 className="font-semibold text-3xl md:text-5xl mb-12">Experience</h2>
-        <Experience data={data} />
-      </section>
+      <section className="max-w-6xl w-full px-4 md:px-16 mx-auto">
+        <div id="experience" className="mb-24">
+          <h2 className="font-semibold text-3xl md:text-5xl mb-12">
+            Experience
+          </h2>
+          <Experience data={data} />
+        </div>
 
-      <section
-        id="education"
-        className="max-w-6xl w-full mt-20 px-4 md:px-16 mx-auto"
-      >
-        <h2 className="font-semibold text-3xl md:text-5xl mb-12">Education</h2>
-        <Education data={data} />
+        <div id="education">
+          <h2 className="font-semibold text-3xl md:text-5xl mb-12">
+            Education
+          </h2>
+          <Education data={data} />
+        </div>
       </section>
     </main>
   );

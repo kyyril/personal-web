@@ -2,7 +2,7 @@ import ProjectCarousel from "@/components/Project/ProjectCarousel";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { getJSONData } from "@/lib/server";
+import { getJSONProject } from "@/lib/server";
 import { GitHubLogoIcon, GlobeIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 
@@ -11,7 +11,7 @@ export default async function Detailproject({
 }: {
   params: { slug: string };
 }) {
-  const data = await getJSONData();
+  const data = await getJSONProject();
   if (!data || !data.projects) {
     return <p>Project not found</p>;
   }
@@ -36,7 +36,7 @@ export default async function Detailproject({
         )}
 
         <div className="flex flex-col mt-6 w-full mx-2 gap-2">
-          <h1 className="text-3xl font-bold lg:text-4xl underline">
+          <h1 className="text-3xl font-bold lg:text-4xl">
             {project.title || "Project Title Not Available"}
           </h1>
           <p className="mt-2 text-muted-foreground">

@@ -1,8 +1,8 @@
 import ListProject from "@/components/Project/ListProject";
-import { getJSONData } from "@/lib/server";
+import { getJSONProject } from "@/lib/server";
 
 export default async function ProjectPage() {
-  const data = await getJSONData();
+  const data = await getJSONProject();
 
   return (
     <section className="max-w-6xl min-h-screen w-full mt-10 px-4 md:px-16 mx-auto">

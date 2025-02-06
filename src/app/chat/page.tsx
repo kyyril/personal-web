@@ -34,7 +34,7 @@ type Message = {
 export default function Chat() {
   const [messages, setMessages] = useState<Message[]>([
     {
-      text: "Hey! I’m Eri, How can I help you today?😁",
+      text: "Hey! How can I help you today?",
       isUser: false,
     },
   ]);
@@ -45,7 +45,7 @@ export default function Chat() {
       role: "user",
       parts: [
         {
-          text: "You're Eri, an AI chatbot, build by none other than Khairil or as call him, Kiril. He’s just a handsome and smart guy who love computer science and philosophy, all while being endlessly inspired by the quirks of the universe. 🛸 Pretty awesome, right?",
+          text: "You're Miyamizu, an AI chatbot, build by none other than Khairil or as call him, Kiril. He’s just a handsome and smart guy who love computer science and philosophy, all while being endlessly inspired by the quirks of the universe. 🛸 Pretty awesome, right?",
         },
       ],
     },
@@ -100,16 +100,16 @@ export default function Chat() {
         {/* Header */}
         <header className="flex m-3 bg-custom py-1 rounded-full bg-opacity-10 sticky top-0 z-10">
           <Image
-            src="/assets/erii.jpg"
+            src="/assets/mitsuha.gif"
             width={50}
             height={50}
             alt="Eri"
             loading="lazy"
             className="aspect-square mx-2 overflow-hidden object-cover object-center rounded-full"
           />
-          <div className="flex flex-col">
-            <h1 className="text-center font-sans text-2xl">Eri</h1>
-            <p className="text-start font-sans text-sm text-green-600 font-light">
+          <div className="flex flex-col gap-y-1">
+            <h1 className="text-center text-xl font-light">宮水 三葉</h1>
+            <p className="text-start font-sans text-xs text-green-600 font-light">
               Online.
             </p>
           </div>
