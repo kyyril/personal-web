@@ -2,8 +2,7 @@
   "personalInfo": {
     "name": "Khairil",
     "title": "FrontEnd Develover",
-    "location": "indonesian",
-    "bio": "I'm an Information Systems student who loves programming, especially Software Web Development. I'm committed to improving my skills and knowledge to keep up with the latest technology."
+    "location": "indonesian"
   },
   "contactInfo": {
     "email": "khairil.4hrp@gmail.com",
@@ -30,7 +29,6 @@
       "id": "2",
       "institution": "Dicoding Academy",
       "degree": "Frontend Development",
-      "description": "I took a course at Dicoding Academy to learn how to create web apps. For my final project, I made a web-based to-do list and note application. I also learned how to make web apps that are responsive, scalable, and secure.",
       "startDate": "2022",
       "endDate": "2024"
     }
@@ -44,8 +42,7 @@
       "status": "Internship",
       "location": "Kab. Labuhanbatu, Indonesia",
       "working": "On-site",
-      "description": "I built the Toyota Labuhanbatu website. It allows easy content updates, so non-technical users can manage text and images. The site has dynamic content and uses SSG. This project improved my API integration and user experience skills.",
-      "startDate": "Jan 2025",
+      "startDate": "2025",
       "endDate": "Present"
     }
   ]

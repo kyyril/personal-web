@@ -24,7 +24,7 @@ export default async function Detailproject({
 
   return (
     <section className="max-w-5xl w-full mt-10 px-4 min-h-screen md:px-16 mx-auto">
-      <Card className="border-none shadow-none">
+      <div className="border-none shadow-none">
         {project && project.image.length > 0 ? (
           <ProjectCarousel images={project.image} />
         ) : (
@@ -115,7 +115,7 @@ export default async function Detailproject({
             )}
           </div>
         </div>
-      </Card>
+      </div>
     </section>
   );
 }

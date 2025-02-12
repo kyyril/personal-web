@@ -33,11 +33,15 @@ export default async function Home() {
           <div className="max-w-7xl w-full px-4 md:px-8 mx-auto">
             <div className="space-y-2">
               <h1 className="text-4xl md:text-5xl font-semibold tracking-tighter ">
-                Hey👋, I&apos;m {data.personalInfo.name}
+                Hey! I&apos;m {data.personalInfo.name}
               </h1>
             </div>
             <p className="max-w-[600px] lg:text-lg font-light opacity-70">
-              {data.personalInfo.bio}
+              I’m an Information Systems student who loves programming,
+              especially software development. I specialize in{" "}
+              <span className="font-semibold">Next.js</span> with{" "}
+              <span className="font-semibold">Typescript</span> and am currently
+              learning backend development with Golang.
             </p>
             <div className="space-x-4 mt-2">
               <Link
