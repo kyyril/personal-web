@@ -9,6 +9,13 @@ import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { Suspense } from "react";
 import { formatDistanceToNow } from "date-fns";
 import { unstable_noStore as noStore } from "next/cache";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: `GUESTBOOKS - khairil rahman hakiki`,
+  description:
+    "I’m an Information Systems student who loves programming, especially software web development. I specialize in Next.js with Typescript and am currently learning backend development with Golang.",
+};
 
 async function getGuestBookEntry() {
   noStore();

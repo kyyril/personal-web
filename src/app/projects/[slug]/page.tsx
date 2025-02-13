@@ -1,10 +1,16 @@
 import ProjectCarousel from "@/components/Project/ProjectCarousel";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { getJSONProject } from "@/lib/server";
 import { GitHubLogoIcon, GlobeIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: `PROJECT - khairil rahman hakiki`,
+  description:
+    "I’m an Information Systems student who loves programming, especially software web development. I specialize in Next.js with Typescript and am currently learning backend development with Golang.",
+};
 
 export default async function Detailproject({
   params,

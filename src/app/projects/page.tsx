@@ -1,6 +1,12 @@
 import ListProject from "@/components/Project/ListProject";
 import { getJSONProject } from "@/lib/server";
+import { Metadata } from "next";
 
+export const metadata: Metadata = {
+  title: "PROJECTS - khairil rahman hakiki",
+  description:
+    "I’m an Information Systems student who loves programming, especially software web development. I specialize in Next.js with Typescript and am currently learning backend development with Golang.",
+};
 export default async function ProjectPage() {
   const data = await getJSONProject();
 

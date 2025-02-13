@@ -10,6 +10,13 @@ import { getJSONData } from "@/lib/server";
 import Education from "@/components/Education";
 import { Data } from "@/lib/interfaces/data";
 import Experience from "@/components/Experience";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "HOME - khairil rahman hakiki",
+  description:
+    "I’m an Information Systems student who loves programming, especially software web development. I specialize in Next.js with Typescript and am currently learning backend development with Golang.",
+};
 
 export default async function Home() {
   const data: Data = await getJSONData();
