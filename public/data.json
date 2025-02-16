@@ -1,19 +1,8 @@
 {
-  "personalInfo": {
-    "name": "Khairil",
-    "title": "FrontEnd Develover",
-    "location": "indonesian"
-  },
   "contactInfo": {
     "email": "khairil.4hrp@gmail.com",
-    "cv": "https://drive.google.com/file/d/1mydBZo6vk4ty8cFkgZt2gLtN5kn4RBih/view",
-    "linkedin": "https://www.linkedin.com/in/khairilrahman",
+    "linkedin": "https://www.linkedin.com/in/khairil-rahman-hakiki",
     "github": "https://github.com/kyyril"
-  },
-  "skills": {
-    "languages": ["JavaScript", "Typescript"],
-    "frameworks": ["React", "Node.js", "NextJs"],
-    "tools": ["git", "postman", "vercel"]
   },
 
   "education": [
@@ -42,7 +31,7 @@
       "status": "Internship",
       "location": "Kab. Labuhanbatu, Indonesia",
       "working": "On-site",
-      "startDate": "2025",
+      "startDate": "Jan 2025",
       "endDate": "Present"
     }
   ]

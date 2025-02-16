@@ -135,7 +135,7 @@
         "ShadcnUI",
         "Sheets API"
       ],
-      "live_url": "https://toyotarantauprapat.vercel.app/",
+      "live_url": "https://toyotarantauprapat.vercel.app",
       "code_repo_url": "/projects/toyota-labuhanbatu",
       "type": "Intern",
       "category": "Web",
@@ -146,14 +146,15 @@
         "Beranda – Highlights the brand, latest promotions, and key updates.",
         "Mobil – The Cars page shows a list of Toyota models with a filter option to help users find specific cars. Users can also calculate a credit simulation based on the selected car type.",
         "Layanan – Displays information about Toyota services, updated automatically.",
-        "Sales – Lists sales representatives with contact details for easy customer inquiries."
+        "Rekomendasi AI – toyota car recommendation based on user preference using AI"
       ],
       "image": [
         "https://res.cloudinary.com/da5ggxk01/image/upload/v1738382101/home_jp4a3i.png",
         "https://res.cloudinary.com/da5ggxk01/image/upload/v1738382101/car_n93lpk.png",
         "https://res.cloudinary.com/da5ggxk01/image/upload/v1738382101/car_detail_ewp3vb.png",
         "https://res.cloudinary.com/da5ggxk01/image/upload/v1738382102/layanan_nuiqeb.png",
-        "https://res.cloudinary.com/da5ggxk01/image/upload/v1738382104/sales_evqxgy.png",
+        "https://res.cloudinary.com/da5ggxk01/image/upload/v1739695004/f15d22a9-a447-46db-b857-0eae42f1c80d.png",
+        "https://res.cloudinary.com/da5ggxk01/image/upload/v1739695177/f6db3acb-9cc4-4ae6-817c-c96e4c386fe4.png",
         "https://res.cloudinary.com/da5ggxk01/image/upload/v1738402138/8b845873-47f9-4497-8db1-35747e93a698.png"
       ]
     },

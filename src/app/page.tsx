@@ -40,7 +40,7 @@ export default async function Home() {
           <div className="max-w-7xl w-full px-4 md:px-8 mx-auto">
             <div className="space-y-2">
               <h1 className="text-4xl md:text-5xl font-semibold tracking-tighter ">
-                Hey! I&apos;m {data.personalInfo.name}
+                Hey! I&apos;m Khairil
               </h1>
             </div>
             <p className="max-w-[600px] lg:text-lg font-light opacity-70">

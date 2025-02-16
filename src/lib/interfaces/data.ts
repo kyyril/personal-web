@@ -1,10 +1,3 @@
-export interface PersonalInfo {
-  name: string;
-  title: string;
-  location: string;
-  bio: string;
-}
-
 export interface ContactInfo {
   email: string;
   cv: string;
@@ -53,7 +46,6 @@ export interface Experience {
 }
 
 export interface Data {
-  personalInfo: PersonalInfo;
   contactInfo: ContactInfo;
   skills: Skills;
   projects: Project[];
