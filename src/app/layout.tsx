@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Navigation } from "@/components/Navbar";
+import { Navigation } from "@/components/BottomBar";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import FooterWrapper from "@/components/FooterWrapper";
 

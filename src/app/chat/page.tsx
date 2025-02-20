@@ -4,10 +4,10 @@ import { Card } from "@/components/ui/card";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { SendIcon, Loader } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import { AnimatePresence, motion } from "framer-motion";
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import { ReloadIcon, RocketIcon } from "@radix-ui/react-icons";
 
 const GEMINI_API_KEY = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
 
@@ -94,7 +94,7 @@ export default function Chat() {
   };
 
   return (
-    <section className="max-w-7xl mt-2 w-full h-full px-4 md:px-16 overflow-hidden mx-auto">
+    <section className="max-w-7xl w-full h-full px-4 md:px-16 overflow-hidden mx-auto pb-16">
       <Card className="px-1 mx-auto max-w-3xl">
         {/* Header */}
         <header className="flex m-3 bg-custom py-1 rounded-full bg-opacity-10 sticky top-0 z-10">
@@ -167,12 +167,12 @@ export default function Chat() {
             {pending ? (
               <div className="flex items-center text-secondary">
                 Thinking...
-                <Loader className="ml-2 animate-spin w-4 h-4 text-custom" />
+                <ReloadIcon className="ml-2 animate-spin w-4 h-4 text-custom" />
               </div>
             ) : (
               <div className="flex items-center gap-1 text-secondary">
                 <span>Send</span>
-                <SendIcon className="h-4 w-4 text-custom" />
+                <RocketIcon className="h-4 w-4 text-custom" />
               </div>
             )}
           </Button>

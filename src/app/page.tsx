@@ -21,10 +21,10 @@ export const metadata: Metadata = {
 export default async function Home() {
   const data: Data = await getJSONData();
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen max-w-6xl w-full mx-auto">
       <section
-        id="home"
-        className="container max-w-5xl mx-auto py-12 md:py-16 lg:py-20 h-[90vh]"
+        id="bio"
+        className="container max-w-5xl mx-auto py-12 md:py-16 lg:py-20 h-screen"
       >
         <div className="flex flex-col lg:flex-row items-center justify-center gap-12">
           <div className="w-1/2 mx-auto lg:w-1/3">
@@ -37,7 +37,7 @@ export default async function Home() {
               className="mx-auto aspect-square overflow-hidden object-cover object-center rounded-full"
             />
           </div>
-          <div className="max-w-7xl w-full px-4 md:px-8 mx-auto">
+          <div className="w-full px-4 md:px-8 mx-auto">
             <div className="space-y-2">
               <h1 className="text-4xl md:text-5xl font-semibold tracking-tighter ">
                 Hey! I&apos;m Khairil

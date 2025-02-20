@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="py-4 container mx-auto border-t mt-20 text-center">
+    <footer className="pb-24 container mx-auto mt-20 text-center">
       <p className="text-sm">
         ©
         <Link

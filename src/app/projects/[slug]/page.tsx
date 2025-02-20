@@ -29,7 +29,7 @@ export default async function Detailproject({
   }
 
   return (
-    <section className="max-w-5xl w-full mt-10 px-4 min-h-screen md:px-16 mx-auto">
+    <section className="max-w-5xl w-full px-4 min-h-screen md:px-16 mx-auto">
       <div className="border-none shadow-none">
         {project && project.image.length > 0 ? (
           <ProjectCarousel images={project.image} />
