@@ -9,9 +9,9 @@ import {
   PaperPlaneIcon,
   HomeIcon,
 } from "@radix-ui/react-icons";
+import { motion } from "framer-motion";
 
 export const navigationItems = [
-  { name: "Home", href: "/", icon: HomeIcon },
   { name: "Projects", href: "/projects", icon: CodeIcon },
   { name: "GuestBooks", href: "/guestbook", icon: PaperPlaneIcon },
   { name: "Chat", href: "/chat", icon: ChatBubbleIcon },
@@ -25,8 +25,28 @@ export function Navigation() {
   return (
     <>
       {/* Bottom Navigation Bar */}
-      <div className="fixed bottom-4 left-1/2 -translate-x-1/2 w-[340px] bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/50 z-50 rounded-2xl">
-        <div className="flex justify-around items-center py-3 px-5">
+      <div className="fixed bottom-4 left-1/2 -translate-x-1/2 w-[330px] bg-background/30 backdrop-blur-xl supports-[backdrop-filter]:bg-background/30 z-50 rounded-lg">
+        <div className="flex justify-around items-center py-3 px-2">
+          <Link href="/" className="relative group">
+            <motion.div
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ type: "spring", stiffness: 400, damping: 17 }}
+            >
+              <Image
+                src="/assets/profile.webp"
+                alt="Profile"
+                width={24}
+                height={24}
+                quality={100}
+                className={`rounded-full border-spacing-3 transition-all duration-300 ${
+                  pathname === "/"
+                    ? "ring-2 ring-custom"
+                    : "ring-2 ring-primary/10"
+                }`}
+              />
+            </motion.div>
+          </Link>
           {navigationItems.map((item) => (
             <Link
               key={item.href}
@@ -40,18 +60,19 @@ export function Navigation() {
                     : "group-hover:text-custom/80"
                 }`}
               />
-              {/* Hover tooltip */}
-              <span className="absolute -top-8 scale-0 transition-all rounded bg-custom/90 p-2 text-xs text-white group-hover:scale-100">
-                {item.name}
-              </span>
             </Link>
           ))}
         </div>
       </div>
-      {/* Settings Button - Fixed to top right */}
-      <div className="fixed top-2 right-2 z-50">
+      {/* Theme Toggler */}
+      <motion.div
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.95 }}
+        transition={{ type: "spring", stiffness: 400, damping: 17 }}
+        className="fixed top-2 right-2 z-50"
+      >
         <ThemeToggler />
-      </div>
+      </motion.div>
       {/* Bottom Spacer */}
       <div className="h-12" /> {/* Increased height for bottom margin */}
     </>
