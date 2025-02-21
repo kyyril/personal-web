@@ -22,6 +22,9 @@ export const metadata: Metadata = {
   creator: "Khairil Rahman Hakiki",
   publisher: "Khairil Rahman Hakiki",
   robots: "index, follow",
+  verification: {
+    google: "google24f9cc081f9ae37b",
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
