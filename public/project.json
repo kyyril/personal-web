@@ -59,6 +59,43 @@
       ]
     },
     {
+      "id": "toyota-labuhanbatu",
+      "title": "Toyota LabuhanBatu",
+      "description": "The Toyota Labuhanbatu is a website that makes it easy to update content using Google Spreadsheet. This allows users to manage text, images, and other content without technical skills.",
+      "technologies": [
+        "Typescript",
+        "Next.js",
+        "TailwindCSS",
+        "ShadcnUI",
+        "SheetsAPI",
+        "Zustand"
+      ],
+      "live_url": "https://www.toyotarantauprapat.com",
+      "code_repo_url": "/projects/toyota-labuhanbatu",
+      "type": "Intern",
+      "category": "Web",
+      "date": "2025-01-02",
+      "features": [
+        "Dynamic Content Management",
+        "Beranda – Highlights the brand, latest promotions, and key updates.",
+        "Mobil – The Cars page shows a list of Toyota models with a filter option to help users find specific cars. Users can also calculate a credit simulation based on the selected car type.",
+        "Layanan – Displays information about Toyota services, updated automatically.",
+        "Rekomendasi AI – toyota car recommendation based on user preference using AI"
+      ],
+      "image": [
+        "https://res.cloudinary.com/da5ggxk01/image/upload/v1740494090/d85c48c5-a453-41d4-8569-7710487badf4.png",
+        "https://res.cloudinary.com/da5ggxk01/image/upload/v1740493600/488c1c41-3861-4cd7-aec4-97f13bf14672.png",
+        "https://res.cloudinary.com/da5ggxk01/image/upload/v1738382101/car_n93lpk.png",
+        "https://res.cloudinary.com/da5ggxk01/image/upload/v1738382101/car_detail_ewp3vb.png",
+        "https://res.cloudinary.com/da5ggxk01/image/upload/v1738382102/layanan_nuiqeb.png",
+        "https://res.cloudinary.com/da5ggxk01/image/upload/v1740493003/b5b7ac42-b347-4a0f-a91a-834cd272ede0.png",
+        "https://res.cloudinary.com/da5ggxk01/image/upload/v1739695004/f15d22a9-a447-46db-b857-0eae42f1c80d.png",
+        "https://res.cloudinary.com/da5ggxk01/image/upload/v1739695177/f6db3acb-9cc4-4ae6-817c-c96e4c386fe4.png",
+        "https://res.cloudinary.com/da5ggxk01/image/upload/v1740494043/dcdb98b6-9eec-4bbb-b7a6-e9893310f526.png",
+        "https://res.cloudinary.com/da5ggxk01/image/upload/v1740494476/d1a4c284-6bd9-4865-baac-7133c07f2156.png"
+      ]
+    },
+    {
       "id": "design-to-code",
       "title": "Design To Code",
       "technologies": [
@@ -122,40 +159,6 @@
         "https://res.cloudinary.com/da5ggxk01/image/upload/v1730448744/Video_Screen1730448720255_eiwe4h.png",
         "https://res.cloudinary.com/da5ggxk01/image/upload/v1730448799/Video_Screen1730448777220_qvqgfa.png",
         "https://res.cloudinary.com/da5ggxk01/image/upload/v1730450907/e060a763-6a49-4f82-8140-6691a486effe.png"
-      ]
-    },
-    {
-      "id": "toyota-labuhanbatu",
-      "title": "Toyota LabuhanBatu",
-      "description": "The Toyota Labuhanbatu is a website that makes it easy to update content using Google Spreadsheet. This allows users to manage text, images, and other content without technical skills.",
-      "technologies": [
-        "Typescript",
-        "Next.js",
-        "TailwindCSS",
-        "ShadcnUI",
-        "Sheets API"
-      ],
-      "live_url": "https://www.toyotarantauprapat.com",
-      "code_repo_url": "/projects/toyota-labuhanbatu",
-      "type": "Intern",
-      "category": "Web",
-      "date": "2025-01-02",
-      "features": [
-        "Dynamic Content Management",
-        "Static-Site-Generator Implementation",
-        "Beranda – Highlights the brand, latest promotions, and key updates.",
-        "Mobil – The Cars page shows a list of Toyota models with a filter option to help users find specific cars. Users can also calculate a credit simulation based on the selected car type.",
-        "Layanan – Displays information about Toyota services, updated automatically.",
-        "Rekomendasi AI – toyota car recommendation based on user preference using AI"
-      ],
-      "image": [
-        "https://res.cloudinary.com/da5ggxk01/image/upload/v1738382101/home_jp4a3i.png",
-        "https://res.cloudinary.com/da5ggxk01/image/upload/v1738382101/car_n93lpk.png",
-        "https://res.cloudinary.com/da5ggxk01/image/upload/v1738382101/car_detail_ewp3vb.png",
-        "https://res.cloudinary.com/da5ggxk01/image/upload/v1738382102/layanan_nuiqeb.png",
-        "https://res.cloudinary.com/da5ggxk01/image/upload/v1739695004/f15d22a9-a447-46db-b857-0eae42f1c80d.png",
-        "https://res.cloudinary.com/da5ggxk01/image/upload/v1739695177/f6db3acb-9cc4-4ae6-817c-c96e4c386fe4.png",
-        "https://res.cloudinary.com/da5ggxk01/image/upload/v1738402138/8b845873-47f9-4497-8db1-35747e93a698.png"
       ]
     },
     {
