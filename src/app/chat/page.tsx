@@ -57,30 +57,35 @@ export default function Chat() {
     setMessages((prev) => [...prev, { text: userMessage, isUser: true }]);
     setHistory((prev) => [
       ...prev,
-      {
-        role: "user",
-        parts: [{ text: userMessage }],
-      },
+      { role: "user", parts: [{ text: userMessage }] },
     ]);
     setInput("");
     setPending(true);
 
     try {
-      const chatSession = model.startChat({
-        generationConfig,
-        history,
-      });
+      const chatSession = model.startChat({ generationConfig, history });
 
-      const result = await chatSession.sendMessage(userMessage);
+      // Mulai request streaming
+      const result = await chatSession.sendMessageStream(userMessage);
 
-      const rawResponse = result.response.text() || "No response.";
-      setMessages((prev) => [...prev, { text: rawResponse, isUser: false }]);
+      let responseText = "";
+      setMessages((prev) => [...prev, { text: "", isUser: false }]); // Siapkan bubble chat kosong
+
+      for await (const chunk of result.stream) {
+        responseText += chunk.text(); // Tambahkan teks hasil streaming
+        setMessages((prev) => {
+          const updatedMessages = [...prev];
+          updatedMessages[updatedMessages.length - 1] = {
+            text: responseText,
+            isUser: false,
+          };
+          return updatedMessages;
+        });
+      }
+
       setHistory((prev) => [
         ...prev,
-        {
-          role: "model",
-          parts: [{ text: rawResponse }],
-        },
+        { role: "model", parts: [{ text: responseText }] },
       ]);
     } catch (error) {
       console.error("Error during Gemini interaction:", error);

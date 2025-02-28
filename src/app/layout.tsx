@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Navigation } from "@/components/BottomBar";
 import { ThemeProvider } from "@/components/ThemeProvider";
-import FooterWrapper from "@/components/FooterWrapper";
+import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "Khairil Rahman Hakiki | Frontend Developer",
@@ -58,7 +58,7 @@ export default function RootLayout({
         >
           <Navigation />
           {children}
-          <FooterWrapper />
+          <Footer />
         </ThemeProvider>
       </body>
     </html>
