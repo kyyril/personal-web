@@ -22,6 +22,8 @@ export interface Project {
   date: string;
   features: string[];
   image: string[];
+  type: string;
+  category: string;
 }
 
 export interface Education {
