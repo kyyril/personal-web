@@ -49,7 +49,7 @@ export default function ListProject({ projects }: ListProjectProps) {
             Category: {categoryFilter}
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="All">All Categories</SelectItem>
+            <SelectItem value="All">All</SelectItem>
             <SelectItem value="Web">Web</SelectItem>
             <SelectItem value="Mobile">Mobile</SelectItem>
           </SelectContent>
@@ -58,7 +58,7 @@ export default function ListProject({ projects }: ListProjectProps) {
         <Select onValueChange={setTypeFilter} value={typeFilter}>
           <SelectTrigger className="truncate">Type: {typeFilter}</SelectTrigger>
           <SelectContent>
-            <SelectItem value="All">All Types</SelectItem>
+            <SelectItem value="All">All</SelectItem>
             <SelectItem value="Frontend">Frontend</SelectItem>
             <SelectItem value="Fullstack">Fullstack</SelectItem>
           </SelectContent>

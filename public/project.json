@@ -59,6 +59,39 @@
       ]
     },
     {
+      "id": "design-to-code",
+      "title": "Design To Code",
+      "technologies": [
+        "Typescript",
+        "Next.js",
+        "TailwindCSS",
+        "ShadcnUI",
+        "Cloudinary",
+        "postgreSQL",
+        "Open-router",
+        "Firebase-auth"
+      ],
+      "live_url": "https://designtocode-kohl.vercel.app",
+      "code_repo_url": "https://github.com/kyyril/designtocode",
+      "type": "Fullstack",
+      "category": "Web",
+      "date": "2023-06-10",
+      "description": "Design to Code is a website that converts your design into React.js code. Simply upload an image of your design, and the system will generate the corresponding code.",
+      "features": [
+        "Generate Code – Automatically convert your design into clean, structured React.js code.",
+        "Regenerate Code – If you're not satisfied, regenerate the code with improvements.",
+        "AI Model Selection – Choose from different AI models to get the best conversion results.",
+        "Design History – View and manage your past design conversions."
+      ],
+      "image": [
+        "https://res.cloudinary.com/da5ggxk01/image/upload/v1739379881/homepage_uwzzae.png",
+        "https://res.cloudinary.com/da5ggxk01/image/upload/v1739379881/work_bujo40.png",
+        "https://res.cloudinary.com/da5ggxk01/image/upload/v1739379882/design_ycpxvx.png",
+        "https://res.cloudinary.com/da5ggxk01/image/upload/v1739379881/testi1_myvo4g.png",
+        "https://res.cloudinary.com/da5ggxk01/image/upload/v1739379881/testi2_jkbqop.png"
+      ]
+    },
+    {
       "id": "toyota-labuhanbatu",
       "title": "Toyota LabuhanBatu",
       "description": "The Toyota Labuhanbatu is a website that makes it easy to update content using Google Spreadsheet. This allows users to manage text, images, and other content without technical skills.",
@@ -95,39 +128,7 @@
         "https://res.cloudinary.com/da5ggxk01/image/upload/v1740494476/d1a4c284-6bd9-4865-baac-7133c07f2156.png"
       ]
     },
-    {
-      "id": "design-to-code",
-      "title": "Design To Code",
-      "technologies": [
-        "Typescript",
-        "Next.js",
-        "TailwindCSS",
-        "ShadcnUI",
-        "AceternityUI",
-        "postgreSQL",
-        "Open-router",
-        "Firebase-auth"
-      ],
-      "live_url": "https://designtocode-kohl.vercel.app",
-      "code_repo_url": "https://github.com/kyyril/designtocode",
-      "type": "Fullstack",
-      "category": "Web",
-      "date": "2023-06-10",
-      "description": "Design to Code is a website that converts your design into React.js code. Simply upload an image of your design, and the system will generate the corresponding code.",
-      "features": [
-        "Generate Code – Automatically convert your design into clean, structured React.js code.",
-        "Regenerate Code – If you're not satisfied, regenerate the code with improvements.",
-        "AI Model Selection – Choose from different AI models to get the best conversion results.",
-        "Design History – View and manage your past design conversions."
-      ],
-      "image": [
-        "https://res.cloudinary.com/da5ggxk01/image/upload/v1739379881/homepage_uwzzae.png",
-        "https://res.cloudinary.com/da5ggxk01/image/upload/v1739379881/work_bujo40.png",
-        "https://res.cloudinary.com/da5ggxk01/image/upload/v1739379882/design_ycpxvx.png",
-        "https://res.cloudinary.com/da5ggxk01/image/upload/v1739379881/testi1_myvo4g.png",
-        "https://res.cloudinary.com/da5ggxk01/image/upload/v1739379881/testi2_jkbqop.png"
-      ]
-    },
+
     {
       "id": "saas-notesapp",
       "title": "Saas NotesApp",
