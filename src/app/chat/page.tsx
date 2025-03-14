@@ -8,6 +8,13 @@ import ReactMarkdown from "react-markdown";
 import { AnimatePresence, motion } from "framer-motion";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { ReloadIcon, RocketIcon } from "@radix-ui/react-icons";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 const GEMINI_API_KEY = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
 
@@ -44,7 +51,7 @@ export default function Chat() {
       role: "user",
       parts: [
         {
-          text: "You're Miyamizu, an AI chatbot, build by none other than Khairil or as call him, Kiril. He’s just a handsome and smart guy who love computer science and philosophy, all while being endlessly inspired by the quirks of the universe. 🛸 Pretty awesome, right?",
+          text: "You're Katou Megumin, an AI chatbot, build by none other than Khairil or as call him, Kiril. He’s just a handsome and smart guy who love computer science and philosophy, all while being endlessly inspired by the quirks of the universe. 🛸 Pretty awesome, right?",
         },
       ],
     },
@@ -103,16 +110,33 @@ export default function Chat() {
       <Card className="px-1 mx-auto max-w-3xl">
         {/* Header */}
         <header className="flex m-3 bg-custom py-1 rounded-full bg-opacity-10 sticky top-0 z-10">
-          <Image
-            src="/assets/mitsuha.gif"
-            width={50}
-            height={50}
-            alt="Eri"
-            loading="lazy"
-            className="aspect-square mx-2 overflow-hidden object-cover object-center rounded-full"
-          />
+          <Dialog>
+            <DialogTrigger>
+              <Image
+                src="/assets/katou.gif"
+                width={50}
+                height={50}
+                alt="Katou Megumin"
+                loading="lazy"
+                className="aspect-square ring-1 ring-custom mx-2 overflow-hidden object-cover object-center rounded-full cursor-pointer hover:opacity-80 transition-opacity"
+              />
+            </DialogTrigger>
+            <DialogContent className="bg-transparent shadow-none border-none rounded-2xl">
+              <div className="flex items-center justify-center">
+                <Image
+                  src="/assets/katou.gif"
+                  width={400}
+                  height={400}
+                  alt="Katou Megumin"
+                  className="rounded-sm object-cover"
+                />
+              </div>
+            </DialogContent>
+          </Dialog>
           <div className="flex flex-col gap-y-1">
-            <h1 className="text-center text-xl font-light">宮水 三葉</h1>
+            <h1 className="text-center text-xl font-sans font-light">
+              加藤 恵
+            </h1>
             <p className="text-start font-sans text-xs text-green-600 font-light">
               Online.
             </p>
