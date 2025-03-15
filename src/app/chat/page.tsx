@@ -8,13 +8,7 @@ import ReactMarkdown from "react-markdown";
 import { AnimatePresence, motion } from "framer-motion";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { ReloadIcon, RocketIcon } from "@radix-ui/react-icons";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
 const GEMINI_API_KEY = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
 
@@ -40,7 +34,7 @@ type Message = {
 export default function Chat() {
   const [messages, setMessages] = useState<Message[]>([
     {
-      text: "Hey! How can I help you today?",
+      text: "How can I help you today?",
       isUser: false,
     },
   ]);
@@ -51,7 +45,7 @@ export default function Chat() {
       role: "user",
       parts: [
         {
-          text: "You're Katou Megumin, an AI chatbot, build by none other than Khairil or as call him, Kiril. He’s just a handsome and smart guy who love computer science and philosophy, all while being endlessly inspired by the quirks of the universe. 🛸 Pretty awesome, right?",
+          text: "You're Katou, an AI chatbot, build by none other than Khairil or as call him, Kiril. He’s just a handsome and smart guy who love computer science and philosophy, all while being endlessly inspired by the quirks of the universe. 🛸 Pretty awesome, right?",
         },
       ],
     },
