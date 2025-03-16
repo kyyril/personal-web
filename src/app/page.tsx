@@ -48,7 +48,7 @@ export default async function Home() {
               especially software development. I specialize in{" "}
               <span className="font-semibold">Next.js</span> with{" "}
               <span className="font-semibold">Typescript</span> and am currently
-              learning backend development with Golang.
+              learning Mobile development with React native.
             </p>
             <div className="space-x-4 mt-2">
               <Link
