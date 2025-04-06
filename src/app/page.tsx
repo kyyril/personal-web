@@ -5,6 +5,7 @@ import {
   GitHubLogoIcon,
   LinkedInLogoIcon,
   EnvelopeClosedIcon,
+  Link1Icon,
 } from "@radix-ui/react-icons";
 import { getJSONData } from "@/lib/server";
 import Education from "@/components/Education";
@@ -92,7 +93,7 @@ export default async function Home() {
                 </Button>
               </Link>
 
-              {/* <Link target="_blank" href={data.contactInfo.cv} prefetch={false}>
+              <Link target="_blank" href={data.contactInfo.cv} prefetch={false}>
                 <Button
                   className="hover:text-custom"
                   variant="secondary"
@@ -101,7 +102,7 @@ export default async function Home() {
                   <Link1Icon />
                   <span className="ml-1 font-light">Resume</span>
                 </Button>
-              </Link> */}
+              </Link>
             </div>
           </div>
         </div>

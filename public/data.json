@@ -2,7 +2,8 @@
   "contactInfo": {
     "email": "khairil.4hrp@gmail.com",
     "linkedin": "https://www.linkedin.com/in/khairil-rahman-hakiki",
-    "github": "https://github.com/kyyril"
+    "github": "https://github.com/kyyril",
+    "cv": "https://drive.google.com/file/d/1ZL3U-a7lVt2pz8FFGk8AcFnhv2o4A2U9/view?usp=sharing"
   },
 
   "education": [
@@ -32,7 +33,8 @@
       "location": "Kab. Labuhanbatu, Indonesia",
       "working": "On-site",
       "startDate": "Jan 2025",
-      "endDate": "Present"
+      "endDate": "Mar 2025",
+      "description": "As a Web Developer Intern, I developed a dynamic website for Toyota Labuhanbatu using Spreadsheet API integration, allowing non-technical staff to easily manage content such as text and images. I also built an AI-powered car recommendation feature based on user preferences.\nAdditionally, I developed ReminderApp with Supabase for Toyota Rantauprapat — a web-based reminder system with role-based access for admins and users, automated tracking of STNK and BPKB expiration dates, and complete CRUD functionality for product data and user profiles."
     }
   ]
 }
