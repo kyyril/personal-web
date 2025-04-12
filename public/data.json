@@ -14,17 +14,22 @@
       "description": "Relevant Coursework: Data structures, algorithms, software engineering, databases, and UI/UX design.",
       "startDate": "2022",
       "endDate": "Present"
-    },
-    {
-      "id": "2",
-      "institution": "Dicoding Academy",
-      "degree": "Frontend Development",
-      "startDate": "2022",
-      "endDate": "2024"
     }
   ],
 
   "experiences": [
+    {
+      "id": "2",
+      "institution": "CodeAtHome",
+      "job": "Junior Frontend Developer",
+      "status": "Freelance",
+      "location": "Lampung, Indonesia",
+      "working": "Remote",
+      "startDate": "April 2025",
+      "endDate": "Present",
+      "description": "Junior Frontend Developer at CodeAtHome — added features, fixed bugs, and followed clean code practices with regular code reviews.",
+      "technologies": ["Typescript", "React.js", "Next.js", "TailwinCSS"]
+    },
     {
       "id": "1",
       "institution": "PT Astra International Tbk - TSO Auto2000",
@@ -34,7 +39,20 @@
       "working": "On-site",
       "startDate": "Jan 2025",
       "endDate": "Mar 2025",
-      "description": "As a Web Developer Intern, I developed a dynamic website for Toyota Labuhanbatu using Spreadsheet API integration, allowing non-technical staff to easily manage content such as text and images. I also built an AI-powered car recommendation feature based on user preferences.\nAdditionally, I developed ReminderApp with Supabase for Toyota Rantauprapat — a web-based reminder system with role-based access for admins and users, automated tracking of STNK and BPKB expiration dates, and complete CRUD functionality for product data and user profiles."
+      "description": "As a Web Developer Intern, I developed a dynamic website for Toyota Labuhanbatu using Spreadsheet API integration, allowing non-technical staff to easily manage content such as text and images. I also built an AI-powered car recommendation feature based on user preferences.\nAdditionally, I developed ReminderApp with Supabase for Toyota Rantauprapat — a web-based reminder system with role-based access for admins and users, automated tracking of STNK and BPKB expiration dates, and complete CRUD functionality for product data and user profiles.",
+      "technologies": [
+        "Typescript",
+        "React.js",
+        "Next.js",
+        "TailwinCSS",
+        "Zustand",
+        "Supabase",
+        "Cloudinary",
+        "ShadcnUI",
+        "Rest API",
+        "Gemini",
+        "Apps Script"
+      ]
     }
   ]
 }

@@ -38,7 +38,7 @@ export interface Experience {
   id: string;
   institution: string;
   job: string;
-
+  technologies: string[];
   location: string;
   description: string;
   startDate: string;
