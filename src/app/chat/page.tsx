@@ -366,9 +366,10 @@ export default function Chat() {
     <div className="h-full flex flex-col">
       <div className="p-4 pb-2">
         <h2 className="text-lg font-semibold">Chat History</h2>
-        <span className="text-xs font-thin text-red-500/60">
-          *This chat is saved in your localstorage
-        </span>
+        <p className="text-xs text-primary/70">
+          <span className="text-red-500">* </span>This chat is saved in your
+          localstorage
+        </p>
       </div>
 
       <Button
