@@ -28,12 +28,19 @@
       "startDate": "April 2025",
       "endDate": "Present",
       "description": "Junior Frontend Developer at CodeAtHome — added features, fixed bugs, and followed clean code practices with regular code reviews.",
-      "technologies": ["Typescript", "React.js", "Next.js", "TailwinCSS"]
+      "technologies": [
+        "Typescript",
+        "React.js",
+        "Next.js",
+        "TailwindCSS",
+        "REST-API",
+        "ShadcnUI"
+      ]
     },
     {
       "id": "1",
       "institution": "PT Astra International Tbk - TSO Auto2000",
-      "job": "Web Developer",
+      "job": "Fullstack Web Developer",
       "status": "Internship",
       "location": "Kab. Labuhanbatu, Indonesia",
       "working": "On-site",
@@ -44,14 +51,14 @@
         "Typescript",
         "React.js",
         "Next.js",
-        "TailwinCSS",
+        "TailwindCSS",
         "Zustand",
         "Supabase",
         "Cloudinary",
         "ShadcnUI",
-        "Rest API",
+        "REST-API",
         "Gemini",
-        "Apps Script"
+        "Apps-Script"
       ]
     }
   ]

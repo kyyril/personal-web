@@ -4,7 +4,13 @@
       "id": "sobat-takwa",
       "title": "Sobat Takwa",
       "description": "Sobat Takwa Is a web app providing prayer schedules, Quran reading with audio, and daily prayers with search functionality, designed for ease and convenience.",
-      "technologies": ["Typescript", "Next.js", "TailwindCSS", "ShadcnUI"],
+      "technologies": [
+        "Typescript",
+        "Next.js",
+        "TailwindCSS",
+        "ShadcnUI",
+        "Framer-motion"
+      ],
       "live_url": "https://sobat-takwa.vercel.app/",
       "code_repo_url": "https://github.com/kyyril/sobatTakwa",
       "type": "Frontend",
@@ -66,8 +72,9 @@
         "Next.js",
         "TailwindCSS",
         "ShadcnUI",
+        "Gemini",
         "Cloudinary",
-        "postgreSQL",
+        "PostgreSQL",
         "Open-router",
         "Firebase-auth"
       ],
@@ -122,7 +129,9 @@
         "Next.js",
         "TailwindCSS",
         "ShadcnUI",
-        "Framer-motion"
+        "Framer-motion",
+        "Gemini",
+        "ApiFy"
       ],
       "live_url": "https://instacook.vercel.app",
       "code_repo_url": "https://github.com/kyyril/roastapp",
@@ -151,7 +160,10 @@
         "Next.js",
         "TailwindCSS",
         "ShadcnUI",
-        "SheetsAPI",
+        "REST-API",
+        "Gemini",
+        "Cloudinary",
+        "Apps-Script",
         "Zustand"
       ],
       "live_url": "https://www.toyotarantauprapat.com",
@@ -189,10 +201,10 @@
         "TailwindCSS",
         "ShadcnUI",
         "Stripe",
-        "Kinde",
+        "Kinde-auth",
         "Prisma",
         "Supabase",
-        "postgreSQL"
+        "PostgreSQL"
       ],
       "live_url": "https://saas-noteapp.vercel.app",
       "code_repo_url": "https://github.com/kyyril/saas-noteapp",
@@ -232,7 +244,7 @@
       "id": "6",
       "title": "Age Calculator",
       "description": "This web app lets you calculate your age by entering your date of birth.",
-      "technologies": ["Javascript", "TailwindCSS", "React"],
+      "technologies": ["Javascript", "TailwindCSS", "React.js"],
       "live_url": "https://age-calculator-kiril.vercel.app/",
       "code_repo_url": "https://github.com/kyyril/age-calculator",
       "type": "Frontend",
