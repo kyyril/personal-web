@@ -226,6 +226,29 @@
       ]
     },
     {
+      "id": "hadith-api",
+      "title": "Hadith API",
+      "description": "Hadith API with 9 narrators, BAHASA translation stored in local JSON file.",
+      "technologies": ["Golang", "Gin", "Swagger", "REST-API"],
+      "live_url": "https://hadith-api-go.vercel.app",
+      "code_repo_url": "https://github.com/kyyril/hadith-api",
+      "type": "Backend",
+      "category": "All",
+      "date": "2023-06-10",
+      "features": [
+        "Get hadiths by narrator (/api/v1/hadis/:slug)",
+        "Get a specific hadith by narrator and number (/api/v1/hadis/:slug/:number)",
+        "Get list of available narrators (/api/v1/narrators)",
+        "Pagination and search support",
+        "Swagger documentation"
+      ],
+      "image": [
+        "https://res.cloudinary.com/da5ggxk01/image/upload/v1747006302/8b747e8a-50f0-43ba-8b8d-81a2a5f99ed7.png",
+        "https://res.cloudinary.com/da5ggxk01/image/upload/v1747006240/6193c862-73ee-4600-b0e4-5616199a3ee0.png",
+        "https://res.cloudinary.com/da5ggxk01/image/upload/v1747006178/6f9c345d-bfe4-425e-9fd0-dc89f0892b17.png"
+      ]
+    },
+    {
       "id": "aku-mahasigma",
       "title": "Aku Mahasigma",
       "description": "A web app for searching and displaying student info from Indonesian universities.",

@@ -60,6 +60,7 @@ export default function ListProject({ projects }: ListProjectProps) {
           <SelectContent>
             <SelectItem value="All">All</SelectItem>
             <SelectItem value="Frontend">Frontend</SelectItem>
+            <SelectItem value="Backend">Backend</SelectItem>
             <SelectItem value="Fullstack">Fullstack</SelectItem>
           </SelectContent>
         </Select>
