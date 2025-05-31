@@ -27,20 +27,21 @@
       "working": "Remote",
       "startDate": "April 2025",
       "endDate": "Present",
-      "description": "Junior Frontend Developer at CodeAtHome — added features, fixed bugs, and followed clean code practices with regular code reviews.",
+      "description": "Junior Frontend Developer at CodeAtHome — added new features, fixed bugs, and followed clean code practices with help from regular code reviews. One of the features I added was payment integration using Xendit with the backend.",
       "technologies": [
         "Typescript",
         "React.js",
         "Next.js",
-        "TailwindCSS",
         "REST-API",
-        "ShadcnUI"
+        "ShadcnUI",
+        "Tanstack Query",
+        "Redux"
       ]
     },
     {
       "id": "1",
       "institution": "PT Astra International Tbk - TSO Auto2000",
-      "job": "Fullstack Web Developer",
+      "job": "Web Developer",
       "status": "Internship",
       "location": "Kab. Labuhanbatu, Indonesia",
       "working": "On-site",
@@ -50,6 +51,7 @@
       "technologies": [
         "Typescript",
         "React.js",
+        "Python",
         "Next.js",
         "TailwindCSS",
         "Zustand",
