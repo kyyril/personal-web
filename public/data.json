@@ -47,7 +47,7 @@
       "working": "On-site",
       "startDate": "Jan 2025",
       "endDate": "Mar 2025",
-      "description": "As a Web Developer Intern, I developed a dynamic website for Toyota Labuhanbatu using Spreadsheet API integration, allowing non-technical staff to easily manage content such as text and images. I also built an AI-powered car recommendation feature based on user preferences.\nAdditionally, I developed ReminderApp with Supabase for Toyota Rantauprapat — a web-based reminder system with role-based access for admins and users, automated tracking of STNK and BPKB expiration dates, and complete CRUD functionality for product data and user profiles.",
+      "description": "As a Web Developer Intern, I developed a dynamic website with easy content management and AI car recommendations for Toyota Labuhanbatu, and built ReminderApp with role-based access and STNK/BPKB reminders for Toyota Rantauprapat.",
       "technologies": [
         "Typescript",
         "React.js",

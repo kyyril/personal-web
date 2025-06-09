@@ -121,37 +121,6 @@
       ]
     },
     {
-      "id": "instacook",
-      "title": "InstaCook",
-      "description": "Roastgram is a web app that delivers sarcastic Instagram profile roasts based on the username you provide.",
-      "technologies": [
-        "Typescript",
-        "Next.js",
-        "TailwindCSS",
-        "ShadcnUI",
-        "Framer-motion",
-        "Gemini",
-        "ApiFy"
-      ],
-      "live_url": "https://instacook.vercel.app",
-      "code_repo_url": "https://github.com/kyyril/roastapp",
-      "type": "Fullstack",
-      "category": "Web",
-      "date": "2025-01-02",
-      "features": [
-        "AI Instagram Roasting – Get sarcastic comments based on Instagram usernames.",
-        "Username Analysis – Processes data for relevant roasting.",
-        "Sarcastic Responses – Powered by Gemini AI for witty comebacks.",
-        "Interactive Animations – Enhanced with Framer Motion for a lively experience.",
-        "Modern Design – Stylish and responsive UI with Tailwind CSS.",
-        "Data Scraping – Uses Apify to fetch profile data."
-      ],
-      "image": [
-        "https://res.cloudinary.com/da5ggxk01/image/upload/v1742616342/25c533d9-bfad-45e5-ba3b-3b1971d907c4.png",
-        "https://res.cloudinary.com/da5ggxk01/image/upload/v1742616442/a3a9671d-9496-4adc-8519-9b67a33dae0c.png"
-      ]
-    },
-    {
       "id": "toyota-labuhanbatu",
       "title": "Toyota LabuhanBatu",
       "description": "The Toyota Labuhanbatu is a website that makes it easy to update content using Google Spreadsheet. This allows users to manage text, images, and other content without technical skills.",
@@ -191,7 +160,70 @@
         "https://res.cloudinary.com/da5ggxk01/image/upload/v1740494476/d1a4c284-6bd9-4865-baac-7133c07f2156.png"
       ]
     },
-
+    {
+      "id": "gemini-fine-tuning-studio",
+      "title": "Gemini Fine-tuning Studio",
+      "description": "A modern, intuitive web application for creating and managing fine-tuned Google Gemini models. Built with React, TypeScript, and Tailwind CSS.",
+      "technologies": [
+        "React.js",
+        "TypeScript",
+        "TailwindCSS",
+        "Vite",
+        "Context"
+      ],
+      "live_url": "https://gemini-fine-tuning-studio.vercel.app",
+      "code_repo_url": "https://github.com/kyyril/gemini-fine-tuning-studio",
+      "type": "Frontend",
+      "category": "Web",
+      "date": "2025-06-09",
+      "features": [
+        "Secure API Key Management: Store your Gemini API key locally",
+        "Training Data Editor: Create, edit, and manage training examples with a visual interface",
+        "Flexible Data Import/Export: Upload training data from JSON files or export your datasets",
+        "Model Creation: Fine-tune Gemini models with customizable hyperparameters",
+        "Real-time Progress Monitoring: Track training progress with visual indicators",
+        "Model Testing: Test your fine-tuned models directly in the interface",
+        "Model Management: List, test, and delete your fine-tuned models",
+        "Modern UI: Beautiful, responsive design with smooth animations",
+        "Smart Notifications: Real-time feedback with toast notifications"
+      ],
+      "image": [
+        "https://res.cloudinary.com/da5ggxk01/image/upload/v1749449892/81faf3e7-024a-499b-b087-7aabf9c51f76.png",
+        "https://res.cloudinary.com/da5ggxk01/image/upload/v1749449736/ec45af41-b063-4676-8df8-a3b9900823b3.png",
+        "https://res.cloudinary.com/da5ggxk01/image/upload/v1749449855/acb1ce25-7ce7-46f0-a5b9-fb0fa3bb2f96.png"
+      ]
+    },
+    {
+      "id": "instacook",
+      "title": "InstaCook",
+      "description": "Roastgram is a web app that delivers sarcastic Instagram profile roasts based on the username you provide.",
+      "technologies": [
+        "Typescript",
+        "Next.js",
+        "TailwindCSS",
+        "ShadcnUI",
+        "Framer-motion",
+        "Gemini",
+        "ApiFy"
+      ],
+      "live_url": "https://instacook.vercel.app",
+      "code_repo_url": "https://github.com/kyyril/roastapp",
+      "type": "Fullstack",
+      "category": "Web",
+      "date": "2025-01-02",
+      "features": [
+        "AI Instagram Roasting – Get sarcastic comments based on Instagram usernames.",
+        "Username Analysis – Processes data for relevant roasting.",
+        "Sarcastic Responses – Powered by Gemini AI for witty comebacks.",
+        "Interactive Animations – Enhanced with Framer Motion for a lively experience.",
+        "Modern Design – Stylish and responsive UI with Tailwind CSS.",
+        "Data Scraping – Uses Apify to fetch profile data."
+      ],
+      "image": [
+        "https://res.cloudinary.com/da5ggxk01/image/upload/v1742616342/25c533d9-bfad-45e5-ba3b-3b1971d907c4.png",
+        "https://res.cloudinary.com/da5ggxk01/image/upload/v1742616442/a3a9671d-9496-4adc-8519-9b67a33dae0c.png"
+      ]
+    },
     {
       "id": "saas-notesapp",
       "title": "Saas NotesApp",
@@ -261,21 +293,6 @@
       "features": ["feat1", "feat2", "feat3"],
       "image": [
         "https://res.cloudinary.com/da5ggxk01/image/upload/v1730253623/akuMahasigma_mksoo2.png"
-      ]
-    },
-    {
-      "id": "6",
-      "title": "Age Calculator",
-      "description": "This web app lets you calculate your age by entering your date of birth.",
-      "technologies": ["Javascript", "TailwindCSS", "React.js"],
-      "live_url": "https://age-calculator-kiril.vercel.app/",
-      "code_repo_url": "https://github.com/kyyril/age-calculator",
-      "type": "Frontend",
-      "category": "Web",
-      "date": "2023-06-10",
-      "features": ["feat1", "feat2", "feat3"],
-      "image": [
-        "https://res.cloudinary.com/da5ggxk01/image/upload/v1730253624/birthDate_sbric0.png"
       ]
     }
   ]
