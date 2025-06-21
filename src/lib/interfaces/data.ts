@@ -20,9 +20,9 @@ export interface Project {
   code_repo_url: string;
   date: string;
   features: string[];
-  images: string[];
-  type: "personal" | "work" | "academic";
-  category: "web" | "mobile" | "desktop" | "library";
+  image: string[];
+  type: string;
+  category: string;
   featured: boolean;
   isPrivate: boolean;
 }
