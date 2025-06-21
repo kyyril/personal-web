@@ -3,7 +3,6 @@ export interface ContactInfo {
   cv: string;
   linkedin: string;
   github: string;
-  website: string;
 }
 
 export interface Skills {
@@ -21,9 +20,11 @@ export interface Project {
   code_repo_url: string;
   date: string;
   features: string[];
-  image: string[];
-  type: string;
-  category: string;
+  images: string[];
+  type: "personal" | "work" | "academic";
+  category: "web" | "mobile" | "desktop" | "library";
+  featured: boolean;
+  isPrivate: boolean;
 }
 
 export interface Education {
@@ -43,8 +44,8 @@ export interface Experience {
   description: string;
   startDate: string;
   endDate: string;
-  status: string;
-  working: string;
+  status: "full-time" | "part-time" | "contract" | "internship" | "freelance";
+  working: "remote" | "onsite" | "hybrid";
 }
 
 export interface Data {

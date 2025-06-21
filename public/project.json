@@ -32,6 +32,59 @@
       ]
     },
     {
+      "id": "sync-blog",
+      "title": "SyncBlog",
+      "description": "SyncBlog is a modern blog application that allows users to manage content with rich features like text editing, user authentication, and dynamic post interactions. Users can like, comment, bookmark, and follow profiles. The platform is optimized with Cloudinary, powered by PostgreSQL, and hosted via Railway.",
+      "technologies": [
+        "Typescript",
+        "Tanstack Query",
+        "TailwindCSS",
+        "ShadcnUI",
+        "Next.js",
+        "Oauth",
+        "Motion",
+        "Redux",
+        "Axios",
+        "Mdx",
+        "Zod",
+        "Cloudflare",
+        "Multirepo",
+        "Express.js",
+        "PostgreSQL",
+        "Cloudinary",
+        "Prisma",
+        "Railway",
+        "Jwt"
+      ],
+      "live_url": "https://syncblog.pages.dev",
+      "code_repo_url": "https://github.com/kyyril/fr-blogs",
+      "type": "Fullstack",
+      "category": "Web",
+      "date": "2024-05-12",
+      "features": [
+        "User authentication",
+        "Create, edit, and delete blog posts",
+        "Rich text editing with MDX",
+        "Category-based filtering of blog posts",
+        "User profiles with follow and unfollow functionality",
+        "Comment system on blog posts",
+        "Like and unlike blog posts",
+        "Bookmark blog posts",
+        "Count blog visitors"
+      ],
+      "image": [
+        "https://res.cloudinary.com/da5ggxk01/image/upload/v1750526245/9c704775-d33c-4ee6-a459-40c836b6379f.png",
+        "https://res.cloudinary.com/da5ggxk01/image/upload/v1750526388/88e5c6d9-1f27-4714-9c33-0a4d1b62dc1f.png",
+        "https://res.cloudinary.com/da5ggxk01/image/upload/v1750526446/d2dcfe99-03e5-42ae-b537-fa0e997b3906.png",
+        "https://res.cloudinary.com/da5ggxk01/image/upload/v1750526495/b1569478-7bcd-45eb-ac0c-3f5f3e5edae1.png",
+        "https://res.cloudinary.com/da5ggxk01/image/upload/v1750526541/6a90f279-1eb9-4396-be5c-a0341205151c.png",
+        "https://res.cloudinary.com/da5ggxk01/image/upload/v1750526568/68408b80-138c-434d-94b1-4d56134ae87c.png",
+        "https://res.cloudinary.com/da5ggxk01/image/upload/v1750526568/68408b80-138c-434d-94b1-4d56134ae87c.png",
+        "https://res.cloudinary.com/da5ggxk01/image/upload/v1750526669/86b02c7c-53f7-4c27-a02b-aef0067fd1ea.png",
+        "https://res.cloudinary.com/da5ggxk01/image/upload/v1750526756/6a770acf-c63c-4fc9-b566-b4ccd1d70872.png"
+      ]
+    },
+    {
       "id": "cihuy-movie",
       "title": "Cihuy Movie",
       "technologies": [
