@@ -56,7 +56,7 @@
         "Railway",
         "Jwt"
       ],
-      "live_url": "https://syncblog.pages.dev",
+      "live_url": "https://syncblog.vercel.app",
       "code_repo_url": "https://github.com/kyyril/fr-blogs",
       "type": "Fullstack",
       "category": "Web",
