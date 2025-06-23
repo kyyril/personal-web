@@ -174,6 +174,39 @@
       ]
     },
     {
+      "id": "manytools",
+      "title": "ManyTools",
+      "description": "ManyTools is a comprehensive web app offering AI-powered tools for text processing and academic paper generation. Built with Next.js 15 and integrated with Google's Gemini AI.",
+      "technologies": [
+        "Typescript",
+        "Next.js",
+        "React.js",
+        "TailwindCSS",
+        "ShadcnUI",
+        "Framer Motion",
+        "Zustand",
+        "Supabase",
+        "Gemini"
+      ],
+      "live_url": "https://manytools-three.vercel.app/",
+      "code_repo_url": "https://github.com/kyyril/manytools",
+      "type": "Fullstack",
+      "category": "Web",
+      "date": "2024-06-10",
+      "features": [
+        "AI Paraphrase, Summarizer, Grammar Check, Plagiarism Detector",
+        "Free token system with ad-based reward",
+        "Authentication via Supabase"
+      ],
+      "image": [
+        "https://res.cloudinary.com/da5ggxk01/image/upload/v1750710834/4d0ae2e1-ac14-4323-be2f-627fb39b75d0.png",
+        "https://res.cloudinary.com/da5ggxk01/image/upload/v1750710881/32a524ea-a528-4d0a-a28c-4b2bce29ebc4.png",
+        "https://res.cloudinary.com/da5ggxk01/image/upload/v1750710932/ca5d1557-1ea6-4218-8215-79a62a9670d0.png",
+        "https://res.cloudinary.com/da5ggxk01/image/upload/v1750710937/46af68aa-5a25-49c7-b1e7-f4e069321e76.png",
+        "https://res.cloudinary.com/da5ggxk01/image/upload/v1750710987/c58fb6e6-36a7-4171-ba7b-97ce20fb287a.png"
+      ]
+    },
+    {
       "id": "toyota-labuhanbatu",
       "title": "Toyota LabuhanBatu",
       "description": "The Toyota Labuhanbatu is a website that makes it easy to update content using Google Spreadsheet. This allows users to manage text, images, and other content without technical skills.",
