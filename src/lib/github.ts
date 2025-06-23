@@ -5,8 +5,10 @@ export interface GitHubRepo {
   description: string;
   html_url: string;
   stargazers_count: number;
+  forks_count: number;
   language: string;
   created_at: string;
+  updated_at: string;
 }
 
 export async function getGitHubRepositories(): Promise<GitHubRepo[]> {
@@ -26,7 +28,9 @@ export async function getGitHubRepositories(): Promise<GitHubRepo[]> {
     description: repo.description || "",
     html_url: repo.html_url,
     stargazers_count: repo.stargazers_count || 0,
+    forks_count: repo.forks_count || 0,
     language: repo.language || "",
     created_at: repo.created_at || "",
+    updated_at: repo.updated_at || "",
   }));
 }
