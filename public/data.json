@@ -41,13 +41,13 @@
     {
       "id": "1",
       "institution": "PT Astra International Tbk - TSO Auto2000",
-      "job": "Web Developer",
+      "job": "Software Enginerr Intern",
       "status": "Internship",
       "location": "Kab. Labuhanbatu, Indonesia",
       "working": "On-site",
       "startDate": "Jan 2025",
       "endDate": "Mar 2025",
-      "description": "As a Web Developer Intern, I developed a dynamic website with easy content management and AI car recommendations for Toyota Labuhanbatu, and built ReminderApp with role-based access and STNK/BPKB reminders for Toyota Rantauprapat.",
+      "description": "As a Software Enginerr Intern, I developed a dynamic website with easy content management and AI car recommendations for Toyota Labuhanbatu, and built ReminderApp with role-based access and STNK/BPKB reminders for Toyota Rantauprapat.",
       "technologies": [
         "Typescript",
         "React.js",
@@ -60,7 +60,8 @@
         "ShadcnUI",
         "REST-API",
         "Gemini",
-        "Apps-Script"
+        "Apps-Script",
+        "Vite"
       ]
     }
   ]
