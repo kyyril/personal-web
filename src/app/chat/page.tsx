@@ -12,6 +12,7 @@ import {
   RocketIcon,
   PlusIcon,
   TrashIcon,
+  SpeakerLoudIcon,
 } from "@radix-ui/react-icons";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import {
@@ -35,6 +36,7 @@ import {
 
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
+import MusicPlayer from "@/components/MusicPlayer";
 
 const GEMINI_API_KEY = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
 
@@ -110,6 +112,7 @@ export default function Chat() {
   const [chatToDelete, setChatToDelete] = useState<string | null>(null);
   const [animateChat, setAnimateChat] = useState<boolean>(true);
   const [chatsList, setChatsList] = useState<ChatHistory[]>([]);
+  const [showMusicPlayer, setShowMusicPlayer] = useState<boolean>(false);
 
   // Auto scroll to bottom when messages change
   useEffect(() => {
@@ -551,8 +554,25 @@ export default function Chat() {
               </p>
             </div>
 
-            {/* New Chat Button */}
-            <div className="ml-auto mr-2 flex items-center">
+            {/* Controls */}
+            <div className="ml-auto mr-2 flex items-center gap-2">
+              {/* Music Player Toggle */}
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="rounded-full h-8 w-8"
+                  onClick={() => setShowMusicPlayer(!showMusicPlayer)}
+                  title="Toggle Music Player"
+                >
+                  <SpeakerLoudIcon className="h-4 w-4" />
+                </Button>
+              </motion.div>
+
+              {/* New Chat Button */}
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -569,6 +589,21 @@ export default function Chat() {
               </motion.div>
             </div>
           </motion.header>
+
+          {/* Music Player */}
+          <AnimatePresence>
+            {showMusicPlayer && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.3 }}
+                className="mx-3 mb-3"
+              >
+                <MusicPlayer />
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           {/* Chat Messages */}
           <div
