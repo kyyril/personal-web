@@ -4,12 +4,21 @@ import { Button } from "@/components/ui/button";
 import { Card, CardHeader } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import prisma from "@/lib/db";
-import { RegisterLink } from "@kinde-oss/kinde-auth-nextjs/components";
+import {
+  RegisterLink,
+  LogoutLink,
+} from "@kinde-oss/kinde-auth-nextjs/components";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { Suspense } from "react";
 import { formatDistanceToNow } from "date-fns";
 import { unstable_noStore as noStore } from "next/cache";
 import { Metadata } from "next";
+import Image from "next/image";
+import {
+  PersonIcon,
+  EnvelopeClosedIcon,
+  ExitIcon,
+} from "@radix-ui/react-icons";
 
 export const metadata: Metadata = {
   title: `GUESTBOOKS - khairil rahman hakiki`,
@@ -94,7 +103,57 @@ async function GuestBookForm() {
   const user = await getUser();
   if (user) {
     return (
-      <div>
+      <div className="space-y-4">
+        {/* User Information Display */}
+        <div className="bg-primary-foreground rounded-lg p-4 border">
+          <div className="flex items-center justify-between mb-3">
+            <h3 className="text-lg font-semibold flex items-center gap-2">
+              <PersonIcon className="w-5 h-5" />
+              Welcome back!
+            </h3>
+            <LogoutLink>
+              <Button
+                variant="outline"
+                size="sm"
+                className="flex items-center gap-2"
+              >
+                <ExitIcon className="w-4 h-4" />
+                Logout
+              </Button>
+            </LogoutLink>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+            <div className="flex items-center gap-2">
+              <PersonIcon className="w-4 h-4 text-muted-foreground" />
+              <span className="font-medium">Name:</span>
+              <span>
+                {user.given_name} {user.family_name}
+              </span>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <EnvelopeClosedIcon className="w-4 h-4 text-muted-foreground" />
+              <span className="font-medium">Email:</span>
+              <span>{user.email}</span>
+            </div>
+
+            {user.picture && (
+              <div className="flex items-center gap-2">
+                <Image
+                  src={user.picture}
+                  alt="Profile"
+                  width={32}
+                  height={32}
+                  className="w-8 h-8 rounded-full border"
+                />
+                <span className="font-medium">Profile Picture</span>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Message Form */}
         <Form />
       </div>
     );
