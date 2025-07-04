@@ -146,10 +146,27 @@ export default function MusicPlayer({
               <div className="w-8 h-8 bg-primary/20 rounded" />
             )}
           </div>
-          <div className="flex-1 min-w-0">
-            <h3 className="font-semibold truncate text-base sm:text-lg md:text-xl max-w-[200px] sm:max-w-[300px] md:max-w-[400px]">
-              {currentTrack.title}
-            </h3>
+          <div className="flex-1">
+            <div className="overflow-hidden w-44 whitespace-nowrap">
+              <p
+                className="inline-block font-semibold text-sm sm:text-base md:text-lg lg:text-xl"
+                style={{
+                  animation: "marquee 10s linear infinite",
+                }}
+              >
+                {currentTrack.title}
+              </p>
+              <style jsx>{`
+                @keyframes marquee {
+                  0% {
+                    transform: translateX(100%);
+                  }
+                  100% {
+                    transform: translateX(-100%);
+                  }
+                }
+              `}</style>
+            </div>
 
             <p className="text-sm text-muted-foreground truncate">
               {currentTrack.artist}
@@ -348,15 +365,14 @@ export default function MusicPlayer({
                     </div>
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-medium truncate">
-                        {track.title}
+                        {track.title.split(" ").slice(0, 4).join(" ") +
+                          (track.title.split(" ").length > 4 ? "..." : "")}
                       </p>
+
                       <p className="text-xs text-muted-foreground truncate">
                         {track.artist}
                       </p>
                     </div>
-                    <span className="text-xs text-muted-foreground">
-                      {formatTime(track.duration)}
-                    </span>
                   </motion.div>
                 ))}
               </div>

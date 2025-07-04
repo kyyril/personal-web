@@ -2,7 +2,6 @@ export interface Track {
   id: number;
   title: string;
   artist: string;
-  duration: number;
   src: string;
   cover: string;
   genre?: string;
@@ -25,9 +24,8 @@ export interface Playlist {
 export const sampleTracks: Track[] = [
   {
     id: 2,
-    title: "Dango Daikozoku - Clannad END Cover Katou Megumi",
+    title: "Dango Daikozoku - Clannad After Story ED Cover Katou Megumi",
     artist: "Katou Megumi",
-    duration: 240,
     src: "/music/daikozoku.mp3",
     cover: "/assets/music-covers/daikozoku.jpeg",
   },
@@ -35,15 +33,13 @@ export const sampleTracks: Track[] = [
     id: 2,
     title: "Aternal - Cover Katou Megumi",
     artist: "Katou Megumi",
-    duration: 240,
     src: "/music/ETERNAL.mp3",
     cover: "/assets/music-covers/eternal.jpeg",
   },
   {
     id: 3,
     title: "Kisetsu Wo Dakishimete - Cover Katou Megumi",
-    artist: "Katou Megumi",
-    duration: 240, // 4 minutes
+    artist: "Katou Megumi", // 4 minutes
     src: "/music/kisetsu-dakishimete.mp3",
     cover: "/assets/music-covers/kisetsu.webp",
   },
@@ -51,7 +47,6 @@ export const sampleTracks: Track[] = [
     id: 4,
     title: "Glistening - Cover Katou Megumi",
     artist: "Katou Megumi",
-    duration: 180, // 3 minutes
     src: "/music/Glistening.mp3",
     cover: "/assets/music-covers/glistening.jpeg",
   },
