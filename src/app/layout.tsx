@@ -4,6 +4,8 @@ import { Navigation } from "@/components/BottomBar";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import FooterWrapper from "@/components/FooterWrapper";
 import { Analytics } from "@vercel/analytics/next";
+import { MusicPlayerProvider } from "@/contexts/MusicPlayerContext";
+import FloatingMusicPlayer from "@/components/FloatingMusicPlayer";
 
 export const metadata: Metadata = {
   title: "Khairil Rahman Hakiki | Frontend Developer",
@@ -57,10 +59,13 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Navigation />
-          {children}
-          <Analytics />
-          <FooterWrapper />
+          <MusicPlayerProvider>
+            <FloatingMusicPlayer />
+            <Navigation />
+            {children}
+            <Analytics />
+            <FooterWrapper />
+          </MusicPlayerProvider>
         </ThemeProvider>
       </body>
     </html>
