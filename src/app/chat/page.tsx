@@ -14,7 +14,13 @@ import {
   TrashIcon,
   SpeakerLoudIcon,
 } from "@radix-ui/react-icons";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import {
   Sheet,
   SheetContent,
@@ -112,7 +118,6 @@ export default function Chat() {
   const [chatToDelete, setChatToDelete] = useState<string | null>(null);
   const [animateChat, setAnimateChat] = useState<boolean>(true);
   const [chatsList, setChatsList] = useState<ChatHistory[]>([]);
-  const [showMusicPlayer, setShowMusicPlayer] = useState<boolean>(false);
 
   // Auto scroll to bottom when messages change
   useEffect(() => {
@@ -445,7 +450,7 @@ export default function Chat() {
   );
 
   return (
-    <section className="max-w-7xl w-full h-full px-4 md:px-16 overflow-hidden mx-auto pb-16">
+    <section className="max-w-7xl w-full h-full mt-2 px-4 md:px-16 overflow-hidden mx-auto pb-16">
       <div className="flex flex-col md:flex-row gap-4 h-full">
         {/* Delete Confirmation Dialog */}
         <AlertDialog
@@ -471,32 +476,6 @@ export default function Chat() {
             </AlertDialogFooter>
           </AlertDialogContent>
         </AlertDialog>
-
-        {/* Mobile Chat History Sidebar */}
-        <Sheet>
-          <SheetTrigger asChild className="md:hidden">
-            <Button variant="outline" size="icon" className="mt-2 w-8 h-8">
-              <svg
-                width="15"
-                height="15"
-                viewBox="0 0 15 15"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M2.5 4C2.22386 4 2 3.77614 2 3.5C2 3.22386 2.22386 3 2.5 3H12.5C12.7761 3 13 3.22386 13 3.5C13 3.77614 12.7761 4 12.5 4H2.5ZM2.5 8C2.22386 8 2 7.77614 2 7.5C2 7.22386 2.22386 7 2.5 7H12.5C12.7761 7 13 7.22386 13 7.5C13 7.77614 12.7761 8 12.5 8H2.5ZM2 11.5C2 11.2239 2.22386 11 2.5 11H12.5C12.7761 11 13 11.2239 13 11.5C13 11.7761 12.7761 12 12.5 12H2.5C2.22386 12 2 11.7761 2 11.5Z"
-                  fill="currentColor"
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                ></path>
-              </svg>
-            </Button>
-          </SheetTrigger>
-          <SheetContent side="left" className="w-60">
-            <button className="hidden" data-close-sheet></button>
-            <ChatHistorySidebar />
-          </SheetContent>
-        </Sheet>
 
         {/* Desktop Chat History Sidebar */}
         <Card className="hidden md:flex flex-col w-64 h-[500px] overflow-hidden">
@@ -556,21 +535,28 @@ export default function Chat() {
 
             {/* Controls */}
             <div className="ml-auto mr-2 flex items-center gap-2">
-              {/* Music Player Toggle */}
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="rounded-full h-8 w-8"
-                  onClick={() => setShowMusicPlayer(!showMusicPlayer)}
-                  title="Toggle Music Player"
-                >
-                  <SpeakerLoudIcon className="h-4 w-4" />
-                </Button>
-              </motion.div>
+              {/* Music Player Dialog */}
+              <Dialog>
+                <DialogTrigger asChild>
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="rounded-full h-8 w-8"
+                      title="Open Music Player"
+                    >
+                      <SpeakerLoudIcon className="h-4 w-4" />
+                    </Button>
+                  </motion.div>
+                </DialogTrigger>
+                <DialogContent className="max-w-md border-none rounded-md">
+                  <DialogHeader></DialogHeader>
+                  <MusicPlayer />
+                </DialogContent>
+              </Dialog>
 
               {/* New Chat Button */}
               <motion.div
@@ -587,23 +573,40 @@ export default function Chat() {
                   <span className="hidden sm:inline">New Chat</span>
                 </Button>
               </motion.div>
+
+              {/* List Chat Button */}
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                {/* Mobile Chat History Sidebar */}
+                <Sheet>
+                  <SheetTrigger asChild className="md:hidden">
+                    <Button variant="outline" size="icon" className="w-8 h-8">
+                      <svg
+                        width="15"
+                        height="15"
+                        viewBox="0 0 15 15"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M2.5 4C2.22386 4 2 3.77614 2 3.5C2 3.22386 2.22386 3 2.5 3H12.5C12.7761 3 13 3.22386 13 3.5C13 3.77614 12.7761 4 12.5 4H2.5ZM2.5 8C2.22386 8 2 7.77614 2 7.5C2 7.22386 2.22386 7 2.5 7H12.5C12.7761 7 13 7.22386 13 7.5C13 7.77614 12.7761 8 12.5 8H2.5ZM2 11.5C2 11.2239 2.22386 11 2.5 11H12.5C12.7761 11 13 11.2239 13 11.5C13 11.7761 12.7761 12 12.5 12H2.5C2.22386 12 2 11.7761 2 11.5Z"
+                          fill="currentColor"
+                          fillRule="evenodd"
+                          clipRule="evenodd"
+                        ></path>
+                      </svg>
+                    </Button>
+                  </SheetTrigger>
+                  <SheetContent side="left" className="w-60">
+                    <button className="hidden" data-close-sheet></button>
+                    <ChatHistorySidebar />
+                  </SheetContent>
+                </Sheet>
+              </motion.div>
             </div>
           </motion.header>
-
-          {/* Music Player */}
-          <AnimatePresence>
-            {showMusicPlayer && (
-              <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: "auto" }}
-                exit={{ opacity: 0, height: 0 }}
-                transition={{ duration: 0.3 }}
-                className="mx-3 mb-3"
-              >
-                <MusicPlayer />
-              </motion.div>
-            )}
-          </AnimatePresence>
 
           {/* Chat Messages */}
           <div

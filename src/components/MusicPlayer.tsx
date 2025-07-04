@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
@@ -18,7 +18,8 @@ import {
   ListBulletIcon,
 } from "@radix-ui/react-icons";
 import { cn } from "@/lib/utils";
-import { sampleTracks, type Track } from "@/lib/musicData";
+import { useMusicPlayer } from "@/contexts/MusicPlayerContext"; // Adjust path as needed
+import Image from "next/image";
 
 interface MusicPlayerProps {
   className?: string;
@@ -29,145 +30,29 @@ export default function MusicPlayer({
   className,
   compact = false,
 }: MusicPlayerProps) {
-  const audioRef = useRef<HTMLAudioElement>(null);
-  const [tracks] = useState<Track[]>(sampleTracks);
-  const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [currentTime, setCurrentTime] = useState(0);
-  const [duration, setDuration] = useState(0);
-  const [volume, setVolume] = useState(0.7);
-  const [isLooping, setIsLooping] = useState(false);
-  const [isShuffling, setIsShuffling] = useState(false);
+  const {
+    tracks,
+    currentTrackIndex,
+    isPlaying,
+    currentTime,
+    duration,
+    volume,
+    isLooping,
+    isShuffling,
+    isLoading,
+    currentTrack,
+    setVolume,
+    setIsLooping,
+    setIsShuffling,
+    setCurrentTrackIndex,
+    togglePlayPause,
+    handleNext,
+    handlePrevious,
+    handleSeek,
+    formatTime,
+  } = useMusicPlayer();
+
   const [showPlaylist, setShowPlaylist] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-
-  const currentTrack = tracks[currentTrackIndex];
-
-  // Format time helper
-  const formatTime = (time: number) => {
-    const minutes = Math.floor(time / 60);
-    const seconds = Math.floor(time % 60);
-    return `${minutes}:${seconds.toString().padStart(2, "0")}`;
-  };
-
-  // Next track function (defined early to avoid dependency issues)
-  const handleNext = useCallback(() => {
-    let nextIndex;
-    if (isShuffling) {
-      nextIndex = Math.floor(Math.random() * tracks.length);
-    } else {
-      nextIndex = (currentTrackIndex + 1) % tracks.length;
-    }
-    setCurrentTrackIndex(nextIndex);
-    setCurrentTime(0);
-  }, [currentTrackIndex, tracks.length, isShuffling]);
-
-  // Audio event handlers
-  useEffect(() => {
-    const audio = audioRef.current;
-    if (!audio) return;
-
-    const handleTimeUpdate = () => setCurrentTime(audio.currentTime);
-    const handleDurationChange = () => setDuration(audio.duration);
-    const handleLoadStart = () => setIsLoading(true);
-    const handleCanPlay = () => setIsLoading(false);
-    const handleEnded = () => {
-      if (isLooping) {
-        audio.currentTime = 0;
-        audio.play();
-      } else {
-        handleNext();
-      }
-    };
-
-    audio.addEventListener("timeupdate", handleTimeUpdate);
-    audio.addEventListener("durationchange", handleDurationChange);
-    audio.addEventListener("loadstart", handleLoadStart);
-    audio.addEventListener("canplay", handleCanPlay);
-    audio.addEventListener("ended", handleEnded);
-
-    return () => {
-      audio.removeEventListener("timeupdate", handleTimeUpdate);
-      audio.removeEventListener("durationchange", handleDurationChange);
-      audio.removeEventListener("loadstart", handleLoadStart);
-      audio.removeEventListener("canplay", handleCanPlay);
-      audio.removeEventListener("ended", handleEnded);
-    };
-  }, [isLooping, handleNext]);
-
-  // Volume control
-  useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.volume = volume;
-    }
-  }, [volume]);
-
-  // Handle track changes - auto play if was playing
-  useEffect(() => {
-    const audio = audioRef.current;
-    if (!audio) return;
-
-    // If music was playing when track changed, continue playing the new track
-    if (isPlaying) {
-      const playNewTrack = async () => {
-        try {
-          // Reset time and wait for the audio to be ready
-          audio.currentTime = 0;
-          await audio.play();
-        } catch (error) {
-          console.error("Error auto-playing new track:", error);
-          setIsPlaying(false);
-        }
-      };
-
-      // Small delay to ensure the new src is loaded
-      const timeoutId = setTimeout(playNewTrack, 100);
-      return () => clearTimeout(timeoutId);
-    }
-  }, [currentTrackIndex, isPlaying]);
-
-  // Play/Pause toggle
-  const togglePlayPause = useCallback(async () => {
-    const audio = audioRef.current;
-    if (!audio) return;
-
-    try {
-      if (isPlaying) {
-        audio.pause();
-        setIsPlaying(false);
-      } else {
-        await audio.play();
-        setIsPlaying(true);
-      }
-    } catch (error) {
-      console.error("Error playing audio:", error);
-      setIsPlaying(false);
-    }
-  }, [isPlaying]);
-
-  // Previous track
-  const handlePrevious = useCallback(() => {
-    const prevIndex =
-      currentTrackIndex === 0 ? tracks.length - 1 : currentTrackIndex - 1;
-    setCurrentTrackIndex(prevIndex);
-    setCurrentTime(0);
-  }, [currentTrackIndex, tracks.length]);
-
-  // Seek to position
-  const handleSeek = useCallback(
-    (e: React.MouseEvent<HTMLDivElement>) => {
-      const audio = audioRef.current;
-      if (!audio || !duration) return;
-
-      const rect = e.currentTarget.getBoundingClientRect();
-      const clickX = e.clientX - rect.left;
-      const newTime = (clickX / rect.width) * duration;
-
-      audio.currentTime = newTime;
-      setCurrentTime(newTime);
-    },
-    [duration]
-  );
 
   // Volume icon based on level
   const getVolumeIcon = () => {
@@ -223,7 +108,6 @@ export default function MusicPlayer({
               </p>
             </div>
           </div>
-          <audio ref={audioRef} src={currentTrack.src} preload="metadata" />
         </Card>
       </motion.div>
     );
@@ -251,7 +135,9 @@ export default function MusicPlayer({
         <div className="flex items-center gap-4 mb-4">
           <div className="w-16 h-16 bg-muted rounded-lg flex items-center justify-center overflow-hidden">
             {currentTrack.cover ? (
-              <img
+              <Image
+                width={100}
+                height={100}
                 src={currentTrack.cover}
                 alt={currentTrack.title}
                 className="w-full h-full object-cover"
@@ -261,7 +147,10 @@ export default function MusicPlayer({
             )}
           </div>
           <div className="flex-1 min-w-0">
-            <h3 className="font-semibold truncate">{currentTrack.title}</h3>
+            <h3 className="font-semibold truncate text-base sm:text-lg md:text-xl max-w-[200px] sm:max-w-[300px] md:max-w-[400px]">
+              {currentTrack.title}
+            </h3>
+
             <p className="text-sm text-muted-foreground truncate">
               {currentTrack.artist}
             </p>
@@ -474,8 +363,6 @@ export default function MusicPlayer({
             </motion.div>
           )}
         </AnimatePresence>
-
-        <audio ref={audioRef} src={currentTrack.src} preload="metadata" />
       </Card>
     </motion.div>
   );

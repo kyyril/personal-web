@@ -24,57 +24,36 @@ export interface Playlist {
 // Note: You'll need to add actual audio files to the public/music directory
 export const sampleTracks: Track[] = [
   {
-    id: 1,
-    title: "Lofi Study Session",
-    artist: "Chill Beats",
-    duration: 180, // 3 minutes
-    src: "/music/Glistening.mp3",
-    cover: "/assets/music-covers/lofi-study.jpg",
-    genre: "Lo-Fi",
-    album: "Study Vibes",
-    year: 2023,
+    id: 2,
+    title: "Dango Daikozoku - Clannad END Cover Katou Megumi",
+    artist: "Katou Megumi",
+    duration: 240,
+    src: "/music/daikozoku.mp3",
+    cover: "/assets/music-covers/daikozoku.jpeg",
   },
   {
     id: 2,
-    title: "Peaceful Morning",
-    artist: "Ambient Sounds",
-    duration: 240, // 4 minutes
+    title: "Aternal - Cover Katou Megumi",
+    artist: "Katou Megumi",
+    duration: 240,
     src: "/music/ETERNAL.mp3",
-    cover: "/assets/music-covers/peaceful-morning.jpg",
-    genre: "Ambient",
-    album: "Morning Meditation",
-    year: 2023,
-  },
-];
-
-// Sample playlists
-export const samplePlaylists: Playlist[] = [
-  {
-    id: "study-playlist",
-    name: "Study & Focus",
-    description: "Perfect tracks for deep work and concentration",
-    tracks: [sampleTracks[0]],
-    cover: "/assets/playlist-covers/study-focus.jpg",
-    createdAt: new Date("2023-01-01"),
-    updatedAt: new Date("2023-12-01"),
+    cover: "/assets/music-covers/eternal.jpeg",
   },
   {
-    id: "chill-playlist",
-    name: "Chill Vibes",
-    description: "Relaxing music for unwinding",
-    tracks: [sampleTracks[1]],
-    cover: "/assets/playlist-covers/chill-vibes.jpg",
-    createdAt: new Date("2023-02-01"),
-    updatedAt: new Date("2023-12-01"),
+    id: 3,
+    title: "Kisetsu Wo Dakishimete - Cover Katou Megumi",
+    artist: "Katou Megumi",
+    duration: 240, // 4 minutes
+    src: "/music/kisetsu-dakishimete.mp3",
+    cover: "/assets/music-covers/kisetsu.webp",
   },
   {
-    id: "all-tracks",
-    name: "All Tracks",
-    description: "Complete music collection",
-    tracks: sampleTracks,
-    cover: "/assets/playlist-covers/all-tracks.jpg",
-    createdAt: new Date("2023-01-01"),
-    updatedAt: new Date("2023-12-01"),
+    id: 4,
+    title: "Glistening - Cover Katou Megumi",
+    artist: "Katou Megumi",
+    duration: 180, // 3 minutes
+    src: "/music/Glistening.mp3",
+    cover: "/assets/music-covers/glistening.jpeg",
   },
 ];
 
