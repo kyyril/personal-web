@@ -1,7 +1,7 @@
 {
   "contactInfo": {
     "email": "khairil.4hrp@gmail.com",
-    "linkedin": "https://www.linkedin.com/in/khairil-rahman-hakiki",
+    "linkedin": "https://www.linkedin.com/in/khairilrahman",
     "github": "https://github.com/kyyril",
     "cv": "https://drive.google.com/file/d/1ZL3U-a7lVt2pz8FFGk8AcFnhv2o4A2U9/view?usp=sharing"
   },
@@ -11,7 +11,7 @@
       "id": "1",
       "institution": "State Islamic University of Imam Bonjol Padang",
       "degree": "Information Systems",
-      "description": "Relevant Coursework: Data structures, algorithms, software engineering, databases, and UI/UX design.",
+      "description": "Relevant coursework: Data structures, algorithms, software engineering, statistics, computer network, operating system, project management, databases, and UI/UX design.",
       "startDate": "2022",
       "endDate": "Present"
     }
@@ -22,7 +22,7 @@
       "id": "2",
       "institution": "CodeAtHome",
       "job": "Junior Frontend Developer",
-      "status": "Freelance",
+      "status": "Part-time",
       "location": "Lampung, Indonesia",
       "working": "Remote",
       "startDate": "April 2025",
@@ -56,6 +56,7 @@
         "TailwindCSS",
         "Zustand",
         "Supabase",
+        "PostgreSQL",
         "Cloudinary",
         "ShadcnUI",
         "REST-API",
