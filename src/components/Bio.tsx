@@ -3,7 +3,6 @@ import { Data } from "@/lib/interfaces/data";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "./ui/button";
-import { motion } from "framer-motion";
 import {
   EnvelopeClosedIcon,
   GitHubLogoIcon,

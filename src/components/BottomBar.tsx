@@ -7,7 +7,6 @@ import {
   ChatBubbleIcon,
   CodeIcon,
   PaperPlaneIcon,
-  HomeIcon,
 } from "@radix-ui/react-icons";
 import { motion } from "framer-motion";
 

@@ -1,13 +1,4 @@
 import React, { Suspense } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import {
-  GitHubLogoIcon,
-  LinkedInLogoIcon,
-  EnvelopeClosedIcon,
-  Link1Icon,
-} from "@radix-ui/react-icons";
 import { data } from "@/lib/data";
 import { Data } from "@/types";
 import { Metadata } from "next";

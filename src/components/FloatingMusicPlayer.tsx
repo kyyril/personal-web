@@ -9,7 +9,6 @@ import {
   PauseIcon,
   TrackNextIcon,
   TrackPreviousIcon,
-  Cross2Icon,
   DragHandleDots2Icon,
   CaretLeftIcon,
 } from "@radix-ui/react-icons";
@@ -19,11 +18,9 @@ import {
   DialogContent,
   DialogTrigger,
   DialogHeader,
-  DialogTitle,
 } from "@/components/ui/dialog";
 import MusicPlayer from "./MusicPlayer";
 import Image from "next/image";
-import { ArrowBigLeft, ArrowLeft } from "lucide-react";
 
 const MotionButton = ({ children, ...props }: any) => (
   <motion.div
