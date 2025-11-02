@@ -1,9 +1,14 @@
-import { Suspense } from "react";
-import ProjectListWrapper from "@/components/Project/ProjectListWrapper";
-import GitHubProjectsWrapper from "@/components/Project/GitHubProjectsWrapper";
+import React, { Suspense } from "react";
 import { Metadata } from "next";
 import ProjectListSkeleton from "@/components/Project/ProjectListSkeleton";
 import GitHubProjectsListSkeleton from "@/components/Project/GitHubProjectsListSkeleton";
+
+const ProjectListWrapper = React.lazy(
+  () => import("@/components/Project/ProjectListWrapper")
+);
+const GitHubProjectsWrapper = React.lazy(
+  () => import("@/components/Project/GitHubProjectsWrapper")
+);
 
 export const metadata: Metadata = {
   title: "Projects | Khairil's Personal Website",

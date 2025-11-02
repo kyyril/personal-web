@@ -19,8 +19,8 @@ function Bio({ data }: { data: Data }) {
           src={"/assets/profile.webp"}
           width={280}
           height={280}
-          loading="lazy"
           alt="image"
+          priority
           className="mx-auto aspect-square overflow-hidden object-cover object-center rounded-full"
         />
       </div>
