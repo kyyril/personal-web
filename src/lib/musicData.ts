@@ -27,14 +27,14 @@ export const sampleTracks: Track[] = [
     title: "Dango Daikozoku - Clannad After Story ED Cover Katou Megumi",
     artist: "Katou Megumi",
     src: "/music/daikozoku.mp3",
-    cover: "/assets/music-covers/daikozoku.jpeg",
+    cover: "/assets/music-covers/daikozoku.webp",
   },
   {
     id: 2,
     title: "Aternal - Cover Katou Megumi",
     artist: "Katou Megumi",
     src: "/music/ETERNAL.mp3",
-    cover: "/assets/music-covers/eternal.jpeg",
+    cover: "/assets/music-covers/eternal.webp",
   },
   {
     id: 3,
@@ -48,7 +48,7 @@ export const sampleTracks: Track[] = [
     title: "Glistening - Cover Katou Megumi",
     artist: "Katou Megumi",
     src: "/music/Glistening.mp3",
-    cover: "/assets/music-covers/glistening.jpeg",
+    cover: "/assets/music-covers/glistening.webp",
   },
 ];
 

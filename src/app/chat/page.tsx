@@ -5,7 +5,6 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { motion, AnimatePresence } from "framer-motion";
-import { GoogleGenerativeAI } from "@google/generative-ai";
 import {
   ReloadIcon,
   RocketIcon,
@@ -37,9 +36,10 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 
-import MusicPlayer from "@/components/MusicPlayer";
 import dynamic from "next/dynamic";
 import ChatMessage from "@/components/Chat/ChatMessage";
+import { MusicPlayerProvider } from "@/contexts/MusicPlayerContext";
+import FloatingMusicPlayer from "@/components/FloatingMusicPlayer";
 
 const ChatHistorySidebar = dynamic(
   () => import("@/components/Chat/ChatHistorySidebar"),
@@ -48,21 +48,9 @@ const ChatHistorySidebar = dynamic(
   }
 );
 
-const GEMINI_API_KEY = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
-
-const genAI = new GoogleGenerativeAI(GEMINI_API_KEY as string);
-
-const model = genAI.getGenerativeModel({
-  model: "gemini-2.5-flash",
+const MusicPlayer = dynamic(() => import("@/components/MusicPlayer"), {
+  ssr: false,
 });
-
-const generationConfig = {
-  temperature: 1,
-  topP: 0.95,
-  topK: 40,
-  maxOutputTokens: 8192,
-  responseMimeType: "text/plain",
-};
 
 type Message = {
   text: string;
@@ -322,6 +310,24 @@ export default function Chat() {
     setPending(true);
 
     try {
+      // Lazy-load GoogleGenerativeAI to reduce initial bundle size
+      const { GoogleGenerativeAI } = await import("@google/generative-ai");
+
+      const GEMINI_API_KEY = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
+      const genAI = new GoogleGenerativeAI(GEMINI_API_KEY as string);
+
+      const model = genAI.getGenerativeModel({
+        model: "gemini-2.5-flash",
+      });
+
+      const generationConfig = {
+        temperature: 1,
+        topP: 0.95,
+        topK: 40,
+        maxOutputTokens: 8192,
+        responseMimeType: "text/plain",
+      };
+
       const chatSession = model.startChat({
         generationConfig,
         history: aiHistory,
@@ -374,234 +380,237 @@ export default function Chat() {
   };
 
   return (
-    <section className="max-w-7xl w-full h-full mt-2 px-4 md:px-16 overflow-hidden mx-auto pb-16">
-      <div className="flex flex-col md:flex-row gap-4 h-full">
-        {/* Delete Confirmation Dialog */}
-        <AlertDialog
-          open={!!chatToDelete}
-          onOpenChange={(open) => !open && setChatToDelete(null)}
-        >
-          <AlertDialogContent>
-            <AlertDialogHeader>
-              <AlertDialogTitle>Are you sure?</AlertDialogTitle>
-              <AlertDialogDescription>
-                This will permanently delete this chat history. This action
-                cannot be undone.
-              </AlertDialogDescription>
-            </AlertDialogHeader>
-            <AlertDialogFooter>
-              <AlertDialogCancel>Cancel</AlertDialogCancel>
-              <AlertDialogAction
-                onClick={deleteChat}
-                className="bg-red-500 hover:bg-red-600 text-white"
-              >
-                Delete
-              </AlertDialogAction>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialog>
-
-        {/* Desktop Chat History Sidebar */}
-        <Card className="hidden md:flex flex-col w-64 h-[500px] overflow-hidden">
-          <ChatHistorySidebar
-            chatsList={chatsList}
-            activeChat={activeChat}
-            isMobile={isMobile}
-            startNewChat={startNewChat}
-            loadChat={loadChat}
-            confirmDeleteChat={confirmDeleteChat}
-          />
-        </Card>
-
-        {/* Chat Area */}
-        <Card className="flex-1 px-1 mx-auto w-full">
-          {/* Header */}
-          <motion.header
-            className="flex m-3 bg-custom py-1 rounded-full bg-opacity-10 sticky top-0 z-10"
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3 }}
+    <MusicPlayerProvider>
+      <FloatingMusicPlayer />
+      <section className="max-w-7xl w-full h-full mt-2 px-4 md:px-16 overflow-hidden mx-auto pb-16">
+        <div className="flex flex-col md:flex-row gap-4 h-full">
+          {/* Delete Confirmation Dialog */}
+          <AlertDialog
+            open={!!chatToDelete}
+            onOpenChange={(open) => !open && setChatToDelete(null)}
           >
-            <Dialog>
-              <DialogTrigger>
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                <AlertDialogDescription>
+                  This will permanently delete this chat history. This action
+                  cannot be undone.
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                <AlertDialogAction
+                  onClick={deleteChat}
+                  className="bg-red-500 hover:bg-red-600 text-white"
                 >
-                  <Image
-                    src="/assets/katou.gif"
-                    width={50}
-                    height={50}
-                    alt="Katou Megumin"
-                    loading="lazy"
-                    className="aspect-square ring-1 ring-custom mx-2 overflow-hidden object-cover object-center rounded-full cursor-pointer hover:opacity-80 transition-opacity"
-                  />
-                </motion.div>
-              </DialogTrigger>
-              <DialogContent className="bg-transparent shadow-none border-none rounded-2xl">
-                <motion.div
-                  className="flex items-center justify-center"
-                  initial={{ scale: 0.8, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <Image
-                    src="/assets/katou.gif"
-                    width={400}
-                    height={400}
-                    alt="Katou Megumin"
-                    className="rounded-sm object-cover"
-                  />
-                </motion.div>
-              </DialogContent>
-            </Dialog>
-            <div className="flex flex-col gap-y-1">
-              <h1 className="text-center text-xl font-sans font-light">
-                加藤 恵
-              </h1>
-              <p className="text-start font-sans text-xs text-green-600 font-light">
-                Online.
-              </p>
-            </div>
+                  Delete
+                </AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
 
-            {/* Controls */}
-            <div className="ml-auto mr-2 flex items-center gap-2">
-              {/* Music Player Dialog */}
+          {/* Desktop Chat History Sidebar */}
+          <Card className="hidden md:flex flex-col w-64 h-[500px] overflow-hidden">
+            <ChatHistorySidebar
+              chatsList={chatsList}
+              activeChat={activeChat}
+              isMobile={isMobile}
+              startNewChat={startNewChat}
+              loadChat={loadChat}
+              confirmDeleteChat={confirmDeleteChat}
+            />
+          </Card>
+
+          {/* Chat Area */}
+          <Card className="flex-1 px-1 mx-auto w-full">
+            {/* Header */}
+            <motion.header
+              className="flex m-3 bg-custom py-1 rounded-full bg-opacity-10 sticky top-0 z-10"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3 }}
+            >
               <Dialog>
-                <DialogTrigger asChild>
+                <DialogTrigger>
                   <motion.div
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className="rounded-full h-8 w-8"
-                      title="Open Music Player"
-                    >
-                      <SpeakerLoudIcon className="h-4 w-4" />
-                    </Button>
+                    <Image
+                      src="/assets/profile.webp"
+                      width={50}
+                      height={50}
+                      alt="Katou Megumin"
+                      loading="lazy"
+                      className="aspect-square ring-1 ring-custom mx-2 overflow-hidden object-cover object-center rounded-full cursor-pointer hover:opacity-80 transition-opacity"
+                    />
                   </motion.div>
                 </DialogTrigger>
-                <DialogContent className="max-w-md border-none rounded-md">
-                  <DialogHeader></DialogHeader>
-                  <MusicPlayer />
+                <DialogContent className="bg-transparent shadow-none border-none rounded-2xl">
+                  <motion.div
+                    className="flex items-center justify-center"
+                    initial={{ scale: 0.8, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <Image
+                      src="/assets/profile.webp"
+                      width={400}
+                      height={400}
+                      alt="Katou Megumin"
+                      className="rounded-sm object-cover"
+                    />
+                  </motion.div>
                 </DialogContent>
               </Dialog>
+              <div className="flex flex-col gap-y-1">
+                <h1 className="text-center text-xl font-sans font-light">
+                  加藤 恵
+                </h1>
+                <p className="text-start font-sans text-xs text-green-600 font-light">
+                  Online.
+                </p>
+              </div>
 
-              {/* New Chat Button */}
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="rounded-full"
-                  onClick={startNewChat}
-                >
-                  <PlusIcon className="mr-1 h-3 w-3" />
-                  <span className="hidden sm:inline">New Chat</span>
-                </Button>
-              </motion.div>
-
-              {/* List Chat Button */}
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                {/* Mobile Chat History Sidebar */}
-                <Sheet>
-                  <SheetTrigger asChild className="md:hidden">
-                    <Button variant="outline" size="icon" className="w-8 h-8">
-                      <svg
-                        width="15"
-                        height="15"
-                        viewBox="0 0 15 15"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
+              {/* Controls */}
+              <div className="ml-auto mr-2 flex items-center gap-2">
+                {/* Music Player Dialog */}
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <motion.div
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="rounded-full h-8 w-8"
+                        title="Open Music Player"
                       >
-                        <path
-                          d="M2.5 4C2.22386 4 2 3.77614 2 3.5C2 3.22386 2.22386 3 2.5 3H12.5C12.7761 3 13 3.22386 13 3.5C13 3.77614 12.7761 4 12.5 4H2.5ZM2.5 8C2.22386 8 2 7.77614 2 7.5C2 7.22386 2.22386 7 2.5 7H12.5C12.7761 7 13 7.22386 13 7.5C13 7.77614 12.7761 8 12.5 8H2.5ZM2 11.5C2 11.2239 2.22386 11 2.5 11H12.5C12.7761 11 13 11.2239 13 11.5C13 11.7761 12.7761 12 12.5 12H2.5C2.22386 12 2 11.7761 2 11.5Z"
-                          fill="currentColor"
-                          fillRule="evenodd"
-                          clipRule="evenodd"
-                        ></path>
-                      </svg>
-                    </Button>
-                  </SheetTrigger>
-                  <SheetContent side="left" className="w-60">
-                    <button className="hidden" data-close-sheet></button>
-                    <ChatHistorySidebar
-                      chatsList={chatsList}
-                      activeChat={activeChat}
-                      isMobile={isMobile}
-                      startNewChat={startNewChat}
-                      loadChat={loadChat}
-                      confirmDeleteChat={confirmDeleteChat}
-                    />
-                  </SheetContent>
-                </Sheet>
-              </motion.div>
-            </div>
-          </motion.header>
+                        <SpeakerLoudIcon className="h-4 w-4" />
+                      </Button>
+                    </motion.div>
+                  </DialogTrigger>
+                  <DialogContent className="max-w-md border-none rounded-md">
+                    <DialogHeader></DialogHeader>
+                    <MusicPlayer />
+                  </DialogContent>
+                </Dialog>
 
-          {/* Chat Messages */}
-          <div
-            className="mx-3 mt-5 h-[360px] overflow-y-auto pb-2"
-            ref={messagesContainerRef}
-          >
-            <AnimatePresence mode="popLayout">
-              {animateChat &&
-                messages.map((msg, index) => (
-                  <ChatMessage key={msg.id} msg={msg} />
-                ))}
-            </AnimatePresence>
-            <div ref={messagesEndRef} /> {/* Empty div for auto-scroll */}
-          </div>
-
-          {/* Input Section */}
-          <motion.div
-            className="m-3 flex flex-col"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3, delay: 0.2 }}
-          >
-            <div className="flex gap-2">
-              <Input
-                className="w-full border rounded px-3 py-2"
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                placeholder="Ask Something..."
-                onKeyPress={(e) =>
-                  e.key === "Enter" && !pending && sendMessage()
-                }
-                disabled={pending}
-              />
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Button
-                  className="flex items-center"
-                  onClick={sendMessage}
-                  disabled={pending}
+                {/* New Chat Button */}
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                 >
-                  {pending ? (
-                    <div className="flex items-center text-secondary">
-                      <ReloadIcon className="animate-spin w-4 h-4 text-custom" />
-                    </div>
-                  ) : (
-                    <div className="flex items-center gap-1 text-secondary">
-                      <RocketIcon className="h-4 w-4 text-custom" />
-                    </div>
-                  )}
-                </Button>
-              </motion.div>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="rounded-full"
+                    onClick={startNewChat}
+                  >
+                    <PlusIcon className="mr-1 h-3 w-3" />
+                    <span className="hidden sm:inline">New Chat</span>
+                  </Button>
+                </motion.div>
+
+                {/* List Chat Button */}
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  {/* Mobile Chat History Sidebar */}
+                  <Sheet>
+                    <SheetTrigger asChild className="md:hidden">
+                      <Button variant="outline" size="icon" className="w-8 h-8">
+                        <svg
+                          width="15"
+                          height="15"
+                          viewBox="0 0 15 15"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M2.5 4C2.22386 4 2 3.77614 2 3.5C2 3.22386 2.22386 3 2.5 3H12.5C12.7761 3 13 3.22386 13 3.5C13 3.77614 12.7761 4 12.5 4H2.5ZM2.5 8C2.22386 8 2 7.77614 2 7.5C2 7.22386 2.22386 7 2.5 7H12.5C12.7761 7 13 7.22386 13 7.5C13 7.77614 12.7761 8 12.5 8H2.5ZM2 11.5C2 11.2239 2.22386 11 2.5 11H12.5C12.7761 11 13 11.2239 13 11.5C13 11.7761 12.7761 12 12.5 12H2.5C2.22386 12 2 11.7761 2 11.5Z"
+                            fill="currentColor"
+                            fillRule="evenodd"
+                            clipRule="evenodd"
+                          ></path>
+                        </svg>
+                      </Button>
+                    </SheetTrigger>
+                    <SheetContent side="left" className="w-60">
+                      <button className="hidden" data-close-sheet></button>
+                      <ChatHistorySidebar
+                        chatsList={chatsList}
+                        activeChat={activeChat}
+                        isMobile={isMobile}
+                        startNewChat={startNewChat}
+                        loadChat={loadChat}
+                        confirmDeleteChat={confirmDeleteChat}
+                      />
+                    </SheetContent>
+                  </Sheet>
+                </motion.div>
+              </div>
+            </motion.header>
+
+            {/* Chat Messages */}
+            <div
+              className="mx-3 mt-5 h-[360px] overflow-y-auto pb-2"
+              ref={messagesContainerRef}
+            >
+              <AnimatePresence mode="popLayout">
+                {animateChat &&
+                  messages.map((msg, index) => (
+                    <ChatMessage key={msg.id} msg={msg} />
+                  ))}
+              </AnimatePresence>
+              <div ref={messagesEndRef} /> {/* Empty div for auto-scroll */}
             </div>
-          </motion.div>
-        </Card>
-      </div>
-    </section>
+
+            {/* Input Section */}
+            <motion.div
+              className="m-3 flex flex-col"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, delay: 0.2 }}
+            >
+              <div className="flex gap-2">
+                <Input
+                  className="w-full border rounded px-3 py-2"
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  placeholder="Ask Something..."
+                  onKeyPress={(e) =>
+                    e.key === "Enter" && !pending && sendMessage()
+                  }
+                  disabled={pending}
+                />
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Button
+                    className="flex items-center"
+                    onClick={sendMessage}
+                    disabled={pending}
+                  >
+                    {pending ? (
+                      <div className="flex items-center text-secondary">
+                        <ReloadIcon className="animate-spin w-4 h-4 text-custom" />
+                      </div>
+                    ) : (
+                      <div className="flex items-center gap-1 text-secondary">
+                        <RocketIcon className="h-4 w-4 text-custom" />
+                      </div>
+                    )}
+                  </Button>
+                </motion.div>
+              </div>
+            </motion.div>
+          </Card>
+        </div>
+      </section>
+    </MusicPlayerProvider>
   );
 }

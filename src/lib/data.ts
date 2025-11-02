@@ -19,7 +19,7 @@ export const education: Education[] = [
     institution: "State Islamic University of Imam Bonjol Padang",
     degree: "Information Systems",
     description:
-      "Relevant coursework: Data structures, algorithms, software engineering, statistics, computer network, operating system, project management, databases, and UI/UX design.",
+      "Relevant coursework: Data structures, algorithms, software engineering, statistics, network, operating system, project management, databases, and UI/UX design.",
     startDate: "2022",
     endDate: "Present",
   },

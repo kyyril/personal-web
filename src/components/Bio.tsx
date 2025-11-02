@@ -19,7 +19,7 @@ function Bio({ data }: { data: Data }) {
           width={280}
           height={280}
           alt="image"
-          priority
+          loading="lazy"
           className="mx-auto aspect-square overflow-hidden object-cover object-center rounded-full"
         />
       </div>
@@ -31,11 +31,10 @@ function Bio({ data }: { data: Data }) {
         </div>
         <p className="max-w-[600px] lg:text-lg font-light opacity-70">
           I’m an Information Systems student who loves programming, especially
-          software development. I specialize in{" "}
-          <span className="font-semibold">Next.js</span> with{" "}
-          <span className="font-semibold">Typescript</span> and am currently
-          learning backend development with{" "}
-          <span className="font-semibold">Golang</span>.
+          software development. I specialize in with{" "}
+          <span className="font-semibold">Next.js</span> and{" "}
+          <span className="font-semibold">Node.js</span> with{" "}
+          <span className="font-semibold">Typescript</span>.
         </p>
         <div className="space-x-4 mt-2">
           <Link target="_blank" href={data.contactInfo.github} prefetch={false}>

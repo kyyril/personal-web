@@ -68,14 +68,12 @@ export default function GuestBook() {
   return (
     <section className="max-w-6xl w-full px-4 min-h-screen md:px-16 mx-auto">
       <h1 className="text-custom text-3xl font-semibold lg:text-4xl flex items-end justify-end pt-4 pb-2">
-        Guest<span className="font-bold text-primary font-mono">Books📑</span>
+        Guest<span className="font-bold text-primary font-mono">Books</span>
       </h1>
-      <p className="text-lg font-semibold lg:text-lg pt-3">
-        <span className="bg-primary-foreground rounded-full">Hey!👋🏻</span>
-      </p>
+
       <p className="text-sm lg:text-sm pt-2">
         Feel free to leave a message in my guestbook! I will be happy to read
-        whatever you write. 😁
+        whatever you write.
       </p>
       <Card className="mt-8">
         <CardHeader className="flex flex-col w-full">

@@ -1,9 +1,14 @@
-import { Card, CardContent, CardHeader, CardFooter } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardFooter,
+} from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 
 export default function CardProjectSkeleton() {
   return (
-    <Card className="flex flex-col lg:flex-row">
+    <Card className="flex flex-col lg:flex-row border-none shadow-none">
       <div className="w-full lg:w-1/3 flex justify-center items-center relative group">
         <Skeleton className="h-[250px] w-full" />
       </div>

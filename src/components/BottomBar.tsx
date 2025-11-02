@@ -38,7 +38,7 @@ export function Navigation() {
                 width={24}
                 height={24}
                 quality={100}
-                className={`rounded-full border-spacing-3 transition-all duration-300 ${
+                className={`rounded-full border-spacing-3 transition-all w-6 h-6 duration-300 object-cover  ${
                   pathname === "/"
                     ? "ring-2 ring-custom"
                     : "ring-2 ring-primary/10"
