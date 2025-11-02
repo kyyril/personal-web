@@ -1,4 +1,5 @@
-import React, { Suspense } from "react";
+import dynamic from "next/dynamic";
+import React from "react";
 import { data } from "@/lib/data";
 import { Data } from "@/types";
 import { Metadata } from "next";
@@ -6,9 +7,15 @@ import EducationSkeleton from "@/components/EducationSkeleton";
 import ExperienceSkeleton from "@/components/ExperienceSkeleton";
 import BioSkeleton from "@/components/BioSkeleton";
 
-const Bio = React.lazy(() => import("@/components/Bio"));
-const Experience = React.lazy(() => import("@/components/Experience"));
-const Education = React.lazy(() => import("@/components/Education"));
+const Bio = dynamic(() => import("@/components/Bio"), {
+  loading: () => <BioSkeleton />,
+});
+const Experience = dynamic(() => import("@/components/Experience"), {
+  loading: () => <ExperienceSkeleton />,
+});
+const Education = dynamic(() => import("@/components/Education"), {
+  loading: () => <EducationSkeleton />,
+});
 
 export const metadata: Metadata = {
   title: "Khairil Rahman Hakiki | Frontend Developer",
@@ -23,9 +30,7 @@ export default function Home() {
         id="bio"
         className="container max-w-5xl mx-auto py-12 md:py-16 lg:py-20 h-screen"
       >
-        <Suspense fallback={<BioSkeleton />}>
-          <Bio data={data} />
-        </Suspense>
+        <Bio data={data} />
       </section>
 
       <section className="max-w-6xl w-full px-4 md:px-16 mx-auto">
@@ -33,18 +38,14 @@ export default function Home() {
           <h2 className="font-semibold text-3xl md:text-5xl mb-12">
             Experience
           </h2>
-          <Suspense fallback={<ExperienceSkeleton />}>
-            <Experience data={data} />
-          </Suspense>
+          <Experience data={data} />
         </div>
 
         <div id="education">
           <h2 className="font-semibold text-3xl md:text-5xl mb-12">
             Education
           </h2>
-          <Suspense fallback={<EducationSkeleton />}>
-            <Education data={data} />
-          </Suspense>
+          <Education data={data} />
         </div>
       </section>
     </main>

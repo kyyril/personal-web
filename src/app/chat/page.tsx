@@ -4,14 +4,12 @@ import { Card } from "@/components/ui/card";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import ReactMarkdown from "react-markdown";
 import { motion, AnimatePresence } from "framer-motion";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import {
   ReloadIcon,
   RocketIcon,
   PlusIcon,
-  TrashIcon,
   SpeakerLoudIcon,
 } from "@radix-ui/react-icons";
 import {
@@ -19,7 +17,6 @@ import {
   DialogContent,
   DialogTrigger,
   DialogHeader,
-  DialogTitle,
 } from "@/components/ui/dialog";
 import {
   Sheet,
@@ -40,9 +37,16 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { cn } from "@/lib/utils";
 import MusicPlayer from "@/components/MusicPlayer";
+import dynamic from "next/dynamic";
+import ChatMessage from "@/components/Chat/ChatMessage";
+
+const ChatHistorySidebar = dynamic(
+  () => import("@/components/Chat/ChatHistorySidebar"),
+  {
+    ssr: false,
+  }
+);
 
 const GEMINI_API_KEY = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
 
@@ -369,86 +373,6 @@ export default function Chat() {
     }
   };
 
-  // Chat history sidebar component (uses chatsList to avoid re-renders)
-  const ChatHistorySidebar = () => (
-    <div className="h-full flex flex-col">
-      <div className="p-4 pb-2">
-        <h2 className="text-lg font-semibold">Chat History</h2>
-        <p className="text-xs text-primary/70">
-          <span className="text-red-500">* </span>This chat is saved in your
-          localstorage
-        </p>
-      </div>
-
-      <Button
-        onClick={() => {
-          startNewChat();
-          if (isMobile) {
-            const closeButton = document.querySelector(
-              "[data-close-sheet]"
-            ) as HTMLElement;
-            if (closeButton) closeButton.click();
-          }
-        }}
-        className="mx-4 mb-4 bg-custom hover:bg-custom/90 text-white"
-      >
-        <PlusIcon className="mr-2 h-4 w-4" /> New Chat
-      </Button>
-
-      <ScrollArea className="flex-1 px-4 pb-4">
-        <div className="space-y-2">
-          {chatsList.length === 0 ? (
-            <p className="text-sm text-muted-foreground text-center py-4">
-              No chat history yet
-            </p>
-          ) : (
-            chatsList.map((chat) => (
-              <div
-                key={chat.id}
-                className={cn(
-                  "flex items-center justify-between p-3 rounded-lg cursor-pointer hover:bg-muted group",
-                  activeChat === chat.id && "bg-muted"
-                )}
-                onClick={() => {
-                  loadChat(chat.id);
-                  if (isMobile) {
-                    const closeButton = document.querySelector(
-                      "[data-close-sheet]"
-                    ) as HTMLElement;
-                    if (closeButton) closeButton.click();
-                  }
-                }}
-              >
-                <div className="truncate flex-1">
-                  <p className="text-sm font-medium">{chat.title}</p>
-                  <p className="text-xs text-muted-foreground">
-                    {new Date(chat.timestamp).toLocaleDateString()}
-                  </p>
-                </div>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="opacity-0 group-hover:opacity-100 sm:flex hidden"
-                  onClick={(e) => confirmDeleteChat(chat.id, e)}
-                >
-                  <TrashIcon className="h-4 w-4 text-muted-foreground hover:text-red-500 transition-colors" />
-                </Button>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="sm:hidden"
-                  onClick={(e) => confirmDeleteChat(chat.id, e)}
-                >
-                  <TrashIcon className="h-4 w-4 text-muted-foreground hover:text-red-500 transition-colors" />
-                </Button>
-              </div>
-            ))
-          )}
-        </div>
-      </ScrollArea>
-    </div>
-  );
-
   return (
     <section className="max-w-7xl w-full h-full mt-2 px-4 md:px-16 overflow-hidden mx-auto pb-16">
       <div className="flex flex-col md:flex-row gap-4 h-full">
@@ -479,7 +403,14 @@ export default function Chat() {
 
         {/* Desktop Chat History Sidebar */}
         <Card className="hidden md:flex flex-col w-64 h-[500px] overflow-hidden">
-          <ChatHistorySidebar />
+          <ChatHistorySidebar
+            chatsList={chatsList}
+            activeChat={activeChat}
+            isMobile={isMobile}
+            startNewChat={startNewChat}
+            loadChat={loadChat}
+            confirmDeleteChat={confirmDeleteChat}
+          />
         </Card>
 
         {/* Chat Area */}
@@ -601,7 +532,14 @@ export default function Chat() {
                   </SheetTrigger>
                   <SheetContent side="left" className="w-60">
                     <button className="hidden" data-close-sheet></button>
-                    <ChatHistorySidebar />
+                    <ChatHistorySidebar
+                      chatsList={chatsList}
+                      activeChat={activeChat}
+                      isMobile={isMobile}
+                      startNewChat={startNewChat}
+                      loadChat={loadChat}
+                      confirmDeleteChat={confirmDeleteChat}
+                    />
                   </SheetContent>
                 </Sheet>
               </motion.div>
@@ -616,28 +554,7 @@ export default function Chat() {
             <AnimatePresence mode="popLayout">
               {animateChat &&
                 messages.map((msg, index) => (
-                  <motion.div
-                    key={msg.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 1, y: -50 }}
-                    transition={{ duration: 0.1 }}
-                    layout
-                    className={`flex ${
-                      msg.isUser ? "justify-end" : "justify-start"
-                    }`}
-                  >
-                    <motion.div
-                      whileHover={{ scale: 1.01 }}
-                      className={`max-w-[85%] ${
-                        msg.isUser
-                          ? "bg-custom text-white rounded-l-sm rounded-b-md p-2 my-2"
-                          : "bg-secondary text-primary rounded-r-sm rounded-b-md p-2 my-2"
-                      }`}
-                    >
-                      <ReactMarkdown>{msg.text}</ReactMarkdown>
-                    </motion.div>
-                  </motion.div>
+                  <ChatMessage key={msg.id} msg={msg} />
                 ))}
             </AnimatePresence>
             <div ref={messagesEndRef} /> {/* Empty div for auto-scroll */}
