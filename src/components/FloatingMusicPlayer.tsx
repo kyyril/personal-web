@@ -25,7 +25,69 @@ import MusicPlayer from "./MusicPlayer";
 import Image from "next/image";
 import { ArrowBigLeft, ArrowLeft } from "lucide-react";
 
-export default function FloatingMusicPlayer() {
+const MotionButton = ({ children, ...props }: any) => (
+  <motion.div
+    whileHover={{ scale: 1.05 }}
+    whileTap={{ scale: 0.95 }}
+    transition={{ type: "spring", stiffness: 400, damping: 17 }}
+  >
+    <Button {...props}>{children}</Button>
+  </motion.div>
+);
+
+const RotatingCover = ({ isPlaying, cover, title }: any) => (
+  <motion.div
+    animate={{ rotate: isPlaying ? 360 : 0 }}
+    transition={{
+      duration: 10,
+      repeat: Infinity,
+      ease: "linear",
+    }}
+    className="w-full h-full flex items-center justify-center"
+  >
+    {cover ? (
+      <Image
+        src={cover}
+        alt={title}
+        width={100}
+        height={100}
+        className="w-full h-full object-cover rounded-full"
+      />
+    ) : (
+      <div className="w-6 h-6 bg-primary/20 rounded-full" />
+    )}
+  </motion.div>
+);
+
+const HiddenPlayer = ({ onShow }: any) => {
+  const { currentTrack, isPlaying } = useMusicPlayer();
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ opacity: 1, scale: 1 }}
+      className="fixed p-2 top-4 left-4 z-40"
+    >
+      <Button
+        variant="default"
+        size="icon"
+        onClick={onShow}
+        className="rounded-full ring-1 ring-custom p-0 overflow-hidden"
+      >
+        {isPlaying ? (
+          <RotatingCover
+            isPlaying={isPlaying}
+            cover={currentTrack.cover}
+            title={currentTrack.title}
+          />
+        ) : (
+          <PlayIcon className="h-4 w-4" />
+        )}
+      </Button>
+    </motion.div>
+  );
+};
+
+const VisiblePlayer = ({ onHide, position, setPosition }: any) => {
   const {
     currentTrack,
     isPlaying,
@@ -34,66 +96,7 @@ export default function FloatingMusicPlayer() {
     handleNext,
     handlePrevious,
   } = useMusicPlayer();
-
-  // State for visibility and position
-  const [isVisible, setIsVisible] = useState(true);
-  const [position, setPosition] = useState({ x: 16, y: 8 }); // Initial position (left-4, top-2)
   const dragConstraintsRef = useRef(null);
-
-  // Only show if there's a current track and it has been interacted with
-  if (!currentTrack || (!isPlaying && !isLoading)) {
-    return null;
-  }
-
-  // Show minimal button if hidden
-  if (!isVisible) {
-    return (
-      <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        className="fixed p-2 top-4 left-4 z-40"
-      >
-        <Button
-          variant="default"
-          size="icon"
-          onClick={() => setIsVisible(true)}
-          className="rounded-full ring-1 ring-custom p-0 overflow-hidden"
-        >
-          {isPlaying && currentTrack.cover ? (
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{
-                duration: 10,
-                repeat: Infinity,
-                ease: "linear",
-              }}
-              className="w-full h-full flex items-center justify-center"
-            >
-              <Image
-                src={currentTrack.cover}
-                alt={currentTrack.title}
-                width={100}
-                height={100}
-                className="w-full h-full object-cover rounded-full"
-              />
-            </motion.div>
-          ) : isPlaying ? (
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{
-                duration: 10,
-                repeat: Infinity,
-                ease: "linear",
-              }}
-              className="w-6 h-6 bg-primary/20 rounded-full"
-            />
-          ) : (
-            <PlayIcon className="h-4 w-4" />
-          )}
-        </Button>
-      </motion.div>
-    );
-  }
 
   return (
     <AnimatePresence>
@@ -127,20 +130,14 @@ export default function FloatingMusicPlayer() {
               y: position.y + info.offset.y,
             });
           }}
-          className="absolute pointer-events-auto cursor-move"
-          style={{
-            willChange: "transform, opacity",
-            transform: "translateZ(0)",
-          }}
+          className="absolute pointer-events-auto cursor-move transform-gpu"
         >
           <Card className="bg-background/95 p-2 border-none backdrop-blur-sm border shadow-lg max-w-[280px]">
             <div className="flex items-center gap-2">
-              {/* Drag Handle */}
               <div className="flex items-center justify-center w-4 h-8 cursor-move opacity-50 hover:opacity-100 transition-opacity">
                 <DragHandleDots2Icon className="h-3 w-3" />
               </div>
 
-              {/* Track Info */}
               <Dialog>
                 <DialogTrigger asChild>
                   <div className="flex items-center gap-3 cursor-pointer hover:opacity-80 transition-opacity flex-1 min-w-0">
@@ -168,89 +165,79 @@ export default function FloatingMusicPlayer() {
                   </div>
                 </DialogTrigger>
                 <DialogContent className="max-w-md border-none rounded-r-md">
-                  <DialogHeader></DialogHeader>
+                  <DialogHeader />
                   <MusicPlayer />
                 </DialogContent>
               </Dialog>
 
-              {/* Controls */}
               <div className="flex items-center gap-1 flex-shrink-0">
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                <MotionButton
+                  variant="ghost"
+                  size="icon"
+                  onClick={handlePrevious}
+                  className="h-7 w-7 transform-gpu"
                 >
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={handlePrevious}
-                    className="h-7 w-7"
-                    style={{ willChange: "transform" }}
-                  >
-                    <TrackPreviousIcon className="h-3 w-3" />
-                  </Button>
-                </motion.div>
+                  <TrackPreviousIcon className="h-3 w-3" />
+                </MotionButton>
 
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                <MotionButton
+                  variant="default"
+                  size="icon"
+                  onClick={togglePlayPause}
+                  disabled={isLoading}
+                  className="h-8 w-8 transform-gpu"
                 >
-                  <Button
-                    variant="default"
-                    size="icon"
-                    onClick={togglePlayPause}
-                    disabled={isLoading}
-                    className="h-8 w-8"
-                    style={{ willChange: "transform" }}
-                  >
-                    {isLoading ? (
-                      <div className="w-3 h-3 border-2 border-current border-t-transparent rounded-full animate-spin" />
-                    ) : isPlaying ? (
-                      <PauseIcon className="h-3 w-3" />
-                    ) : (
-                      <PlayIcon className="h-3 w-3" />
-                    )}
-                  </Button>
-                </motion.div>
+                  {isLoading ? (
+                    <div className="w-3 h-3 border-2 border-current border-t-transparent rounded-full animate-spin" />
+                  ) : isPlaying ? (
+                    <PauseIcon className="h-3 w-3" />
+                  ) : (
+                    <PlayIcon className="h-3 w-3" />
+                  )}
+                </MotionButton>
 
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                <MotionButton
+                  variant="ghost"
+                  size="icon"
+                  onClick={handleNext}
+                  className="h-7 w-7 transform-gpu"
                 >
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={handleNext}
-                    className="h-7 w-7"
-                    style={{ willChange: "transform" }}
-                  >
-                    <TrackNextIcon className="h-3 w-3" />
-                  </Button>
-                </motion.div>
+                  <TrackNextIcon className="h-3 w-3" />
+                </MotionButton>
 
-                {/* Hide Button */}
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                <MotionButton
+                  variant="ghost"
+                  size="icon"
+                  onClick={onHide}
+                  className="h-7 w-7 opacity-60 hover:opacity-100 transform-gpu"
                 >
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={() => setIsVisible(false)}
-                    className="h-7 w-7 opacity-60 hover:opacity-100"
-                    style={{ willChange: "transform" }}
-                  >
-                    <CaretLeftIcon className="h-3 w-3" />
-                  </Button>
-                </motion.div>
+                  <CaretLeftIcon className="h-3 w-3" />
+                </MotionButton>
               </div>
             </div>
           </Card>
         </motion.div>
       </motion.div>
     </AnimatePresence>
+  );
+};
+
+export default function FloatingMusicPlayer() {
+  const { currentTrack, isPlaying, isLoading } = useMusicPlayer();
+  const [isVisible, setIsVisible] = useState(true);
+  const [position, setPosition] = useState({ x: 16, y: 8 });
+
+  if (!currentTrack || (!isPlaying && !isLoading)) {
+    return null;
+  }
+
+  return isVisible ? (
+    <VisiblePlayer
+      onHide={() => setIsVisible(false)}
+      position={position}
+      setPosition={setPosition}
+    />
+  ) : (
+    <HiddenPlayer onShow={() => setIsVisible(true)} />
   );
 }
