@@ -9,6 +9,12 @@ import {
   Link1Icon,
   LinkedInLogoIcon,
 } from "@radix-ui/react-icons";
+import {
+  LucidePaperclip,
+  Paperclip,
+  PaperclipIcon,
+  PartyPopperIcon,
+} from "lucide-react";
 
 function Bio({ data }: { data: Data }) {
   return (
@@ -63,9 +69,9 @@ function Bio({ data }: { data: Data }) {
           </Link>
 
           <Link target="_blank" href={data.contactInfo.cv} prefetch={false}>
-            <Button className="hover:text-custom" variant="secondary" size="sm">
-              <Link1Icon />
-              <span className="ml-1 font-light">Resume</span>
+            <Button variant={"link"} className="hover:text-custom" size="sm">
+              <Paperclip />
+              <span className="text-md">Resume</span>
             </Button>
           </Link>
         </div>

@@ -73,30 +73,31 @@ export default function GitHubProjects({ repositories }: GitHubProjectsProps) {
 
   // Generate pagination numbers with ellipsis
   const generatePaginationNumbers = () => {
-    const delta = 2;
+    const delta = 0;
     const range = [];
-    const rangeWithDots = [];
+    const rangeWithDots: (string | number)[] = [];
+    let l: number | undefined;
 
-    for (
-      let i = Math.max(2, currentPage - delta);
-      i <= Math.min(totalPages - 1, currentPage + delta);
-      i++
-    ) {
-      range.push(i);
+    for (let i = 1; i <= totalPages; i++) {
+      if (
+        i === 1 ||
+        i === totalPages ||
+        (i >= currentPage - delta && i <= currentPage + delta)
+      ) {
+        range.push(i);
+      }
     }
 
-    if (currentPage - delta > 2) {
-      rangeWithDots.push(1, "...");
-    } else {
-      rangeWithDots.push(1);
-    }
-
-    rangeWithDots.push(...range);
-
-    if (currentPage + delta < totalPages - 1) {
-      rangeWithDots.push("...", totalPages);
-    } else if (totalPages > 1) {
-      rangeWithDots.push(totalPages);
+    for (const i of range) {
+      if (l) {
+        if (i - l === 2) {
+          rangeWithDots.push(l + 1);
+        } else if (i - l !== 1) {
+          rangeWithDots.push("...");
+        }
+      }
+      rangeWithDots.push(i);
+      l = i;
     }
 
     return rangeWithDots;
@@ -119,7 +120,7 @@ export default function GitHubProjects({ repositories }: GitHubProjectsProps) {
               key={repo.name}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: index * 0.1 }}
+              transition={{ duration: 0.1, delay: index * 0.1 }}
             >
               <Card className="group h-full flex flex-col hover:shadow-lg hover:shadow-black/5 transition-all duration-300 hover:-translate-y-1 border-border/50 hover:border-border">
                 <CardHeader className="pb-3">
@@ -130,7 +131,7 @@ export default function GitHubProjects({ repositories }: GitHubProjectsProps) {
                         target="_blank"
                         className="block"
                       >
-                        <h3 className="text-lg font-semibold group-hover:text-primary transition-colors duration-200 truncate">
+                        <h3 className="text-lg font-semibold group-hover:text-custom transition-colors duration-200 truncate">
                           {repo.name}
                         </h3>
                       </Link>
@@ -181,7 +182,7 @@ export default function GitHubProjects({ repositories }: GitHubProjectsProps) {
                       <Button
                         variant="ghost"
                         size="sm"
-                        className="h-8 px-3 text-xs hover:bg-primary/10 hover:text-primary"
+                        className="h-8 px-3 text-xs hover:bg-custom/10 hover:text-custom"
                       >
                         View Repo
                       </Button>

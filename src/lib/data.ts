@@ -485,7 +485,7 @@ export const projects: Project[] = [
     date: "2023-06-10",
     features: ["feat1", "feat2", "feat3"],
     image: [
-      "httpshttps://res.cloudinary.com/da5ggxk01/image/upload/v1730253623/akuMahasigma_mksoo2.png",
+      "https://res.cloudinary.com/da5ggxk01/image/upload/v1730253623/akuMahasigma_mksoo2.png",
     ],
     featured: false,
     isPrivate: false,

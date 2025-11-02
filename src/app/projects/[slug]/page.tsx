@@ -1,4 +1,6 @@
+import { Suspense } from "react";
 import ProjectCarousel from "@/components/Project/ProjectCarousel";
+import ProjectImageCarouselSkeleton from "@/components/Project/ProjectImageCarouselSkeleton";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { projects } from "@/lib/data";
@@ -26,15 +28,17 @@ export default function Detailproject({
   return (
     <section className="max-w-5xl w-full px-4 min-h-screen md:px-16 mx-auto">
       <div className="border-none shadow-none">
-        {project && project.image.length > 0 ? (
-          <ProjectCarousel images={project.image} />
-        ) : (
-          <div className="text-center py-10">
-            <p className="text-xl text-muted-foreground">
-              No images available.
-            </p>
-          </div>
-        )}
+        <Suspense fallback={<ProjectImageCarouselSkeleton />}>
+          {project && project.image.length > 0 ? (
+            <ProjectCarousel images={project.image} />
+          ) : (
+            <div className="text-center py-10">
+              <p className="text-xl text-muted-foreground">
+                No images available.
+              </p>
+            </div>
+          )}
+        </Suspense>
 
         <div className="flex flex-col mt-6 w-full mx-2 gap-2">
           <h1 className="text-3xl font-bold lg:text-4xl">

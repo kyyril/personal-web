@@ -6,12 +6,12 @@ import FooterWrapper from "@/components/FooterWrapper";
 import { Analytics } from "@vercel/analytics/next";
 
 export const metadata: Metadata = {
-  title: "Khairil Rahman Hakiki | Frontend Developer",
+  title: "Khairil Rahman Hakiki | Software Engineer",
   description:
-    "I'm an Information Systems student who loves programming, especially software web development. I specialize in Next.js with Typescript and am currently learning backend development with Golang.",
+    "I'm an Information Systems student who loves programming, especially software development. I specialize in Next.js with Typescript and am currently learning backend development with Golang.",
   keywords: [
     "Khairil Rahman Hakiki",
-    "Frontend Developer",
+    "Software Engineer",
     "Web Development",
     "Next.js",
     "TypeScript",
@@ -31,12 +31,12 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://kyyril.vercel.app",
     siteName: "Khairil Rahman Hakiki",
-    title: "Khairil Rahman Hakiki | Frontend Developer",
-    description: "Frontend Developer specializing in Next.js and TypeScript",
+    title: "Khairil Rahman Hakiki | Software Engineer",
+    description: "Software Engineer specializing in Next.js and TypeScript",
   },
   twitter: {
-    title: "Khairil Rahman Hakiki | Frontend Developer",
-    description: "Frontend Developer specializing in Next.js and TypeScript",
+    title: "Khairil Rahman Hakiki | Software Engineer",
+    description: "Software Engineer specializing in Next.js and TypeScript",
   },
 };
 
@@ -58,7 +58,8 @@ export default function RootLayout({
               name: "Khairil Rahman Hakiki | Frontend Developer",
               potentialAction: {
                 "@type": "SearchAction",
-                target: "https://kyyril.vercel.app/search?q={search_term_string}",
+                target:
+                  "https://kyyril.vercel.app/search?q={search_term_string}",
                 "query-input": "required name=search_term_string",
               },
             }),
