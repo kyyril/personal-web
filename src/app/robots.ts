@@ -5,7 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: '*',
       allow: '/',
-      disallow: ['/api/', '/private/'],
+      disallow: ['/api/'],
     },
     sitemap: 'https://kyyril.vercel.app/sitemap.xml',
   }

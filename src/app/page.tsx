@@ -9,15 +9,15 @@ import {
 } from "@radix-ui/react-icons";
 import { getJSONData } from "@/lib/server";
 import Education from "@/components/Education";
-import { Data } from "@/lib/interfaces/data";
+import { Data } from "@/types";
 import Experience from "@/components/Experience";
 import { Metadata } from "next";
 import Bio from "@/components/Bio";
 
 export const metadata: Metadata = {
-  title: "HOME - khairil rahman hakiki",
+  title: "Khairil Rahman Hakiki | Frontend Developer",
   description:
-    "I’m an Information Systems student who loves programming, especially software web development. I specialize in Next.js with Typescript and am currently learning backend development with Golang.",
+    "Welcome to the personal website of Khairil Rahman Hakiki, a passionate Frontend Developer specializing in Next.js and TypeScript. Explore my projects, experience, and feel free to get in touch.",
 };
 
 export default async function Home() {

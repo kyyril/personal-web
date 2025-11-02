@@ -5,9 +5,17 @@ import { getGitHubRepositories } from "@/lib/github";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "PROJECTS - khairil rahman hakiki",
-  description:
-    "I'm an Information Systems student who loves programming, especially software web development. I specialize in Next.js with Typescript and am currently learning backend development with Golang.",
+  title: "Projects | Khairil's Personal Website",
+  description: "Explore a collection of Khairil's projects, including web applications, open-source contributions, and personal experiments. See his skills in action.",
+  openGraph: {
+    title: "Projects | Khairil's Personal Website",
+    description: "Explore a collection of Khairil's projects, including web applications, open-source contributions, and personal experiments. See his skills in action.",
+    url: "https://kyyril.vercel.app/projects",
+  },
+  twitter: {
+    title: "Projects | Khairil's Personal Website",
+    description: "Explore a collection of Khairil's projects, including web applications, open-source contributions, and personal experiments. See his skills in action.",
+  },
 };
 
 export default async function ProjectPage() {

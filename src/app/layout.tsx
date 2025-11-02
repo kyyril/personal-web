@@ -50,7 +50,22 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <title>khairil rahman hakiki</title>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              url: "https://kyyril.vercel.app/",
+              name: "Khairil Rahman Hakiki | Frontend Developer",
+              potentialAction: {
+                "@type": "SearchAction",
+                target: "https://kyyril.vercel.app/search?q={search_term_string}",
+                "query-input": "required name=search_term_string",
+              },
+            }),
+          }}
+        />
       </head>
       <body className={`antialiased`}>
         <ThemeProvider

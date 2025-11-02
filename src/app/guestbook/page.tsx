@@ -21,9 +21,17 @@ import {
 } from "@radix-ui/react-icons";
 
 export const metadata: Metadata = {
-  title: `GUESTBOOKS - khairil rahman hakiki`,
-  description:
-    "I’m an Information Systems student who loves programming, especially software web development. I specialize in Next.js with Typescript and am currently learning backend development with Golang.",
+  title: "Guestbook | Khairil's Personal Website",
+  description: "Leave a message for Khairil and see what others have to say. Your feedback and comments are greatly appreciated!",
+  openGraph: {
+    title: "Guestbook | Khairil's Personal Website",
+    description: "Leave a message for Khairil and see what others have to say. Your feedback and comments are greatly appreciated!",
+    url: "https://kyyril.vercel.app/guestbook",
+  },
+  twitter: {
+    title: "Guestbook | Khairil's Personal Website",
+    description: "Leave a message for Khairil and see what others have to say. Your feedback and comments are greatly appreciated!",
+  },
 };
 
 async function getGuestBookEntry() {
