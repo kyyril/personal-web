@@ -4,6 +4,7 @@ import { Navigation } from "@/components/BottomBar";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import FooterWrapper from "@/components/FooterWrapper";
 import { Analytics } from "@vercel/analytics/next";
+import { AuthProvider } from "@/contexts/AuthContext";
 
 export const metadata: Metadata = {
   title: "Khairil Rahman Hakiki | Software Engineer",
@@ -73,10 +74,12 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Navigation />
-          {children}
-          <Analytics />
-          <FooterWrapper />
+          <AuthProvider>
+            <Navigation />
+            {children}
+            <Analytics />
+            <FooterWrapper />
+          </AuthProvider>
         </ThemeProvider>
       </body>
     </html>

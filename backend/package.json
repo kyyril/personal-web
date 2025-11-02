@@ -1,0 +1,25 @@
+{
+  "name": "backend",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "bun --watch index.ts",
+    "build": "tsc",
+    "start": "bun run build && bun start"
+  },
+  "dependencies": {
+    "@elysiajs/cors": "^1.4.0",
+    "@prisma/client": "latest",
+    "elysia": "latest",
+    "firebase-admin": "latest"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "prisma": "latest",
+    "typescript": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  }
+}

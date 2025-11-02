@@ -1,0 +1,81 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "./backend/src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  username  String
+  avatarUrl String?
+  email     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  guestbookEntries GuestbookEntry[]
+  messages         Message[]
+  replies          Reply[]          @relation(name: "ReplyAuthor")
+  userReplies      Reply[]          @relation(name: "ReplyUser")
+  likes            Like[]
+
+  @@map("users")
+}
+
+model GuestbookEntry {
+  id        String   @id @default(uuid())
+  message   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId    String
+
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  replies Reply[] @relation(name: "GuestbookEntryReplies")
+
+  @@map("guestbook_entries")
+}
+
+model Message {
+  id        String   @id @default(uuid())
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  authorId  String
+
+  author User   @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  likes  Like[]
+
+  @@map("messages")
+}
+
+model Reply {
+  id               String   @id @default(uuid())
+  content          String
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  authorId         String
+  guestbookEntryId String // Foreign key to GuestbookEntry
+  userId           String
+
+  author         User           @relation(fields: [authorId], references: [id], onDelete: Cascade, name: "ReplyAuthor")
+  guestbookEntry GuestbookEntry @relation(fields: [guestbookEntryId], references: [id], onDelete: Cascade, name: "GuestbookEntryReplies")
+  user           User           @relation(fields: [userId], references: [id], onDelete: Cascade, name: "ReplyUser")
+
+  @@map("replies")
+}
+
+model Like {
+  id        String   @id @default(uuid())
+  emote     String
+  createdAt DateTime @default(now())
+  userId    String
+  messageId String
+
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  message Message @relation(fields: [messageId], references: [id], onDelete: Cascade)
+
+  @@map("likes")
+}
