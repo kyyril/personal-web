@@ -1,5 +1,5 @@
 import { Form } from "@/components/Form";
-import { GuestBookLoadingForm, LoadingMessage } from "@/components/Loading";
+
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -19,18 +19,25 @@ import {
   EnvelopeClosedIcon,
   ExitIcon,
 } from "@radix-ui/react-icons";
+import {
+  GuestBookLoadingForm,
+  LoadingMessage,
+} from "@/components/LoadingGuestbookSkeleton";
 
 export const metadata: Metadata = {
   title: "Guestbook | Khairil's Personal Website",
-  description: "Leave a message for Khairil and see what others have to say. Your feedback and comments are greatly appreciated!",
+  description:
+    "Leave a message for Khairil and see what others have to say. Your feedback and comments are greatly appreciated!",
   openGraph: {
     title: "Guestbook | Khairil's Personal Website",
-    description: "Leave a message for Khairil and see what others have to say. Your feedback and comments are greatly appreciated!",
+    description:
+      "Leave a message for Khairil and see what others have to say. Your feedback and comments are greatly appreciated!",
     url: "https://kyyril.vercel.app/guestbook",
   },
   twitter: {
     title: "Guestbook | Khairil's Personal Website",
-    description: "Leave a message for Khairil and see what others have to say. Your feedback and comments are greatly appreciated!",
+    description:
+      "Leave a message for Khairil and see what others have to say. Your feedback and comments are greatly appreciated!",
   },
 };
 
