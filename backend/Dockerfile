@@ -16,17 +16,12 @@ RUN bun install
 # Copy the rest of the application code
 COPY . .
 
-# Copy .env file if it exists (for local development, not recommended for production)
-# For production, consider using Docker secrets or environment variables directly.
-COPY .env ./.env
-
 # Generate Prisma client
 RUN bun prisma generate
 
 # Build the TypeScript application
 RUN bun run build
 
-# Expose the port your application runs on (adjust if different)
 EXPOSE 5000
 
 # Start the application
