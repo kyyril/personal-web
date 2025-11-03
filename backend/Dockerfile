@@ -9,9 +9,11 @@ RUN apt-get update -y && apt-get install -y openssl
 
 # Copy package.json and bun.lock to install dependencies
 COPY package.json bun.lock ./
+COPY prisma/ ./prisma/
 
 # Install dependencies
 RUN bun install
+COPY node_modules/.prisma/client/ ./node_modules/.prisma/client/
 
 # Copy the rest of the application code
 COPY . .
@@ -23,6 +25,8 @@ RUN bun prisma generate
 RUN bun run build
 
 EXPOSE 5000
+
+ENV PRISMA_QUERY_ENGINE_BINARY="/app/node_modules/.prisma/client/query_engine-linux-arm64-openssl-3.0.x"
 
 # Start the application
 CMD ["bun", "run", "start"]
