@@ -1,8 +1,17 @@
 import { Elysia } from "elysia";
-import { PrismaClient } from "../generated/prisma";
+import { PrismaClient } from "../../prisma/backend/src/generated/prisma";
 import { authMiddleware } from "../middleware/auth";
+import type { AuthenticatedUser } from "../middleware/auth"; // Import as type
 
 const prisma = new PrismaClient();
+
+interface CreateGuestbookEntryBody {
+  message: string;
+}
+
+interface UpdateGuestbookEntryBody {
+  message: string;
+}
 
 export const guestbookRoutes = new Elysia()
   .group("/guestbook", (app) =>
@@ -36,8 +45,13 @@ export const guestbookRoutes = new Elysia()
         app
           // Create a new guestbook entry
           .post("/", async ({ request, user }) => {
-            const body = await request.json();
+            const body = await request.json() as CreateGuestbookEntryBody;
             const { message } = body;
+
+            // Ensure user is authenticated before proceeding
+            if (!user) {
+              return new Response("Unauthorized", { status: 401 });
+            }
 
             const entry = await prisma.guestbookEntry.create({
               data: {
@@ -76,8 +90,13 @@ export const guestbookRoutes = new Elysia()
               })
               // Update a guestbook entry
               .put("/", async ({ params, request, user }) => {
-                const body = await request.json();
+                const body = await request.json() as UpdateGuestbookEntryBody;
                 const { message } = body;
+
+                // Ensure user is authenticated before proceeding
+                if (!user) {
+                  return new Response("Unauthorized", { status: 401 });
+                }
 
                 // Check if the user is the author of the entry
                 const entry = await prisma.guestbookEntry.findUnique({
@@ -104,6 +123,11 @@ export const guestbookRoutes = new Elysia()
               })
               // Delete a guestbook entry
               .delete("/", async ({ params, user }) => {
+                // Ensure user is authenticated before proceeding
+                if (!user) {
+                  return new Response("Unauthorized", { status: 401 });
+                }
+
                 // Check if the user is the author of the entry
                 const entry = await prisma.guestbookEntry.findUnique({
                   where: { id: params.id },

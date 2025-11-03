@@ -1,6 +1,6 @@
 import { Elysia } from "elysia";
 import { cors } from "@elysiajs/cors";
-import { PrismaClient } from "./src/generated/prisma";
+import { PrismaClient } from "./prisma/backend/src/generated/prisma";
 import { initializeFirebase } from "./src/config/firebase";
 import { guestbookRoutes } from "./src/routes/guestbook";
 import { replyRoutes } from "./src/routes/replies";
@@ -19,8 +19,6 @@ const app = new Elysia()
         "http://localhost:5173", // Vite dev
         "https://kyyril.vercel.app", // Production
         "https://kyyril.pages.dev", // Production
-        /\.vercel\.app$/, // All Vercel subdomains
-        /\.netlify\.app$/, // All Netlify subdomains
       ],
       credentials: true,
       methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],

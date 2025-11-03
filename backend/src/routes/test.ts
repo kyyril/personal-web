@@ -1,5 +1,5 @@
 import { Elysia } from "elysia";
-import { PrismaClient } from "../generated/prisma";
+import { PrismaClient } from "../../prisma/backend/src/generated/prisma";
 
 const prisma = new PrismaClient();
 
@@ -28,7 +28,7 @@ export const testRoutes = new Elysia()
     } catch (error) {
       console.error('Database test error:', error);
       return {
-        error: error.message,
+        error: (error as any).message,
         databaseConnected: false
       };
     }
@@ -41,6 +41,6 @@ export const testRoutes = new Elysia()
       return users;
     } catch (error) {
       console.error('Users test error:', error);
-      return { error: error.message };
+      return { error: (error as any).message };
     }
   });

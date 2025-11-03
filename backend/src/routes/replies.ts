@@ -1,8 +1,18 @@
 import { Elysia } from "elysia";
-import { PrismaClient } from "../generated/prisma";
+import { PrismaClient } from "../../prisma/backend/src/generated/prisma";
 import { authMiddleware } from "../middleware/auth";
+import type { AuthenticatedUser } from "../middleware/auth"; // Import as type
 
 const prisma = new PrismaClient();
+
+interface CreateReplyBody {
+  content: string;
+  guestbookEntryId: string;
+}
+
+interface UpdateReplyBody {
+  content: string;
+}
 
 export const replyRoutes = new Elysia()
   .use(authMiddleware)
@@ -10,8 +20,13 @@ export const replyRoutes = new Elysia()
     app
       // Create a new reply
       .post("/", async ({ request, user }) => {
-        const body = await request.json();
+        const body = await request.json() as CreateReplyBody;
         const { content, guestbookEntryId } = body;
+
+        // Ensure user is authenticated before proceeding
+        if (!user) {
+          return new Response("Unauthorized", { status: 401 });
+        }
 
         const reply = await prisma.reply.create({
           data: {
@@ -50,8 +65,13 @@ export const replyRoutes = new Elysia()
           })
           // Update a reply
           .put("/", async ({ params, request, user }) => {
-            const body = await request.json();
+            const body = await request.json() as UpdateReplyBody;
             const { content } = body;
+
+            // Ensure user is authenticated before proceeding
+            if (!user) {
+              return new Response("Unauthorized", { status: 401 });
+            }
 
             // Check if the user is the author of the reply
             const reply = await prisma.reply.findUnique({
@@ -80,6 +100,11 @@ export const replyRoutes = new Elysia()
           })
           // Delete a reply
           .delete("/", async ({ params, user }) => {
+            // Ensure user is authenticated before proceeding
+            if (!user) {
+              return new Response("Unauthorized", { status: 401 });
+            }
+
             // Check if the user is the author of the reply
             const reply = await prisma.reply.findUnique({
               where: { id: params.id },
