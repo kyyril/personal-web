@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "bun --watch index.ts",
     "build": "tsc",
-    "start": "bun run build && bun start"
+    "start": "bun dist/index.js"
   },
   "dependencies": {
     "@elysiajs/cors": "^1.4.0",
