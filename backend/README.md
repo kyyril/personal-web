@@ -12,6 +12,6 @@ To run:
 bun run index.ts
 ```
 
-bunx prisma generate --schema=./prisma/schema.prisma
+docker build -t backend-image ./backend
 
 This project was created using `bun init` in bun v1.3.1. [Bun](https://bun.com) is a fast all-in-one JavaScript runtime.

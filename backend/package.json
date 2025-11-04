@@ -9,11 +9,12 @@
     "start": "bun dist/index.js"
   },
   "dependencies": {
-    "@elysiajs/cors": "^1.4.0",
-    "@prisma/client": "latest",
-    "elysia": "latest",
-    "firebase-admin": "latest"
-  },
+      "@elysiajs/cors": "^1.4.0",
+      "@prisma/client": "latest",
+      "elysia": "latest",
+      "firebase-admin": "latest",
+      "dotenv": "latest"
+    },
   "devDependencies": {
     "@types/bun": "latest",
     "prisma": "latest",

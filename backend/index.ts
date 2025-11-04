@@ -1,6 +1,7 @@
 import { Elysia } from "elysia";
 import { cors } from "@elysiajs/cors";
 import { PrismaClient } from "./prisma/backend/src/generated/prisma";
+import "dotenv/config";
 import { initializeFirebase } from "./src/config/firebase";
 import { guestbookRoutes } from "./src/routes/guestbook";
 import { replyRoutes } from "./src/routes/replies";
