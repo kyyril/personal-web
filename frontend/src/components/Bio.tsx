@@ -15,19 +15,45 @@ import {
   PaperclipIcon,
   PartyPopperIcon,
 } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { motion } from "framer-motion";
 
 function Bio({ data }: { data: Data }) {
   return (
     <div className="flex flex-col lg:flex-row items-center justify-center gap-12">
       <div className="w-1/2 mx-auto lg:w-1/3">
-        <Image
-          src={"/assets/profile.webp"}
-          width={280}
-          height={280}
-          alt="image"
-          loading="lazy"
-          className="mx-auto aspect-square overflow-hidden object-cover object-center rounded-full"
-        />
+        <Dialog>
+          <DialogTrigger asChild>
+            <Image
+              src={"/assets/profile.webp"}
+              width={280}
+              height={280}
+              alt="image"
+              loading="lazy"
+              className="mx-auto aspect-square overflow-hidden object-cover object-center rounded-full cursor-pointer hover:ring-2 hover:ring-primary transition-all duration-300"
+            />
+          </DialogTrigger>
+          <DialogContent className="bg-transparent shadow-none border-none rounded-2xl">
+            <motion.div
+              className="flex items-center justify-center"
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.3 }}
+            >
+              <Image
+                src="/assets/profile.webp"
+                width={400}
+                height={400}
+                alt="Katou Megumin"
+                className="rounded-sm object-cover"
+              />
+            </motion.div>
+          </DialogContent>
+        </Dialog>
       </div>
       <div className="w-full px-4 md:px-8 mx-auto">
         <div className="space-y-2">
@@ -36,11 +62,11 @@ function Bio({ data }: { data: Data }) {
           </h1>
         </div>
         <p className="max-w-[600px] lg:text-lg font-light opacity-70">
-          I’m an Information Systems student who loves programming, especially
-          software development. I specialize in with{" "}
-          <span className="font-semibold">Next.js</span> and{" "}
+          Information Systems student specializing in software development. I
+          leverage <span className="font-semibold">React.js</span> and{" "}
           <span className="font-semibold">Node.js</span> with{" "}
-          <span className="font-semibold">Typescript</span>.
+          <span className="font-semibold">Typescript</span> to build robust,
+          scalable applications.{" "}
         </p>
         <div className="space-x-4 mt-2">
           <Link target="_blank" href={data.contactInfo.github} prefetch={false}>

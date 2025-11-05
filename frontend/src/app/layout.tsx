@@ -9,10 +9,11 @@ import { AuthProvider } from "../contexts/AuthContext";
 export const metadata: Metadata = {
   title: "Khairil Rahman Hakiki | Software Engineer",
   description:
-    "I'm an Information Systems student who loves programming, especially software development. I specialize in Next.js with Typescript and am currently learning backend development with Golang.",
+    "I'm an Information Systems student who loves programming, especially software development. I specialize in React.js and Node.js with TypeScript",
   keywords: [
     "Khairil Rahman Hakiki",
-    "Software Engineer",
+    "Khairil Rahman Hakiki Hrp",
+    "Khairil Rahman Hakiki Harahap",
     "Web Development",
     "Next.js",
     "TypeScript",
@@ -21,8 +22,8 @@ export const metadata: Metadata = {
     "Information Systems",
   ],
   authors: [{ name: "Khairil Rahman Hakiki" }],
-  creator: "Khairil Rahman Hakiki",
-  publisher: "Khairil Rahman Hakiki",
+  creator: "Khairil Rahman Hakiki Hrp",
+  publisher: "Khairil Rahman Hakiki Hrp",
   robots: "index, follow",
   verification: {
     google: "24f9cc081f9ae37b",
@@ -33,11 +34,13 @@ export const metadata: Metadata = {
     url: "https://kyyril.vercel.app",
     siteName: "Khairil Rahman Hakiki",
     title: "Khairil Rahman Hakiki | Software Engineer",
-    description: "Software Engineer specializing in Next.js and TypeScript",
+    description:
+      "Software Engineer specializing in React.js and Node.js with TypeScript",
   },
   twitter: {
     title: "Khairil Rahman Hakiki | Software Engineer",
-    description: "Software Engineer specializing in Next.js and TypeScript",
+    description:
+      "Software Engineer specializing in React.js and Node.js with TypeScript",
   },
 };
 
@@ -56,7 +59,7 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "WebSite",
               url: "https://kyyril.vercel.app/",
-              name: "Khairil Rahman Hakiki | Frontend Developer",
+              name: "Khairil Rahman Hakiki | Software Engineer",
               potentialAction: {
                 "@type": "SearchAction",
                 target:

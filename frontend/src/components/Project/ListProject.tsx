@@ -125,17 +125,32 @@ export default function ListProject({ projects }: ListProjectProps) {
 
       {/* Project List */}
       <ul className="grid grid-cols-1 gap-4">
-        {paginatedProjects.length > 0
-          ? paginatedProjects.map((project) => (
+        {paginatedProjects.length > 0 ? (
+          <>
+            {paginatedProjects.map((project, index) => (
               <li key={project.id}>
-                <CardProject project={project} />
+                <CardProject project={project} index={index} />
               </li>
-            ))
-          : Array.from({ length: PROJECTS_PER_PAGE }).map((_, index) => (
-              <li key={index}>
+            ))}
+            {Array.from({
+              length: PROJECTS_PER_PAGE - paginatedProjects.length,
+            }).map((_, index) => (
+              <li
+                key={`placeholder-${index}`}
+                className="invisible"
+                aria-hidden="true"
+              >
                 <CardProjectSkeleton />
               </li>
             ))}
+          </>
+        ) : (
+          Array.from({ length: PROJECTS_PER_PAGE }).map((_, index) => (
+            <li key={index}>
+              <CardProjectSkeleton />
+            </li>
+          ))
+        )}
       </ul>
 
       {/* Enhanced Pagination */}

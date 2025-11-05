@@ -15,6 +15,7 @@ import {
 } from "@radix-ui/react-icons";
 import { GitFork } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import GitHubProjectCardSkeleton from "./GitHubProjectCardSkeleton";
 
 interface GitHubProjectsProps {
   repositories: GitHubRepo[];
@@ -130,7 +131,7 @@ export default function GitHubProjects({ repositories }: GitHubProjectsProps) {
                           {repo.name}
                         </h3>
                       </Link>
-                      <p className="text-sm text-muted-foreground line-clamp-2 mt-1 leading-relaxed">
+                      <p className="text-sm text-muted-foreground line-clamp-1 mt-1 leading-relaxed">
                         {repo.description || "No description available"}
                       </p>
                     </div>
@@ -186,6 +187,17 @@ export default function GitHubProjects({ repositories }: GitHubProjectsProps) {
                 </CardFooter>
               </Card>
             </motion.div>
+          ))}
+          {Array.from({
+            length: itemsPerPage - currentRepositories.length,
+          }).map((_, index) => (
+            <div
+              key={`placeholder-${index}`}
+              className="invisible"
+              aria-hidden="true"
+            >
+              <GitHubProjectCardSkeleton />
+            </div>
           ))}
         </motion.div>
       </AnimatePresence>

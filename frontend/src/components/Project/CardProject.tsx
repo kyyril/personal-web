@@ -9,7 +9,7 @@ import {
   CardTitle,
 } from "../ui/card";
 import { Button } from "../ui/button";
-import { Badge } from "../ui/badge";
+import TechBadges from "./TechBadges";
 import { GlobeIcon, GitHubLogoIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
 import { useState } from "react";
@@ -25,16 +25,17 @@ interface ProjectProps {
     live_url: string;
     code_repo_url: string;
   };
+  index: number;
 }
 
-export default function CardProject({ project }: ProjectProps) {
+export default function CardProject({ project, index }: ProjectProps) {
   const [imageLoading, setImageLoading] = useState(true);
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 5 }}
+      initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3 }}
+      transition={{ duration: 0.1, delay: index * 0.1 }}
     >
       <Card className="flex flex-col lg:flex-row hover:shadow-lg hover:shadow-black/5 transition-all duration-300 hover:-translate-y-1 border-border/50 hover:border-border">
         <div className="w-full lg:w-1/3 flex justify-center items-center relative group">
@@ -62,20 +63,10 @@ export default function CardProject({ project }: ProjectProps) {
                 {project.title}
               </CardTitle>
             </Link>
-            <div className="flex flex-wrap gap-1 mt-1">
-              {project.technologies.map((tech) => (
-                <Badge
-                  key={tech}
-                  variant="secondary"
-                  className="p-0.5 text-xs line-clamp-1"
-                >
-                  {tech}
-                </Badge>
-              ))}
-            </div>
+            <TechBadges technologies={project.technologies} />
           </CardHeader>
           <CardContent className="py-1">
-            <CardDescription className="overflow-hidden text-ellipsis line-clamp-2">
+            <CardDescription className="overflow-hidden text-ellipsis line-clamp-1">
               {project.description}
             </CardDescription>
           </CardContent>
