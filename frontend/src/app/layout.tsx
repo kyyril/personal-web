@@ -5,7 +5,9 @@ import { ThemeProvider } from "../components/ThemeProvider";
 import FooterWrapper from "../components/FooterWrapper";
 import { Analytics } from "@vercel/analytics/next";
 import { AuthProvider } from "../contexts/AuthContext";
+import { ClientOnly } from "../components/ClientOnly";
 
+export const runtime = "edge";
 export const metadata: Metadata = {
   title: "Khairil Rahman Hakiki | Software Engineer",
   description:
@@ -77,29 +79,31 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <AuthProvider>
-            {/* Skip Links for Accessibility */}
-            <a
-              href="#main-content"
-              className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-primary text-primary-foreground px-4 py-2 rounded-md z-50"
-            >
-              Skip to main content
-            </a>
-            <a
-              href="#navigation"
-              className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-32 bg-primary text-primary-foreground px-4 py-2 rounded-md z-50"
-            >
-              Skip to navigation
-            </a>
+          <ClientOnly>
+            <AuthProvider>
+              {/* Skip Links for Accessibility */}
+              <a
+                href="#main-content"
+                className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-primary text-primary-foreground px-4 py-2 rounded-md z-50"
+              >
+                Skip to main content
+              </a>
+              <a
+                href="#navigation"
+                className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-32 bg-primary text-primary-foreground px-4 py-2 rounded-md z-50"
+              >
+                Skip to navigation
+              </a>
 
-            <Navigation />
-            <main id="main-content" role="main" className="min-h-screen">
-              {children}
-            </main>
-            {/* Analytics with proper configuration to avoid insights 404 */}
-            {process.env.VERCEL && <Analytics />}
-            <FooterWrapper />
-          </AuthProvider>
+              <Navigation />
+              <main id="main-content" role="main" className="min-h-screen">
+                {children}
+              </main>
+              {/* Analytics with proper configuration to avoid insights 404 */}
+              {process.env.VERCEL && <Analytics />}
+              <FooterWrapper />
+            </AuthProvider>
+          </ClientOnly>
         </ThemeProvider>
       </body>
     </html>

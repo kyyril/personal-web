@@ -93,11 +93,12 @@ export function FirebaseGuestbook() {
 
     try {
       const token = await getToken();
+      console.log("Retrieved token:", token);
       if (!token) {
-        throw new Error("Not authenticated");
+        throw new Error("Not authenticated, token is null or undefined.");
       }
 
-      const response = await fetch(`${API_BASE}/guestbook/auth`, {
+      const response = await fetch(`${API_BASE}/guestbook/protected/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -107,13 +108,15 @@ export function FirebaseGuestbook() {
       });
 
       if (!response.ok) {
-        throw new Error("Failed to submit message");
+        const errorBody = await response.text();
+        console.error("Failed to submit message. Status:", response.status, "Body:", errorBody);
+        throw new Error(`Failed to submit message: ${response.status} ${response.statusText}`);
       }
 
       setMessage("");
       await fetchEntries();
     } catch (error) {
-      console.error("Error submitting message:", error);
+      console.error("Error in handleSubmit:", error);
     }
   };
 
@@ -124,7 +127,7 @@ export function FirebaseGuestbook() {
         throw new Error("Not authenticated");
       }
 
-      const response = await fetch(`${API_BASE}/guestbook/auth/${id}`, {
+      const response = await fetch(`${API_BASE}/guestbook/protected/${id}/`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -148,7 +151,7 @@ export function FirebaseGuestbook() {
         throw new Error("Not authenticated");
       }
 
-      const response = await fetch(`${API_BASE}/guestbook/auth/${id}`, {
+      const response = await fetch(`${API_BASE}/guestbook/protected/${id}/`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

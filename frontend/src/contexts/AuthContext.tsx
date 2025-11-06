@@ -38,7 +38,22 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const signIn = async () => {
     try {
-      await signInWithPopup(auth, googleProvider);
+      const result = await signInWithPopup(auth, googleProvider);
+      const idToken = await result.user.getIdToken();
+
+      const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+      console.log("NEXT_PUBLIC_BACKEND_URL:", backendUrl);
+      const fetchUrl = `${backendUrl}/user`;
+      console.log("Frontend attempting POST to:", fetchUrl);
+
+      // Send the ID token to your backend to create/update the user in your database
+      await fetch(fetchUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${idToken}`,
+        },
+      });
     } catch (error) {
       console.error("Error signing in:", error);
     }

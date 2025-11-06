@@ -7,9 +7,11 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "analyze": "cross-env ANALYZE=true next build"
+    "analyze": "cross-env ANALYZE=true next build",
+    "pages:build": "npx @cloudflare/next-on-pages"
   },
   "dependencies": {
+    "@cloudflare/next-on-pages": "^1.13.16",
     "@google/generative-ai": "^0.21.0",
     "@octokit/rest": "^22.0.0",
     "@radix-ui/react-alert-dialog": "^1.1.11",
