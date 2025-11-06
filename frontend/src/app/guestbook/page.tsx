@@ -25,8 +25,6 @@ export default function GuestBook() {
         Guest<span className="font-bold text-primary font-mono">Books</span>
       </h1>
 
-      <h1 className="text-red-600 font-bold">Still under development!</h1>
-
       <div className="mt-8">
         <FirebaseGuestbook />
       </div>

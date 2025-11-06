@@ -17,6 +17,7 @@ interface ReplyData {
   id: string;
   content: string;
   createdAt: string;
+  updatedAt: string;
   authorId: string;
   author: {
     id: string;
@@ -30,6 +31,7 @@ interface GuestbookEntryProps {
     id: string;
     message: string;
     createdAt: string;
+    updatedAt: string;
     userId: string;
     user: {
       id: string;
@@ -127,6 +129,11 @@ export function GuestbookEntry({
             </div>
             <p className="text-sm text-muted-foreground">
               {new Date(entry.createdAt).toLocaleString()}
+              {entry.createdAt !== entry.updatedAt && (
+                <span className="ml-2 text-xs text-gray-500">
+                  (edited {new Date(entry.updatedAt).toLocaleString()})
+                </span>
+              )}
             </p>
 
             {editingEntry === entry.id ? (

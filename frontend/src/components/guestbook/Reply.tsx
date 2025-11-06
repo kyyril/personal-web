@@ -1,14 +1,21 @@
-'use client';
+"use client";
 
-import { Button } from '../ui/button';
-import { Input } from '../ui/input';
-import { PersonIcon, Pencil1Icon, TrashIcon, CheckIcon, Cross2Icon } from '@radix-ui/react-icons';
-import Image from 'next/image';
+import { Button } from "../ui/button";
+import { Input } from "../ui/input";
+import {
+  PersonIcon,
+  Pencil1Icon,
+  TrashIcon,
+  CheckIcon,
+  Cross2Icon,
+} from "@radix-ui/react-icons";
+import Image from "next/image";
 
 interface ReplyData {
   id: string;
   content: string;
   createdAt: string;
+  updatedAt: string;
   authorId: string;
   author: {
     id: string;
@@ -61,10 +68,15 @@ export function Reply({
             <p className="text-sm font-medium">{reply.author.username}</p>
             <p className="text-xs text-muted-foreground">
               {new Date(reply.createdAt).toLocaleString()}
+              {reply.createdAt !== reply.updatedAt && (
+                <span className="ml-2 text-xs text-gray-500">
+                  (edited {new Date(reply.updatedAt).toLocaleString()})
+                </span>
+              )}
             </p>
           </div>
         </div>
-        
+
         <div className="flex gap-1">
           {currentUserId === reply.authorId && (
             <>
@@ -86,7 +98,7 @@ export function Reply({
           )}
         </div>
       </div>
-      
+
       {editingReply === reply.id ? (
         <div className="mt-2 flex gap-2">
           <Input
@@ -95,10 +107,7 @@ export function Reply({
             maxLength={300}
             className="flex-1"
           />
-          <Button
-            size="sm"
-            onClick={() => onSaveEdit(reply.id)}
-          >
+          <Button size="sm" onClick={() => onSaveEdit(reply.id)}>
             <CheckIcon className="w-4 h-4" />
           </Button>
           <Button

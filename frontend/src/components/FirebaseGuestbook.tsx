@@ -259,12 +259,12 @@ export function FirebaseGuestbook() {
 
   const startEditEntry = (entry: GuestbookEntry) => {
     setEditingEntry(entry.id);
-    setEditContent(entry.message);
+    setEditContent(entry.message); // Pre-populate with entry's message
   };
 
   const startEditReply = (reply: Reply) => {
     setEditingReply(reply.id);
-    setEditContent(reply.content);
+    setEditContent(reply.content); // Pre-populate with reply's content
   };
 
   // Remove early return - show entries even for non-authenticated users
