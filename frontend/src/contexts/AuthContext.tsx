@@ -6,14 +6,23 @@ import {
   signInWithPopup,
   onAuthStateChanged,
   signOut,
-  signInWithRedirect,
   getIdToken,
 } from "firebase/auth";
 import { auth, googleProvider } from "../lib/firebase";
 
+// Define Prisma User type for context
+interface PrismaUser {
+  id: string;
+  firebaseUid: string;
+  email?: string | null;
+  username?: string | null;
+  avatarUrl?: string | null;
+}
+
 // Define types for the context
 type AuthContextType = {
   currentUser: User | null;
+  prismaUser: PrismaUser | null; // Add prismaUser to context
   loading: boolean;
   signIn: () => Promise<void>;
   logOut: () => Promise<void>;
@@ -22,6 +31,7 @@ type AuthContextType = {
 
 const AuthContext = createContext<AuthContextType>({
   currentUser: null,
+  prismaUser: null,
   loading: true,
   signIn: async () => {},
   logOut: async () => {},
@@ -34,6 +44,7 @@ export function useAuth() {
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
+  const [prismaUser, setPrismaUser] = useState<PrismaUser | null>(null); // State for Prisma user
   const [loading, setLoading] = useState(true);
 
   const signIn = async () => {
@@ -47,13 +58,20 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       console.log("Frontend attempting POST to:", fetchUrl);
 
       // Send the ID token to your backend to create/update the user in your database
-      await fetch(fetchUrl, {
+      const response = await fetch(fetchUrl, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${idToken}`,
         },
       });
+
+      if (!response.ok) {
+        throw new Error("Failed to sync user with backend");
+      }
+      const userData = await response.json();
+      setPrismaUser(userData.user); // Set prismaUser from backend response
+
     } catch (error) {
       console.error("Error signing in:", error);
     }
@@ -62,6 +80,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const logOut = async () => {
     try {
       await signOut(auth);
+      setPrismaUser(null); // Clear prismaUser on logout
     } catch (error) {
       console.error("Error signing out:", error);
     }
@@ -78,8 +97,34 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
       setCurrentUser(user);
+      if (user) {
+        // Fetch or create prisma user when firebase user is available
+        try {
+          const idToken = await user.getIdToken();
+          const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+          const fetchUrl = `${backendUrl}/user`;
+          const response = await fetch(fetchUrl, {
+            method: "POST", // Use POST to ensure creation/update
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${idToken}`,
+            },
+          });
+
+          if (!response.ok) {
+            throw new Error("Failed to sync user on auth state change");
+          }
+          const userData = await response.json();
+          setPrismaUser(userData.user);
+        } catch (error) {
+          console.error("Error syncing Prisma user:", error);
+          setPrismaUser(null);
+        }
+      } else {
+        setPrismaUser(null);
+      }
       setLoading(false);
     });
 
@@ -88,6 +133,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const value = {
     currentUser,
+    prismaUser,
     loading,
     signIn,
     logOut,

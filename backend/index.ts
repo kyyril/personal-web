@@ -9,8 +9,6 @@ import { guestbookRoutes } from "./src/routes/guestbook";
 import { replyRoutes } from "./src/routes/replies";
 import { testRoutes } from "./src/routes/test";
 import { userRoutes } from "./src/routes/user";
-import { authMiddleware } from "./src/middleware/auth"; // Import authMiddleware
-
 const prisma = new PrismaClient();
 
 // Initialize Firebase

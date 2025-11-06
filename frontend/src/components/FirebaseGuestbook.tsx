@@ -37,7 +37,7 @@ interface Reply {
 }
 
 export function FirebaseGuestbook() {
-  const { currentUser, signIn, logOut, getToken } = useAuth();
+  const { currentUser, prismaUser, signIn, logOut, getToken } = useAuth();
   const [message, setMessage] = useState("");
   const [entries, setEntries] = useState<GuestbookEntry[]>([]);
   const [loading, setLoading] = useState(true);
@@ -316,7 +316,7 @@ export function FirebaseGuestbook() {
                 key={entry.id}
                 entry={entry}
                 currentUser={
-                  currentUser ? { uid: currentUser.uid } : { uid: "" }
+                  prismaUser ? { uid: prismaUser.id } : { uid: "" } // Pass Prisma user ID
                 }
                 editingEntry={editingEntry}
                 replyingTo={replyingTo}
@@ -324,7 +324,7 @@ export function FirebaseGuestbook() {
                 editingReply={editingReply}
                 editContent={editContent}
                 onEditContentChange={setEditContent}
-                onStartEditEntry={() => currentUser && startEditEntry(entry)}
+                onStartEditEntry={() => prismaUser && startEditEntry(entry)} // Use prismaUser
                 onCancelEditEntry={() => {
                   setEditingEntry(null);
                   setEditContent("");
@@ -332,12 +332,12 @@ export function FirebaseGuestbook() {
                 onSaveEditEntry={() => handleEditEntry(entry.id, editContent)}
                 onDeleteEntry={() => handleDeleteEntry(entry.id)}
                 onSetReplyingTo={(entryId) =>
-                  currentUser ? setReplyingTo(entryId) : signIn()
+                  prismaUser ? setReplyingTo(entryId) : signIn() // Use prismaUser
                 }
                 onReplyContentChange={setReplyContent}
                 onSubmitReply={() => handleSubmitReply(entry.id)}
                 onStartEditReply={(replyId: string) =>
-                  currentUser &&
+                  prismaUser && // Use prismaUser
                   startEditReply({
                     id: replyId,
                     content: "",
