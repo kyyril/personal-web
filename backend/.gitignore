@@ -9,6 +9,8 @@ dist
 # code coverage
 coverage
 *.lcov
+# Prisma generated client
+/backend/src/generated/prisma/
 /migrasiDB
 # logs
 logs
