@@ -30,7 +30,7 @@ const nextConfig = {
           {
             key: "Content-Security-Policy",
             value:
-              "default-src 'self'; script-src 'self' 'unsafe-inline' *.vercel.com *.vercel-analytics.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' *.vercel.com *.vercel-analytics.com; font-src 'self'; frame-ancestors 'none';",
+              "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://apis.google.com https://www.gstatic.com https://*.firebaseapp.com https://www.googletagmanager.com *.vercel.com *.vercel-analytics.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' *.vercel.com *.vercel-analytics.com https://personal-api.up.railway.app wss://*.firebaseio.com https://*.googleapis.com https://securetoken.googleapis.com; font-src 'self' data:; frame-src https://*.firebaseapp.com https://apis.google.com; frame-ancestors 'none';",
           },
           {
             key: "Strict-Transport-Security",
