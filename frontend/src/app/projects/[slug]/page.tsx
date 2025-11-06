@@ -14,12 +14,13 @@ export const metadata: Metadata = {
     "I’m an Information Systems student who loves programming, especially software web development. I specialize in Next.js with Typescript and am currently learning backend development with Golang.",
 };
 
-export default function Detailproject({
+export default async function Detailproject({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
-  const project = projects.find((project) => project.id === params.slug);
+  const { slug } = await params;
+  const project = projects.find((project) => project.id === slug);
 
   if (!project) {
     return <p>Project not found</p>;

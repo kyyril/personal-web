@@ -1,284 +1,105 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import { Button } from "./ui/button";
 import { Card, CardHeader } from "./ui/card";
 import { PersonIcon } from "@radix-ui/react-icons";
-import { GuestbookAuth, GuestbookUserInfo, GuestbookEntry } from "./guestbook";
-
-interface GuestbookEntry {
-  id: string;
-  message: string;
-  createdAt: string;
-  updatedAt: string;
-  userId: string;
-  user: {
-    id: string;
-    username: string;
-    avatarUrl?: string;
-    email?: string;
-  };
-  replies: Reply[];
-}
-
-interface Reply {
-  id: string;
-  content: string;
-  createdAt: string;
-  updatedAt: string;
-  authorId: string;
-  userId: string;
-  author: {
-    id: string;
-    username: string;
-    avatarUrl?: string;
-  };
-}
+import { GuestbookUserInfo, GuestbookEntry } from "./guestbook";
+import { useGuestbook } from "../hooks/useGuestbook";
 
 export function FirebaseGuestbook() {
-  const { currentUser, prismaUser, signIn, logOut, getToken } = useAuth();
+  const { currentUser, prismaUser, signIn, logOut } = useAuth();
+  const {
+    entries,
+    loading,
+    error,
+    addEntry,
+    removeEntry,
+    editEntry,
+    addReply,
+    removeReply,
+    editReply,
+  } = useGuestbook();
+
   const [message, setMessage] = useState("");
-  const [entries, setEntries] = useState<GuestbookEntry[]>([]);
-  const [loading, setLoading] = useState(true);
   const [replyingTo, setReplyingTo] = useState<string | null>(null);
   const [replyContent, setReplyContent] = useState("");
-  const [editingEntry, setEditingEntry] = useState<string | null>(null);
-  const [editingReply, setEditingReply] = useState<string | null>(null);
+  const [editingEntryId, setEditingEntryId] = useState<string | null>(null);
+  const [editingReplyId, setEditingReplyId] = useState<string | null>(null);
   const [editContent, setEditContent] = useState("");
-
-  const API_BASE =
-    process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:5000";
-  console.log("API_BASE:", API_BASE);
-  console.log(
-    "Current user:",
-    currentUser ? "Authenticated" : "Not authenticated"
-  );
-
-  const fetchEntries = async () => {
-    try {
-      setLoading(true);
-      console.log("Fetching entries from:", `${API_BASE}/guestbook`);
-
-      // Public endpoint for GET
-      const response = await fetch(`${API_BASE}/guestbook`);
-
-      console.log("Response status:", response.status);
-      console.log("Response ok:", response.ok);
-
-      if (!response.ok) {
-        throw new Error(
-          `Failed to fetch entries: ${response.status} ${response.statusText}`
-        );
-      }
-
-      const data = await response.json();
-      console.log("Fetched data:", data);
-      console.log("Data length:", data.length);
-      setEntries(data);
-    } catch (error) {
-      console.error("Error fetching guestbook entries:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchEntries();
-  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!message.trim() || !currentUser) return;
-
     try {
-      const token = await getToken();
-      console.log("Retrieved token:", token);
-      if (!token) {
-        throw new Error("Not authenticated, token is null or undefined.");
-      }
-
-      const response = await fetch(`${API_BASE}/guestbook/protected/`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ message }),
-      });
-
-      if (!response.ok) {
-        const errorBody = await response.text();
-        console.error(
-          "Failed to submit message. Status:",
-          response.status,
-          "Body:",
-          errorBody
-        );
-        throw new Error(
-          `Failed to submit message: ${response.status} ${response.statusText}`
-        );
-      }
-
+      await addEntry(message);
       setMessage("");
-      await fetchEntries();
-    } catch (error) {
-      console.error("Error in handleSubmit:", error);
+    } catch (err) {
+      console.error("Error submitting guestbook entry:", err);
+      // Optionally show a user-friendly error message
     }
   };
 
   const handleDeleteEntry = async (id: string) => {
     try {
-      const token = await getToken();
-      if (!token) {
-        throw new Error("Not authenticated");
-      }
-
-      const response = await fetch(`${API_BASE}/guestbook/protected/${id}/`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to delete entry");
-      }
-
-      await fetchEntries();
-    } catch (error) {
-      console.error("Error deleting entry:", error);
+      await removeEntry(id);
+    } catch (err) {
+      console.error("Error deleting guestbook entry:", err);
     }
   };
 
-  const handleEditEntry = async (id: string, newMessage: string) => {
+  const handleEditEntry = async (id: string) => {
     try {
-      const token = await getToken();
-      if (!token) {
-        throw new Error("Not authenticated");
-      }
-
-      const response = await fetch(`${API_BASE}/guestbook/protected/${id}/`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ message: newMessage }),
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to update entry");
-      }
-
-      setEditingEntry(null);
+      await editEntry(id, editContent);
+      setEditingEntryId(null);
       setEditContent("");
-      await fetchEntries();
-    } catch (error) {
-      console.error("Error updating entry:", error);
+    } catch (err) {
+      console.error("Error editing guestbook entry:", err);
     }
   };
 
   const handleSubmitReply = async (entryId: string) => {
     if (!replyContent.trim() || !currentUser) return;
-
     try {
-      const token = await getToken();
-      if (!token) {
-        throw new Error("Not authenticated");
-      }
-
-      const response = await fetch(`${API_BASE}/replies`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          content: replyContent,
-          guestbookEntryId: entryId,
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to submit reply");
-      }
-
+      await addReply(entryId, replyContent);
       setReplyContent("");
       setReplyingTo(null);
-      await fetchEntries();
-    } catch (error) {
-      console.error("Error submitting reply:", error);
+    } catch (err) {
+      console.error("Error submitting reply:", err);
     }
   };
 
   const handleDeleteReply = async (replyId: string) => {
     try {
-      const token = await getToken();
-      if (!token) {
-        throw new Error("Not authenticated");
-      }
-
-      const response = await fetch(`${API_BASE}/replies/${replyId}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to delete reply");
-      }
-
-      await fetchEntries();
-    } catch (error) {
-      console.error("Error deleting reply:", error);
+      await removeReply(replyId);
+    } catch (err) {
+      console.error("Error deleting reply:", err);
     }
   };
 
-  const handleEditReply = async (replyId: string, newContent: string) => {
+  const handleEditReply = async (replyId: string) => {
     try {
-      const token = await getToken();
-      if (!token) {
-        throw new Error("Not authenticated");
-      }
-
-      const response = await fetch(`${API_BASE}/replies/${replyId}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ content: newContent }),
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to update reply");
-      }
-
-      setEditingReply(null);
+      await editReply(replyId, editContent);
+      setEditingReplyId(null);
       setEditContent("");
-      await fetchEntries();
-    } catch (error) {
-      console.error("Error updating reply:", error);
+    } catch (err) {
+      console.error("Error editing reply:", err);
     }
   };
 
-  const startEditEntry = (entry: GuestbookEntry) => {
-    setEditingEntry(entry.id);
-    setEditContent(entry.message); // Pre-populate with entry's message
+  const startEditEntry = (entry: any) => {
+    setEditingEntryId(entry.id);
+    setEditContent(entry.message);
   };
 
-  const startEditReply = (reply: Reply) => {
-    setEditingReply(reply.id);
-    setEditContent(reply.content); // Pre-populate with reply's content
+  const startEditReply = (reply: any) => {
+    setEditingReplyId(reply.id);
+    setEditContent(reply.content);
   };
-
-  // Remove early return - show entries even for non-authenticated users
 
   return (
     <div className="space-y-6">
-      {/* Always show entries, but show different UI based on auth status */}
       {currentUser ? (
         <GuestbookUserInfo
           currentUser={{
@@ -314,6 +135,8 @@ export function FirebaseGuestbook() {
         <h2 className="text-2xl font-bold">Messages ({entries.length})</h2>
         {loading ? (
           <p>Loading...</p>
+        ) : error ? (
+          <p className="text-red-500">{error}</p>
         ) : entries.length === 0 ? (
           <p>No messages yet. Be the first to leave a message!</p>
         ) : (
@@ -323,46 +146,33 @@ export function FirebaseGuestbook() {
                 key={entry.id}
                 entry={entry}
                 currentUser={
-                  prismaUser ? { uid: prismaUser.id } : { uid: "" } // Pass Prisma user ID
+                  prismaUser ? { uid: prismaUser.id } : { uid: "" }
                 }
-                editingEntry={editingEntry}
+                editingEntry={editingEntryId}
                 replyingTo={replyingTo}
                 replyContent={replyContent}
-                editingReply={editingReply}
+                editingReply={editingReplyId}
                 editContent={editContent}
                 onEditContentChange={setEditContent}
-                onStartEditEntry={() => prismaUser && startEditEntry(entry)} // Use prismaUser
+                onStartEditEntry={() => prismaUser && startEditEntry(entry)}
                 onCancelEditEntry={() => {
-                  setEditingEntry(null);
+                  setEditingEntryId(null);
                   setEditContent("");
                 }}
-                onSaveEditEntry={() => handleEditEntry(entry.id, editContent)}
+                onSaveEditEntry={() => handleEditEntry(entry.id)}
                 onDeleteEntry={() => handleDeleteEntry(entry.id)}
-                onSetReplyingTo={
-                  (entryId) => (prismaUser ? setReplyingTo(entryId) : signIn()) // Use prismaUser
+                onSetReplyingTo={(entryId) =>
+                  prismaUser ? setReplyingTo(entryId) : signIn()
                 }
                 onReplyContentChange={setReplyContent}
                 onSubmitReply={() => handleSubmitReply(entry.id)}
-                onStartEditReply={(replyId: string) =>
-                  prismaUser && // Use prismaUser
-                  startEditReply({
-                    id: replyId,
-                    content: "",
-                    createdAt: "",
-                    updatedAt: "",
-                    authorId: "",
-                    userId: "",
-                    author: { id: "", username: "" },
-                  })
-                }
-                onCancelEditReply={(replyId: string) => {
-                  setEditingReply(null);
+                onStartEditReply={(reply) => prismaUser && startEditReply(reply)}
+                onCancelEditReply={() => {
+                  setEditingReplyId(null);
                   setEditContent("");
                 }}
-                onSaveEditReply={(replyId: string) =>
-                  handleEditReply(replyId, editContent)
-                }
-                onDeleteReply={(replyId: string) => handleDeleteReply(replyId)}
+                onSaveEditReply={(replyId) => handleEditReply(replyId)}
+                onDeleteReply={(replyId) => handleDeleteReply(replyId)}
               />
             ))}
           </div>

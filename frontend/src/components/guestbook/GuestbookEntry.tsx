@@ -57,7 +57,7 @@ interface GuestbookEntryProps {
   onSetReplyingTo: (entryId: string | null) => void;
   onReplyContentChange: (content: string) => void;
   onSubmitReply: () => void;
-  onStartEditReply: (replyId: string) => void;
+  onStartEditReply: (reply: ReplyData) => void;
   onCancelEditReply: (replyId: string) => void;
   onSaveEditReply: (replyId: string) => void;
   onDeleteReply: (replyId: string) => void;
@@ -212,7 +212,7 @@ export function GuestbookEntry({
                     editingReply={editingReply}
                     editContent={editContent}
                     onEditContentChange={onEditContentChange}
-                    onStartEdit={() => onStartEditReply(reply.id)}
+                    onStartEdit={onStartEditReply}
                     onCancelEdit={() => onCancelEditReply(reply.id)}
                     onSaveEdit={() => onSaveEditReply(reply.id)}
                     onDelete={() => onDeleteReply(reply.id)}

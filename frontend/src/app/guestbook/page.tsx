@@ -1,22 +1,7 @@
-import { Metadata } from "next";
 import { FirebaseGuestbook } from "../../components/FirebaseGuestbook";
+import { guestbookMetadata } from "./metadata";
 
-export const metadata: Metadata = {
-  title: "Guestbook | Khairil's Personal Website",
-  description:
-    "Leave a message for Khairil and see what others have to say. Your feedback and comments are greatly appreciated!",
-  openGraph: {
-    title: "Guestbook | Khairil's Personal Website",
-    description:
-      "Leave a message for Khairil and see what others have to say. Your feedback and comments are greatly appreciated!",
-    url: "https://kyyril.vercel.app/guestbook",
-  },
-  twitter: {
-    title: "Guestbook | Khairil's Personal Website",
-    description:
-      "Leave a message for Khairil and see what others have to say. Your feedback and comments are greatly appreciated!",
-  },
-};
+export const metadata = guestbookMetadata;
 
 export default function GuestBook() {
   return (

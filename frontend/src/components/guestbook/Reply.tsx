@@ -30,7 +30,7 @@ interface ReplyProps {
   editingReply: string | null;
   editContent: string;
   onEditContentChange: (content: string) => void;
-  onStartEdit: (replyId: string) => void;
+  onStartEdit: (reply: ReplyData) => void;
   onCancelEdit: (replyId: string) => void;
   onSaveEdit: (replyId: string) => void;
   onDelete: (replyId: string) => void;
@@ -83,7 +83,7 @@ export function Reply({
               <Button
                 size="sm"
                 variant="ghost"
-                onClick={() => onStartEdit(reply.id)}
+                onClick={() => onStartEdit(reply)}
               >
                 <Pencil1Icon className="w-3 h-3" />
               </Button>
