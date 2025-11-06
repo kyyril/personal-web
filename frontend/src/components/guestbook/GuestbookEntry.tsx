@@ -1,6 +1,4 @@
 "use client";
-
-import { useState } from "react";
 import { Button } from "../ui/button";
 import { Card, CardHeader } from "../ui/card";
 import { Input } from "../ui/input";
@@ -111,10 +109,16 @@ export function GuestbookEntry({
                       variant="outline"
                       size="sm"
                       onClick={onStartEditEntry}
+                      aria-label="Edit guestbook entry"
                     >
                       <Pencil1Icon className="w-4 h-4" />
                     </Button>
-                    <Button variant="outline" size="sm" onClick={onDeleteEntry}>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={onDeleteEntry}
+                      aria-label="Delete guestbook entry"
+                    >
                       <TrashIcon className="w-4 h-4" />
                     </Button>
                   </>
@@ -133,10 +137,19 @@ export function GuestbookEntry({
                   maxLength={500}
                   className="flex-1"
                 />
-                <Button size="sm" onClick={onSaveEditEntry}>
+                <Button
+                  size="sm"
+                  onClick={onSaveEditEntry}
+                  aria-label="Save changes"
+                >
                   <CheckIcon className="w-4 h-4" />
                 </Button>
-                <Button size="sm" variant="outline" onClick={onCancelEditEntry}>
+                <Button
+                  size="sm"
+                  variant="outline"
+                  onClick={onCancelEditEntry}
+                  aria-label="Cancel editing"
+                >
                   <Cross2Icon className="w-4 h-4" />
                 </Button>
               </div>
@@ -154,6 +167,9 @@ export function GuestbookEntry({
                   onClick={() =>
                     onSetReplyingTo(replyingTo === entry.id ? null : entry.id)
                   }
+                  aria-label={
+                    replyingTo === entry.id ? "Cancel reply" : "Reply to entry"
+                  }
                 >
                   <ChatBubbleIcon className="w-4 h-4 mr-1" />
                   {replyingTo === entry.id ? "Cancel" : "Reply"}
@@ -169,7 +185,11 @@ export function GuestbookEntry({
                     placeholder="Write a reply..."
                     maxLength={300}
                   />
-                  <Button size="sm" onClick={onSubmitReply}>
+                  <Button
+                    size="sm"
+                    onClick={onSubmitReply}
+                    aria-label="Send reply"
+                  >
                     Send
                   </Button>
                 </div>

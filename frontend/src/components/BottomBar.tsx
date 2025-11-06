@@ -24,9 +24,19 @@ export function Navigation() {
   return (
     <>
       {/* Bottom Navigation Bar */}
-      <div className="fixed bottom-4 left-1/2 -translate-x-1/2 w-[330px] bg-background/30 backdrop-blur-xl supports-[backdrop-filter]:bg-background/30 z-50 rounded-lg">
+      <nav
+        id="navigation"
+        role="navigation"
+        aria-label="Main navigation"
+        className="fixed bottom-4 left-1/2 -translate-x-1/2 w-[330px] bg-background/30 backdrop-blur-xl supports-[backdrop-filter]:bg-background/30 z-50 rounded-lg"
+      >
         <div className="flex justify-around items-center py-3 px-2">
-          <Link href="/" className="relative group">
+          <Link
+            href="/"
+            className="relative group"
+            aria-label="Navigate to home page"
+            aria-current={pathname === "/" ? "page" : undefined}
+          >
             <motion.div
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
@@ -51,6 +61,8 @@ export function Navigation() {
               key={item.href}
               href={item.href}
               className="relative group flex flex-col items-center gap-1"
+              aria-label={`Navigate to ${item.name} page`}
+              aria-current={isActive(item.href) ? "page" : undefined}
             >
               <item.icon
                 className={`w-5 h-5 transition-colors ${
@@ -58,11 +70,12 @@ export function Navigation() {
                     ? "text-custom"
                     : "group-hover:text-custom/80"
                 }`}
+                aria-hidden="true"
               />
             </Link>
           ))}
         </div>
-      </div>
+      </nav>
       {/* Theme Toggler */}
       <motion.div
         whileHover={{ scale: 1.1 }}

@@ -90,6 +90,7 @@ export default function MusicPlayer({
               onClick={togglePlayPause}
               disabled={isLoading}
               className="h-8 w-8"
+              aria-label={isPlaying ? "Pause music" : "Play music"}
             >
               {isLoading ? (
                 <div className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
@@ -177,6 +178,7 @@ export default function MusicPlayer({
             size="icon"
             onClick={() => setShowPlaylist(!showPlaylist)}
             className="h-8 w-8"
+            aria-label={showPlaylist ? "Hide playlist" : "Show playlist"}
           >
             <ListBulletIcon className="h-4 w-4" />
           </Button>
@@ -216,6 +218,7 @@ export default function MusicPlayer({
               size="icon"
               onClick={() => setIsShuffling(!isShuffling)}
               className={cn("h-8 w-8", isShuffling && "text-primary")}
+              aria-label={isShuffling ? "Disable shuffle" : "Enable shuffle"}
             >
               <ShuffleIcon className="h-4 w-4" />
             </Button>
@@ -224,6 +227,7 @@ export default function MusicPlayer({
               size="icon"
               onClick={() => setIsLooping(!isLooping)}
               className={cn("h-8 w-8", isLooping && "text-primary")}
+              aria-label={isLooping ? "Disable loop" : "Enable loop"}
             >
               <LoopIcon className="h-4 w-4" />
             </Button>
@@ -241,6 +245,7 @@ export default function MusicPlayer({
                 onClick={handlePrevious}
                 className="h-8 w-8"
                 style={{ willChange: "transform" }}
+                aria-label="Previous track"
               >
                 <TrackPreviousIcon className="h-4 w-4" />
               </Button>
@@ -257,6 +262,7 @@ export default function MusicPlayer({
                 disabled={isLoading}
                 className="h-10 w-10"
                 style={{ willChange: "transform" }}
+                aria-label={isPlaying ? "Pause music" : "Play music"}
               >
                 <AnimatePresence mode="wait">
                   {isLoading ? (
@@ -302,6 +308,7 @@ export default function MusicPlayer({
                 onClick={handleNext}
                 className="h-8 w-8"
                 style={{ willChange: "transform" }}
+                aria-label="Next track"
               >
                 <TrackNextIcon className="h-4 w-4" />
               </Button>

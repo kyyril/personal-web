@@ -69,6 +69,7 @@ const HiddenPlayer = ({ onShow }: any) => {
         size="icon"
         onClick={onShow}
         className="rounded-full ring-1 ring-custom p-0 overflow-hidden"
+        aria-label="Show music player"
       >
         {isPlaying ? (
           <RotatingCover
@@ -173,6 +174,7 @@ const VisiblePlayer = ({ onHide, position, setPosition }: any) => {
                   size="icon"
                   onClick={handlePrevious}
                   className="h-7 w-7 transform-gpu"
+                  aria-label="Previous track"
                 >
                   <TrackPreviousIcon className="h-3 w-3" />
                 </MotionButton>
@@ -183,6 +185,7 @@ const VisiblePlayer = ({ onHide, position, setPosition }: any) => {
                   onClick={togglePlayPause}
                   disabled={isLoading}
                   className="h-8 w-8 transform-gpu"
+                  aria-label={isPlaying ? "Pause music" : "Play music"}
                 >
                   {isLoading ? (
                     <div className="w-3 h-3 border-2 border-current border-t-transparent rounded-full animate-spin" />
@@ -198,6 +201,7 @@ const VisiblePlayer = ({ onHide, position, setPosition }: any) => {
                   size="icon"
                   onClick={handleNext}
                   className="h-7 w-7 transform-gpu"
+                  aria-label="Next track"
                 >
                   <TrackNextIcon className="h-3 w-3" />
                 </MotionButton>
@@ -207,6 +211,7 @@ const VisiblePlayer = ({ onHide, position, setPosition }: any) => {
                   size="icon"
                   onClick={onHide}
                   className="h-7 w-7 opacity-60 hover:opacity-100 transform-gpu"
+                  aria-label="Hide music player"
                 >
                   <CaretLeftIcon className="h-3 w-3" />
                 </MotionButton>

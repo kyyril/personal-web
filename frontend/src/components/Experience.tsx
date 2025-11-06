@@ -25,11 +25,11 @@ function Experience({ data }: { data: Data }) {
         >
           <div className="aspect-square w-3 bg-gray-900 rounded-full absolute left-0 translate-x-[-29.5px] z-10 top-2 dark:bg-gray-50" />
 
-          <h4 className="text-xl font-semibold">{ex.job}</h4>
+          <h3 className="text-xl font-semibold">{ex.job}</h3>
           <div className="flex flex-row gap-x-2">
-            <h5>
+            <h4>
               {ex.institution} - <span className="text-sm">{ex.status}</span>
-            </h5>
+            </h4>
           </div>
           <p>
             {ex.location} - {ex.working}
@@ -72,6 +72,8 @@ function Experience({ data }: { data: Data }) {
                       setExpandedId(expandedId === ex.id ? null : ex.id)
                     }
                     className="px-2 py-1 h-7 text-xs group"
+                    aria-label={`${expandedId === ex.id ? 'Show less' : 'Show more'} technologies for ${ex.job} position`}
+                    aria-expanded={expandedId === ex.id}
                   >
                     {expandedId === ex.id ? (
                       <motion.div
@@ -79,7 +81,10 @@ function Experience({ data }: { data: Data }) {
                         initial={{ y: 2 }}
                         animate={{ y: 0 }}
                       >
-                        Show Less <ChevronUpIcon className="ml-1 h-3 w-3" />
+                        <span className="sr-only">
+                          Show fewer technologies for {ex.job} position
+                        </span>
+                        Show Less <ChevronUpIcon className="ml-1 h-3 w-3" aria-hidden="true" />
                       </motion.div>
                     ) : (
                       <motion.div
@@ -87,8 +92,11 @@ function Experience({ data }: { data: Data }) {
                         initial={{ y: -2 }}
                         animate={{ y: 0 }}
                       >
+                        <span className="sr-only">
+                          Show {ex.technologies.length - 3} more technologies for {ex.job} position
+                        </span>
                         +{ex.technologies.length - 3} More{" "}
-                        <ChevronDownIcon className="ml-1 h-3 w-3" />
+                        <ChevronDownIcon className="ml-1 h-3 w-3" aria-hidden="true" />
                       </motion.div>
                     )}
                   </Button>

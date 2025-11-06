@@ -37,9 +37,9 @@ export default function ProjectPage() {
         <ProjectListWrapper />
       </Suspense>
 
-      <h2 className="mb-6 text-2xl font-bold lg:text-3xl flex items-end pb-4 pt-24">
+      <h3 className="mb-6 text-2xl font-bold lg:text-3xl flex items-end pb-4 pt-24">
         GitHub Repositories
-      </h2>
+      </h3>
       <Suspense fallback={<GitHubProjectsListSkeleton />}>
         <GitHubProjectsWrapper />
       </Suspense>

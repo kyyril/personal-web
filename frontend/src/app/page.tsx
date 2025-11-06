@@ -1,7 +1,6 @@
 import dynamic from "next/dynamic";
 import React from "react";
 import { data } from "../lib/data";
-import { Data } from "../types";
 import { Metadata } from "next";
 import EducationSkeleton from "../components/EducationSkeleton";
 import ExperienceSkeleton from "../components/ExperienceSkeleton";
@@ -25,29 +24,32 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <main className="min-h-screen max-w-6xl w-full mx-auto">
+    <div className="min-h-screen max-w-6xl w-full mx-auto">
       <section
         id="bio"
+        role="region"
+        aria-labelledby="bio-heading"
         className="container max-w-5xl mx-auto py-12 md:py-16 lg:py-20 h-screen"
       >
+        <h1 id="bio-heading" className="sr-only">Biography and Introduction</h1>
         <Bio data={data} />
       </section>
 
       <section className="max-w-6xl w-full px-4 md:px-16 mx-auto">
-        <div id="experience" className="mb-24">
-          <h2 className="font-semibold text-3xl md:text-5xl mb-12">
+        <div id="experience" className="mb-24" role="region" aria-labelledby="experience-heading">
+          <h2 id="experience-heading" className="font-semibold text-3xl md:text-5xl mb-12">
             Experience
           </h2>
           <Experience data={data} />
         </div>
 
-        <div id="education">
-          <h2 className="font-semibold text-3xl md:text-5xl mb-12">
+        <div id="education" role="region" aria-labelledby="education-heading">
+          <h3 id="education-heading" className="font-semibold text-3xl md:text-5xl mb-12">
             Education
-          </h2>
+          </h3>
           <Education data={data} />
         </div>
       </section>
-    </main>
+    </div>
   );
 }

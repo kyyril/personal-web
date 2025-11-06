@@ -172,6 +172,7 @@ export default function ListProject({ projects }: ListProjectProps) {
               onClick={goToPreviousPage}
               disabled={currentPage === 1}
               className="h-9 px-3 gap-1 hover:bg-primary/10 hover:text-primary disabled:opacity-50"
+              aria-label={`Go to previous page, page ${currentPage - 1} of ${totalPages}`}
             >
               <ChevronLeftIcon className="h-4 w-4" />
               <span className="hidden sm:inline">Previous</span>
@@ -200,6 +201,8 @@ export default function ListProject({ projects }: ListProjectProps) {
                         ? "bg-primary text-primary-foreground shadow-sm"
                         : "hover:bg-primary/10 hover:text-primary"
                     }`}
+                    aria-label={`Go to page ${pageNum} of ${totalPages}`}
+                    aria-current={isActive ? "page" : undefined}
                   >
                     {pageNum}
                   </Button>
@@ -214,6 +217,7 @@ export default function ListProject({ projects }: ListProjectProps) {
               onClick={goToNextPage}
               disabled={currentPage === totalPages}
               className="h-9 px-3 gap-1 hover:bg-primary/10 hover:text-primary disabled:opacity-50"
+              aria-label={`Go to next page, page ${currentPage + 1} of ${totalPages}`}
             >
               <span className="hidden sm:inline">Next</span>
               <ChevronRightIcon className="h-4 w-4" />

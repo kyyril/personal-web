@@ -24,6 +24,7 @@ export default function ThemeToggler() {
       variant="ghost"
       size="icon"
       onClick={toggleTheme}
+      aria-label={`Switch to ${resolvedTheme === "light" ? "dark" : "light"} mode`}
     >
       <AnimatePresence mode="wait" initial={false}>
         {resolvedTheme === "light" ? (

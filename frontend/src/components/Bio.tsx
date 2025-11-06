@@ -6,20 +6,10 @@ import { Button } from "./ui/button";
 import {
   EnvelopeClosedIcon,
   GitHubLogoIcon,
-  Link1Icon,
   LinkedInLogoIcon,
 } from "@radix-ui/react-icons";
-import {
-  LucidePaperclip,
-  Paperclip,
-  PaperclipIcon,
-  PartyPopperIcon,
-} from "lucide-react";
-import {
-  Dialog,
-  DialogContent,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+import { Paperclip } from "lucide-react";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { motion } from "framer-motion";
 
 function Bio({ data }: { data: Data }) {
@@ -32,9 +22,10 @@ function Bio({ data }: { data: Data }) {
               src={"/assets/profile.webp"}
               width={280}
               height={280}
-              alt="image"
+              alt="Profile photo"
               loading="lazy"
               className="mx-auto aspect-square overflow-hidden object-cover object-center rounded-full cursor-pointer hover:ring-2 hover:ring-primary transition-all duration-300"
+              aria-label="View profile photo in full size"
             />
           </DialogTrigger>
           <DialogContent className="bg-transparent shadow-none border-none rounded-2xl">
@@ -70,7 +61,12 @@ function Bio({ data }: { data: Data }) {
         </p>
         <div className="space-x-4 mt-2">
           <Link target="_blank" href={data.contactInfo.github} prefetch={false}>
-            <Button className="hover:text-custom" variant="secondary" size="sm">
+            <Button
+              className="hover:text-custom"
+              variant="secondary"
+              size="sm"
+              aria-label="Visit GitHub profile"
+            >
               <GitHubLogoIcon />
             </Button>
           </Link>
@@ -80,7 +76,12 @@ function Bio({ data }: { data: Data }) {
             href={data.contactInfo.linkedin}
             prefetch={false}
           >
-            <Button className="hover:text-custom" variant="secondary" size="sm">
+            <Button
+              className="hover:text-custom"
+              variant="secondary"
+              size="sm"
+              aria-label="Visit LinkedIn profile"
+            >
               <LinkedInLogoIcon />
             </Button>
           </Link>
@@ -89,13 +90,23 @@ function Bio({ data }: { data: Data }) {
             href={`mailto:${data.contactInfo.email}`}
             prefetch={false}
           >
-            <Button className="hover:text-custom" variant="secondary" size="sm">
+            <Button
+              className="hover:text-custom"
+              variant="secondary"
+              size="sm"
+              aria-label="Send email"
+            >
               <EnvelopeClosedIcon />
             </Button>
           </Link>
 
           <Link target="_blank" href={data.contactInfo.cv} prefetch={false}>
-            <Button variant={"link"} className="hover:text-custom" size="sm">
+            <Button
+              variant={"link"}
+              className="hover:text-custom"
+              size="sm"
+              aria-label="Download resume"
+            >
               <Paperclip />
               <span className="text-md">Resume</span>
             </Button>
