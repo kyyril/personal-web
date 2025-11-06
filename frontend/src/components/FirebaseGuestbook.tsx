@@ -109,8 +109,15 @@ export function FirebaseGuestbook() {
 
       if (!response.ok) {
         const errorBody = await response.text();
-        console.error("Failed to submit message. Status:", response.status, "Body:", errorBody);
-        throw new Error(`Failed to submit message: ${response.status} ${response.statusText}`);
+        console.error(
+          "Failed to submit message. Status:",
+          response.status,
+          "Body:",
+          errorBody
+        );
+        throw new Error(
+          `Failed to submit message: ${response.status} ${response.statusText}`
+        );
       }
 
       setMessage("");
@@ -295,7 +302,7 @@ export function FirebaseGuestbook() {
                 </p>
                 <Button onClick={signIn} className="flex items-center gap-2">
                   <PersonIcon className="w-4 h-4" />
-                  Sign in with Google
+                  Sign in
                 </Button>
               </div>
             </CardHeader>
@@ -331,8 +338,8 @@ export function FirebaseGuestbook() {
                 }}
                 onSaveEditEntry={() => handleEditEntry(entry.id, editContent)}
                 onDeleteEntry={() => handleDeleteEntry(entry.id)}
-                onSetReplyingTo={(entryId) =>
-                  prismaUser ? setReplyingTo(entryId) : signIn() // Use prismaUser
+                onSetReplyingTo={
+                  (entryId) => (prismaUser ? setReplyingTo(entryId) : signIn()) // Use prismaUser
                 }
                 onReplyContentChange={setReplyContent}
                 onSubmitReply={() => handleSubmitReply(entry.id)}
