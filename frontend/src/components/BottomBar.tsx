@@ -24,11 +24,14 @@ export function Navigation() {
   return (
     <>
       {/* Bottom Navigation Bar */}
-      <nav
+      <motion.nav
         id="navigation"
         role="navigation"
         aria-label="Main navigation"
-        className="fixed bottom-4 left-1/2 -translate-x-1/2 w-[330px] bg-background/30 backdrop-blur-xl supports-[backdrop-filter]:bg-background/30 z-50 rounded-lg"
+        className="fixed bottom-6 w-[300px] inset-x-0 mx-auto bg-background/30 backdrop-blur-xl supports-[backdrop-filter]:bg-background/30 z-50 rounded-lg"
+        initial={{ y: 100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ type: "spring", stiffness: 120, damping: 17, delay: 0.2 }}
       >
         <div className="flex justify-around items-center py-3 px-2">
           <Link
@@ -50,8 +53,8 @@ export function Navigation() {
                 quality={100}
                 className={`rounded-full border-spacing-3 transition-all w-6 h-6 duration-300 object-cover  ${
                   pathname === "/"
-                    ? "ring-2 ring-custom"
-                    : "ring-2 ring-primary/10"
+                    ? "ring-1 ring-custom"
+                    : "ring-1 ring-primary/10"
                 }`}
               />
             </motion.div>
@@ -75,7 +78,7 @@ export function Navigation() {
             </Link>
           ))}
         </div>
-      </nav>
+      </motion.nav>
       {/* Theme Toggler */}
       <motion.div
         whileHover={{ scale: 1.1 }}
