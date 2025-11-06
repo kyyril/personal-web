@@ -410,7 +410,7 @@ export default function Chat() {
           </AlertDialog>
 
           {/* Desktop Chat History Sidebar */}
-          <Card className="hidden md:flex flex-col w-64 h-[500px] overflow-hidden">
+          <Card className="hidden md:flex flex-col w-64 h-[500px] overflow-hidden" role="navigation" aria-label="Chat history sidebar">
             <ChatHistorySidebar
               chatsList={chatsList}
               activeChat={activeChat}
@@ -431,20 +431,17 @@ export default function Chat() {
               transition={{ duration: 0.3 }}
             >
               <Dialog>
-                <DialogTrigger>
-                  <motion.div
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
+                <DialogTrigger asChild>
+                  <button className="cursor-pointer hover:opacity-80 transition-opacity" aria-label="View profile picture">
                     <Image
                       src="/assets/profile.webp"
                       width={50}
                       height={50}
                       alt="Katou Megumin"
                       loading="lazy"
-                      className="aspect-square ring-1 ring-custom mx-2 overflow-hidden object-cover object-center rounded-full cursor-pointer hover:opacity-80 transition-opacity"
+                      className="aspect-square ring-1 ring-custom mx-2 overflow-hidden object-cover object-center rounded-full"
                     />
-                  </motion.div>
+                  </button>
                 </DialogTrigger>
                 <DialogContent className="bg-transparent shadow-none border-none rounded-2xl">
                   <motion.div
@@ -464,7 +461,7 @@ export default function Chat() {
                 </DialogContent>
               </Dialog>
               <div className="flex flex-col gap-y-1">
-                <h1 className="text-center text-xl font-sans font-light">
+                <h1 className="text-center text-xl font-sans font-light" aria-label="Chat assistant name">
                   加藤 恵
                 </h1>
                 <p className="text-start font-sans text-xs text-green-600 font-light">
@@ -477,19 +474,15 @@ export default function Chat() {
                 {/* Music Player Dialog */}
                 <Dialog>
                   <DialogTrigger asChild>
-                    <motion.div
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="rounded-full h-8 w-8"
+                      title="Open Music Player"
+                      aria-label="Open music player"
                     >
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        className="rounded-full h-8 w-8"
-                        title="Open Music Player"
-                      >
-                        <SpeakerLoudIcon className="h-4 w-4" />
-                      </Button>
-                    </motion.div>
+                      <SpeakerLoudIcon className="h-4 w-4" />
+                    </Button>
                   </DialogTrigger>
                   <DialogContent className="max-w-md border-none rounded-md">
                     <DialogHeader></DialogHeader>
@@ -507,6 +500,7 @@ export default function Chat() {
                     size="sm"
                     className="rounded-full"
                     onClick={startNewChat}
+                    aria-label="Start a new chat"
                   >
                     <PlusIcon className="mr-1 h-3 w-3" />
                     <span className="hidden sm:inline">New Chat</span>
@@ -521,13 +515,19 @@ export default function Chat() {
                   {/* Mobile Chat History Sidebar */}
                   <Sheet>
                     <SheetTrigger asChild className="md:hidden">
-                      <Button variant="outline" size="icon" className="w-8 h-8">
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        className="w-8 h-8"
+                        aria-label="Open chat history sidebar"
+                      >
                         <svg
                           width="15"
                           height="15"
                           viewBox="0 0 15 15"
                           fill="none"
                           xmlns="http://www.w3.org/2000/svg"
+                          aria-hidden="true"
                         >
                           <path
                             d="M2.5 4C2.22386 4 2 3.77614 2 3.5C2 3.22386 2.22386 3 2.5 3H12.5C12.7761 3 13 3.22386 13 3.5C13 3.77614 12.7761 4 12.5 4H2.5ZM2.5 8C2.22386 8 2 7.77614 2 7.5C2 7.22386 2.22386 7 2.5 7H12.5C12.7761 7 13 7.22386 13 7.5C13 7.77614 12.7761 8 12.5 8H2.5ZM2 11.5C2 11.2239 2.22386 11 2.5 11H12.5C12.7761 11 13 11.2239 13 11.5C13 11.7761 12.7761 12 12.5 12H2.5C2.22386 12 2 11.7761 2 11.5Z"
@@ -538,8 +538,9 @@ export default function Chat() {
                         </svg>
                       </Button>
                     </SheetTrigger>
-                    <SheetContent side="left" className="w-60">
+                    <SheetContent side="left" className="w-60" aria-labelledby="chat-history-sidebar-title">
                       <button className="hidden" data-close-sheet></button>
+                      <h2 id="chat-history-sidebar-title" className="sr-only">Chat History Sidebar</h2>
                       <ChatHistorySidebar
                         chatsList={chatsList}
                         activeChat={activeChat}
@@ -558,6 +559,9 @@ export default function Chat() {
             <div
               className="mx-3 mt-5 h-[360px] overflow-y-auto pb-2"
               ref={messagesContainerRef}
+              role="log"
+              aria-live="polite"
+              aria-label="Chat messages"
             >
               <AnimatePresence mode="popLayout">
                 {animateChat &&
@@ -580,11 +584,13 @@ export default function Chat() {
                   className="w-full border rounded px-3 py-2"
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
-                  placeholder="Ask Something..."
+                  placeholder="Ask something..."
                   onKeyPress={(e) =>
                     e.key === "Enter" && !pending && sendMessage()
                   }
                   disabled={pending}
+                  aria-label="Message input"
+                  aria-describedby="message-input-help"
                 />
                 <motion.div
                   whileHover={{ scale: 1.05 }}
@@ -594,13 +600,14 @@ export default function Chat() {
                     className="flex items-center"
                     onClick={sendMessage}
                     disabled={pending}
+                    aria-label={pending ? "Sending message" : "Send message"}
                   >
                     {pending ? (
-                      <div className="flex items-center text-secondary">
+                      <div className="flex items-center text-secondary" aria-hidden="true">
                         <ReloadIcon className="animate-spin w-4 h-4 text-custom" />
                       </div>
                     ) : (
-                      <div className="flex items-center gap-1 text-secondary">
+                      <div className="flex items-center gap-1 text-secondary" aria-hidden="true">
                         <RocketIcon className="h-4 w-4 text-custom" />
                       </div>
                     )}

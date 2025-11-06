@@ -30,7 +30,7 @@ export default React.forwardRef<HTMLDivElement, ChatMessageProps>(
           className={`max-w-[85%] ${
             msg.isUser
               ? "bg-custom text-white rounded-l-sm rounded-b-md p-2 my-2"
-              : "bg-secondary text-primary rounded-r-sm rounded-b-md p-2 my-2"
+              : "bg-secondary text-foreground rounded-r-sm rounded-b-md p-2 my-2"
           }`}
         >
           <ReactMarkdown>{msg.text}</ReactMarkdown>

@@ -31,12 +31,16 @@ export default function ChatHistorySidebar({
   confirmDeleteChat,
 }: ChatHistorySidebarProps) {
   return (
-    <div className="h-full flex flex-col">
+    <div
+      className="h-full flex flex-col"
+      role="navigation"
+      aria-label="Chat history"
+    >
       <div className="p-4 pb-2">
         <h2 className="text-lg font-semibold">Chat History</h2>
         <p className="text-xs text-primary/70">
           <span className="text-red-500">* </span>This chat is saved in your
-          localstorage
+          local storage
         </p>
       </div>
 
@@ -50,7 +54,10 @@ export default function ChatHistorySidebar({
             if (closeButton) closeButton.click();
           }
         }}
-        className="mx-4 mb-4 bg-custom hover:bg-custom/90 text-white"
+        className="mx-4 mb-4 bg-custom hover:bg-custom/80 text-white"
+        style={{
+          backgroundColor: "#2563eb",
+        }}
       >
         <PlusIcon className="mr-2 h-4 w-4" /> New Chat
       </Button>
@@ -90,6 +97,7 @@ export default function ChatHistorySidebar({
                   size="icon"
                   className="opacity-0 group-hover:opacity-100 sm:flex hidden"
                   onClick={(e) => confirmDeleteChat(chat.id, e)}
+                  aria-label={`Delete chat: ${chat.title}`}
                 >
                   <TrashIcon className="h-4 w-4 text-muted-foreground hover:text-red-500 transition-colors" />
                 </Button>
@@ -98,6 +106,7 @@ export default function ChatHistorySidebar({
                   size="icon"
                   className="sm:hidden"
                   onClick={(e) => confirmDeleteChat(chat.id, e)}
+                  aria-label={`Delete chat: ${chat.title}`}
                 >
                   <TrashIcon className="h-4 w-4 text-muted-foreground hover:text-red-500 transition-colors" />
                 </Button>
