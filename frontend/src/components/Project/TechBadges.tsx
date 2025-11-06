@@ -6,6 +6,7 @@ interface TechBadgesProps {
   technologies: string[];
 }
 
+// Custom hook for window size
 const useWindowSize = () => {
   const [windowSize, setWindowSize] = useState({
     width: typeof window !== "undefined" ? window.innerWidth : 0,

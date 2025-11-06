@@ -17,6 +17,10 @@ const nextConfig = {
         hostname: "avatars.githubusercontent.com",
       },
     ],
+    formats: ["image/avif", "image/webp"],
+  },
+  experimental: {
+    esmExternals: "loose",
   },
   async headers() {
     return [
@@ -25,7 +29,8 @@ const nextConfig = {
         headers: [
           {
             key: "Content-Security-Policy",
-            value: "default-src 'self'; script-src 'self' 'unsafe-inline' *.vercel.com *.vercel-analytics.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' *.vercel.com *.vercel-analytics.com; font-src 'self'; frame-ancestors 'none';",
+            value:
+              "default-src 'self'; script-src 'self' 'unsafe-inline' *.vercel.com *.vercel-analytics.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' *.vercel.com *.vercel-analytics.com; font-src 'self'; frame-ancestors 'none';",
           },
           {
             key: "Strict-Transport-Security",

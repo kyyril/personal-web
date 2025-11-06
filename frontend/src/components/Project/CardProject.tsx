@@ -12,8 +12,7 @@ import { Button } from "../ui/button";
 import TechBadges from "./TechBadges";
 import { GlobeIcon, GitHubLogoIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
 
 interface ProjectProps {
   project: {
@@ -30,12 +29,27 @@ interface ProjectProps {
 
 export default function CardProject({ project, index }: ProjectProps) {
   const [imageLoading, setImageLoading] = useState(true);
+  const [isVisible, setIsVisible] = useState(false);
+  const [hasMounted, setHasMounted] = useState(false);
+
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (hasMounted) {
+      const timer = setTimeout(() => {
+        setIsVisible(true);
+      }, index * 100);
+      return () => clearTimeout(timer);
+    }
+  }, [index, hasMounted]);
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.1, delay: index * 0.1 }}
+    <div
+      className={`transition-all duration-300 ease-out ${
+        isVisible && hasMounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
+      }`}
     >
       <Card className="flex flex-col lg:flex-row hover:shadow-lg hover:shadow-black/5 transition-all duration-300 hover:-translate-y-1 border-border/50 hover:border-border">
         <div className="w-full lg:w-1/3 flex justify-center items-center relative group">
@@ -45,13 +59,15 @@ export default function CardProject({ project, index }: ProjectProps) {
           <Image
             src={project?.image[0]}
             alt={project?.title}
-            width={400}
-            height={250}
-            quality={100}
+            width={300}
+            height={156}
+            quality={65}
             className={`rounded-xl object-cover w-full h-full transition-opacity duration-500 ${
               imageLoading ? "opacity-0" : "opacity-100"
             }`}
-            loading="lazy"
+            loading={index === 0 ? "eager" : "lazy"}
+            fetchPriority={index === 0 ? "high" : "low"}
+            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 33vw, 300px"
             onLoad={() => setImageLoading(false)}
           />
         </div>
@@ -66,7 +82,7 @@ export default function CardProject({ project, index }: ProjectProps) {
             <TechBadges technologies={project.technologies} />
           </CardHeader>
           <CardContent className="py-1">
-            <CardDescription className="overflow-hidden text-ellipsis line-clamp-1">
+            <CardDescription className="overflow-hidden text-ellipsis line-clamp-2">
               {project.description}
             </CardDescription>
           </CardContent>
@@ -99,6 +115,6 @@ export default function CardProject({ project, index }: ProjectProps) {
           </CardFooter>
         </div>
       </Card>
-    </motion.div>
+    </div>
   );
 }

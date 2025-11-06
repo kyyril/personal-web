@@ -91,7 +91,7 @@ export default function RootLayout({
             >
               Skip to navigation
             </a>
-            
+
             <Navigation />
             <main id="main-content" role="main" className="min-h-screen">
               {children}

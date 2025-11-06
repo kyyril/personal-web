@@ -16,7 +16,7 @@ const config: Config = {
       },
       colors: {
         custom: {
-          DEFAULT: "#2563eb", // Changed to blue-600 for better contrast
+          DEFAULT: "#2563eb",
           foreground: "#ffffff",
         },
         background: "hsl(var(--background))",

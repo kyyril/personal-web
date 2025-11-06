@@ -1,7 +1,7 @@
 "use client";
 import { GitHubRepo } from "../../lib/github";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect, useLayoutEffect } from "react";
 import { Button } from "../ui/button";
 import { Card, CardHeader, CardContent, CardFooter } from "../ui/card";
 
@@ -14,7 +14,6 @@ import {
   DotsHorizontalIcon,
 } from "@radix-ui/react-icons";
 import { GitFork } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
 import GitHubProjectCardSkeleton from "./GitHubProjectCardSkeleton";
 
 interface GitHubProjectsProps {
@@ -23,6 +22,8 @@ interface GitHubProjectsProps {
 
 export default function GitHubProjects({ repositories }: GitHubProjectsProps) {
   const [currentPage, setCurrentPage] = useState(1);
+  const [isVisible, setIsVisible] = useState(false);
+  const [hasMounted, setHasMounted] = useState(false);
   const itemsPerPage = 6;
   const totalPages = Math.ceil(repositories.length / itemsPerPage);
 
@@ -33,8 +34,22 @@ export default function GitHubProjects({ repositories }: GitHubProjectsProps) {
     indexOfLastItem
   );
 
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
+
+  useLayoutEffect(() => {
+    if (hasMounted) {
+      setIsVisible(true);
+      return () => setIsVisible(false);
+    }
+  }, [currentPage, hasMounted]);
+
   const handlePageChange = (pageNumber: number) => {
-    setCurrentPage(pageNumber);
+    setIsVisible(false);
+    setTimeout(() => {
+      setCurrentPage(pageNumber);
+    }, 150);
   };
 
   const formatDate = (dateString: string) => {
@@ -102,105 +117,104 @@ export default function GitHubProjects({ repositories }: GitHubProjectsProps) {
   return (
     <div className="space-y-8">
       {/* Repository Grid */}
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={currentPage}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-          transition={{ duration: 0.3 }}
-          className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"
-        >
-          {currentRepositories.map((repo, index) => (
-            <motion.div
-              key={repo.name}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.1, delay: index * 0.1 }}
-            >
-              <Card className="group h-full flex flex-col hover:shadow-lg hover:shadow-black/5 transition-all duration-300 hover:-translate-y-1 border-border/50 hover:border-border">
-                <CardHeader className="pb-3">
-                  <div className="flex items-start justify-between gap-2">
-                    <div className="flex-1 min-w-0">
-                      <Link
-                        href={repo.html_url}
-                        target="_blank"
-                        className="block"
-                      >
-                        <h3 className="text-lg font-semibold group-hover:text-custom transition-colors duration-200 truncate">
-                          {repo.name}
-                        </h3>
-                      </Link>
-                      <p className="text-sm text-muted-foreground line-clamp-1 mt-1 leading-relaxed">
-                        {repo.description || "No description available"}
-                      </p>
-                    </div>
-                    <GitHubLogoIcon className="h-5 w-5 text-muted-foreground group-hover:text-foreground transition-colors duration-200 flex-shrink-0" />
-                  </div>
-                </CardHeader>
-
-                <CardContent className="flex-1 pb-3">
-                  <div className="flex items-center gap-4 text-sm">
-                    {repo.language && (
-                      <div className="flex items-center gap-2">
-                        <div
-                          className={`w-3 h-3 rounded-full ${getLanguageColor(
-                            repo.language
-                          )}`}
-                        />
-                        <span className="text-muted-foreground font-medium">
-                          {repo.language}
-                        </span>
-                      </div>
-                    )}
-                    <div className="flex items-center gap-3">
-                      <div className="flex items-center gap-1 text-muted-foreground">
-                        <StarIcon className="h-3 w-3" />
-                        <span className="font-medium">
-                          {repo.stargazers_count}
-                        </span>
-                      </div>
-                      <div className="flex items-center gap-1 text-muted-foreground">
-                        <GitFork className="h-3 w-3" />
-                        <span className="font-medium">{repo.forks_count}</span>
-                      </div>
-                    </div>
-                  </div>
-                </CardContent>
-
-                <CardFooter className="pt-0 pb-4">
-                  <div className="flex items-center justify-between w-full">
-                    <div className="flex items-center gap-1 text-xs text-muted-foreground">
-                      <CalendarIcon className="h-3 w-3" />
-                      <span>Created {formatDate(repo.created_at)}</span>
-                    </div>
-                    <Link href={repo.html_url} target="_blank">
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        className="h-8 px-3 text-xs hover:bg-custom/10 hover:text-custom"
-                      >
-                        View Repo
-                      </Button>
+      <div
+        className={`grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 transition-all duration-300 ${
+          isVisible && hasMounted
+            ? "opacity-100 translate-y-0"
+            : "opacity-0 translate-y-5"
+        }`}
+      >
+        {currentRepositories.map((repo, index) => (
+          <div
+            key={repo.name}
+            className={`transition-all duration-300 delay-${index * 50} ${
+              isVisible && hasMounted
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-5"
+            }`}
+          >
+            <Card className="group h-full flex flex-col hover:shadow-lg hover:shadow-black/5 transition-all duration-300 hover:-translate-y-1 border-border/50 hover:border-border">
+              <CardHeader className="pb-3">
+                <div className="flex items-start justify-between gap-2">
+                  <div className="flex-1 min-w-0">
+                    <Link
+                      href={repo.html_url}
+                      target="_blank"
+                      className="block"
+                    >
+                      <h3 className="text-lg font-semibold group-hover:text-custom transition-colors duration-200 truncate">
+                        {repo.name}
+                      </h3>
                     </Link>
+                    <p className="text-sm text-muted-foreground line-clamp-1 mt-1 leading-relaxed">
+                      {repo.description || "No description available"}
+                    </p>
                   </div>
-                </CardFooter>
-              </Card>
-            </motion.div>
-          ))}
-          {Array.from({
-            length: itemsPerPage - currentRepositories.length,
-          }).map((_, index) => (
-            <div
-              key={`placeholder-${index}`}
-              className="invisible"
-              aria-hidden="true"
-            >
-              <GitHubProjectCardSkeleton />
-            </div>
-          ))}
-        </motion.div>
-      </AnimatePresence>
+                  <GitHubLogoIcon className="h-5 w-5 text-muted-foreground group-hover:text-foreground transition-colors duration-200 flex-shrink-0" />
+                </div>
+              </CardHeader>
+
+              <CardContent className="flex-1 pb-3">
+                <div className="flex items-center gap-4 text-sm">
+                  {repo.language && (
+                    <div className="flex items-center gap-2">
+                      <div
+                        className={`w-3 h-3 rounded-full ${getLanguageColor(
+                          repo.language
+                        )}`}
+                      />
+                      <span className="text-muted-foreground font-medium">
+                        {repo.language}
+                      </span>
+                    </div>
+                  )}
+                  <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-1 text-muted-foreground">
+                      <StarIcon className="h-3 w-3" />
+                      <span className="font-medium">
+                        {repo.stargazers_count}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-1 text-muted-foreground">
+                      <GitFork className="h-3 w-3" />
+                      <span className="font-medium">{repo.forks_count}</span>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+
+              <CardFooter className="pt-0 pb-4">
+                <div className="flex items-center justify-between w-full">
+                  <div className="flex items-center gap-1 text-xs text-muted-foreground">
+                    <CalendarIcon className="h-3 w-3" />
+                    <span>Created {formatDate(repo.created_at)}</span>
+                  </div>
+                  <Link href={repo.html_url} target="_blank">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="h-8 px-3 text-xs hover:bg-custom/10 hover:text-custom"
+                    >
+                      View Repo
+                    </Button>
+                  </Link>
+                </div>
+              </CardFooter>
+            </Card>
+          </div>
+        ))}
+        {Array.from({
+          length: itemsPerPage - currentRepositories.length,
+        }).map((_, index) => (
+          <div
+            key={`placeholder-${index}`}
+            className="invisible"
+            aria-hidden="true"
+          >
+            <GitHubProjectCardSkeleton />
+          </div>
+        ))}
+      </div>
 
       {/* Enhanced Pagination */}
       {totalPages > 1 && (
@@ -221,6 +235,7 @@ export default function GitHubProjects({ repositories }: GitHubProjectsProps) {
               onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage === 1}
               className="h-9 px-3 gap-1 hover:bg-primary/10 hover:text-primary disabled:opacity-50"
+              aria-label={`Go to previous page (page ${currentPage - 1})`}
             >
               <ChevronLeftIcon className="h-4 w-4" />
               <span className="hidden sm:inline">Previous</span>
@@ -249,6 +264,8 @@ export default function GitHubProjects({ repositories }: GitHubProjectsProps) {
                         ? "bg-primary text-primary-foreground shadow-sm"
                         : "hover:bg-primary/10 hover:text-primary"
                     }`}
+                    aria-label={`Go to page ${pageNum}`}
+                    aria-current={isActive ? "page" : undefined}
                   >
                     {pageNum}
                   </Button>
@@ -263,6 +280,7 @@ export default function GitHubProjects({ repositories }: GitHubProjectsProps) {
               onClick={() => handlePageChange(currentPage + 1)}
               disabled={currentPage === totalPages}
               className="h-9 px-3 gap-1 hover:bg-primary/10 hover:text-primary disabled:opacity-50"
+              aria-label={`Go to next page (page ${currentPage + 1})`}
             >
               <span className="hidden sm:inline">Next</span>
               <ChevronRightIcon className="h-4 w-4" />

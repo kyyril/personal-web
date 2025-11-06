@@ -2,13 +2,8 @@ import React, { Suspense } from "react";
 import { Metadata } from "next";
 import ProjectListSkeleton from "../../components/Project/ProjectListSkeleton";
 import GitHubProjectsListSkeleton from "../../components/Project/GitHubProjectsListSkeleton";
-
-const ProjectListWrapper = React.lazy(
-  () => import("../../components/Project/ProjectListWrapper")
-);
-const GitHubProjectsWrapper = React.lazy(
-  () => import("../../components/Project/GitHubProjectsWrapper")
-);
+import ProjectListWrapper from "../../components/Project/ProjectListWrapper";
+import GitHubProjectsWrapper from "../../components/Project/GitHubProjectsWrapper";
 
 export const metadata: Metadata = {
   title: "Projects | Khairil's Personal Website",
@@ -37,9 +32,9 @@ export default function ProjectPage() {
         <ProjectListWrapper />
       </Suspense>
 
-      <h3 className="mb-6 text-2xl font-bold lg:text-3xl flex items-end pb-4 pt-24">
+      <h2 className="mb-6 text-2xl font-bold lg:text-3xl flex items-end pb-4 pt-24">
         GitHub Repositories
-      </h3>
+      </h2>
       <Suspense fallback={<GitHubProjectsListSkeleton />}>
         <GitHubProjectsWrapper />
       </Suspense>

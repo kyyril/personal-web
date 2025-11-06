@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { Button } from "../ui/button";
 import { Select, SelectTrigger, SelectContent, SelectItem } from "../ui/select";
 import CardProject from "./CardProject";
@@ -31,6 +31,11 @@ export default function ListProject({ projects }: ListProjectProps) {
   const [categoryFilter, setCategoryFilter] = useState("All");
   const [typeFilter, setTypeFilter] = useState("All");
   const [currentPage, setCurrentPage] = useState(1);
+  const [hasMounted, setHasMounted] = useState(false);
+
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
 
   const filteredProjects = useMemo(() => {
     return projects.filter((project) => {
@@ -125,7 +130,7 @@ export default function ListProject({ projects }: ListProjectProps) {
 
       {/* Project List */}
       <ul className="grid grid-cols-1 gap-4">
-        {paginatedProjects.length > 0 ? (
+        {hasMounted && paginatedProjects.length > 0 ? (
           <>
             {paginatedProjects.map((project, index) => (
               <li key={project.id}>
