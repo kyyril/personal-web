@@ -12,6 +12,7 @@ import {
 } from "@radix-ui/react-icons";
 import Image from "next/image";
 import { Reply } from "./Reply";
+import { Loader } from "lucide-react";
 
 interface ReplyData {
   id: string;
@@ -61,6 +62,11 @@ interface GuestbookEntryProps {
   onCancelEditReply: (replyId: string) => void;
   onSaveEditReply: (replyId: string) => void;
   onDeleteReply: (replyId: string) => void;
+  isDeletingEntry: boolean;
+  isEditingEntry: boolean;
+  isAddingReply: boolean;
+  isDeletingReply: boolean;
+  isEditingReply: boolean;
 }
 
 export function GuestbookEntry({
@@ -83,6 +89,11 @@ export function GuestbookEntry({
   onCancelEditReply,
   onSaveEditReply,
   onDeleteReply,
+  isDeletingEntry,
+  isEditingEntry,
+  isAddingReply,
+  isDeletingReply,
+  isEditingReply,
 }: GuestbookEntryProps) {
   return (
     <Card key={entry.id}>
@@ -112,16 +123,26 @@ export function GuestbookEntry({
                       size="sm"
                       onClick={onStartEditEntry}
                       aria-label="Edit guestbook entry"
+                      disabled={isEditingEntry || isDeletingEntry}
                     >
-                      <Pencil1Icon className="w-4 h-4" />
+                      {isEditingEntry && editingEntry === entry.id ? (
+                        <Loader className="mr-2 h-4 w-4 animate-spin" />
+                      ) : (
+                        <Pencil1Icon className="w-4 h-4" />
+                      )}
                     </Button>
                     <Button
                       variant="outline"
                       size="sm"
                       onClick={onDeleteEntry}
                       aria-label="Delete guestbook entry"
+                      disabled={isDeletingEntry || isEditingEntry}
                     >
-                      <TrashIcon className="w-4 h-4" />
+                      {isDeletingEntry ? (
+                        <Loader className="mr-2 h-4 w-4 animate-spin" />
+                      ) : (
+                        <TrashIcon className="w-4 h-4" />
+                      )}
                     </Button>
                   </>
                 )}
@@ -148,14 +169,20 @@ export function GuestbookEntry({
                   size="sm"
                   onClick={onSaveEditEntry}
                   aria-label="Save changes"
+                  disabled={isEditingEntry}
                 >
-                  <CheckIcon className="w-4 h-4" />
+                  {isEditingEntry ? (
+                    <Loader className="mr-2 h-4 w-4 animate-spin" />
+                  ) : (
+                    <CheckIcon className="w-4 h-4" />
+                  )}
                 </Button>
                 <Button
                   size="sm"
                   variant="outline"
                   onClick={onCancelEditEntry}
                   aria-label="Cancel editing"
+                  disabled={isEditingEntry}
                 >
                   <Cross2Icon className="w-4 h-4" />
                 </Button>
@@ -191,13 +218,19 @@ export function GuestbookEntry({
                     onChange={(e) => onReplyContentChange(e.target.value)}
                     placeholder="Write a reply..."
                     maxLength={300}
+                    disabled={isAddingReply}
                   />
                   <Button
                     size="sm"
                     onClick={onSubmitReply}
                     aria-label="Send reply"
+                    disabled={isAddingReply}
                   >
-                    Send
+                    {isAddingReply ? (
+                      <Loader className="mr-2 h-4 w-4 animate-spin" />
+                    ) : (
+                      "Send"
+                    )}
                   </Button>
                 </div>
               )}
@@ -216,6 +249,8 @@ export function GuestbookEntry({
                     onCancelEdit={() => onCancelEditReply(reply.id)}
                     onSaveEdit={() => onSaveEditReply(reply.id)}
                     onDelete={() => onDeleteReply(reply.id)}
+                    isDeletingReply={isDeletingReply}
+                    isEditingReply={isEditingReply}
                   />
                 ))}
               </div>

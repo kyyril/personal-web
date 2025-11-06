@@ -1,5 +1,6 @@
 "use client";
 
+import { Loader } from "lucide-react";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import {
@@ -34,6 +35,8 @@ interface ReplyProps {
   onCancelEdit: (replyId: string) => void;
   onSaveEdit: (replyId: string) => void;
   onDelete: (replyId: string) => void;
+  isDeletingReply: boolean;
+  isEditingReply: boolean;
 }
 
 export function Reply({
@@ -46,6 +49,8 @@ export function Reply({
   onCancelEdit,
   onSaveEdit,
   onDelete,
+  isDeletingReply,
+  isEditingReply,
 }: ReplyProps) {
   return (
     <div className="bg-muted/50 rounded-lg p-3">
@@ -84,15 +89,25 @@ export function Reply({
                 size="sm"
                 variant="ghost"
                 onClick={() => onStartEdit(reply)}
+                disabled={isEditingReply || isDeletingReply}
               >
-                <Pencil1Icon className="w-3 h-3" />
+                {isEditingReply && editingReply === reply.id ? (
+                  <Loader className="w-3 h-3 animate-spin" />
+                ) : (
+                  <Pencil1Icon className="w-3 h-3" />
+                )}
               </Button>
               <Button
                 size="sm"
                 variant="ghost"
                 onClick={() => onDelete(reply.id)}
+                disabled={isDeletingReply || isEditingReply}
               >
-                <TrashIcon className="w-3 h-3" />
+                {isDeletingReply ? (
+                  <Loader className="w-3 h-3 animate-spin" />
+                ) : (
+                  <TrashIcon className="w-3 h-3" />
+                )}
               </Button>
             </>
           )}
@@ -106,14 +121,24 @@ export function Reply({
             onChange={(e) => onEditContentChange(e.target.value)}
             maxLength={300}
             className="flex-1"
+            disabled={isEditingReply}
           />
-          <Button size="sm" onClick={() => onSaveEdit(reply.id)}>
-            <CheckIcon className="w-4 h-4" />
+          <Button
+            size="sm"
+            onClick={() => onSaveEdit(reply.id)}
+            disabled={isEditingReply}
+          >
+            {isEditingReply ? (
+              <Loader className="w-4 h-4 animate-spin" />
+            ) : (
+              <CheckIcon className="w-4 h-4" />
+            )}
           </Button>
           <Button
             size="sm"
             variant="outline"
             onClick={() => onCancelEdit(reply.id)}
+            disabled={isEditingReply}
           >
             <Cross2Icon className="w-4 h-4" />
           </Button>

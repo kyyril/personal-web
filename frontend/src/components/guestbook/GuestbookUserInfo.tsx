@@ -1,10 +1,11 @@
-'use client';
+"use client";
 
-import { Button } from '../ui/button';
-import { Card, CardHeader } from '../ui/card';
-import { Input } from '../ui/input';
-import { PersonIcon, ExitIcon } from '@radix-ui/react-icons';
-import Image from 'next/image';
+import { Loader } from "lucide-react";
+import { Button } from "../ui/button";
+import { Card, CardHeader } from "../ui/card";
+import { Input } from "../ui/input";
+import { PersonIcon, ExitIcon } from "@radix-ui/react-icons";
+import Image from "next/image";
 
 interface GuestbookUserInfoProps {
   currentUser: {
@@ -17,6 +18,7 @@ interface GuestbookUserInfoProps {
   onMessageChange: (message: string) => void;
   onSubmit: (e: React.FormEvent) => void;
   onLogOut: () => void;
+  isSubmitting: boolean;
 }
 
 export function GuestbookUserInfo({
@@ -25,6 +27,7 @@ export function GuestbookUserInfo({
   onMessageChange,
   onSubmit,
   onLogOut,
+  isSubmitting,
 }: GuestbookUserInfoProps) {
   return (
     <Card>
@@ -73,7 +76,10 @@ export function GuestbookUserInfo({
         </div>
 
         {/* Message Form */}
-        <form onSubmit={onSubmit} className="flex justify-between gap-4 flex-col md:flex-row mt-4">
+        <form
+          onSubmit={onSubmit}
+          className="flex justify-between gap-4 flex-col md:flex-row mt-4"
+        >
           <Input
             type="text"
             value={message}
@@ -81,8 +87,12 @@ export function GuestbookUserInfo({
             maxLength={500}
             placeholder="Leave a message..."
             required
+            disabled={isSubmitting}
           />
-          <Button type="submit">Send</Button>
+          <Button type="submit" disabled={isSubmitting}>
+            {isSubmitting && <Loader className="mr-2 h-4 w-4 animate-spin" />}
+            Send
+          </Button>
         </form>
       </CardHeader>
     </Card>

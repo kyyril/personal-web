@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import useSWR, { mutate } from "swr";
 import {
   fetchGuestbookEntries,
   submitGuestbookEntry,
@@ -39,29 +39,19 @@ interface Reply {
   };
 }
 
+const GUESTBOOK_API_KEY = "/guestbook";
+
 export const useGuestbook = () => {
   const { currentUser, getToken } = useAuth();
-  const [entries, setEntries] = useState<GuestbookEntry[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
 
-  const refreshEntries = useCallback(async () => {
-    setLoading(true);
-    setError(null);
-    try {
-      const data = await fetchGuestbookEntries();
-      setEntries(data);
-    } catch (err) {
-      setError("Failed to fetch guestbook entries.");
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
+  const fetcher = async () => {
+    return await fetchGuestbookEntries();
+  };
 
-  useEffect(() => {
-    refreshEntries();
-  }, [refreshEntries]);
+  const { data: entries, error, isLoading } = useSWR<GuestbookEntry[]>(
+    GUESTBOOK_API_KEY,
+    fetcher
+  );
 
   const addEntry = async (message: string) => {
     if (!currentUser) {
@@ -72,7 +62,7 @@ export const useGuestbook = () => {
       throw new Error("Authentication token not found.");
     }
     await submitGuestbookEntry(message, token);
-    await refreshEntries();
+    mutate(GUESTBOOK_API_KEY);
   };
 
   const removeEntry = async (id: string) => {
@@ -84,7 +74,7 @@ export const useGuestbook = () => {
       throw new Error("Authentication token not found.");
     }
     await deleteGuestbookEntry(id, token);
-    await refreshEntries();
+    mutate(GUESTBOOK_API_KEY);
   };
 
   const editEntry = async (id: string, newMessage: string) => {
@@ -96,7 +86,7 @@ export const useGuestbook = () => {
       throw new Error("Authentication token not found.");
     }
     await updateGuestbookEntry(id, newMessage, token);
-    await refreshEntries();
+    mutate(GUESTBOOK_API_KEY);
   };
 
   const addReply = async (entryId: string, content: string) => {
@@ -108,7 +98,7 @@ export const useGuestbook = () => {
       throw new Error("Authentication token not found.");
     }
     await submitReply(entryId, content, token);
-    await refreshEntries();
+    mutate(GUESTBOOK_API_KEY);
   };
 
   const removeReply = async (replyId: string) => {
@@ -120,7 +110,7 @@ export const useGuestbook = () => {
       throw new Error("Authentication token not found.");
     }
     await deleteReply(replyId, token);
-    await refreshEntries();
+    mutate(GUESTBOOK_API_KEY);
   };
 
   const editReply = async (replyId: string, newContent: string) => {
@@ -132,14 +122,13 @@ export const useGuestbook = () => {
       throw new Error("Authentication token not found.");
     }
     await updateReply(replyId, newContent, token);
-    await refreshEntries();
+    mutate(GUESTBOOK_API_KEY);
   };
 
   return {
     entries,
-    loading,
+    isLoading,
     error,
-    refreshEntries,
     addEntry,
     removeEntry,
     editEntry,

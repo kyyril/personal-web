@@ -12,7 +12,7 @@ export function FirebaseGuestbook() {
   const { currentUser, prismaUser, signIn, logOut } = useAuth();
   const {
     entries,
-    loading,
+    isLoading,
     error,
     addEntry,
     removeEntry,
@@ -29,62 +29,99 @@ export function FirebaseGuestbook() {
   const [editingReplyId, setEditingReplyId] = useState<string | null>(null);
   const [editContent, setEditContent] = useState("");
 
+  const [isAddingEntry, setIsAddingEntry] = useState(false);
+  const [isDeletingEntry, setIsDeletingEntry] = useState(false);
+  const [isEditingEntry, setIsEditingEntry] = useState(false);
+  const [isAddingReply, setIsAddingReply] = useState(false);
+  const [isDeletingReply, setIsDeletingReply] = useState(false);
+  const [isEditingReply, setIsEditingReply] = useState(false);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!message.trim() || !currentUser) return;
+    setIsAddingEntry(true);
+    console.log("isAddingEntry set to true");
     try {
       await addEntry(message);
       setMessage("");
     } catch (err) {
       console.error("Error submitting guestbook entry:", err);
       // Optionally show a user-friendly error message
+    } finally {
+      setIsAddingEntry(false);
+      console.log("isAddingEntry set to false");
     }
   };
 
   const handleDeleteEntry = async (id: string) => {
+    setIsDeletingEntry(true);
+    console.log("isDeletingEntry set to true");
     try {
       await removeEntry(id);
     } catch (err) {
       console.error("Error deleting guestbook entry:", err);
+    } finally {
+      setIsDeletingEntry(false);
+      console.log("isDeletingEntry set to false");
     }
   };
 
   const handleEditEntry = async (id: string) => {
+    setIsEditingEntry(true);
+    console.log("isEditingEntry set to true");
     try {
       await editEntry(id, editContent);
       setEditingEntryId(null);
       setEditContent("");
     } catch (err) {
       console.error("Error editing guestbook entry:", err);
+    } finally {
+      setIsEditingEntry(false);
+      console.log("isEditingEntry set to false");
     }
   };
 
   const handleSubmitReply = async (entryId: string) => {
     if (!replyContent.trim() || !currentUser) return;
+    setIsAddingReply(true);
+    console.log("isAddingReply set to true");
     try {
       await addReply(entryId, replyContent);
       setReplyContent("");
       setReplyingTo(null);
     } catch (err) {
       console.error("Error submitting reply:", err);
+    } finally {
+      setIsAddingReply(false);
+      console.log("isAddingReply set to false");
     }
   };
 
   const handleDeleteReply = async (replyId: string) => {
+    setIsDeletingReply(true);
+    console.log("isDeletingReply set to true");
     try {
       await removeReply(replyId);
     } catch (err) {
       console.error("Error deleting reply:", err);
+    } finally {
+      setIsDeletingReply(false);
+      console.log("isDeletingReply set to false");
     }
   };
 
   const handleEditReply = async (replyId: string) => {
+    setIsEditingReply(true);
+    console.log("isEditingReply set to true");
     try {
       await editReply(replyId, editContent);
       setEditingReplyId(null);
       setEditContent("");
     } catch (err) {
       console.error("Error editing reply:", err);
+    } finally {
+      setIsEditingReply(false);
+      console.log("isEditingReply set to false");
     }
   };
 
@@ -112,6 +149,7 @@ export function FirebaseGuestbook() {
           onMessageChange={setMessage}
           onSubmit={handleSubmit}
           onLogOut={logOut}
+          isSubmitting={isAddingEntry}
         />
       ) : (
         <div className="flex justify-center">
@@ -132,12 +170,12 @@ export function FirebaseGuestbook() {
       )}
 
       <div className="space-y-4">
-        <h2 className="text-2xl font-bold">Messages ({entries.length})</h2>
-        {loading ? (
-          <p>Loading...</p>
+        <h2 className="text-2xl font-bold">Messages ({entries ? entries.length : 0})</h2>
+        {isLoading ? (
+          <p>Loading guestbook entries...</p>
         ) : error ? (
-          <p className="text-red-500">{error}</p>
-        ) : entries.length === 0 ? (
+          <p className="text-red-500">Error loading entries: {error.message}</p>
+        ) : !entries || entries.length === 0 ? (
           <p>No messages yet. Be the first to leave a message!</p>
         ) : (
           <div className="space-y-4">
@@ -173,6 +211,11 @@ export function FirebaseGuestbook() {
                 }}
                 onSaveEditReply={(replyId) => handleEditReply(replyId)}
                 onDeleteReply={(replyId) => handleDeleteReply(replyId)}
+                isDeletingEntry={isDeletingEntry}
+                isEditingEntry={isEditingEntry}
+                isAddingReply={isAddingReply}
+                isDeletingReply={isDeletingReply}
+                isEditingReply={isEditingReply}
               />
             ))}
           </div>
