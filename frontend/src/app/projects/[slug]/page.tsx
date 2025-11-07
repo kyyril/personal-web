@@ -29,17 +29,17 @@ export default async function Detailproject({
   return (
     <section className="max-w-5xl w-full px-4 min-h-screen md:px-16 mx-auto">
       <div className="border-none shadow-none">
-        <Suspense fallback={<ProjectImageCarouselSkeleton />}>
-          {project && project.image.length > 0 ? (
+        {project && project.image.length > 0 ? (
+          <div className="animate-in fade-in slide-in-from-bottom-4 duration-700">
             <ProjectCarousel images={project.image} />
-          ) : (
-            <div className="text-center py-10">
-              <p className="text-xl text-muted-foreground">
-                No images available.
-              </p>
-            </div>
-          )}
-        </Suspense>
+          </div>
+        ) : (
+          <div className="text-center py-10 animate-in fade-in duration-500">
+            <p className="text-xl text-muted-foreground">
+              No images available.
+            </p>
+          </div>
+        )}
 
         <div className="flex flex-col mt-6 w-full mx-2 gap-2">
           <h1 className="text-3xl font-bold lg:text-4xl">

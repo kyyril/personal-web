@@ -47,13 +47,11 @@ export default function CardProject({ project, index }: ProjectProps) {
 
   return (
     <div
-      className={`transition-all duration-300 ease-out ${
-        isVisible && hasMounted
-          ? "opacity-100 translate-y-0"
-          : "opacity-0 translate-y-5"
+      className={`transition-all duration-100 ${
+        isVisible && hasMounted ? "opacity-100" : "opacity-0"
       }`}
     >
-      <Card className="flex flex-col lg:flex-row hover:shadow-lg hover:shadow-black/5 transition-all duration-300 hover:-translate-y-1">
+      <Card className="flex flex-col lg:flex-row hover:shadow-lg hover:shadow-black/5 transition-all duration-300 hover:-translate-y-0.5">
         <div className="w-full lg:w-1/3 flex justify-center items-center relative group">
           {imageLoading && (
             <div className="absolute w-full h-full animate-pulse rounded" />

@@ -1,5 +1,5 @@
-import { Card, CardHeader, CardContent, CardFooter } from "../ui/card";
-import { Skeleton } from "../ui/skeleton";
+import { Card, CardHeader, CardContent, CardFooter } from "../../ui/card";
+import { Skeleton } from "../../ui/skeleton";
 
 export default function GitHubProjectsSkeleton() {
   return (

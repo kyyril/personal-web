@@ -1,5 +1,5 @@
 import GitHubProjects from "./GitHubProjects";
-import { getGitHubRepositories } from "../../lib/github";
+import { getGitHubRepositories } from "../../../lib/github";
 import GitHubProjectsSkeleton from "./GitHubProjectsSkeleton"; // Import the new skeleton component
 
 export default async function GitHubProjectsWrapper() {

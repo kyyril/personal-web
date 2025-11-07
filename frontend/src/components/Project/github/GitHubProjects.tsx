@@ -1,9 +1,9 @@
 "use client";
-import { GitHubRepo } from "../../lib/github";
+import { GitHubRepo } from "../../../lib/github";
 import Link from "next/link";
 import { useState, useEffect, useLayoutEffect } from "react";
-import { Button } from "../ui/button";
-import { Card, CardHeader, CardContent, CardFooter } from "../ui/card";
+import { Button } from "../../ui/button";
+import { Card, CardHeader, CardContent, CardFooter } from "../../ui/card";
 
 import {
   ChevronLeftIcon,
@@ -127,7 +127,7 @@ export default function GitHubProjects({ repositories }: GitHubProjectsProps) {
         {currentRepositories.map((repo, index) => (
           <div
             key={repo.name}
-            className={`transition-all duration-300 delay-${index * 50} ${
+            className={`transition-all duration-100 delay-${index * 50} ${
               isVisible && hasMounted
                 ? "opacity-100 translate-y-0"
                 : "opacity-0 translate-y-5"

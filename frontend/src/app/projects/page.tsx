@@ -1,9 +1,9 @@
 import React, { Suspense } from "react";
 import { Metadata } from "next";
 import ProjectListSkeleton from "../../components/Project/ProjectListSkeleton";
-import GitHubProjectsListSkeleton from "../../components/Project/GitHubProjectsListSkeleton";
+import GitHubProjectsListSkeleton from "../../components/Project/github/GitHubProjectsListSkeleton";
 import ProjectListWrapper from "../../components/Project/ProjectListWrapper";
-import GitHubProjectsWrapper from "../../components/Project/GitHubProjectsWrapper";
+import GitHubProjectsWrapper from "../../components/Project/github/GitHubProjectsWrapper";
 
 export const metadata: Metadata = {
   title: "Projects | Khairil's Personal Website",
