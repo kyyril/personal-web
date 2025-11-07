@@ -4,7 +4,7 @@ import { Skeleton } from "../ui/skeleton";
 export default function ProjectDetailSkeleton() {
   return (
     <section className="max-w-5xl w-full px-4 min-h-screen md:px-16 mx-auto">
-      <div className="border-none shadow-none">
+      <div className="shadow-none">
         {/* Carousel/Image Placeholder */}
         <ProjectImageCarouselSkeleton />
 

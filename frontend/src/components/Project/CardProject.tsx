@@ -48,13 +48,15 @@ export default function CardProject({ project, index }: ProjectProps) {
   return (
     <div
       className={`transition-all duration-300 ease-out ${
-        isVisible && hasMounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
+        isVisible && hasMounted
+          ? "opacity-100 translate-y-0"
+          : "opacity-0 translate-y-5"
       }`}
     >
-      <Card className="flex flex-col lg:flex-row hover:shadow-lg hover:shadow-black/5 transition-all duration-300 hover:-translate-y-1 border-border/50 hover:border-border">
+      <Card className="flex flex-col lg:flex-row hover:shadow-lg hover:shadow-black/5 transition-all duration-300 hover:-translate-y-1">
         <div className="w-full lg:w-1/3 flex justify-center items-center relative group">
           {imageLoading && (
-            <div className="absolute w-full h-full animate-pulse rounded-xl" />
+            <div className="absolute w-full h-full animate-pulse rounded" />
           )}
           <Image
             src={project?.image[0]}
@@ -62,7 +64,7 @@ export default function CardProject({ project, index }: ProjectProps) {
             width={300}
             height={156}
             quality={65}
-            className={`rounded-xl object-cover w-full h-full transition-opacity duration-500 ${
+            className={`rounded object-cover w-full h-full transition-opacity duration-500 ${
               imageLoading ? "opacity-0" : "opacity-100"
             }`}
             loading={index === 0 ? "eager" : "lazy"}

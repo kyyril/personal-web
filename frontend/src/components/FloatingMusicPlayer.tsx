@@ -130,7 +130,7 @@ const VisiblePlayer = ({ onHide, position, setPosition }: any) => {
           }}
           className="absolute pointer-events-auto cursor-move transform-gpu"
         >
-          <Card className="bg-background/95 p-2 border-none backdrop-blur-sm border shadow-lg max-w-[280px]">
+          <Card className="bg-background/95 p-2 border-none backdrop-blur-sm shadow-lg max-w-[280px]">
             <div className="flex items-center gap-2">
               <div className="flex items-center justify-center w-4 h-8 cursor-move opacity-50 hover:opacity-100 transition-opacity">
                 <DragHandleDots2Icon className="h-3 w-3" />
@@ -139,7 +139,7 @@ const VisiblePlayer = ({ onHide, position, setPosition }: any) => {
               <Dialog>
                 <DialogTrigger asChild>
                   <div className="flex items-center gap-3 cursor-pointer hover:opacity-80 transition-opacity flex-1 min-w-0">
-                    <div className="w-8 h-8 bg-muted rounded-sm flex items-center justify-center overflow-hidden flex-shrink-0">
+                    <div className="w-8 h-8 bg-muted rounded flex items-center justify-center overflow-hidden flex-shrink-0">
                       {currentTrack.cover ? (
                         <Image
                           width={100}
@@ -162,7 +162,7 @@ const VisiblePlayer = ({ onHide, position, setPosition }: any) => {
                     </div>
                   </div>
                 </DialogTrigger>
-                <DialogContent className="max-w-md border-none rounded-r-md">
+                <DialogContent className="max-w-md border-none rounded-r">
                   <DialogHeader />
                   <MusicPlayer />
                 </DialogContent>
@@ -188,7 +188,7 @@ const VisiblePlayer = ({ onHide, position, setPosition }: any) => {
                   aria-label={isPlaying ? "Pause music" : "Play music"}
                 >
                   {isLoading ? (
-                    <div className="w-3 h-3 border-2 border-current border-t-transparent rounded-full animate-spin" />
+                    <div className="w-3 h-3 rounded-full animate-spin" />
                   ) : isPlaying ? (
                     <PauseIcon className="h-3 w-3" />
                   ) : (

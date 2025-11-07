@@ -123,7 +123,7 @@ export default function ListProject({ projects }: ListProjectProps) {
           </SelectContent>
         </Select>
 
-        <Button variant="outline" onClick={clearFilters}>
+        <Button variant="ghost" onClick={clearFilters}>
           Clear
         </Button>
       </div>
@@ -172,7 +172,7 @@ export default function ListProject({ projects }: ListProjectProps) {
           <div className="flex items-center gap-1 order-1 sm:order-2">
             {/* Previous Button */}
             <Button
-              variant="outline"
+              variant="ghost"
               size="sm"
               onClick={goToPreviousPage}
               disabled={currentPage === 1}
@@ -198,7 +198,7 @@ export default function ListProject({ projects }: ListProjectProps) {
                 return (
                   <Button
                     key={pageNum}
-                    variant={isActive ? "default" : "outline"}
+                    variant={isActive ? "default" : "ghost"}
                     size="sm"
                     onClick={() => setCurrentPage(pageNum as number)}
                     className={`h-9 w-9 p-0 ${
@@ -217,7 +217,7 @@ export default function ListProject({ projects }: ListProjectProps) {
 
             {/* Next Button */}
             <Button
-              variant="outline"
+              variant="ghost"
               size="sm"
               onClick={goToNextPage}
               disabled={currentPage === totalPages}

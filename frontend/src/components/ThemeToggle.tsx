@@ -20,7 +20,7 @@ export default function ThemeToggler() {
 
   return (
     <Button
-      className="relative flex items-center justify-center w-10 h-10 rounded-full hover:bg-transparent"
+      className="relative flex items-center justify-center w-10 h-10 rounded hover:bg-transparent"
       variant="ghost"
       size="icon"
       onClick={toggleTheme}

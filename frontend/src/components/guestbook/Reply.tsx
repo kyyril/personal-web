@@ -53,7 +53,7 @@ export function Reply({
   isEditingReply,
 }: ReplyProps) {
   return (
-    <div className="bg-muted/50 rounded-lg p-3">
+    <div className="bg-muted/50 rounded p-3">
       <div className="flex items-start justify-between">
         <div className="flex items-center gap-2">
           {reply.author.avatarUrl ? (
@@ -136,7 +136,7 @@ export function Reply({
           </Button>
           <Button
             size="sm"
-            variant="outline"
+            variant="ghost"
             onClick={() => onCancelEdit(reply.id)}
             disabled={isEditingReply}
           >

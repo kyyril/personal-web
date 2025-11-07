@@ -20,7 +20,6 @@
     --accent-foreground: 0 0% 10%;
     --destructive: 0 80% 60%;
     --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 85%;
     --input: 0 0% 90%;
     --ring: 0 0% 20%;
     --radius: 0.75rem;
@@ -48,7 +47,6 @@
     --accent-foreground: 0 0% 90%;
     --destructive: 0 60% 45%;
     --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 18%;
     --input: 0 0% 20%;
     --ring: 0 0% 70%;
     --chart-1: 240 5% 50%;
@@ -82,15 +80,6 @@
     }
   }
 
-  .loader {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    border: 1px solid transparent;
-    border-top-color: #3b82f6;
-    animation: spinFade 0.6s linear infinite;
-  }
-
   /* Music Player Slider Styles */
   .slider {
     background: linear-gradient(
@@ -100,7 +89,6 @@
       hsl(var(--muted)) var(--value, 0%),
       hsl(var(--muted)) 100%
     );
-    outline: none;
     transition: all 0.2s ease;
   }
 

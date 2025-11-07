@@ -28,7 +28,7 @@ function Bio({ data }: { data: Data }) {
               aria-label="View profile photo in full size"
             />
           </DialogTrigger>
-          <DialogContent className="bg-transparent shadow-none border-none rounded-2xl">
+          <DialogContent className="bg-transparent shadow-none border-none rounded">
             <motion.div
               className="flex items-center justify-center"
               initial={{ scale: 0.8, opacity: 0 }}
@@ -40,7 +40,7 @@ function Bio({ data }: { data: Data }) {
                 width={400}
                 height={400}
                 alt="Katou Megumin"
-                className="rounded-sm object-cover"
+                className="rounded object-cover"
               />
             </motion.div>
           </DialogContent>

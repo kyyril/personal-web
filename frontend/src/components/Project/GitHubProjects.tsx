@@ -133,7 +133,7 @@ export default function GitHubProjects({ repositories }: GitHubProjectsProps) {
                 : "opacity-0 translate-y-5"
             }`}
           >
-            <Card className="group h-full flex flex-col hover:shadow-lg hover:shadow-black/5 transition-all duration-300 hover:-translate-y-1 border-border/50 hover:border-border">
+            <Card className="group h-full flex flex-col hover:shadow-lg hover:shadow-black/5 transition-all duration-300 hover:-translate-y-1">
               <CardHeader className="pb-3">
                 <div className="flex items-start justify-between gap-2">
                   <div className="flex-1 min-w-0">
@@ -230,7 +230,7 @@ export default function GitHubProjects({ repositories }: GitHubProjectsProps) {
           <div className="flex items-center gap-1 order-1 sm:order-2">
             {/* Previous Button */}
             <Button
-              variant="outline"
+              variant="ghost"
               size="sm"
               onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage === 1}
@@ -256,7 +256,7 @@ export default function GitHubProjects({ repositories }: GitHubProjectsProps) {
                 return (
                   <Button
                     key={pageNum}
-                    variant={isActive ? "default" : "outline"}
+                    variant={isActive ? "default" : "ghost"}
                     size="sm"
                     onClick={() => handlePageChange(pageNum as number)}
                     className={`h-9 w-9 p-0 ${
@@ -275,7 +275,7 @@ export default function GitHubProjects({ repositories }: GitHubProjectsProps) {
 
             {/* Next Button */}
             <Button
-              variant="outline"
+              variant="ghost"
               size="sm"
               onClick={() => handlePageChange(currentPage + 1)}
               disabled={currentPage === totalPages}

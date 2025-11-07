@@ -32,7 +32,7 @@ export default function ProjectCarousel({ images }: ProjectCarouselProps) {
               width={500}
               loading="lazy"
               quality={100}
-              className="rounded-sm"
+              className="rounded"
             />
           </CarouselItem>
         ))}

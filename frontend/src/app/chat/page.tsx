@@ -429,7 +429,7 @@ export default function Chat() {
           <Card className="flex-1 px-1 mx-auto w-full">
             {/* Header */}
             <motion.header
-              className="flex m-3 bg-custom py-1 rounded-full bg-opacity-10 sticky top-0 z-10"
+              className="flex m-3 bg-custom py-1 rounded bg-opacity-10 sticky top-0 z-10"
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3 }}
@@ -450,7 +450,7 @@ export default function Chat() {
                     />
                   </button>
                 </DialogTrigger>
-                <DialogContent className="bg-transparent shadow-none border-none rounded-2xl">
+                <DialogContent className="bg-transparent shadow-none border-none rounded">
                   <motion.div
                     className="flex items-center justify-center"
                     initial={{ scale: 0.8, opacity: 0 }}
@@ -462,7 +462,7 @@ export default function Chat() {
                       width={400}
                       height={400}
                       alt="Katou Megumin"
-                      className="rounded-sm object-cover"
+                      className="rounded object-cover"
                     />
                   </motion.div>
                 </DialogContent>
@@ -487,14 +487,14 @@ export default function Chat() {
                     <Button
                       variant="ghost"
                       size="icon"
-                      className="rounded-full h-8 w-8"
+                      className="rounded h-8 w-8"
                       title="Open Music Player"
                       aria-label="Open music player"
                     >
                       <SpeakerLoudIcon className="h-4 w-4" />
                     </Button>
                   </DialogTrigger>
-                  <DialogContent className="max-w-md border-none rounded-md">
+                  <DialogContent className="max-w-md border-none rounded">
                     <DialogHeader></DialogHeader>
                     <MusicPlayer />
                   </DialogContent>
@@ -506,9 +506,9 @@ export default function Chat() {
                   whileTap={{ scale: 0.95 }}
                 >
                   <Button
-                    variant="outline"
+                    variant="ghost"
                     size="sm"
-                    className="rounded-full"
+                    className="rounded"
                     onClick={startNewChat}
                     aria-label="Start a new chat"
                   >
@@ -526,7 +526,7 @@ export default function Chat() {
                   <Sheet>
                     <SheetTrigger asChild className="md:hidden">
                       <Button
-                        variant="outline"
+                        variant="ghost"
                         size="icon"
                         className="w-8 h-8"
                         aria-label="Open chat history sidebar"

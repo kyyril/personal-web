@@ -82,7 +82,7 @@ export default function MusicPlayer({
           transform: "translateZ(0)",
         }}
       >
-        <Card className="p-3 bg-background/95 backdrop-blur-sm border shadow-lg">
+        <Card className="p-3 bg-background/95 backdrop-blur-sm shadow-lg">
           <div className="flex items-center gap-3">
             <Button
               variant="ghost"
@@ -93,7 +93,7 @@ export default function MusicPlayer({
               aria-label={isPlaying ? "Pause music" : "Play music"}
             >
               {isLoading ? (
-                <div className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
+                <div className="w-4 h-4 rounded-full animate-spin" />
               ) : isPlaying ? (
                 <PauseIcon className="h-4 w-4" />
               ) : (
@@ -131,10 +131,10 @@ export default function MusicPlayer({
         transform: "translateZ(0)", // Hardware acceleration
       }}
     >
-      <Card className="p-4 bg-background/95 backdrop-blur-sm border">
+      <Card className="p-4 bg-background/95 backdrop-blur-sm">
         {/* Track Info */}
         <div className="flex items-center gap-4 mb-4">
-          <div className="w-16 h-16 bg-muted rounded-lg flex items-center justify-center overflow-hidden">
+          <div className="w-16 h-16 bg-muted rounded flex items-center justify-center overflow-hidden">
             {currentTrack.cover ? (
               <Image
                 width={100}
@@ -271,7 +271,7 @@ export default function MusicPlayer({
                       initial={{ opacity: 0, scale: 0.8 }}
                       animate={{ opacity: 1, scale: 1 }}
                       exit={{ opacity: 0, scale: 0.8 }}
-                      className="w-5 h-5 border-2 border-current border-t-transparent rounded-full animate-spin"
+                      className="w-5 h-5 rounded-full animate-spin"
                     />
                   ) : isPlaying ? (
                     <motion.div
@@ -324,7 +324,7 @@ export default function MusicPlayer({
               step="0.01"
               value={volume}
               onChange={(e) => setVolume(parseFloat(e.target.value))}
-              className="w-16 h-1 bg-muted rounded-lg appearance-none cursor-pointer slider"
+              className="w-16 h-1 bg-muted rounded appearance-none cursor-pointer slider"
               style={{
                 willChange: "transform",
                 transform: "translateZ(0)",
@@ -365,7 +365,7 @@ export default function MusicPlayer({
                   >
                     <div className="w-8 h-8 bg-muted rounded flex items-center justify-center text-xs">
                       {index === currentTrackIndex && isPlaying ? (
-                        <div className="w-3 h-3 border border-current border-t-transparent rounded-full animate-spin" />
+                        <div className="w-3 h-3 rounded-full animate-spin" />
                       ) : (
                         index + 1
                       )}

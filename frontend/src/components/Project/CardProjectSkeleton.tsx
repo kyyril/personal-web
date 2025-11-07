@@ -3,7 +3,7 @@ import { Skeleton } from "../ui/skeleton";
 
 export default function CardProjectSkeleton() {
   return (
-    <Card className="flex flex-col lg:flex-row border-none shadow-none">
+    <Card className="flex flex-col lg:flex-row shadow-none">
       <div className="w-full lg:w-1/3 flex justify-center items-center relative group">
         <Skeleton className="h-[250px] w-full" />
       </div>

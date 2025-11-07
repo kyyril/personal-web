@@ -102,7 +102,7 @@ export default async function Detailproject({
                 <Button
                   size="sm"
                   className="hover:text-cus font-normal"
-                  variant="outline"
+                  variant="ghost"
                 >
                   <GitHubLogoIcon className="h-3 w-3 mr-0.5" />
                   Repo
@@ -113,7 +113,7 @@ export default async function Detailproject({
                 size="sm"
                 disabled
                 className="font-normal"
-                variant="outline"
+                variant="ghost"
               >
                 <GitHubLogoIcon className="h-3 w-3 mr-0.5" />
                 Repo (Unavailable)

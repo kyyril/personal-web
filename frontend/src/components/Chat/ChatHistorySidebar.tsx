@@ -73,7 +73,7 @@ export default function ChatHistorySidebar({
               <div
                 key={chat.id}
                 className={cn(
-                  "flex items-center justify-between p-3 rounded-lg cursor-pointer hover:bg-muted group",
+                  "flex items-center justify-between p-3 rounded cursor-pointer hover:bg-muted group",
                   activeChat === chat.id && "bg-muted"
                 )}
                 onClick={() => {

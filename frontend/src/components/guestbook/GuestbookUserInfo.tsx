@@ -32,7 +32,7 @@ export function GuestbookUserInfo({
   return (
     <Card>
       <CardHeader className="flex flex-col w-full">
-        <div className="bg-primary-foreground rounded-lg p-4">
+        <div className="bg-primary-foreground rounded p-4">
           <div className="flex items-center justify-between mb-3">
             <h3 className="text-lg font-semibold flex items-center gap-2">
               <PersonIcon className="w-5 h-5" />
@@ -67,7 +67,7 @@ export function GuestbookUserInfo({
                   alt="Profile"
                   width={32}
                   height={32}
-                  className="w-8 h-8 rounded-full border"
+                  className="w-8 h-8 rounded-full"
                 />
                 <span className="font-medium">Profile Picture</span>
               </div>
