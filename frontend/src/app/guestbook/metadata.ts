@@ -8,7 +8,7 @@ export const guestbookMetadata: Metadata = {
     title: "Guestbook | Khairil's Personal Website",
     description:
       "Leave a message for Khairil and see what others have to say. Your feedback and comments are greatly appreciated!",
-    url: "https://kyyril.vercel.app/guestbook",
+    url: "https://kyyril.pages.dev/guestbook",
   },
   twitter: {
     title: "Guestbook | Khairil's Personal Website",

@@ -46,6 +46,6 @@ console.log(
 );
 
 console.log("Elysia app started. Registered routes:");
-app.routes.forEach(route => {
+app.routes.forEach((route) => {
   console.log(`- ${route.method} ${route.path}`);
 });

@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://kyyril.vercel.app",
+    url: "https://kyyril.pages.dev",
     siteName: "Khairil Rahman Hakiki",
     title: "Khairil Rahman Hakiki | Software Engineer",
     description:
@@ -59,12 +59,12 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "WebSite",
-              url: "https://kyyril.vercel.app/",
+              url: "https://kyyril.pages.dev/",
               name: "Khairil Rahman Hakiki | Software Engineer",
               potentialAction: {
                 "@type": "SearchAction",
                 target:
-                  "https://kyyril.vercel.app/search?q={search_term_string}",
+                  "https://kyyril.pages.dev/search?q={search_term_string}",
                 "query-input": "required name=search_term_string",
               },
             }),

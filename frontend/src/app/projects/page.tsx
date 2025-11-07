@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     title: "Projects | Khairil's Personal Website",
     description:
       "Explore a collection of Khairil's projects, including web applications, open-source contributions, and personal experiments. See his skills in action.",
-    url: "https://kyyril.vercel.app/projects",
+    url: "https://kyyril.pages.dev/projects",
   },
   twitter: {
     title: "Projects | Khairil's Personal Website",
