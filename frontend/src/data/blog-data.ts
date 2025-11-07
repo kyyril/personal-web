@@ -337,7 +337,7 @@ export const blogData = {
   "react",
   "tutorial"
 ] as string[],
-  lastUpdated: '2025-11-07T21:10:07.303Z',
+  lastUpdated: '2025-11-07T21:57:40.956Z',
 } as const;
 
 // Helper functions

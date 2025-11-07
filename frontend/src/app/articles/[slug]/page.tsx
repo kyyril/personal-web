@@ -8,6 +8,7 @@ import { CalendarDays, Clock, User, ArrowLeft, Share2, BookOpen } from 'lucide-r
 import { format } from 'date-fns';
 import { Metadata } from 'next';
 import { TableOfContents, BackToTop } from '@/components/blog/TableOfContents';
+import { ClientCommentSection } from '@/components/blog/ClientCommentSection';
 
 interface PageProps {
   params: Promise<{
@@ -149,6 +150,9 @@ export default async function ArticlePage({ params }: PageProps) {
                 <div dangerouslySetInnerHTML={{ __html: post.content }} />
               </div>
             </article>
+            
+            {/* Comments Section */}
+            <ClientCommentSection article={post} />
             
             {/* Related Posts */}
             {relatedPosts.length > 0 && (
