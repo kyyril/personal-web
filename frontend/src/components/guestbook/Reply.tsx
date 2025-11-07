@@ -53,99 +53,120 @@ export function Reply({
   isEditingReply,
 }: ReplyProps) {
   return (
-    <div className="bg-muted/50 rounded p-3">
-      <div className="flex items-start justify-between">
-        <div className="flex items-center gap-2">
+    <div className="bg-muted/50 rounded p-3 md:p-4">
+      <div className="flex items-start gap-2 md:gap-3">
+        {/* Avatar */}
+        <div className="flex-shrink-0">
           {reply.author.avatarUrl ? (
-            <Image
-              src={reply.author.avatarUrl}
-              alt={reply.author.username}
-              width={24}
-              height={24}
-              className="rounded-full"
-            />
+            <div className="w-8 h-8 md:w-10 md:h-10 relative">
+              <Image
+                src={reply.author.avatarUrl}
+                alt={reply.author.username}
+                fill
+                className="rounded-full object-cover"
+              />
+            </div>
           ) : (
-            <div className="w-6 h-6 rounded-full bg-secondary flex items-center justify-center">
-              <PersonIcon className="w-3 h-3" />
+            <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-secondary flex items-center justify-center">
+              <PersonIcon className="w-4 h-4 md:w-5 md:h-5" />
             </div>
           )}
-          <div>
-            <p className="text-sm font-medium">{reply.author.username}</p>
-            <p className="text-xs text-muted-foreground">
-              {new Date(reply.createdAt).toLocaleString()}
-              {reply.createdAt !== reply.updatedAt && (
-                <span className="ml-2 text-xs text-gray-500">
-                  (edited {new Date(reply.updatedAt).toLocaleString()})
-                </span>
-              )}
-            </p>
-          </div>
         </div>
 
-        <div className="flex gap-1">
-          {currentUserId === reply.authorId && (
-            <>
-              <Button
-                size="icon"
-                variant="ghost"
-                onClick={() => onStartEdit(reply)}
-                disabled={isEditingReply || isDeletingReply}
-              >
-                {isEditingReply && editingReply === reply.id ? (
-                  <Loader className="w-3 h-3 animate-spin" />
-                ) : (
-                  <Pencil1Icon className="w-3 h-3" />
+        {/* Content */}
+        <div className="flex-1 min-w-0">
+          {/* Header with username and actions */}
+          <div className="flex items-start justify-between gap-2 mb-1">
+            <div className="flex-1 min-w-0">
+              <h3 className="text-sm md:text-base font-medium">
+                {reply.author.username}
+              </h3>
+              <p className="text-xs text-muted-foreground">
+                {new Date(reply.createdAt).toLocaleString()}
+                {reply.createdAt !== reply.updatedAt && (
+                  <span className="ml-1 italic">(edited)</span>
                 )}
-              </Button>
-              <Button
-                size="icon"
-                variant="ghost"
-                onClick={() => onDelete(reply.id)}
-                disabled={isDeletingReply || isEditingReply}
-              >
-                {isDeletingReply ? (
-                  <Loader className="w-3 h-3 animate-spin" />
-                ) : (
-                  <TrashIcon className="w-3 h-3" />
-                )}
-              </Button>
-            </>
+              </p>
+            </div>
+
+            {/* Action buttons */}
+            {currentUserId === reply.authorId && (
+              <div className="flex gap-1 flex-shrink-0">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-8 w-8"
+                  onClick={() => onStartEdit(reply)}
+                  disabled={isEditingReply || isDeletingReply}
+                  aria-label="Edit reply"
+                >
+                  {isEditingReply && editingReply === reply.id ? (
+                    <Loader className="w-3 h-3 animate-spin" />
+                  ) : (
+                    <Pencil1Icon className="w-3 h-3 md:w-4 md:h-4" />
+                  )}
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-8 w-8"
+                  onClick={() => onDelete(reply.id)}
+                  disabled={isDeletingReply || isEditingReply}
+                  aria-label="Delete reply"
+                >
+                  {isDeletingReply ? (
+                    <Loader className="w-3 h-3 animate-spin" />
+                  ) : (
+                    <TrashIcon className="w-3 h-3 md:w-4 md:h-4" />
+                  )}
+                </Button>
+              </div>
+            )}
+          </div>
+
+          {/* Edit form or content */}
+          {editingReply === reply.id ? (
+            <div className="mt-3 space-y-2">
+              <Input
+                value={editContent}
+                onChange={(e) => onEditContentChange(e.target.value)}
+                maxLength={300}
+                className="w-full"
+                disabled={isEditingReply}
+              />
+              <div className="flex gap-2">
+                <Button
+                  size="sm"
+                  onClick={() => onSaveEdit(reply.id)}
+                  disabled={isEditingReply}
+                >
+                  {isEditingReply ? (
+                    <Loader className="mr-2 h-4 w-4 animate-spin" />
+                  ) : (
+                    <>
+                      <CheckIcon className="w-4 h-4 mr-1" />
+                      Save
+                    </>
+                  )}
+                </Button>
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  onClick={() => onCancelEdit(reply.id)}
+                  disabled={isEditingReply}
+                >
+                  <Cross2Icon className="w-4 h-4 mr-1" />
+                  Cancel
+                </Button>
+              </div>
+            </div>
+          ) : (
+            <p className="mt-1 text-sm md:text-base break-words whitespace-pre-wrap">
+              {reply.content}
+            </p>
           )}
         </div>
       </div>
-
-      {editingReply === reply.id ? (
-        <div className="mt-2 flex gap-2">
-          <Input
-            value={editContent}
-            onChange={(e) => onEditContentChange(e.target.value)}
-            maxLength={300}
-            className="flex-1"
-            disabled={isEditingReply}
-          />
-          <Button
-            size="sm"
-            onClick={() => onSaveEdit(reply.id)}
-            disabled={isEditingReply}
-          >
-            {isEditingReply ? (
-              <Loader className="w-4 h-4 animate-spin" />
-            ) : (
-              <CheckIcon className="w-4 h-4" />
-            )}
-          </Button>
-          <Button
-            size="sm"
-            variant="ghost"
-            onClick={() => onCancelEdit(reply.id)}
-            disabled={isEditingReply}
-          >
-            <Cross2Icon className="w-4 h-4" />
-          </Button>
-        </div>
-      ) : (
-        <p className="mt-1 text-sm">{reply.content}</p>
-      )}
     </div>
   );
 }

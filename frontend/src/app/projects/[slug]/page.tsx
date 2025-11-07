@@ -5,6 +5,7 @@ import { projects } from "../../../lib/data";
 import { GitHubLogoIcon, GlobeIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 import { Metadata } from "next";
+import Breadcrumb from "../../../components/Breadcrumb";
 
 export const metadata: Metadata = {
   title: `PROJECT - khairil rahman hakiki`,
@@ -24,8 +25,15 @@ export default async function Detailproject({
     return <p>Project not found</p>;
   }
 
+  const breadcrumbItems = [
+    { label: "Home", href: "/" },
+    { label: "Projects", href: "/projects" },
+    { label: project.title }
+  ];
+
   return (
     <section className="max-w-5xl w-full px-4 min-h-screen md:px-16 mx-auto">
+      <Breadcrumb items={breadcrumbItems} className="mb-4" />
       <div className="border-none shadow-none">
         {project && project.image.length > 0 ? (
           <div className="animate-in fade-in slide-in-from-bottom-4 duration-700">

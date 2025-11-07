@@ -1,0 +1,93 @@
+{
+  "name": "Khairil Rahman Hakiki | Software Engineer",
+  "short_name": "Khairil HR",
+  "description": "Software Engineer specializing in React.js and Node.js with TypeScript",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": ["portfolio", "personal", "developer", "tech"],
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "any",
+      "type": "image/x-icon",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/profile.webp",
+      "sizes": "192x192",
+      "type": "image/webp",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/profile.webp",
+      "sizes": "512x512",
+      "type": "image/webp",
+      "purpose": "any"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/assets/profile.webp",
+      "sizes": "1280x720",
+      "type": "image/webp",
+      "form_factor": "wide",
+      "label": "Khairil Rahman Hakiki - Software Engineer Portfolio"
+    },
+    {
+      "src": "/assets/profilev2.webp", 
+      "sizes": "1280x720",
+      "type": "image/webp",
+      "form_factor": "wide",
+      "label": "Khairil Rahman Hakiki - Software Engineer Portfolio"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Projects",
+      "short_name": "Projects",
+      "description": "View my latest projects and work",
+      "url": "/projects",
+      "icons": [
+        {
+          "src": "/assets/profile.webp",
+          "sizes": "192x192",
+          "type": "image/webp"
+        }
+      ]
+    },
+    {
+      "name": "Guestbook",
+      "short_name": "Guestbook",
+      "description": "Sign my guestbook",
+      "url": "/guestbook",
+      "icons": [
+        {
+          "src": "/assets/profile.webp",
+          "sizes": "192x192",
+          "type": "image/webp"
+        }
+      ]
+    },
+    {
+      "name": "Chat",
+      "short_name": "Chat",
+      "description": "Start a conversation",
+      "url": "/chat",
+      "icons": [
+        {
+          "src": "/assets/profile.webp",
+          "sizes": "192x192",
+          "type": "image/webp"
+        }
+      ]
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false
+}

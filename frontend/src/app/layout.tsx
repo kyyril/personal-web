@@ -26,6 +26,9 @@ export const metadata: Metadata = {
   creator: "Khairil Rahman Hakiki Hrp",
   publisher: "Khairil Rahman Hakiki Hrp",
   robots: "index, follow",
+  alternates: {
+    canonical: "https://kyyril.pages.dev",
+  },
   verification: {
     google: "24f9cc081f9ae37b",
   },
@@ -37,11 +40,23 @@ export const metadata: Metadata = {
     title: "Khairil Rahman Hakiki | Software Engineer",
     description:
       "Software Engineer specializing in React.js and Node.js with TypeScript",
+    images: [
+      {
+        url: "https://kyyril.pages.dev/assets/profile.webp",
+        width: 1200,
+        height: 630,
+        alt: "Khairil Rahman Hakiki - Software Engineer",
+      }
+    ]
   },
   twitter: {
     title: "Khairil Rahman Hakiki | Software Engineer",
     description:
       "Software Engineer specializing in React.js and Node.js with TypeScript",
+    card: "summary_large_image",
+    images: [
+      "https://kyyril.pages.dev/assets/profile.webp"
+    ]
   },
 };
 
@@ -53,20 +68,82 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+        <meta name="theme-color" content="#000000" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="apple-mobile-web-app-title" content="Khairil HR" />
+        <link rel="manifest" href="/manifest.json" />
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" href="/assets/profile.webp" />
+        
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": "WebSite",
-              url: "https://kyyril.pages.dev/",
-              name: "Khairil Rahman Hakiki | Software Engineer",
-              potentialAction: {
-                "@type": "SearchAction",
-                target:
-                  "https://kyyril.pages.dev/search?q={search_term_string}",
-                "query-input": "required name=search_term_string",
-              },
+              "@graph": [
+                {
+                  "@type": "WebSite",
+                  "@id": "https://kyyril.pages.dev/#website",
+                  "url": "https://kyyril.pages.dev/",
+                  "name": "Khairil Rahman Hakiki | Software Engineer",
+                  "description": "Software Engineer specializing in React.js and Node.js with TypeScript",
+                  "potentialAction": {
+                    "@type": "SearchAction",
+                    "target": "https://kyyril.pages.dev/search?q={search_term_string}",
+                    "query-input": "required name=search_term_string"
+                  },
+                  "publisher": {
+                    "@id": "https://kyyril.pages.dev/#person"
+                  }
+                },
+                {
+                  "@type": "Person",
+                  "@id": "https://kyyril.pages.dev/#person",
+                  "name": "Khairil Rahman Hakiki",
+                  "alternateName": "Khairil Rahman Hakiki Hrp",
+                  "url": "https://kyyril.pages.dev",
+                  "image": "https://kyyril.pages.dev/assets/profile.webp",
+                  "jobTitle": "Software Engineer",
+                  "description": "Information Systems student who loves programming, especially software development. Specializing in React.js and Node.js with TypeScript",
+                  "sameAs": [
+                    "https://github.com/kyyril",
+                    "https://www.linkedin.com/in/khairil-rahman-hakiki/",
+                    "https://twitter.com/kyyril_dev"
+                  ],
+                  "knowsAbout": [
+                    "Web Development",
+                    "Next.js",
+                    "TypeScript",
+                    "React",
+                    "Node.js",
+                    "Software Engineering",
+                    "Information Systems"
+                  ],
+                  "alumniOf": {
+                    "@type": "CollegeOrUniversity",
+                    "name": "Information Systems"
+                  }
+                },
+                {
+                  "@type": "WebPage",
+                  "@id": "https://kyyril.pages.dev/#webpage",
+                  "url": "https://kyyril.pages.dev",
+                  "name": "Khairil Rahman Hakiki | Software Engineer",
+                  "description": "Software Engineer specializing in React.js and Node.js with TypeScript",
+                  "isPartOf": {
+                    "@id": "https://kyyril.pages.dev/#website"
+                  },
+                  "about": {
+                    "@id": "https://kyyril.pages.dev/#person"
+                  },
+                  "audience": {
+                    "@type": "Audience",
+                    "audienceType": "Software Developers, Tech Enthusiasts"
+                  }
+                }
+              ]
             }),
           }}
         />
