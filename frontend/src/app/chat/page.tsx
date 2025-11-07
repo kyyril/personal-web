@@ -410,7 +410,11 @@ export default function Chat() {
           </AlertDialog>
 
           {/* Desktop Chat History Sidebar */}
-          <Card className="hidden md:flex flex-col w-64 h-[500px] overflow-hidden" role="navigation" aria-label="Chat history sidebar">
+          <Card
+            className="hidden md:flex flex-col w-64 h-[500px] overflow-hidden"
+            role="navigation"
+            aria-label="Chat history sidebar"
+          >
             <ChatHistorySidebar
               chatsList={chatsList}
               activeChat={activeChat}
@@ -432,7 +436,10 @@ export default function Chat() {
             >
               <Dialog>
                 <DialogTrigger asChild>
-                  <button className="cursor-pointer hover:opacity-80 transition-opacity" aria-label="View profile picture">
+                  <button
+                    className="cursor-pointer hover:opacity-80 transition-opacity"
+                    aria-label="View profile picture"
+                  >
                     <Image
                       src="/assets/profile.webp"
                       width={50}
@@ -461,7 +468,10 @@ export default function Chat() {
                 </DialogContent>
               </Dialog>
               <div className="flex flex-col gap-y-1">
-                <h1 className="text-center text-xl font-sans font-light" aria-label="Chat assistant name">
+                <h1
+                  className="text-center text-xl font-sans font-light"
+                  aria-label="Chat assistant name"
+                >
                   加藤 恵
                 </h1>
                 <p className="text-start font-sans text-xs text-green-600 font-light">
@@ -538,9 +548,15 @@ export default function Chat() {
                         </svg>
                       </Button>
                     </SheetTrigger>
-                    <SheetContent side="left" className="w-60" aria-labelledby="chat-history-sidebar-title">
+                    <SheetContent
+                      side="left"
+                      className="w-60"
+                      aria-labelledby="chat-history-sidebar-title"
+                    >
                       <button className="hidden" data-close-sheet></button>
-                      <h2 id="chat-history-sidebar-title" className="sr-only">Chat History Sidebar</h2>
+                      <h2 id="chat-history-sidebar-title" className="sr-only">
+                        Chat History Sidebar
+                      </h2>
                       <ChatHistorySidebar
                         chatsList={chatsList}
                         activeChat={activeChat}
@@ -581,7 +597,7 @@ export default function Chat() {
             >
               <div className="flex gap-2">
                 <Input
-                  className="w-full border rounded px-3 py-2"
+                  className="w-full rounded px-3 py-2"
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   placeholder="Ask something..."
@@ -603,11 +619,17 @@ export default function Chat() {
                     aria-label={pending ? "Sending message" : "Send message"}
                   >
                     {pending ? (
-                      <div className="flex items-center text-secondary" aria-hidden="true">
+                      <div
+                        className="flex items-center text-secondary"
+                        aria-hidden="true"
+                      >
                         <ReloadIcon className="animate-spin w-4 h-4 text-custom" />
                       </div>
                     ) : (
-                      <div className="flex items-center gap-1 text-secondary" aria-hidden="true">
+                      <div
+                        className="flex items-center gap-1 text-secondary"
+                        aria-hidden="true"
+                      >
                         <RocketIcon className="h-4 w-4 text-custom" />
                       </div>
                     )}

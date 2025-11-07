@@ -32,15 +32,15 @@ export function GuestbookUserInfo({
   return (
     <Card>
       <CardHeader className="flex flex-col w-full">
-        <div className="bg-primary-foreground rounded-lg p-4 border">
+        <div className="bg-primary-foreground rounded-lg p-4">
           <div className="flex items-center justify-between mb-3">
             <h3 className="text-lg font-semibold flex items-center gap-2">
               <PersonIcon className="w-5 h-5" />
               Welcome back!
             </h3>
             <Button
-              variant="outline"
               size="sm"
+              variant={"ghost"}
               className="flex items-center gap-2"
               onClick={onLogOut}
             >

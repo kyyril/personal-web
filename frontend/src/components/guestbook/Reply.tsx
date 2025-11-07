@@ -65,7 +65,7 @@ export function Reply({
               className="rounded-full"
             />
           ) : (
-            <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center">
+            <div className="w-6 h-6 rounded-full bg-secondary flex items-center justify-center">
               <PersonIcon className="w-3 h-3" />
             </div>
           )}
@@ -86,7 +86,7 @@ export function Reply({
           {currentUserId === reply.authorId && (
             <>
               <Button
-                size="sm"
+                size="icon"
                 variant="ghost"
                 onClick={() => onStartEdit(reply)}
                 disabled={isEditingReply || isDeletingReply}
@@ -98,7 +98,7 @@ export function Reply({
                 )}
               </Button>
               <Button
-                size="sm"
+                size="icon"
                 variant="ghost"
                 onClick={() => onDelete(reply.id)}
                 disabled={isDeletingReply || isEditingReply}

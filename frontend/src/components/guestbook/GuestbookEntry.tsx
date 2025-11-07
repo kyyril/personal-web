@@ -119,8 +119,8 @@ export function GuestbookEntry({
                 {currentUser.uid === entry.userId && (
                   <>
                     <Button
-                      variant="outline"
-                      size="sm"
+                      variant="ghost"
+                      size="icon"
                       onClick={onStartEditEntry}
                       aria-label="Edit guestbook entry"
                       disabled={isEditingEntry || isDeletingEntry}
@@ -132,8 +132,8 @@ export function GuestbookEntry({
                       )}
                     </Button>
                     <Button
-                      variant="outline"
-                      size="sm"
+                      variant="ghost"
+                      size="icon"
                       onClick={onDeleteEntry}
                       aria-label="Delete guestbook entry"
                       disabled={isDeletingEntry || isEditingEntry}
@@ -179,7 +179,7 @@ export function GuestbookEntry({
                 </Button>
                 <Button
                   size="sm"
-                  variant="outline"
+                  variant="ghost"
                   onClick={onCancelEditEntry}
                   aria-label="Cancel editing"
                   disabled={isEditingEntry}
@@ -192,12 +192,11 @@ export function GuestbookEntry({
             )}
 
             {/* Replies Section */}
-            <div className="mt-4 ml-4 border-l-2 border-muted pl-4">
-              <div className="flex items-center justify-between mb-2">
-                <h4 className="text-sm font-medium">Replies</h4>
+            <div className="mt-2 ml-4 pl-4">
+              <div className="flex justify-end mb-2">
                 <Button
                   size="sm"
-                  variant="outline"
+                  variant="ghost"
                   onClick={() =>
                     onSetReplyingTo(replyingTo === entry.id ? null : entry.id)
                   }
