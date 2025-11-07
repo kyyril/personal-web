@@ -1,0 +1,88 @@
+---
+title: "Getting Started dengan Next.js 15 App Router"
+description: "Tutorial lengkap untuk memulai development dengan Next.js 15 dan fitur-fitur baru App Router"
+date: "2025-11-07"
+category: "Next.js"
+tags: ["nextjs", "app-router", "tutorial", "react"]
+author: "Developer"
+readTime: "8 min read"
+coverImage: "/assets/blog/nextjs-15-cover.jpg"
+published: true
+---
+
+# Introduction to Next.js 15 App Router
+
+Next.js 15 menghadirkan **App Router** yang powerful untuk building modern web applications. Dalam artikel ini, kita akan membahas dasar-dasar penggunaan Next.js 15 dengan App Router.
+
+## What is App Router?
+
+App Router adalah sistem routing baru di Next.js yang memberikan kita kemampuan untuk:
+
+- Server Components
+- Streaming
+- Built-in optimization
+- dan banyak lagi...
+
+## Setting Up Your First Project
+
+Untuk memulai project Next.js 15, kita bisa menggunakan:
+
+```bash
+npx create-next-app@latest my-app --typescript --tailwind --eslint
+```
+
+### Directory Structure
+
+App Router menggunakan struktur folder yang berbeda:
+
+```
+app/
+├── layout.tsx
+├── page.tsx
+├── blog/
+│   ├── page.tsx
+│   └── [slug]/
+│       └── page.tsx
+```
+
+## Basic Component Example
+
+Mari kita buat component sederhana:
+
+```tsx
+// components/HelloWorld.tsx
+export default function HelloWorld() {
+  return (
+    <div className="text-center py-8">
+      <h1 className="text-3xl font-bold text-blue-600">
+        Hello World with Next.js 15!
+      </h1>
+      <p className="mt-4 text-gray-600">
+        Building modern web applications has never been easier.
+      </p>
+    </div>
+  );
+}
+```
+
+## Key Features
+
+### 1. Server Components
+
+Server components memungkinkan kita untuk:
+
+- Reduce bundle size
+- Better performance
+- Automatic code splitting
+
+### 2. Streaming
+
+Streaming membuat aplikasi terasa lebih cepat dengan:
+
+- Progressive rendering
+- Selective hydration
+- Better user experience
+
+## Conclusion
+
+Next.js 15 dengan App Router memberikan developer experience yang luar biasa untuk building modern web applications. Stay tuned untuk artikel selanjutnya tentang advanced features!

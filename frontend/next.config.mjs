@@ -21,7 +21,9 @@ const nextConfig = {
   },
   experimental: {
     esmExternals: "loose",
+    mdxRs: true,
   },
+  pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
   async headers() {
     return [
       {
