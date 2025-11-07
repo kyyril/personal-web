@@ -382,8 +382,8 @@ export default function Chat() {
   return (
     <MusicPlayerProvider>
       <FloatingMusicPlayer />
-      <section className="max-w-7xl w-full h-full mt-2 px-4 md:px-16 overflow-hidden mx-auto pb-16">
-        <div className="flex flex-col md:flex-row gap-4 h-full">
+      <section className="max-w-7xl w-full h-full px-4 md:px-16 overflow-hidden mx-auto pb-16">
+        <div className="flex flex-col md:flex-row pt-16 gap-4">
           {/* Delete Confirmation Dialog */}
           <AlertDialog
             open={!!chatToDelete}
@@ -429,7 +429,7 @@ export default function Chat() {
           <Card className="flex-1 px-1 mx-auto w-full">
             {/* Header */}
             <motion.header
-              className="flex m-3 bg-custom py-1 rounded bg-opacity-10 sticky top-0 z-10"
+              className="flex m-3 bg-custom rounded-full bg-opacity-10 sticky top-0 z-10"
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3 }}
@@ -446,7 +446,7 @@ export default function Chat() {
                       height={50}
                       alt="Katou Megumin"
                       loading="lazy"
-                      className="aspect-square ring-1 ring-custom mx-2 overflow-hidden object-cover object-center rounded-full"
+                      className="aspect-square ring-1 ring-custom mr-2 overflow-hidden object-cover object-center rounded-full"
                     />
                   </button>
                 </DialogTrigger>
@@ -613,7 +613,7 @@ export default function Chat() {
                   whileTap={{ scale: 0.95 }}
                 >
                   <Button
-                    className="flex items-center"
+                    className="flex items-center p-3"
                     onClick={sendMessage}
                     disabled={pending}
                     aria-label={pending ? "Sending message" : "Send message"}
@@ -630,7 +630,7 @@ export default function Chat() {
                         className="flex items-center gap-1 text-secondary"
                         aria-hidden="true"
                       >
-                        <RocketIcon className="h-4 w-4 text-custom" />
+                        <RocketIcon className="h-4 w-4" />
                       </div>
                     )}
                   </Button>

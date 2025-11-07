@@ -7,10 +7,19 @@ import { Card, CardHeader } from "./ui/card";
 import { PersonIcon } from "@radix-ui/react-icons";
 import { GuestbookUserInfo, GuestbookEntry } from "./guestbook";
 import { useGuestbook } from "../hooks/useGuestbook";
-import { LoadingMessage, GuestBookLoadingForm } from "./LoadingGuestbookSkeleton";
+import {
+  LoadingMessage,
+  GuestBookLoadingProfile,
+} from "./LoadingGuestbookSkeleton";
 
 export function FirebaseGuestbook() {
-  const { currentUser, prismaUser, signIn, logOut, loading: isAuthLoading } = useAuth();
+  const {
+    currentUser,
+    prismaUser,
+    signIn,
+    logOut,
+    loading: isAuthLoading,
+  } = useAuth();
   const {
     entries,
     isLoading,
@@ -140,7 +149,7 @@ export function FirebaseGuestbook() {
       {isAuthLoading ? (
         <div className="flex justify-center">
           <div className="w-full max-w-md">
-            <GuestBookLoadingForm />
+            <GuestBookLoadingProfile />
           </div>
         </div>
       ) : currentUser ? (
@@ -180,11 +189,16 @@ export function FirebaseGuestbook() {
       )}
 
       <div className="space-y-4">
-        <h2 className="text-2xl font-bold">Messages ({entries ? entries.length : 0})</h2>
-        {isLoading ? (
-          <LoadingMessage />
-        ) : error ? (
-          <p className="text-red-500">Error loading entries: {error.message}</p>
+        <h2 className="text-2xl font-bold">
+          Messages ({entries ? entries.length : 0})
+        </h2>
+        {isLoading || error ? (
+          <>
+            <LoadingMessage />
+            {""}
+            <LoadingMessage />
+            <LoadingMessage />
+          </>
         ) : !entries || entries.length === 0 ? (
           <p>No messages yet. Be the first to leave a message!</p>
         ) : (
@@ -193,9 +207,7 @@ export function FirebaseGuestbook() {
               <GuestbookEntry
                 key={entry.id}
                 entry={entry}
-                currentUser={
-                  prismaUser ? { uid: prismaUser.id } : { uid: "" }
-                }
+                currentUser={prismaUser ? { uid: prismaUser.id } : { uid: "" }}
                 editingEntry={editingEntryId}
                 replyingTo={replyingTo}
                 replyContent={replyContent}
@@ -214,7 +226,9 @@ export function FirebaseGuestbook() {
                 }
                 onReplyContentChange={setReplyContent}
                 onSubmitReply={() => handleSubmitReply(entry.id)}
-                onStartEditReply={(reply) => prismaUser && startEditReply(reply)}
+                onStartEditReply={(reply) =>
+                  prismaUser && startEditReply(reply)
+                }
                 onCancelEditReply={() => {
                   setEditingReplyId(null);
                   setEditContent("");

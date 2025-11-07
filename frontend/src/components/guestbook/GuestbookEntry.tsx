@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 import { Button } from "../ui/button";
 import { Card, CardHeader } from "../ui/card";
 import { Input } from "../ui/input";
@@ -12,7 +13,7 @@ import {
 } from "@radix-ui/react-icons";
 import Image from "next/image";
 import { Reply } from "./Reply";
-import { Loader } from "lucide-react";
+import { Loader, ChevronDown } from "lucide-react";
 
 interface ReplyData {
   id: string;
@@ -95,106 +96,129 @@ export function GuestbookEntry({
   isDeletingReply,
   isEditingReply,
 }: GuestbookEntryProps) {
-  return (
-    <Card key={entry.id}>
-      <CardHeader>
-        <div className="flex items-start gap-4">
-          {entry.user.avatarUrl ? (
-            <div className="w-8 h-8 md:w-10 md:h-10 relative shrink-0">
-              <Image
-                src={entry.user.avatarUrl}
-                alt={entry.user.username}
-                fill
-                className="rounded-full object-cover"
-              />
-            </div>
-          ) : (
-            <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-secondary flex items-center justify-center shrink-0">
-              <PersonIcon className="w-4 h-4 md:w-5 md:h-5" />
-            </div>
-          )}
-          <div className="flex-1">
-            <div className="flex items-center justify-between">
-              <h3 className="text-sm md:text-base font-medium">{entry.user.username}</h3>
-              <div className="flex gap-2">
-                {currentUser.uid === entry.userId && (
-                  <>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      onClick={onStartEditEntry}
-                      aria-label="Edit guestbook entry"
-                      disabled={isEditingEntry || isDeletingEntry}
-                    >
-                      {isEditingEntry && editingEntry === entry.id ? (
-                        <Loader className="mr-2 h-3 w-3 md:h-4 md:w-4 animate-spin" />
-                      ) : (
-                        <Pencil1Icon className="w-3 h-3 md:w-4 md:h-4" />
-                      )}
-                    </Button>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      onClick={onDeleteEntry}
-                      aria-label="Delete guestbook entry"
-                      disabled={isDeletingEntry || isEditingEntry}
-                    >
-                      {isDeletingEntry ? (
-                        <Loader className="mr-2 h-3 w-3 md:h-4 md:w-4 animate-spin" />
-                      ) : (
-                        <TrashIcon className="w-3 h-3 md:w-4 md:h-4" />
-                      )}
-                    </Button>
-                  </>
-                )}
-              </div>
-            </div>
-            <p className="text-xs md:text-sm text-muted-foreground">
-              {new Date(entry.createdAt).toLocaleString()}
-              {entry.createdAt !== entry.updatedAt && (
-                <span className="ml-1 md:ml-2 text-xs text-gray-500">
-                  (edited {new Date(entry.updatedAt).toLocaleString()})
-                </span>
-              )}
-            </p>
+  const [showReplies, setShowReplies] = useState(false);
 
+  return (
+    <Card>
+      <CardHeader className="p-4 md:p-6">
+        <div className="flex gap-3 md:gap-4">
+          {/* Avatar */}
+          <div className="flex-shrink-0">
+            {entry.user.avatarUrl ? (
+              <div className="w-10 h-10 md:w-12 md:h-12 relative">
+                <Image
+                  src={entry.user.avatarUrl}
+                  alt={entry.user.username}
+                  fill
+                  className="rounded-full object-cover"
+                />
+              </div>
+            ) : (
+              <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-secondary flex items-center justify-center">
+                <PersonIcon className="w-5 h-5 md:w-6 md:h-6" />
+              </div>
+            )}
+          </div>
+
+          {/* Content */}
+          <div className="flex-1 min-w-0">
+            {/* Header with username and actions */}
+            <div className="flex items-start justify-between gap-2 mb-1">
+              <div className="flex-1 min-w-0">
+                <h3 className="text-sm md:text-base font-semibold truncate">
+                  {entry.user.username}
+                </h3>
+                <p className="text-xs text-muted-foreground">
+                  {new Date(entry.createdAt).toLocaleString()}
+                  {entry.createdAt !== entry.updatedAt && (
+                    <span className="ml-1 italic">(edited)</span>
+                  )}
+                </p>
+              </div>
+
+              {/* Action buttons */}
+              {currentUser.uid === entry.userId && (
+                <div className="flex gap-1 flex-shrink-0">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="h-8 w-8"
+                    onClick={onStartEditEntry}
+                    aria-label="Edit guestbook entry"
+                    disabled={isEditingEntry || isDeletingEntry}
+                  >
+                    {isEditingEntry && editingEntry === entry.id ? (
+                      <Loader className="h-4 w-4 animate-spin" />
+                    ) : (
+                      <Pencil1Icon className="w-4 h-4" />
+                    )}
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="h-8 w-8"
+                    onClick={onDeleteEntry}
+                    aria-label="Delete guestbook entry"
+                    disabled={isDeletingEntry || isEditingEntry}
+                  >
+                    {isDeletingEntry ? (
+                      <Loader className="h-4 w-4 animate-spin" />
+                    ) : (
+                      <TrashIcon className="w-4 h-4" />
+                    )}
+                  </Button>
+                </div>
+              )}
+            </div>
+
+            {/* Message content or edit form */}
             {editingEntry === entry.id ? (
-              <div className="mt-2 flex gap-2">
+              <div className="mt-3 space-y-2">
                 <Input
                   value={editContent}
                   onChange={(e) => onEditContentChange(e.target.value)}
                   maxLength={500}
-                  className="flex-1"
+                  className="w-full"
+                  disabled={isEditingEntry}
                 />
-                <Button
-                  size="sm"
-                  onClick={onSaveEditEntry}
-                  aria-label="Save changes"
-                  disabled={isEditingEntry}
-                >
-                  {isEditingEntry ? (
-                    <Loader className="mr-2 h-3 w-3 md:h-4 md:w-4 animate-spin" />
-                  ) : (
-                    <CheckIcon className="w-3 h-3 md:w-4 md:h-4" />
-                  )}
-                </Button>
-                <Button
-                  size="sm"
-                  variant="ghost"
-                  onClick={onCancelEditEntry}
-                  aria-label="Cancel editing"
-                  disabled={isEditingEntry}
-                >
-                  <Cross2Icon className="w-3 h-3 md:w-4 md:h-4" />
-                </Button>
+                <div className="flex gap-2">
+                  <Button
+                    size="sm"
+                    onClick={onSaveEditEntry}
+                    aria-label="Save changes"
+                    disabled={isEditingEntry}
+                  >
+                    {isEditingEntry ? (
+                      <Loader className="mr-2 h-4 w-4 animate-spin" />
+                    ) : (
+                      <>
+                        <CheckIcon className="w-4 h-4 mr-1" />
+                        Save
+                      </>
+                    )}
+                  </Button>
+                  <Button
+                    size="sm"
+                    variant="ghost"
+                    onClick={onCancelEditEntry}
+                    aria-label="Cancel editing"
+                    disabled={isEditingEntry}
+                  >
+                    <Cross2Icon className="w-4 h-4 mr-1" />
+                    Cancel
+                  </Button>
+                </div>
               </div>
             ) : (
-              <p className="mt-2 text-sm md:text-base">{entry.message}</p>
+              <p className="mt-2 text-sm md:text-base break-words whitespace-pre-wrap">
+                {entry.message}
+              </p>
             )}
 
-            {/* Replies Section */}
-            <div className="mt-2 ml-2 pl-2 md:ml-4 md:pl-4">
-              <div className="flex justify-end mb-2">
+            {/* Reply button and replies section */}
+            <div className="mt-4 space-y-3">
+              {/* Reply button */}
+              <div className="flex items-center gap-3">
                 <Button
                   size="sm"
                   variant="ghost"
@@ -204,30 +228,55 @@ export function GuestbookEntry({
                   aria-label={
                     replyingTo === entry.id ? "Cancel reply" : "Reply to entry"
                   }
+                  className="h-8"
                 >
-                  <ChatBubbleIcon className="w-3 h-3 md:w-4 md:h-4 mr-1" />
-                  {replyingTo === entry.id ? "Cancel" : "Reply"}
+                  <ChatBubbleIcon className="w-4 h-4 mr-1.5" />
+                  {replyingTo === entry.id ? "Cancel Reply" : "Reply"}
                 </Button>
+
+                {/* Show/hide replies toggle */}
+                {entry.replies.length > 0 && (
+                  <Button
+                    size="sm"
+                    variant="ghost"
+                    onClick={() => setShowReplies(!showReplies)}
+                    aria-label={
+                      showReplies
+                        ? "Hide replies"
+                        : `Show ${entry.replies.length} replies`
+                    }
+                    className="h-8 text-muted-foreground"
+                  >
+                    {entry.replies.length}{" "}
+                    {entry.replies.length === 1 ? "reply" : "replies"}
+                    <ChevronDown
+                      className={`ml-1.5 h-4 w-4 transition-transform ${
+                        showReplies ? "rotate-180" : ""
+                      }`}
+                    />
+                  </Button>
+                )}
               </div>
 
-              {/* Reply Form */}
+              {/* Reply form */}
               {replyingTo === entry.id && (
-                <div className="mb-3 flex gap-2">
+                <div className="flex gap-2 pl-0 md:pl-4">
                   <Input
                     value={replyContent}
                     onChange={(e) => onReplyContentChange(e.target.value)}
                     placeholder="Write a reply..."
                     maxLength={300}
                     disabled={isAddingReply}
+                    className="flex-1"
                   />
                   <Button
                     size="sm"
                     onClick={onSubmitReply}
                     aria-label="Send reply"
-                    disabled={isAddingReply}
+                    disabled={isAddingReply || !replyContent.trim()}
                   >
                     {isAddingReply ? (
-                      <Loader className="mr-2 h-3 w-3 md:h-4 md:w-4 animate-spin" />
+                      <Loader className="h-4 w-4 animate-spin" />
                     ) : (
                       "Send"
                     )}
@@ -235,25 +284,27 @@ export function GuestbookEntry({
                 </div>
               )}
 
-              {/* Replies List */}
-              <div className="space-y-2">
-                {entry.replies.map((reply) => (
-                  <Reply
-                    key={reply.id}
-                    reply={reply}
-                    currentUserId={currentUser.uid}
-                    editingReply={editingReply}
-                    editContent={editContent}
-                    onEditContentChange={onEditContentChange}
-                    onStartEdit={onStartEditReply}
-                    onCancelEdit={() => onCancelEditReply(reply.id)}
-                    onSaveEdit={() => onSaveEditReply(reply.id)}
-                    onDelete={() => onDeleteReply(reply.id)}
-                    isDeletingReply={isDeletingReply}
-                    isEditingReply={isEditingReply}
-                  />
-                ))}
-              </div>
+              {/* Replies list */}
+              {showReplies && entry.replies.length > 0 && (
+                <div className="pl-0 md:pl-4 pt-2 border-l-2 border-muted ml-2 space-y-3">
+                  {entry.replies.map((reply) => (
+                    <Reply
+                      key={reply.id}
+                      reply={reply}
+                      currentUserId={currentUser.uid}
+                      editingReply={editingReply}
+                      editContent={editContent}
+                      onEditContentChange={onEditContentChange}
+                      onStartEdit={onStartEditReply}
+                      onCancelEdit={() => onCancelEditReply(reply.id)}
+                      onSaveEdit={() => onSaveEditReply(reply.id)}
+                      onDelete={() => onDeleteReply(reply.id)}
+                      isDeletingReply={isDeletingReply}
+                      isEditingReply={isEditingReply}
+                    />
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         </div>
