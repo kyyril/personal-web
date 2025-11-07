@@ -82,13 +82,13 @@ export default async function Detailproject({
           <div className="flex space-x-2 mt-4">
             {project.live_url ? (
               <Link target="_blank" href={project.live_url} prefetch={false}>
-                <Button size="sm" className="hover:text-custom font-normal">
+                <Button size="sm" className="hover:text-custom ">
                   <GlobeIcon className="h-3 w-3 mr-0.5" />
                   Visit
                 </Button>
               </Link>
             ) : (
-              <Button size="sm" disabled className="font-normal">
+              <Button size="sm" disabled className="">
                 <GlobeIcon className="h-3 w-3 mr-0.5" />
                 Visit (Unavailable)
               </Button>
@@ -99,22 +99,13 @@ export default async function Detailproject({
                 href={project.code_repo_url}
                 prefetch={false}
               >
-                <Button
-                  size="sm"
-                  className="hover:text-cus font-normal"
-                  variant="ghost"
-                >
+                <Button size="sm" className="hover:text-cus " variant="ghost">
                   <GitHubLogoIcon className="h-3 w-3 mr-0.5" />
                   Repo
                 </Button>
               </Link>
             ) : (
-              <Button
-                size="sm"
-                disabled
-                className="font-normal"
-                variant="ghost"
-              >
+              <Button size="sm" disabled className="" variant="ghost">
                 <GitHubLogoIcon className="h-3 w-3 mr-0.5" />
                 Repo (Unavailable)
               </Button>

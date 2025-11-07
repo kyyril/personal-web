@@ -469,12 +469,12 @@ export default function Chat() {
               </Dialog>
               <div className="flex flex-col gap-y-1">
                 <h1
-                  className="text-center text-xl font-sans font-light"
+                  className="text-center text-xl  font-light"
                   aria-label="Chat assistant name"
                 >
                   加藤 恵
                 </h1>
-                <p className="text-start font-sans text-xs text-green-600 font-light">
+                <p className="text-start  text-xs text-green-600 font-light">
                   Online.
                 </p>
               </div>

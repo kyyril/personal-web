@@ -7,9 +7,10 @@ import { Card, CardHeader } from "./ui/card";
 import { PersonIcon } from "@radix-ui/react-icons";
 import { GuestbookUserInfo, GuestbookEntry } from "./guestbook";
 import { useGuestbook } from "../hooks/useGuestbook";
+import { LoadingMessage, GuestBookLoadingForm } from "./LoadingGuestbookSkeleton";
 
 export function FirebaseGuestbook() {
-  const { currentUser, prismaUser, signIn, logOut } = useAuth();
+  const { currentUser, prismaUser, signIn, logOut, loading: isAuthLoading } = useAuth();
   const {
     entries,
     isLoading,
@@ -134,23 +135,32 @@ export function FirebaseGuestbook() {
     setEditingReplyId(reply.id);
     setEditContent(reply.content);
   };
-
   return (
     <div className="space-y-6">
-      {currentUser ? (
-        <GuestbookUserInfo
-          currentUser={{
-            displayName: currentUser.displayName || "",
-            email: currentUser.email || "",
-            photoURL: currentUser.photoURL || undefined,
-            uid: currentUser.uid,
-          }}
-          message={message}
-          onMessageChange={setMessage}
-          onSubmit={handleSubmit}
-          onLogOut={logOut}
-          isSubmitting={isAddingEntry}
-        />
+      {isAuthLoading ? (
+        <div className="flex justify-center">
+          <div className="w-full max-w-md">
+            <GuestBookLoadingForm />
+          </div>
+        </div>
+      ) : currentUser ? (
+        <div className="flex justify-center">
+          <div className="w-full max-w-md">
+            <GuestbookUserInfo
+              currentUser={{
+                displayName: currentUser.displayName || "",
+                email: currentUser.email || "",
+                photoURL: currentUser.photoURL || undefined,
+                uid: currentUser.uid,
+              }}
+              message={message}
+              onMessageChange={setMessage}
+              onSubmit={handleSubmit}
+              onLogOut={logOut}
+              isSubmitting={isAddingEntry}
+            />
+          </div>
+        </div>
       ) : (
         <div className="flex justify-center">
           <Card className="w-full max-w-md">
@@ -172,7 +182,7 @@ export function FirebaseGuestbook() {
       <div className="space-y-4">
         <h2 className="text-2xl font-bold">Messages ({entries ? entries.length : 0})</h2>
         {isLoading ? (
-          <p>Loading guestbook entries...</p>
+          <LoadingMessage />
         ) : error ? (
           <p className="text-red-500">Error loading entries: {error.message}</p>
         ) : !entries || entries.length === 0 ? (
