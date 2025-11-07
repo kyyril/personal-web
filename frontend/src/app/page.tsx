@@ -17,9 +17,9 @@ const Education = dynamic(() => import("../components/Education"), {
 });
 
 export const metadata: Metadata = {
-  title: "Khairil Rahman Hakiki | Frontend Developer",
+  title: "Khairil Rahman Hakiki | Software Engineer",
   description:
-    "Welcome to the personal website of Khairil Rahman Hakiki, a passionate Frontend Developer specializing in Next.js and TypeScript. Explore my projects, experience, and feel free to get in touch.",
+    "Welcome to the personal website of Khairil Rahman Hakiki, a passionate Software Engineer specializing in Next.js and TypeScript. Explore my projects, experience, and feel free to get in touch.",
 };
 
 export default function Home() {
@@ -31,20 +31,33 @@ export default function Home() {
         aria-labelledby="bio-heading"
         className="container max-w-5xl mx-auto py-12 md:py-16 lg:py-20 h-screen"
       >
-        <h1 id="bio-heading" className="sr-only">Biography and Introduction</h1>
+        <h1 id="bio-heading" className="sr-only">
+          Biography and Introduction
+        </h1>
         <Bio data={data} />
       </section>
 
       <section className="max-w-6xl w-full px-4 md:px-16 mx-auto">
-        <div id="experience" className="mb-24" role="region" aria-labelledby="experience-heading">
-          <h2 id="experience-heading" className="font-semibold text-3xl md:text-5xl mb-12">
+        <div
+          id="experience"
+          className="mb-24"
+          role="region"
+          aria-labelledby="experience-heading"
+        >
+          <h2
+            id="experience-heading"
+            className="font-semibold text-3xl md:text-5xl mb-12"
+          >
             Experience
           </h2>
           <Experience data={data} />
         </div>
 
         <div id="education" role="region" aria-labelledby="education-heading">
-          <h3 id="education-heading" className="font-semibold text-3xl md:text-5xl mb-12">
+          <h3
+            id="education-heading"
+            className="font-semibold text-3xl md:text-5xl mb-12"
+          >
             Education
           </h3>
           <Education data={data} />

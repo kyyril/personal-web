@@ -46,7 +46,7 @@ export function Navigation() {
               transition={{ type: "spring", stiffness: 400, damping: 17 }}
             >
               <Image
-                src="/assets/profile.webp"
+                src="/assets/profilev2.webp"
                 alt="Profile"
                 width={24}
                 height={24}

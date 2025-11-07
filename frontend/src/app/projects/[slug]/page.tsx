@@ -1,6 +1,4 @@
-import { Suspense } from "react";
 import ProjectCarousel from "../../../components/Project/ProjectCarousel";
-import ProjectImageCarouselSkeleton from "../../../components/Project/ProjectImageCarouselSkeleton";
 import { Badge } from "../../../components/ui/badge";
 import { Button } from "../../../components/ui/button";
 import { projects } from "../../../lib/data";
@@ -11,7 +9,7 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: `PROJECT - khairil rahman hakiki`,
   description:
-    "I’m an Information Systems student who loves programming, especially software web development. I specialize in Next.js with Typescript and am currently learning backend development with Golang.",
+    "I'm an Information Systems student who loves programming, especially software development. I specialize in React.js and Node.js with TypeScript",
 };
 
 export default async function Detailproject({
