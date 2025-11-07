@@ -147,7 +147,7 @@ export default async function ArticlePage({ params }: PageProps) {
               
               {/* Article Content */}
               <div className="prose prose-lg dark:prose-invert max-w-none">
-                <div dangerouslySetInnerHTML={{ __html: post.content }} />
+                <div className="whitespace-pre-line" dangerouslySetInnerHTML={{ __html: post.content }} />
               </div>
             </article>
             

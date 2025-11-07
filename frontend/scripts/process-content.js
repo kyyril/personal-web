@@ -1,24 +1,50 @@
-const fs = require('fs');
-const path = require('path');
-const matter = require('gray-matter');
-const { remark } = require('remark');
-const remarkGfm = require('remark-gfm');
-const remarkSlug = require('remark-slug');
+const fs = require("fs");
+const path = require("path");
+const matter = require("gray-matter");
+const { remark } = require("remark");
+const remarkGfm = require("remark-gfm");
+const remarkRehype = require("remark-rehype");
+const rehypeStringify = require("rehype-stringify");
+const rehypeRaw = require("rehype-raw");
+const remarkBreaks = require("remark-breaks");
 
 // Create output directory if it doesn't exist
-const outputDir = path.join(__dirname, '..', 'src', 'data');
+const outputDir = path.join(__dirname, "..", "src", "data");
 if (!fs.existsSync(outputDir)) {
   fs.mkdirSync(outputDir, { recursive: true });
 }
 
 // Process MDX files and create static data
-const articlesDir = path.join(__dirname, '..', 'content', 'articles');
+const articlesDir = path.join(__dirname, "..", "content", "articles");
+
+// Process markdown to HTML using remark/rehype
+async function processMarkdownToHtml(content) {
+  // Remove frontmatter
+  const contentWithoutFrontmatter = content.replace(
+    /^---\s*[\s\S]*?---\s*/,
+    ""
+  );
+
+  // Helper to handle CJS/ESM module differences
+  const usePlugin = (plugin) =>
+    plugin && plugin.default ? plugin.default : plugin;
+
+  const file = await remark()
+    .use(usePlugin(remarkGfm))
+    .use(usePlugin(remarkBreaks))
+    .use(usePlugin(remarkRehype), { allowDangerousHtml: true })
+    .use(usePlugin(rehypeRaw))
+    .use(usePlugin(rehypeStringify))
+    .process(contentWithoutFrontmatter);
+
+  return String(file);
+}
 
 // Extract headings from content
 function extractHeadings(content) {
   const headings = [];
-  const lines = content.split('\n');
-  
+  const lines = content.split("\n");
+
   for (const line of lines) {
     const headingMatch = line.match(/^(#{1,6})\s+(.+)$/);
     if (headingMatch) {
@@ -26,9 +52,9 @@ function extractHeadings(content) {
       const text = headingMatch[2].trim();
       const id = text
         .toLowerCase()
-        .replace(/[^\w\s-]/g, '')
-        .replace(/\s+/g, '-');
-      
+        .replace(/[^\w\s-]/g, "")
+        .replace(/\s+/g, "-");
+
       headings.push({
         id,
         text,
@@ -36,81 +62,99 @@ function extractHeadings(content) {
       });
     }
   }
-  
+
   return headings;
 }
 
 // Process all articles
-const articles = [];
-const categories = new Map();
-const tags = new Set();
+async function processAllArticles() {
+  const articles = [];
+  const categories = new Map();
+  const tags = new Set();
 
-if (fs.existsSync(articlesDir)) {
-  const files = fs.readdirSync(articlesDir).filter(file => file.endsWith('.mdx'));
-  
-  for (const file of files) {
-    const filePath = path.join(articlesDir, file);
-    const content = fs.readFileSync(filePath, 'utf8');
-    const { data, content: rawContent } = matter(content);
-    
-    // Skip drafts
-    if (data.draft || data.published === false) {
-      continue;
-    }
-    
-    const slug = file.replace(/\.mdx$/, '');
-    const headings = extractHeadings(rawContent);
-    
-    // Generate excerpt
-    const excerpt = rawContent
-      .replace(/[#*`]/g, '')
-      .replace(/\n+/g, ' ')
-      .trim()
-      .slice(0, 160) + '...';
-    
-    const article = {
-      slug,
-      frontmatter: data,
-      content: rawContent, // Store raw content for client-side processing
-      excerpt,
-      headings,
-    };
-    
-    articles.push(article);
-    
-    // Track categories
-    const categoryCount = categories.get(data.category) || 0;
-    categories.set(data.category, categoryCount + 1);
-    
-    // Track tags
-    if (data.tags && Array.isArray(data.tags)) {
-      data.tags.forEach(tag => tags.add(tag));
+  if (fs.existsSync(articlesDir)) {
+    const files = fs
+      .readdirSync(articlesDir)
+      .filter((file) => file.endsWith(".mdx"));
+
+    for (const file of files) {
+      const filePath = path.join(articlesDir, file);
+      const content = fs.readFileSync(filePath, "utf8");
+      const { data, content: rawContent } = matter(content);
+
+      // Skip drafts
+      if (data.draft || data.published === false) {
+        continue;
+      }
+
+      const slug = file.replace(/\.mdx$/, "");
+      const headings = extractHeadings(rawContent);
+
+      // Process markdown to HTML
+      const processedHtml = await processMarkdownToHtml(rawContent);
+
+      // Generate excerpt
+      const excerpt =
+        rawContent
+          .replace(/[#*`]/g, "")
+          .replace(/\n+/g, " ")
+          .trim()
+          .slice(0, 160) + "...";
+
+      const article = {
+        slug,
+        frontmatter: data,
+        content: processedHtml, // Store processed HTML content
+        excerpt,
+        headings,
+      };
+
+      articles.push(article);
+
+      // Track categories
+      const categoryCount = categories.get(data.category) || 0;
+      categories.set(data.category, categoryCount + 1);
+
+      // Track tags
+      if (data.tags && Array.isArray(data.tags)) {
+        data.tags.forEach((tag) => tags.add(tag));
+      }
     }
   }
+
+  return { articles, categories, tags };
 }
 
-// Sort articles by date (newest first)
-articles.sort((a, b) => new Date(b.frontmatter.date) - new Date(a.frontmatter.date));
+// Main execution
+(async function () {
+  const { articles, categories, tags } = await processAllArticles();
 
-// Create categories array
-const categoriesArray = Array.from(categories.entries()).map(([name, count]) => ({
-  name,
-  slug: name.toLowerCase().replace(/\s+/g, '-'),
-  description: `${name} related articles`,
-  count,
-}));
+  // Sort articles by date (newest first)
+  articles.sort(
+    (a, b) => new Date(b.frontmatter.date) - new Date(a.frontmatter.date)
+  );
 
-// Create data export
-const data = {
-  articles,
-  categories: categoriesArray,
-  tags: Array.from(tags).sort(),
-  lastUpdated: new Date().toISOString(),
-};
+  // Create categories array
+  const categoriesArray = Array.from(categories.entries()).map(
+    ([name, count]) => ({
+      name,
+      slug: name.toLowerCase().replace(/\s+/g, "-"),
+      description: `${name} related articles`,
+      count,
+    })
+  );
 
-// Write to TypeScript file
-const outputPath = path.join(outputDir, 'blog-data.ts');
-const content = `// Auto-generated blog data
+  // Create data export
+  const data = {
+    articles,
+    categories: categoriesArray,
+    tags: Array.from(tags).sort(),
+    lastUpdated: new Date().toISOString(),
+  };
+
+  // Write to TypeScript file
+  const outputPath = path.join(outputDir, "blog-data.ts");
+  const content = `// Auto-generated blog data
 // This file is generated by scripts/process-content.js
 
 export interface Article {
@@ -195,9 +239,10 @@ export function getRecentArticles(limit: number = 5): Article[] {
 }
 `;
 
-fs.writeFileSync(outputPath, content);
+  fs.writeFileSync(outputPath, content);
 
-console.log(`✅ Processed ${articles.length} articles`);
-console.log(`✅ Created ${categoriesArray.length} categories`);
-console.log(`✅ Found ${tags.size} unique tags`);
-console.log(`✅ Generated ${outputPath}`);
+  console.log(`✅ Processed ${articles.length} articles`);
+  console.log(`✅ Created ${categoriesArray.length} categories`);
+  console.log(`✅ Found ${tags.size} unique tags`);
+  console.log(`✅ Generated ${outputPath}`);
+})();
