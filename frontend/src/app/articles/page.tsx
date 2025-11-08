@@ -112,7 +112,15 @@ function ArticlesList({ articles }: { articles: Article[] }) {
         >
           <CardHeader>
             <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
-              <Badge variant="secondary">{post.frontmatter.category}</Badge>
+              <Link
+                href={`/articles/category/${encodeURIComponent(
+                  post.frontmatter.category.toLowerCase().replace(/s+/g, "-")
+                )}`}
+              >
+                <span className="cursor-pointer hover:bg-secondary rounded font-semibold">
+                  / {post.frontmatter.category}
+                </span>
+              </Link>
               <span>•</span>
               <span className="flex items-center gap-1">
                 <CalendarDays className="h-3 w-3" />
@@ -148,9 +156,19 @@ function ArticlesList({ articles }: { articles: Article[] }) {
             {post.frontmatter.tags && post.frontmatter.tags.length > 0 && (
               <div className="mt-4 flex flex-wrap gap-1">
                 {post.frontmatter.tags.slice(0, 3).map((tag) => (
-                  <Badge key={tag} variant="secondary" className="text-xs">
-                    {tag}
-                  </Badge>
+                  <Link
+                    key={tag}
+                    href={`/articles/tags/${encodeURIComponent(
+                      tag.toLowerCase().replace(/s+/g, "-")
+                    )}`}
+                  >
+                    <Badge
+                      variant="secondary"
+                      className="text-xs cursor-pointer hover:bg-secondary"
+                    >
+                      {tag}
+                    </Badge>
+                  </Link>
                 ))}
                 {post.frontmatter.tags.length > 3 && (
                   <Badge variant="secondary" className="text-xs">
@@ -160,10 +178,10 @@ function ArticlesList({ articles }: { articles: Article[] }) {
               </div>
             )}
 
-            <div className="mt-4">
+            <div className="mt-4 w-full flex">
               <Link
                 href={`/articles/${post.slug}`}
-                className="text-primary hover:underline font-medium"
+                className="flex justify-end text-primary hover:underline font-medium"
               >
                 Read more →
               </Link>
@@ -243,7 +261,7 @@ export default function ArticlesPage() {
         />
 
         {/* Quick Category Links */}
-        <div className="mb-6">
+        <div className="my-6">
           <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
             <Folder className="h-5 w-5" />
             Quick Category Links
@@ -252,7 +270,7 @@ export default function ArticlesPage() {
             <Link href="/articles">
               <Badge
                 variant="secondary"
-                className="cursor-pointer hover:bg-accent"
+                className="cursor-pointer hover:bg-secondary"
               >
                 All ({allArticles.length})
               </Badge>
@@ -260,11 +278,11 @@ export default function ArticlesPage() {
             {categories.map((category) => (
               <Link
                 key={category.slug}
-                href={`/articles/category/${category.slug}`}
+                href={`/articles/category/${encodeURIComponent(category.slug)}`}
               >
                 <Badge
                   variant="secondary"
-                  className="cursor-pointer hover:bg-accent"
+                  className="cursor-pointer hover:bg-secondary"
                 >
                   {category.name} ({category.count})
                 </Badge>

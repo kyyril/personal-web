@@ -173,96 +173,119 @@ export default async function ArticlePage({ params }: PageProps) {
         }}
       />
 
-      {/* Breadcrumb Navigation */}
-      <div className="container mx-auto px-4 py-8 max-w-6xl">
-        <nav className="flex items-center space-x-2 text-sm text-muted-foreground mb-8">
-          <Link
-            href="/articles"
-            className="hover:text-foreground transition-colors"
-          >
-            Articles
-          </Link>
-          <span>/</span>
-          <Link
-            href={`/articles/category/${post.frontmatter.category
-              .toLowerCase()
-              .replace(/\s+/g, "-")}`}
-            className="hover:text-foreground transition-colors"
-          >
-            {post.frontmatter.category}
-          </Link>
-          <span>/</span>
-          <span className="text-foreground">{post.frontmatter.title}</span>
-        </nav>
+      {/* Breadcrumb Navigation and Back Button */}
+      <div className="container mx-auto px-4 py-4 sm:py-6 lg:py-8 max-w-6xl">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6 lg:mb-8">
+          {/* Breadcrumb Navigation */}
+          <nav className="flex items-center space-x-2 text-sm text-muted-foreground order-2 sm:order-1">
+            <Link
+              href="/articles"
+              className="hover:text-foreground transition-colors"
+            >
+              Articles
+            </Link>
+            <span>/</span>
+            <Link
+              href={`/articles/category/${encodeURIComponent(
+                post.frontmatter.category.toLowerCase().replace(/\s+/g, "-")
+              )}`}
+              className="hover:text-foreground transition-colors"
+            >
+              {post.frontmatter.category}
+            </Link>
+            <span>/</span>
+            <span className="text-foreground truncate">
+              {post.frontmatter.title}
+            </span>
+          </nav>
 
-        {/* Back Button */}
-        <div className="mb-6">
-          <Link
-            href="/articles"
-            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            Back to Articles
-          </Link>
+          {/* Back Button */}
+          <div className="order-1 sm:order-2">
+            <Link
+              href="/articles"
+              className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              <ArrowLeft className="h-4 w-4" />
+              <span className="hidden sm:inline">Back to Articles</span>
+              <span className="sm:hidden">Back</span>
+            </Link>
+          </div>
         </div>
       </div>
 
       {/* Main Content Layout with TOC */}
       <div className="container mx-auto px-4 max-w-7xl">
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-          {/* Table of Contents Sidebar */}
-          <div className="lg:col-span-1">
-            <TableOfContents headings={post.headings} />
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 lg:gap-8">
+          {/* Table of Contents Sidebar - Hidden on mobile, shown on lg+ */}
+          <div className="hidden lg:block lg:col-span-1">
+            <div className="sticky top-8">
+              <TableOfContents headings={post.headings} />
+            </div>
           </div>
 
           {/* Main Article Content */}
           <div className="lg:col-span-3">
-            <article className="mb-12">
+            <article className="mb-8 lg:mb-12">
               {/* Article Header */}
-              <header className="mb-8">
-                <div className="flex items-center gap-3 mb-4">
-                  <Badge variant="secondary">{post.frontmatter.category}</Badge>
+              <header className="mb-6 lg:mb-8">
+                <div className="flex flex-wrap items-center gap-2 lg:gap-3 mb-4">
+                  <span className="font-bold">#</span>
                   {post.frontmatter.tags.slice(0, 3).map((tag) => (
-                    <Badge key={tag} variant="secondary" className="text-xs">
-                      {tag}
-                    </Badge>
+                    <Link
+                      key={tag}
+                      href={`/articles/tags/${encodeURIComponent(
+                        tag.toLowerCase().replace(/s+/g, "-")
+                      )}`}
+                    >
+                      <Badge
+                        variant="secondary"
+                        className="text-xs cursor-pointer hover:bg-secondary"
+                      >
+                        {tag}
+                      </Badge>
+                    </Link>
                   ))}
                 </div>
 
-                <h1 className="text-4xl font-bold text-foreground mb-4 leading-tight">
+                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-4 leading-tight">
                   {post.frontmatter.title}
                 </h1>
 
-                <p className="text-xl text-muted-foreground mb-6 leading-relaxed">
+                <p className="text-lg sm:text-xl text-muted-foreground mb-6 leading-relaxed">
                   {post.frontmatter.description}
                 </p>
 
-                <div className="flex flex-wrap items-center gap-6 text-sm text-muted-foreground">
+                <div className="flex flex-wrap items-center gap-4 lg:gap-6 text-sm text-muted-foreground">
                   <div className="flex items-center gap-2">
-                    <User className="h-4 w-4" />
-                    <span>{post.frontmatter.author}</span>
+                    <User className="h-4 w-4 flex-shrink-0" />
+                    <span className="truncate">{post.frontmatter.author}</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <CalendarDays className="h-4 w-4" />
-                    <time dateTime={post.frontmatter.date}>
-                      {format(new Date(post.frontmatter.date), "MMMM dd, yyyy")}
+                    <CalendarDays className="h-4 w-4 flex-shrink-0" />
+                    <time
+                      dateTime={post.frontmatter.date}
+                      className="whitespace-nowrap"
+                    >
+                      {format(new Date(post.frontmatter.date), "MMM dd, yyyy")}
                     </time>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Clock className="h-4 w-4" />
-                    <span>{post.frontmatter.readTime}</span>
+                    <Clock className="h-4 w-4 flex-shrink-0" />
+                    <span className="whitespace-nowrap">
+                      {post.frontmatter.readTime}
+                    </span>
                   </div>
                   <button className="flex items-center gap-2 hover:text-foreground transition-colors">
-                    <Share2 className="h-4 w-4" />
-                    <span>Share</span>
+                    <Share2 className="h-4 w-4 flex-shrink-0" />
+                    <span className="hidden sm:inline">Share</span>
                   </button>
                 </div>
               </header>
 
               {/* Article Content */}
-              <div className="prose prose-lg dark:prose-invert max-w-none">
+              <div className="prose prose-base sm:prose-lg dark:prose-invert max-w-none prose-headings:scroll-mt-20">
                 <div
-                  className="whitespace-pre-line"
+                  className="whitespace-pre-line leading-relaxed"
                   dangerouslySetInnerHTML={{ __html: post.content }}
                 />
               </div>
@@ -273,51 +296,65 @@ export default async function ArticlePage({ params }: PageProps) {
 
             {/* Related Posts */}
             {relatedPosts.length > 0 && (
-              <section className="mb-12">
-                <h2 className="text-2xl font-bold text-foreground mb-6 flex items-center gap-2">
-                  <BookOpen className="h-6 w-6" />
+              <section className="mb-8 lg:mb-12">
+                <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-4 lg:mb-6 flex items-center gap-2">
+                  <BookOpen className="h-5 w-5 lg:h-6 lg:w-6 flex-shrink-0" />
                   Related Articles
                 </h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
                   {relatedPosts.map((relatedPost) => (
                     <Card
                       key={relatedPost.slug}
-                      className="hover:shadow-lg transition-shadow"
+                      className="hover:shadow-lg transition-shadow h-full"
                     >
-                      <CardHeader>
+                      <CardHeader className="pb-3">
                         <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
-                          <Badge variant="secondary" className="text-xs">
-                            {relatedPost.frontmatter.category}
-                          </Badge>
+                          <Link
+                            href={`/articles/category/${encodeURIComponent(
+                              relatedPost.frontmatter.category
+                                .toLowerCase()
+                                .replace(/s+/g, "-")
+                            )}`}
+                          >
+                            <span className="cursor-pointer hover:bg-secondary rounded font-semibold">
+                              / {relatedPost.frontmatter.category}
+                            </span>
+                          </Link>
                           <span>•</span>
-                          <span>
+                          <span className="truncate">
                             {format(
                               new Date(relatedPost.frontmatter.date),
                               "MMM dd, yyyy"
                             )}
                           </span>
                         </div>
-                        <CardTitle className="text-lg line-clamp-2 hover:text-primary transition-colors">
+                        <CardTitle className="text-base lg:text-lg line-clamp-2 hover:text-primary transition-colors leading-tight">
                           <Link href={`/articles/${relatedPost.slug}`}>
                             {relatedPost.frontmatter.title}
                           </Link>
                         </CardTitle>
                       </CardHeader>
-                      <CardContent>
-                        <p className="text-sm text-muted-foreground line-clamp-2">
+                      <CardContent className="pt-0">
+                        <p className="text-sm text-muted-foreground line-clamp-2 mb-3 leading-relaxed">
                           {relatedPost.frontmatter.description}
                         </p>
-                        <div className="mt-3 flex flex-wrap gap-1">
+                        <div className="flex flex-wrap gap-1">
                           {relatedPost.frontmatter.tags
                             .slice(0, 2)
                             .map((tag) => (
-                              <Badge
+                              <Link
                                 key={tag}
-                                variant="secondary"
-                                className="text-xs"
+                                href={`/articles/tags/${encodeURIComponent(
+                                  tag.toLowerCase().replace(/s+/g, "-")
+                                )}`}
                               >
-                                {tag}
-                              </Badge>
+                                <Badge
+                                  variant="secondary"
+                                  className="text-xs cursor-pointer hover:bg-secondary"
+                                >
+                                  {tag}
+                                </Badge>
+                              </Link>
                             ))}
                         </div>
                       </CardContent>
@@ -328,18 +365,18 @@ export default async function ArticlePage({ params }: PageProps) {
             )}
 
             {/* Call to Action */}
-            <section className="text-center py-12 border-t border-border">
-              <h3 className="text-2xl font-bold text-foreground mb-4">
+            <section className="text-center py-8 lg:py-12 border-t border-border">
+              <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-4">
                 Enjoyed this article?
               </h3>
-              <p className="text-muted-foreground mb-6">
+              <p className="text-muted-foreground mb-6 text-sm sm:text-base">
                 Follow me for more insights on web development and modern
                 frontend technologies.
               </p>
               <div className="flex flex-wrap justify-center gap-3">
                 <Link
                   href="/articles"
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors text-sm sm:text-base"
                 >
                   <BookOpen className="h-4 w-4" />
                   Read More Articles

@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getAllCategories, getArticlesByCategory } from "@/data/blog-data";
+import { getAllArticles } from "@/data/blog-data";
 import { Badge } from "@/components/ui/badge";
 import {
   Card,
@@ -10,48 +10,58 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { CalendarDays, Clock, User, Folder, ArrowLeft } from "lucide-react";
+import { CalendarDays, Clock, User, Tag, ArrowLeft } from "lucide-react";
 import { Metadata } from "next";
 import Script from "next/script";
 
 interface PageProps {
   params: Promise<{
-    category: string;
+    tag: string;
   }>;
 }
 
 export async function generateStaticParams() {
-  const categories = getAllCategories();
-  return categories.map((category) => ({
-    category: category.slug,
+  const articles = getAllArticles();
+  const tagSet = new Set<string>();
+  articles.forEach((article) => {
+    article.frontmatter.tags.forEach((tag) => {
+      tagSet.add(tag.toLowerCase().replace(/s+/g, "-"));
+    });
+  });
+  return Array.from(tagSet).map((tag) => ({
+    tag,
   }));
 }
 
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
-  const { category } = await params;
-  const categories = getAllCategories();
-  const categoryData = categories.find((cat) => cat.slug === category);
+  const { tag } = await params;
+  const articles = getAllArticles();
+  const tagArticles = articles.filter((article) =>
+    article.frontmatter.tags.some(
+      (t) => t.toLowerCase().replace(/s+/g, "-") === tag
+    )
+  );
 
-  if (!categoryData) {
+  if (tagArticles.length === 0) {
     return {
-      title: "Category Not Found",
-      description: "The requested category could not be found.",
+      title: "Tag Not Found",
+      description: "The requested tag could not be found.",
     };
   }
 
+  const tagName =
+    tagArticles[0].frontmatter.tags.find(
+      (t) => t.toLowerCase().replace(/s+/g, "-") === tag
+    ) || tag;
+
   return {
-    title: `${categoryData.name} Articles | Khairil Rahman Hakiki Blog`,
-    description: `Browse all ${categoryData.name.toLowerCase()} articles and tutorials. ${
-      categoryData.description
-    } Find the latest insights and best practices.`,
-    keywords: [
-      categoryData.name,
-      "articles",
-      "tutorials",
-      categoryData.name.toLowerCase(),
-    ],
+    title: `${tagName} Articles | Khairil Rahman Hakiki Blog`,
+    description: `Browse all articles tagged with ${tagName.toLowerCase()}. Find the latest insights and best practices. (${
+      tagArticles.length
+    } article${tagArticles.length !== 1 ? "s" : ""})`,
+    keywords: [tagName, "articles", "tutorials", tagName.toLowerCase()],
     authors: [{ name: "Khairil Rahman Hakiki" }],
     creator: "Khairil Rahman Hakiki",
     publisher: "Khairil Rahman Hakiki",
@@ -63,18 +73,16 @@ export async function generateMetadata({
     openGraph: {
       type: "website",
       locale: "en_US",
-      url: `https://kyyril.pages.dev/articles/category/${category}`,
-      title: `${categoryData.name} Articles | Khairil Rahman Hakiki Blog`,
-      description: `Browse all ${categoryData.name.toLowerCase()} articles and tutorials. ${
-        categoryData.description
-      } Find the latest insights and best practices.`,
+      url: `https://kyyril.pages.dev/articles/tags/${tag}`,
+      title: `${tagName} Articles | Khairil Rahman Hakiki Blog`,
+      description: `Browse all articles tagged with ${tagName.toLowerCase()}. Find the latest insights and best practices.`,
       siteName: "Khairil Rahman Hakiki Blog",
       images: [
         {
           url: "/assets/profile.webp",
           width: 1200,
           height: 630,
-          alt: `${categoryData.name} Articles`,
+          alt: `${tagName} Articles`,
         },
       ],
     },
@@ -82,14 +90,12 @@ export async function generateMetadata({
       card: "summary_large_image",
       site: "@khairilrahmanhakiki",
       creator: "@khairilrahmanhakiki",
-      title: `${categoryData.name} Articles | Khairil Rahman Hakiki Blog`,
-      description: `Browse all ${categoryData.name.toLowerCase()} articles and tutorials. ${
-        categoryData.description
-      }`,
+      title: `${tagName} Articles | Khairil Rahman Hakiki Blog`,
+      description: `Browse all articles tagged with ${tagName.toLowerCase()}.`,
       images: ["/assets/profile.webp"],
     },
     alternates: {
-      canonical: `https://kyyril.pages.dev/articles/category/${category}`,
+      canonical: `https://kyyril.pages.dev/articles/tags/${tag}`,
     },
     robots: {
       index: true,
@@ -105,39 +111,32 @@ export async function generateMetadata({
   };
 }
 
-export default async function CategoryPage({ params }: PageProps) {
-  const { category } = await params;
-  const categories = getAllCategories();
-  const categoryData = categories.find((cat) => cat.slug === category);
+export default async function TagPage({ params }: PageProps) {
+  const { tag } = await params;
+  const allArticles = getAllArticles();
+  const articles = allArticles.filter((article) =>
+    article.frontmatter.tags.some(
+      (t) => t.toLowerCase().replace(/s+/g, "-") === tag
+    )
+  );
 
-  if (!categoryData) {
+  if (articles.length === 0) {
     notFound();
   }
 
-  const articles = getArticlesByCategory(category);
-  const categoryTags = articles.reduce((acc, article) => {
-    article.frontmatter.tags.forEach((tag) => {
-      const existing = acc.find((t) => t.name === tag);
-      if (existing) {
-        existing.count++;
-      } else {
-        acc.push({
-          name: tag,
-          slug: tag.toLowerCase().replace(/s+/g, "-"),
-          count: 1,
-        });
-      }
-    });
-    return acc;
-  }, [] as { name: string; slug: string; count: number }[]);
+  const tagName =
+    articles[0].frontmatter.tags.find(
+      (t) => t.toLowerCase().replace(/s+/g, "-") === tag
+    ) || tag;
+  const tagData = { name: tagName, slug: tag, count: articles.length };
 
-  // JSON-LD structured data for category page
-  const categoryStructuredData = {
+  // JSON-LD structured data for tag page
+  const tagStructuredData = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    name: `${categoryData.name} Articles`,
-    description: `${categoryData.description}`,
-    url: `https://kyyril.pages.dev/articles/category/${category}`,
+    name: `${tagData.name} Articles`,
+    description: `Articles tagged with ${tagData.name}`,
+    url: `https://kyyril.pages.dev/articles/tags/${tag}`,
     mainEntity: {
       "@type": "Blog",
       blogPost: articles.map((article) => ({
@@ -150,7 +149,6 @@ export default async function CategoryPage({ params }: PageProps) {
           "@type": "Person",
           name: article.frontmatter.author,
         },
-        articleSection: article.frontmatter.category,
         keywords: article.frontmatter.tags.join(", "),
       })),
     },
@@ -172,8 +170,8 @@ export default async function CategoryPage({ params }: PageProps) {
         {
           "@type": "ListItem",
           position: 3,
-          name: categoryData.name,
-          item: `https://kyyril.pages.dev/articles/category/${category}`,
+          name: tagData.name,
+          item: `https://kyyril.pages.dev/articles/tags/${tag}`,
         },
       ],
     },
@@ -183,10 +181,10 @@ export default async function CategoryPage({ params }: PageProps) {
     <>
       {/* Structured Data Script */}
       <Script
-        id="category-structured-data"
+        id="tag-structured-data"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(categoryStructuredData, null, 2),
+          __html: JSON.stringify(tagStructuredData, null, 2),
         }}
       />
 
@@ -200,7 +198,7 @@ export default async function CategoryPage({ params }: PageProps) {
             Articles
           </Link>
           <span>/</span>
-          <span className="text-foreground">{categoryData.name}</span>
+          <span className="text-foreground">{tagData.name}</span>
         </nav>
 
         {/* Back Button */}
@@ -214,66 +212,56 @@ export default async function CategoryPage({ params }: PageProps) {
           </Link>
         </div>
 
-        {/* Category Header */}
+        {/* Tag Header */}
         <div className="mb-12">
           <div className="flex items-center gap-3 mb-4">
-            <Folder className="h-8 w-8 text-primary" />
+            <Tag className="h-8 w-8 text-primary" />
             <div>
               <h1 className="text-4xl font-bold text-foreground">
-                {categoryData.name}
+                {tagData.name}
               </h1>
               <p className="text-lg text-muted-foreground mt-2">
-                {categoryData.description} ({categoryData.count} article
-                {categoryData.count !== 1 ? "s" : ""})
+                Articles tagged with {tagData.name.toLowerCase()} (
+                {tagData.count} article
+                {tagData.count !== 1 ? "s" : ""})
               </p>
             </div>
           </div>
 
-          {/* All Categories Navigation */}
+          {/* All Tags Navigation */}
           <div className="mt-8">
             <h3 className="text-sm font-semibold text-muted-foreground mb-3">
-              All Categories
+              All Tags
             </h3>
             <div className="flex flex-wrap gap-2">
-              {categories.map((cat) => (
-                <Link
-                  key={cat.slug}
-                  href={`/articles/category/${encodeURIComponent(cat.slug)}`}
-                >
-                  <Badge
-                    variant={cat.slug === category ? "default" : "secondary"}
-                    className="cursor-pointer hover:bg-secondary"
-                  >
-                    {cat.name} ({cat.count})
-                  </Badge>
-                </Link>
-              ))}
-            </div>
-          </div>
-
-          {/* Tags in this Category */}
-          {categoryTags.length > 0 && (
-            <div className="mt-6">
-              <h3 className="text-sm font-semibold text-muted-foreground mb-3">
-                Tags in {categoryData.name}
-              </h3>
-              <div className="flex flex-wrap gap-2">
-                {categoryTags.map((tag) => (
+              {allArticles
+                .reduce((acc, article) => {
+                  article.frontmatter.tags.forEach((t) => {
+                    const slug = t.toLowerCase().replace(/s+/g, "-");
+                    const existing = acc.find((tag) => tag.slug === slug);
+                    if (existing) {
+                      existing.count++;
+                    } else {
+                      acc.push({ name: t, slug, count: 1 });
+                    }
+                  });
+                  return acc;
+                }, [] as { name: string; slug: string; count: number }[])
+                .map((t) => (
                   <Link
-                    key={tag.slug}
-                    href={`/articles/tags/${encodeURIComponent(tag.slug)}`}
+                    key={t.slug}
+                    href={`/articles/tags/${encodeURIComponent(t.slug)}`}
                   >
                     <Badge
-                      variant="secondary"
+                      variant={t.slug === tag ? "default" : "secondary"}
                       className="cursor-pointer hover:bg-secondary"
                     >
-                      {tag.name} ({tag.count})
+                      {t.name} ({t.count})
                     </Badge>
                   </Link>
                 ))}
-              </div>
             </div>
-          )}
+          </div>
         </div>
 
         {/* Articles Grid */}
@@ -343,7 +331,11 @@ export default async function CategoryPage({ params }: PageProps) {
                             )}`}
                           >
                             <Badge
-                              variant="secondary"
+                              variant={
+                                tag.toLowerCase().replace(/s+/g, "-") === tag
+                                  ? "default"
+                                  : "secondary"
+                              }
                               className="text-xs cursor-pointer hover:bg-secondary"
                             >
                               {tag}
@@ -374,19 +366,18 @@ export default async function CategoryPage({ params }: PageProps) {
           /* Empty State */
           <div className="text-center py-12">
             <div className="text-muted-foreground mb-4">
-              <Folder className="h-12 w-12 mx-auto mb-4 opacity-50" />
+              <Tag className="h-12 w-12 mx-auto mb-4 opacity-50" />
               <h3 className="text-lg font-semibold mb-2">
-                No articles in this category yet
+                No articles with this tag yet
               </h3>
               <p>
-                Check back soon for new {categoryData.name.toLowerCase()}{" "}
-                content!
+                Check back soon for new {tagData.name.toLowerCase()} content!
               </p>
               <Link
                 href="/articles"
                 className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors"
               >
-                <Folder className="h-4 w-4" />
+                <Tag className="h-4 w-4" />
                 Browse All Articles
               </Link>
             </div>

@@ -2,9 +2,9 @@
 title: "Modern React Patterns untuk 2025"
 description: "Mengenal pattern-pattern React terbaru yang akan ruling di tahun 2025"
 date: "2025-11-06"
-category: "React"
+category: "library"
 tags: ["react", "patterns", "hooks", "2025"]
-author: "Developer"
+author: "Khairil Rahman"
 readTime: "12 min read"
 published: true
 ---
@@ -27,11 +27,11 @@ Custom hooks adalah cornerstone dari modern React development. Berikut pattern-p
 
 ```typescript
 // useLocalStorage.ts
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 function useLocalStorage<T>(key: string, initialValue: T) {
   const [storedValue, setStoredValue] = useState<T>(() => {
-    if (typeof window === 'undefined') {
+    if (typeof window === "undefined") {
       return initialValue;
     }
     try {
@@ -45,9 +45,10 @@ function useLocalStorage<T>(key: string, initialValue: T) {
 
   const setValue = (value: T | ((val: T) => T)) => {
     try {
-      const valueToStore = value instanceof Function ? value(storedValue) : value;
+      const valueToStore =
+        value instanceof Function ? value(storedValue) : value;
       setStoredValue(valueToStore);
-      if (typeof window !== 'undefined') {
+      if (typeof window !== "undefined") {
         window.localStorage.setItem(key, JSON.stringify(valueToStore));
       }
     } catch (error) {
@@ -65,7 +66,7 @@ Pattern ini memungkinkan kita untuk membuat component yang flexible dan reusable
 
 ```tsx
 // Modal.tsx
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState } from "react";
 
 interface ModalContextType {
   isOpen: boolean;
@@ -79,7 +80,13 @@ function Modal({ children }: { children: React.ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <ModalContext.Provider value={{ isOpen, openModal: () => setIsOpen(true), closeModal: () => setIsOpen(false) }}>
+    <ModalContext.Provider
+      value={{
+        isOpen,
+        openModal: () => setIsOpen(true),
+        closeModal: () => setIsOpen(false),
+      }}
+    >
       {children}
     </ModalContext.Provider>
   );
@@ -96,9 +103,7 @@ function ModalContent({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-      <div className="bg-white p-6 rounded-lg max-w-md w-full">
-        {children}
-      </div>
+      <div className="bg-white p-6 rounded-lg max-w-md w-full">{children}</div>
     </div>
   );
 }
@@ -126,7 +131,7 @@ Untuk state management di 2025, kita punya several options:
 ### Zustand (Lightweight State Management)
 
 ```typescript
-import { create } from 'zustand';
+import { create } from "zustand";
 
 interface UserState {
   user: User | null;
@@ -176,15 +181,14 @@ const ExpensiveComponent = React.memo(({ data, onUpdate }) => {
 ```tsx
 function SearchResults({ query }: { query: string }) {
   const deferredQuery = useDeferredValue(query);
-  const results = useMemo(() => 
-    searchResults(deferredQuery), 
-    [deferredQuery]
-  );
+  const results = useMemo(() => searchResults(deferredQuery), [deferredQuery]);
 
   return (
     <div>
       {query !== deferredQuery && <div>Loading...</div>}
-      {results.map(result => <ResultItem key={result.id} {...result} />)}
+      {results.map((result) => (
+        <ResultItem key={result.id} {...result} />
+      ))}
     </div>
   );
 }
@@ -193,6 +197,7 @@ function SearchResults({ query }: { query: string }) {
 ## Kesimpulan
 
 React patterns di 2025 lebih fokus pada:
+
 - **Simplicity**: Less boilerplate, more functionality
 - **Performance**: Built-in optimizations
 - **Developer Experience**: Better tooling dan patterns

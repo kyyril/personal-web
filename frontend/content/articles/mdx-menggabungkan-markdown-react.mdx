@@ -2,9 +2,9 @@
 title: "MDX: Menggabungkan Markdown dengan React Components"
 description: "Panduan lengkap menggunakan MDX untuk membuat content yang interaktif dalam Next.js"
 date: "2025-11-05"
-category: "Next.js"
+category: "framework"
 tags: ["mdx", "content", "components", "nextjs"]
-author: "Developer"
+author: "Khairil Rahman"
 readTime: "10 min read"
 published: true
 ---
@@ -29,7 +29,7 @@ MDX adalah superset dari markdown yang memungkinkan kita untuk:
 ```jsx
 # Blog Post Title
 
-Ini adalah content markdown biasa. 
+Ini adalah content markdown biasa.
 
 <Callout type="info">
   Ini adalah React component yang akan dirender!
@@ -57,22 +57,25 @@ Dan ini adalah <Badge variant="outline">React component</Badge> yang menggunakan
 ### Setup MDX in Next.js
 
 1. Install dependencies:
+
 ```bash
 npm install @next/mdx gray-matter remark remark-gfm
 ```
 
 2. Update `next.config.mjs`:
+
 ```javascript
-import { withMDX } from '@next/mdx';
+import { withMDX } from "@next/mdx";
 
 const nextConfig = {
-  pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
+  pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
 };
 
 export default withMDX()(nextConfig);
 ```
 
 3. Create MDX content:
+
 ```mdx
 ---
 title: "My First MDX Post"
@@ -105,7 +108,7 @@ export function CodeBlock({ children, filename, language }) {
 
 // Usage dalam MDX
 <CodeBlock filename="example.ts" language="typescript">
-{`
+  {`
 import { useState } from 'react';
 
 function Counter() {
@@ -118,61 +121,63 @@ function Counter() {
   );
 }
 `}
-</CodeBlock>
+</CodeBlock>;
 ```
 
 ### Interactive Charts
 
 ```jsx
 // components/Chart.tsx
-import { Line } from 'react-chartjs-2';
+import { Line } from "react-chartjs-2";
 
 export function BlogChart({ data }) {
   return (
     <div className="my-8">
-      <Line 
-        data={data} 
-        options={{ 
-          responsive: true, 
-          plugins: { 
-            legend: { position: 'top' } 
-          } 
-        }} 
+      <Line
+        data={data}
+        options={{
+          responsive: true,
+          plugins: {
+            legend: { position: "top" },
+          },
+        }}
       />
     </div>
   );
 }
 
 // Usage
-<BlogChart 
+<BlogChart
   data={{
-    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-    datasets: [{
-      label: 'Performance',
-      data: [12, 19, 3, 5, 2, 3],
-      borderColor: 'rgb(75, 192, 192)',
-      tension: 0.1
-    }]
-  }} 
-/>
+    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+    datasets: [
+      {
+        label: "Performance",
+        data: [12, 19, 3, 5, 2, 3],
+        borderColor: "rgb(75, 192, 192)",
+        tension: 0.1,
+      },
+    ],
+  }}
+/>;
 ```
 
 ### Interactive Code Playground
 
 ```jsx
 // components/CodePlayground.tsx
-import { useState } from 'react';
+import { useState } from "react";
 
 export function CodePlayground({ initialCode }) {
   const [code, setCode] = useState(initialCode);
-  const [output, setOutput] = useState('');
+  const [output, setOutput] = useState("");
 
   const runCode = () => {
     // Simple code execution (in real app, use sandbox)
     try {
       setOutput(eval(code));
     } catch (error) {
-      setOutput('Error: ' + error.message);
+      setOutput("Error: " + error.message);
     }
   };
 
@@ -184,7 +189,10 @@ export function CodePlayground({ initialCode }) {
           onChange={(e) => setCode(e.target.value)}
           className="w-full h-32 p-2 border rounded"
         />
-        <button onClick={runCode} className="mt-2 px-4 py-2 bg-blue-500 text-white rounded">
+        <button
+          onClick={runCode}
+          className="mt-2 px-4 py-2 bg-blue-500 text-white rounded"
+        >
           Run Code
         </button>
       </div>
@@ -214,7 +222,6 @@ components:
   - CodeBlock
   - Chart
 ---
-
 # Blog Content Here
 ```
 
@@ -222,24 +229,24 @@ components:
 
 ```jsx
 // lib/content/loaders.ts
-import fs from 'fs';
-import path from 'path';
-import matter from 'gray-matter';
-import { serialize } from 'next-mdx-remote/serialize';
+import fs from "fs";
+import path from "path";
+import matter from "gray-matter";
+import { serialize } from "next-mdx-remote/serialize";
 
 export async function loadMdxContent(slug) {
-  const filePath = path.join(process.cwd(), 'content', `${slug}.mdx`);
-  const fileContents = fs.readFileSync(filePath, 'utf8');
+  const filePath = path.join(process.cwd(), "content", `${slug}.mdx`);
+  const fileContents = fs.readFileSync(filePath, "utf8");
   const { data, content } = matter(fileContents);
-  
+
   const mdxSource = await serialize(content, {
     parseFrontmatter: true,
     mdxOptions: {
-      remarkPlugins: [require('remark-gfm')],
-      rehypePlugins: [require('rehype-prism-plus')],
+      remarkPlugins: [require("remark-gfm")],
+      rehypePlugins: [require("rehype-prism-plus")],
     },
   });
-  
+
   return {
     mdxSource,
     frontmatter: data,
@@ -277,20 +284,21 @@ components/
 
 ```jsx
 // Lazy load heavy components
-import dynamic from 'next/dynamic';
+import dynamic from "next/dynamic";
 
-const BlogChart = dynamic(() => import('./BlogChart'), {
+const BlogChart = dynamic(() => import("./BlogChart"), {
   loading: () => <div>Loading chart...</div>,
-  ssr: false
+  ssr: false,
 });
 
 // Usage
-<BlogChart data={chartData} />
+<BlogChart data={chartData} />;
 ```
 
 ## Kesimpulan
 
 MDX adalah powerful tool untuk:
+
 - Membuat content yang interactive
 - Menulis dokumentasi yang rich
 - Building developer blogs yang engaging

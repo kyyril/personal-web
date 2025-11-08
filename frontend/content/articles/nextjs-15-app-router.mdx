@@ -2,9 +2,9 @@
 title: "Introduction to Next.js 15 App Router"
 description: "Membahas dasar-dasar penggunaan Next.js 15 dengan App Router, dari Server Components hingga Streaming."
 date: "2025-11-07"
-category: "Next.js"
+category: "framework"
 tags: ["nextjs", "app-router", "tutorial", "react", "v15"]
-author: "Kilo Code"
+author: "Khairil Rahman"
 readTime: "6 min read"
 published: true
 ---
@@ -16,6 +16,7 @@ Next.js 15 menghadirkan App Router yang powerful untuk building modern web appli
 ## What is App Router?
 
 App Router adalah sistem routing baru di Next.js yang memberikan kita kemampuan untuk:
+
 - Server Components
 - Streaming
 - Built-in optimization
@@ -49,7 +50,7 @@ Mari kita buat component sederhana:
 
 ```tsx
 // components/HelloWorld.tsx
-export default function HelloWorld() { 
+export default function HelloWorld() {
   return (
     <div>
       <h1>Hello World with Next.js 15!</h1>
@@ -63,6 +64,7 @@ export default function HelloWorld() {
 
 1.  **Server Components**
     Server components memungkinkan kita untuk:
+
     - Reduce bundle size
     - Better performance
     - Automatic code splitting
