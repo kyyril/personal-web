@@ -344,7 +344,7 @@ export default async function CategoryPage({ params }: PageProps) {
                           >
                             <Badge
                               variant="secondary"
-                              className="text-xs cursor-pointer hover:bg-secondary"
+                              className="text-xs cursor-pointer hover:bg-secondary/50"
                             >
                               {tag}
                             </Badge>

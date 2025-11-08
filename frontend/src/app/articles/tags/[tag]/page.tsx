@@ -336,7 +336,7 @@ export default async function TagPage({ params }: PageProps) {
                                   ? "default"
                                   : "secondary"
                               }
-                              className="text-xs cursor-pointer hover:bg-secondary"
+                              className="text-xs cursor-pointer hover:bg-secondary/50"
                             >
                               {tag}
                             </Badge>

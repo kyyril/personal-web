@@ -28,7 +28,7 @@ export function Navigation() {
         id="navigation"
         role="navigation"
         aria-label="Main navigation"
-        className="fixed bottom-6 w-[300px] inset-x-0 mx-auto bg-background/90 backdrop-blur-sm supports-[backdrop-filter]:bg-background/90 z-50 rounded"
+        className="fixed bottom-6 w-[300px] inset-x-0 mx-auto bg-background/10 backdrop-blur-sm supports-[backdrop-filter]:bg-background/50 z-50 rounded"
         initial={{ y: 100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ type: "spring", stiffness: 120, damping: 17, delay: 0.2 }}
@@ -48,8 +48,8 @@ export function Navigation() {
               <Image
                 src="/assets/profilev2.webp"
                 alt="Profile"
-                width={24}
-                height={24}
+                width={28}
+                height={28}
                 quality={100}
                 className={`rounded-full border-spacing-3 transition-all w-6 h-6 duration-300 object-cover  ${
                   pathname === "/"

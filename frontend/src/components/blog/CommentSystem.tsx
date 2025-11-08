@@ -153,8 +153,9 @@ export function CommentsToggle({
     <div className={`mt-8 ${className}`}>
       <button
         onClick={onToggle}
-        className="flex items-center gap-2 text-primary hover:text-primary/80 font-medium"
+        className="flex items-center gap-2 my-8 text-primary hover:text-primary/80 font-medium"
       >
+        {showComments ? "Hide Comments" : "Show Comments"} ({article.slug})
         <svg
           className={`h-4 w-4 transition-transform ${
             showComments ? "rotate-180" : ""
@@ -170,7 +171,6 @@ export function CommentsToggle({
             d="M19 9l-7 7-7-7"
           />
         </svg>
-        {showComments ? "Hide Comments" : "Show Comments"} ({article.slug})
       </button>
 
       {showComments && (

@@ -86,31 +86,9 @@ export function TableOfContents({
 
   // Create hierarchical structure
   const createHierarchy = (headings: Heading[]) => {
-    const result: Heading[] = [];
-    const stack: Heading[] = [];
-
-    for (const heading of headings) {
-      // Remove headings of same or higher level from stack
-      while (
-        stack.length > 0 &&
-        stack[stack.length - 1].level >= heading.level
-      ) {
-        stack.pop();
-      }
-
-      if (stack.length === 0) {
-        // Top-level heading
-        result.push(heading);
-      } else {
-        // This would be handled by the nested structure
-        // For simplicity, we'll use flat structure with proper indentation
-        result.push(heading);
-      }
-
-      stack.push(heading);
-    }
-
-    return result;
+    // For simplicity, return filtered headings as flat structure
+    // Indentation will be handled in rendering
+    return headings;
   };
 
   const hierarchy = createHierarchy(filteredHeadings);
@@ -127,7 +105,10 @@ export function TableOfContents({
         behavior: "smooth",
       });
     }
-    setIsMobileOpen(false); // Close mobile TOC after navigation
+    // Close mobile TOC after navigation
+    if (window.innerWidth < 768) {
+      setIsMobileOpen(false);
+    }
   };
 
   // Mobile TOC Component
@@ -135,12 +116,12 @@ export function TableOfContents({
     <>
       {/* Mobile FAB */}
       <Button
-        variant="ghost"
-        size="icon"
-        className="fixed bottom-6 right-6 z-50 md:hidden shadow-lg"
+        variant="default"
+        size="lg"
+        className="fixed bottom-6 right-6 z-50 md:hidden shadow-lg border-2 border-primary"
         onClick={() => setIsMobileOpen(true)}
       >
-        <Menu className="h-4 w-4" />
+        <List className="h-5 w-5" />
       </Button>
 
       {/* Mobile Overlay */}
@@ -161,7 +142,7 @@ export function TableOfContents({
                 <X className="h-4 w-4" />
               </Button>
             </div>
-            <ScrollArea className="h-[calc(100vh-80px)] p-4">
+            <ScrollArea className="h-[calc(100vh-80px)] p-4 pr-2">
               <TocList />
             </ScrollArea>
           </div>
@@ -169,8 +150,6 @@ export function TableOfContents({
       )}
     </>
   );
-
-  
 
   // Desktop TOC List Component
   const TocList = () => (
@@ -186,13 +165,12 @@ export function TableOfContents({
             className={cn(
               "w-full text-left text-sm transition-colors hover:text-foreground",
               "px-2 py-1 rounded-md",
-              isChild && "ml-4",
               isActive
                 ? "text-primary bg-primary/10 font-medium"
                 : "text-muted-foreground hover:text-foreground hover:bg-accent"
             )}
             style={{
-              paddingLeft: `${(heading.level - 1) * 12 + 8}px`,
+              paddingLeft: `${(heading.level - 2) * 16 + 8}px`,
             }}
           >
             <span className="line-clamp-2">{heading.text}</span>
@@ -207,7 +185,7 @@ export function TableOfContents({
       {/* Desktop TOC */}
       <div
         className={cn(
-          "hidden md:block sticky top-24 w-64 max-h-[calc(100vh-6rem)] bg-background border rounded-lg p-4",
+          "hidden md:block shadow-md sticky top-24 w-64 max-h-[calc(100vh-6rem)] bg-background p-4",
           className
         )}
       >
@@ -247,7 +225,7 @@ export function TableOfContents({
 
         {/* TOC Content */}
         {!isCollapsed && (
-          <ScrollArea className="h-[calc(100vh-12rem)]">
+          <ScrollArea className="h-[calc(100vh-12rem)] pr-2">
             <TocList />
           </ScrollArea>
         )}
@@ -289,9 +267,8 @@ export function BackToTop() {
 
   return (
     <Button
-      variant="outline"
-      size="icon"
-      className="fixed bottom-6 left-6 z-40 shadow-lg"
+      size={"icon"}
+      className="fixed bottom-40 border backdrop-blur-sm supports-[backdrop-filter]:bg-primary/50 right-2 md:hidden"
       onClick={scrollToTop}
     >
       <ArrowUp className="h-4 w-4" />

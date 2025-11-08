@@ -296,7 +296,7 @@ export default async function ArticlePage({ params }: PageProps) {
 
             {/* Related Posts */}
             {relatedPosts.length > 0 && (
-              <section className="mb-8 lg:mb-12">
+              <section className="mb-8 lg:mb-12 mt-12">
                 <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-4 lg:mb-6 flex items-center gap-2">
                   <BookOpen className="h-5 w-5 lg:h-6 lg:w-6 flex-shrink-0" />
                   Related Articles
@@ -350,7 +350,7 @@ export default async function ArticlePage({ params }: PageProps) {
                               >
                                 <Badge
                                   variant="secondary"
-                                  className="text-xs cursor-pointer hover:bg-secondary"
+                                  className="text-xs cursor-pointer hover:bg-secondary/50"
                                 >
                                   {tag}
                                 </Badge>
@@ -379,7 +379,7 @@ export default async function ArticlePage({ params }: PageProps) {
                   className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors text-sm sm:text-base"
                 >
                   <BookOpen className="h-4 w-4" />
-                  Read More Articles
+                  Read More
                 </Link>
               </div>
             </section>
