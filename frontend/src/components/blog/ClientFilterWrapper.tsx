@@ -102,9 +102,9 @@ export function ClientFilterWrapper({
               {/* Tags */}
               {post.frontmatter.tags && post.frontmatter.tags.length > 0 && (
                 <div className="mt-4 flex flex-wrap gap-1">
-                  {post.frontmatter.tags.slice(0, 3).map((tag) => (
+                  {post.frontmatter.tags.slice(0, 3).map((tag, index) => (
                     <Link
-                      key={tag}
+                      key={`${tag}-${index}`}
                       href={`/articles/tags/${encodeURIComponent(
                         tag.toLowerCase().replace(/s+/g, "-")
                       )}`}

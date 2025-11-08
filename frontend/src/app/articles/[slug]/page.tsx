@@ -230,9 +230,9 @@ export default async function ArticlePage({ params }: PageProps) {
               <header className="mb-6 lg:mb-8">
                 <div className="flex flex-wrap items-center gap-2 lg:gap-3 mb-4">
                   <span className="font-bold">#</span>
-                  {post.frontmatter.tags.slice(0, 3).map((tag) => (
+                  {post.frontmatter.tags.slice(0, 3).map((tag, index) => (
                     <Link
-                      key={tag}
+                      key={`${tag}-${index}`}
                       href={`/articles/tags/${encodeURIComponent(
                         tag.toLowerCase().replace(/s+/g, "-")
                       )}`}
@@ -341,9 +341,9 @@ export default async function ArticlePage({ params }: PageProps) {
                         <div className="flex flex-wrap gap-1">
                           {relatedPost.frontmatter.tags
                             .slice(0, 2)
-                            .map((tag) => (
+                            .map((tag, index) => (
                               <Link
-                                key={tag}
+                                key={`${tag}-${index}`}
                                 href={`/articles/tags/${encodeURIComponent(
                                   tag.toLowerCase().replace(/s+/g, "-")
                                 )}`}

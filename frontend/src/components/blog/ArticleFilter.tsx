@@ -241,9 +241,9 @@ export function ArticleFilter({
                   Active Filters
                 </label>
                 <div className="flex flex-wrap gap-1">
-                  {selectedTags.map((tag) => (
+                  {selectedTags.map((tag, index) => (
                     <Badge
-                      key={tag}
+                      key={`${tag}-${index}`}
                       variant="secondary"
                       className="cursor-pointer gap-1"
                       onClick={() => handleTagToggle(tag)}

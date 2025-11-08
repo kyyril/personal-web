@@ -323,9 +323,9 @@ export default async function TagPage({ params }: PageProps) {
                   {article.frontmatter.tags &&
                     article.frontmatter.tags.length > 0 && (
                       <div className="mt-4 flex flex-wrap gap-1">
-                        {article.frontmatter.tags.slice(0, 3).map((tag) => (
+                        {article.frontmatter.tags.slice(0, 3).map((tag, index) => (
                           <Link
-                            key={tag}
+                            key={`${tag}-${index}`}
                             href={`/articles/tags/${encodeURIComponent(
                               tag.toLowerCase().replace(/s+/g, "-")
                             )}`}

@@ -16,7 +16,7 @@ import { Metadata } from "next";
 import Script from "next/script";
 
 export const metadata: Metadata = {
-  title: "Articles | Blog - Software engineer & Frontend Tutorials",
+  title: "Articles | Software engineer & Frontend Tutorials",
   description:
     "Read the latest articles about software engineer, React, Next.js, and modern frontend technologies. Learn from comprehensive tutorials and best practices.",
   keywords: [
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "https://kyyril.pages.dev/articles",
-    title: "Articles | Blog - software engineer & Software Tutorials",
+    title: "Articles | Software engineer & Software Tutorials",
     description:
       "Read the latest articles about software engineer, React, Next.js, and modern frontend technologies. Learn from comprehensive tutorials and best practices.",
     siteName: "Khairil Rahman Hakiki Blog",
@@ -155,9 +155,9 @@ function ArticlesList({ articles }: { articles: Article[] }) {
             {/* Tags */}
             {post.frontmatter.tags && post.frontmatter.tags.length > 0 && (
               <div className="mt-4 flex flex-wrap gap-1">
-                {post.frontmatter.tags.slice(0, 3).map((tag) => (
+                {post.frontmatter.tags.slice(0, 3).map((tag, index) => (
                   <Link
-                    key={tag}
+                    key={`${tag}-${index}`}
                     href={`/articles/tags/${encodeURIComponent(
                       tag.toLowerCase().replace(/s+/g, "-")
                     )}`}
