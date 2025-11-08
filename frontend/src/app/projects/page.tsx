@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     "Next.js applications",
     "TypeScript development",
     "web development portfolio",
-    "software engineer projects"
+    "software engineer projects",
   ],
   alternates: {
     canonical: "https://kyyril.pages.dev/projects",
@@ -33,8 +33,8 @@ export const metadata: Metadata = {
         width: 1200,
         height: 630,
         alt: "Khairil Rahman Hakiki - Projects Portfolio",
-      }
-    ]
+      },
+    ],
   },
   twitter: {
     title: "Projects | Khairil Rahman Hakiki",
@@ -47,21 +47,11 @@ export const metadata: Metadata = {
 export const revalidate = 3600;
 
 export default function ProjectPage() {
-  const breadcrumbItems = [
-    { label: "Home", href: "/" },
-    { label: "Projects" }
-  ];
+  const breadcrumbItems = [{ label: "Home", href: "/" }, { label: "Projects" }];
 
   return (
     <section className="max-w-6xl min-h-screen w-full px-4 md:px-16 mx-auto">
       <Breadcrumb items={breadcrumbItems} className="mb-4" />
-      <h1 className="mb-6 text-3xl font-bold lg:text-4xl flex items-end pb-4 pt-2">
-        Projects
-      </h1>
-      <p className="text-muted-foreground mb-8 max-w-3xl">
-        Explore a collection of my work including web applications, open-source contributions,
-        and personal experiments. Each project showcases different aspects of modern web development.
-      </p>
       <Suspense fallback={<ProjectListSkeleton />}>
         <ProjectListWrapper />
       </Suspense>
@@ -70,7 +60,8 @@ export default function ProjectPage() {
         GitHub Repositories
       </h2>
       <p className="text-muted-foreground mb-8 max-w-3xl">
-        Live repositories showcasing ongoing development work and collaborative projects.
+        Live repositories showcasing ongoing development work and collaborative
+        projects.
       </p>
       <Suspense fallback={<GitHubProjectsListSkeleton />}>
         <GitHubProjectsWrapper />

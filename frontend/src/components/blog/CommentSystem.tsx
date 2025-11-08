@@ -41,7 +41,7 @@ export function CommentSystem({ article, className = "" }: CommentSystemProps) {
   if (!mounted) {
     return (
       <div
-        className={`border rounded-lg p-4 text-center text-muted-foreground ${className}`}
+        className={`border rounded p-4 text-center text-muted-foreground ${className}`}
       >
         <div className="animate-pulse">Loading comments...</div>
       </div>
@@ -60,7 +60,7 @@ export function CommentSystem({ article, className = "" }: CommentSystemProps) {
       <Giscus {...giscusConfig} />
 
       {/* Comment Guidelines */}
-      <div className="mt-4 p-4 bg-muted/50 rounded-lg text-sm">
+      <div className="mt-4 mb-24 p-4 bg-muted/50 rounded text-sm">
         <h4 className="font-medium mb-2">Comment Guidelines:</h4>
         <ul className="list-disc list-inside space-y-1 text-muted-foreground">
           <li>
@@ -123,7 +123,7 @@ export function UtterancesCommentSystem({ article }: { article: Article }) {
 
   if (!mounted) {
     return (
-      <div className="mt-8 border rounded-lg p-4 text-center text-muted-foreground">
+      <div className="mt-8 border rounded p-4 text-center text-muted-foreground">
         <div className="animate-pulse">Loading comments...</div>
       </div>
     );

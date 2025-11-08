@@ -82,14 +82,6 @@ export function TableOfContents({
     (heading: Heading) => heading.level > 1
   );
 
-  console.log("TOC Debug:", {
-    content: !!content,
-    headings: headings?.length,
-    extractedHeadings: extractedHeadings.length,
-    filteredHeadings: filteredHeadings.length,
-    contentPreview: content?.substring(0, 200),
-  });
-
   // Track scroll progress and active section - MUST be called before any conditional returns
   useEffect(() => {
     const handleScroll = () => {
@@ -171,12 +163,11 @@ export function TableOfContents({
     <>
       {/* Mobile FAB */}
       <Button
-        variant="default"
-        size="lg"
-        className="fixed bottom-6 right-6 z-50 md:hidden shadow-lg border-2 border-primary"
+        size="icon"
+        className="fixed bottom-40 backdrop-blur-sm supports-[backdrop-filter]:bg-primary/50 right-4 md:hidden z-50"
         onClick={() => setIsMobileOpen(true)}
       >
-        <List className="h-5 w-5" />
+        <Menu className="h-5 w-5" />
       </Button>
 
       {/* Mobile Overlay */}
@@ -186,8 +177,8 @@ export function TableOfContents({
             className="absolute inset-0 bg-black/50"
             onClick={() => setIsMobileOpen(false)}
           />
-          <div className="absolute right-0 top-0 h-full w-80 max-w-[85vw] bg-background border-l shadow-lg">
-            <div className="flex items-center justify-between p-4 border-b">
+          <div className="absolute right-0 top-0 h-full w-80 max-w-[85vw] bg-background  shadow-lg">
+            <div className="flex items-center justify-between p-4">
               <h3 className="font-semibold">Table of Contents</h3>
               <Button
                 variant="ghost"
@@ -219,7 +210,7 @@ export function TableOfContents({
             onClick={() => scrollToSection(heading.id)}
             className={cn(
               "w-full text-left text-sm transition-colors hover:text-foreground",
-              "px-2 py-1 rounded-md",
+              "px-2 py-1 rounded",
               isActive
                 ? "text-primary bg-primary/10 font-medium"
                 : "text-muted-foreground hover:text-foreground hover:bg-accent"
@@ -239,7 +230,7 @@ export function TableOfContents({
     <>
       {/* Full Screen Progress Bar */}
       {showProgress && (
-        <div className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm border-b">
+        <div className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm ">
           <div className="w-full bg-secondary h-1">
             <div
               className="bg-primary h-1 transition-all duration-300"
@@ -289,44 +280,5 @@ export function TableOfContents({
       {/* Mobile TOC */}
       <MobileTOC />
     </>
-  );
-}
-
-// Back to top button component
-export function BackToTop() {
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const toggleVisibility = () => {
-      if (window.pageYOffset > 300) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
-      }
-    };
-
-    window.addEventListener("scroll", toggleVisibility);
-    return () => window.removeEventListener("scroll", toggleVisibility);
-  }, []);
-
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
-
-  if (!isVisible) {
-    return null;
-  }
-
-  return (
-    <Button
-      size={"icon"}
-      className="fixed bottom-40 border backdrop-blur-sm supports-[backdrop-filter]:bg-primary/50 right-2 md:hidden"
-      onClick={scrollToTop}
-    >
-      <ArrowUp className="h-4 w-4" />
-    </Button>
   );
 }

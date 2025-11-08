@@ -4,11 +4,15 @@ description: "Exploring advanced MDX rendering capabilities with quotes, images,
 date: "2024-11-08"
 category: "Development"
 tags: ["MDX", "React", "Frontend", "Content"]
+author: "Khairil Rahman"
+readTime: "8 min read"
+coverImage: "/assets/blog/nextjs-15-cover.jpg"
+published: true
 ---
 
 Welcome to this comprehensive showcase of enhanced MDX rendering capabilities. This article demonstrates various rich content elements that make your blog posts more engaging and visually appealing.
 
-# Blockquotes with Author Attribution
+## Blockquotes with Author Attribution
 
 Blockquotes can now include author attribution. Simply add `-- Author Name` at the end of your blockquote:
 
@@ -18,35 +22,34 @@ Blockquotes can now include author attribution. Simply add `-- Author Name` at t
 > Innovation distinguishes between a leader and a follower.
 > -- Steve Jobs
 
-# Enhanced Images with Captions
+## Enhanced Images with Captions
 
 Images now support captions using the `title` attribute in markdown:
 
 ![Beautiful sunset over mountains](https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=400&fit=crop "A stunning sunset view over rugged mountain peaks")
 
-# Callout Boxes
+## Callout Boxes
 
 Use callout boxes to highlight important information:
 
 <div class="callout-info">
-  **Info Callout:** This is useful for general information that readers should
-  pay attention to.
+  Info: This is useful for general information that readers should pay attention
+  to.
 </div>
 
 <div class="callout-warning">
-  **Warning Callout:** Be careful with this important warning message.
+  Warning: Be careful with this important warning message.
 </div>
 
 <div class="callout-success">
-  **Success Callout:** Great job! This indicates successful completion of a
-  task.
+  Success: Great job! This indicates successful completion of a task.
 </div>
 
 <div class="callout-error">
-  **Error Callout:** Something went wrong. Check your code and try again.
+  Error: Something went wrong. Check your code and try again.
 </div>
 
-# Collapsible Sections
+## Collapsible Sections
 
 Create expandable content sections for better organization:
 
@@ -64,13 +67,13 @@ MDX files are processed by remark and rehype plugins that transform the content 
 
 </details>
 
-# Highlighted Text
+## Highlighted Text
 
 Use the `<mark>` tag to highlight important text:
 
 The `<mark>` element represents text which is <mark>marked or highlighted</mark> for reference or notation purposes.
 
-# Code Blocks with Copy Functionality
+## Code Blocks with Copy Functionality
 
 Code blocks now include syntax highlighting and copy-to-clipboard functionality:
 
@@ -91,21 +94,21 @@ def calculate_fibonacci(n):
         return n
     return calculate_fibonacci(n-1) + calculate_fibonacci(n-2)
 
-# Example usage
-print(calculate_fibonacci(10))  # Output: 55
+## Example usage
+print(calculate_fibonacci(10))  ## Output: 55
 ```
 
-# Advanced Lists
+## Advanced Lists
 
 - **Feature 1:** Enhanced list styling with custom bullets
 - **Feature 2:** Better spacing and typography
 - **Feature 3:** Improved readability across devices
 
-# Mathematical Expressions
+## Mathematical Expressions
 
 While not natively supported in this renderer, you can use inline code for simple expressions: `E = mc²` or `a² + b² = c²`.
 
-# Tables with Enhanced Styling
+## Tables with Enhanced Styling
 
 | Feature     | Status   | Description                    |
 | ----------- | -------- | ------------------------------ |
@@ -115,7 +118,7 @@ While not natively supported in this renderer, you can use inline code for simpl
 | Collapsible | New      | Expandable content sections    |
 | Highlights  | New      | Text highlighting support      |
 
-# Conclusion
+## Conclusion
 
 These enhanced MDX features provide a rich set of tools for creating engaging and interactive blog content. From author-attributed quotes to collapsible sections and callout boxes, your articles can now be more visually appealing and user-friendly.
 

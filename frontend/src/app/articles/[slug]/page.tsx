@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -21,9 +19,11 @@ import {
 import { format } from "date-fns";
 import { Metadata } from "next";
 import Script from "next/script";
-import { TableOfContents, BackToTop } from "@/components/blog/TableOfContents";
+import { TableOfContents } from "@/components/blog/TableOfContents";
 import { ClientCommentSection } from "@/components/blog/ClientCommentSection";
 import { MDXRenderer } from "@/components/blog/MDXRenderer";
+import { Breadcrumb } from "@/components/Breadcrumb";
+import { ReadingProgressBar } from "@/components/blog/ReadingProgressBar";
 
 interface PageProps {
   params: Promise<{
@@ -31,8 +31,79 @@ interface PageProps {
   }>;
 }
 
-export default function ArticlePage({ params }: PageProps) {
-  const { slug } = React.use(params);
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const post = getArticleBySlug(slug);
+
+  if (!post) {
+    return {
+      title: "Article Not Found",
+      description: "The requested article could not be found.",
+    };
+  }
+
+  return {
+    title: `${post.frontmatter.title} | Khairil Rahman Hakiki Blog`,
+    description: post.frontmatter.description,
+    keywords: post.frontmatter.tags.join(", "),
+    authors: [{ name: post.frontmatter.author }],
+    creator: "Khairil Rahman Hakiki",
+    publisher: "Khairil Rahman Hakiki",
+    formatDetection: {
+      email: false,
+      address: false,
+      telephone: false,
+    },
+    openGraph: {
+      type: "article",
+      locale: "en_US",
+      url: `https://kyyril.pages.dev/articles/${post.slug}`,
+      title: `${post.frontmatter.title} | Khairil Rahman Hakiki Blog`,
+      description: post.frontmatter.description,
+      siteName: "Khairil Rahman Hakiki Blog",
+      publishedTime: post.frontmatter.date,
+      modifiedTime: post.frontmatter.date,
+      authors: [post.frontmatter.author],
+      section: post.frontmatter.category,
+      tags: post.frontmatter.tags,
+      images: [
+        {
+          url: post.frontmatter.coverImage || "/assets/profile.webp",
+          width: 1200,
+          height: 630,
+          alt: post.frontmatter.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      site: "@kilocode",
+      creator: "@kilocode",
+      title: `${post.frontmatter.title} | Khairil Rahman Hakiki Blog`,
+      description: post.frontmatter.description,
+      images: [post.frontmatter.coverImage || "/assets/profile.webp"],
+    },
+    alternates: {
+      canonical: `https://kyyril.pages.dev/articles/${post.slug}`,
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
+    },
+  };
+}
+
+export default async function ArticlePage({ params }: PageProps) {
+  const { slug } = await params;
   const post = getArticleBySlug(slug);
 
   if (!post) {
@@ -41,32 +112,7 @@ export default function ArticlePage({ params }: PageProps) {
 
   const relatedPosts = getRelatedArticles(post, 3);
 
-  // Reading progress tracking
-  React.useEffect(() => {
-    const handleScroll = () => {
-      const scrollTop =
-        window.pageYOffset || document.documentElement.scrollTop;
-      const scrollHeight =
-        document.documentElement.scrollHeight -
-        document.documentElement.clientHeight;
-      const progress = (scrollTop / scrollHeight) * 100;
-
-      const progressBar = document.getElementById("reading-progress-bar");
-      const progressText = document.getElementById("reading-progress-text");
-
-      if (progressBar) {
-        progressBar.style.width = `${Math.min(progress, 100)}%`;
-      }
-      if (progressText) {
-        progressText.textContent = `${Math.round(Math.min(progress, 100))}%`;
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  // JSON-LD structured data for article
+  // Enhanced JSON-LD structured data for article
   const articleData = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
@@ -82,7 +128,7 @@ export default function ArticlePage({ params }: PageProps) {
     },
     publisher: {
       "@type": "Person",
-      name: "Kilo Code",
+      name: "Khairil Rahman Hakiki",
       url: "https://kyyril.pages.dev",
     },
     mainEntityOfPage: {
@@ -96,6 +142,7 @@ export default function ArticlePage({ params }: PageProps) {
         "https://kyyril.pages.dev/assets/profile.webp",
       width: 1200,
       height: 630,
+      alt: post.frontmatter.title,
     },
     articleSection: post.frontmatter.category,
     keywords: post.frontmatter.tags.join(", "),
@@ -111,10 +158,41 @@ export default function ArticlePage({ params }: PageProps) {
       url: `https://kyyril.pages.dev/articles/${relatedPost.slug}`,
       datePublished: relatedPost.frontmatter.date,
     })),
+    breadcrumb: {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: "https://kyyril.pages.dev",
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Articles",
+          item: "https://kyyril.pages.dev/articles",
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: post.frontmatter.category,
+          item: `https://kyyril.pages.dev/articles/category/${encodeURIComponent(
+            post.frontmatter.category.toLowerCase().replace(/\s+/g, "-")
+          )}`,
+        },
+        {
+          "@type": "ListItem",
+          position: 4,
+          name: post.frontmatter.title,
+          item: `https://kyyril.pages.dev/articles/${post.slug}`,
+        },
+      ],
+    },
   };
 
   return (
-    <>
+    <div>
       {/* Structured Data Script */}
       <Script
         id="article-structured-data"
@@ -125,41 +203,26 @@ export default function ArticlePage({ params }: PageProps) {
       />
 
       {/* Reading Progress Bar */}
-      <div className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm">
-        <div className="w-full bg-secondary h-1">
-          <div
-            className="bg-primary h-0.5 transition-all duration-300"
-            style={{ width: "0%" }}
-            id="reading-progress-bar"
-          />
-        </div>
-      </div>
+      <ReadingProgressBar />
 
       {/* Breadcrumb Navigation and Back Button */}
       <div className="container mx-auto px-4 py-4 sm:py-6 lg:py-8 max-w-6xl pt-12">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6 lg:mb-8">
           {/* Breadcrumb Navigation */}
-          <nav className="flex items-center space-x-2 text-sm text-muted-foreground order-2 sm:order-1">
-            <Link
-              href="/articles"
-              className="hover:text-foreground transition-colors"
-            >
-              Articles
-            </Link>
-            <span>/</span>
-            <Link
-              href={`/articles/category/${encodeURIComponent(
-                post.frontmatter.category.toLowerCase().replace(/\s+/g, "-")
-              )}`}
-              className="hover:text-foreground transition-colors"
-            >
-              {post.frontmatter.category}
-            </Link>
-            <span>/</span>
-            <span className="text-foreground truncate">
-              {post.frontmatter.title}
-            </span>
-          </nav>
+          <Breadcrumb
+            items={[
+              { label: "Home", href: "/" },
+              { label: "Articles", href: "/articles" },
+              {
+                label: post.frontmatter.category,
+                href: `/articles/category/${encodeURIComponent(
+                  post.frontmatter.category.toLowerCase().replace(/\s+/g, "-")
+                )}`,
+              },
+              { label: post.frontmatter.title },
+            ]}
+            className="order-2 sm:order-1"
+          />
 
           {/* Back Button */}
           <div className="order-1 sm:order-2">
@@ -187,6 +250,10 @@ export default function ArticlePage({ params }: PageProps) {
 
           {/* Main Article Content */}
           <div className="lg:col-span-3">
+            {/* Mobile TOC - Always visible on mobile */}
+            <div className="block lg:hidden mb-6">
+              <TableOfContents content={post.content} isMobile={true} />
+            </div>
             <article className="mb-8 lg:mb-12">
               {/* Article Header */}
               <header className="mb-6 lg:mb-8">
@@ -333,7 +400,7 @@ export default function ArticlePage({ params }: PageProps) {
               <div className="flex flex-wrap justify-center gap-3">
                 <Link
                   href="/articles"
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors text-sm sm:text-base"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground roundedmd hover:bg-primary/90 transition-colors text-sm sm:text-base"
                 >
                   <BookOpen className="h-4 w-4" />
                   Read More
@@ -343,9 +410,6 @@ export default function ArticlePage({ params }: PageProps) {
           </div>
         </div>
       </div>
-
-      {/* Back to Top Button */}
-      <BackToTop />
-    </>
+    </div>
   );
 }

@@ -13,6 +13,7 @@ import {
 import { CalendarDays, Clock, User, Tag, ArrowLeft } from "lucide-react";
 import { Metadata } from "next";
 import Script from "next/script";
+import { Breadcrumb } from "@/components/Breadcrumb";
 
 interface PageProps {
   params: Promise<{
@@ -130,7 +131,7 @@ export default async function TagPage({ params }: PageProps) {
     ) || tag;
   const tagData = { name: tagName, slug: tag, count: articles.length };
 
-  // JSON-LD structured data for tag page
+  // Enhanced JSON-LD structured data for tag page
   const tagStructuredData = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
@@ -150,6 +151,17 @@ export default async function TagPage({ params }: PageProps) {
           name: article.frontmatter.author,
         },
         keywords: article.frontmatter.tags.join(", "),
+        wordCount: article.content.length,
+        timeRequired: `PT${article.frontmatter.readTime.split(" ")[0]}M`,
+        image: {
+          "@type": "ImageObject",
+          url:
+            article.frontmatter.coverImage ||
+            "https://kyyril.pages.dev/assets/profile.webp",
+          width: 1200,
+          height: 630,
+          alt: article.frontmatter.title,
+        },
       })),
     },
     breadcrumb: {
@@ -190,16 +202,14 @@ export default async function TagPage({ params }: PageProps) {
 
       <div className="container mx-auto px-4 py-8 max-w-6xl">
         {/* Breadcrumb Navigation */}
-        <nav className="flex items-center space-x-2 text-sm text-muted-foreground mb-8">
-          <Link
-            href="/articles"
-            className="hover:text-foreground transition-colors"
-          >
-            Articles
-          </Link>
-          <span>/</span>
-          <span className="text-foreground">{tagData.name}</span>
-        </nav>
+        <Breadcrumb
+          items={[
+            { label: "Home", href: "/" },
+            { label: "Articles", href: "/articles" },
+            { label: tagData.name },
+          ]}
+          className="mb-8"
+        />
 
         {/* Back Button */}
         <div className="mb-6">
@@ -323,25 +333,27 @@ export default async function TagPage({ params }: PageProps) {
                   {article.frontmatter.tags &&
                     article.frontmatter.tags.length > 0 && (
                       <div className="mt-4 flex flex-wrap gap-1">
-                        {article.frontmatter.tags.slice(0, 3).map((tag, index) => (
-                          <Link
-                            key={`${tag}-${index}`}
-                            href={`/articles/tags/${encodeURIComponent(
-                              tag.toLowerCase().replace(/s+/g, "-")
-                            )}`}
-                          >
-                            <Badge
-                              variant={
-                                tag.toLowerCase().replace(/s+/g, "-") === tag
-                                  ? "default"
-                                  : "secondary"
-                              }
-                              className="text-xs cursor-pointer hover:bg-secondary/50"
+                        {article.frontmatter.tags
+                          .slice(0, 3)
+                          .map((tag, index) => (
+                            <Link
+                              key={`${tag}-${index}`}
+                              href={`/articles/tags/${encodeURIComponent(
+                                tag.toLowerCase().replace(/s+/g, "-")
+                              )}`}
                             >
-                              {tag}
-                            </Badge>
-                          </Link>
-                        ))}
+                              <Badge
+                                variant={
+                                  tag.toLowerCase().replace(/s+/g, "-") === tag
+                                    ? "default"
+                                    : "secondary"
+                                }
+                                className="text-xs cursor-pointer hover:bg-secondary/50"
+                              >
+                                {tag}
+                              </Badge>
+                            </Link>
+                          ))}
                         {article.frontmatter.tags.length > 3 && (
                           <Badge variant="secondary" className="text-xs">
                             +{article.frontmatter.tags.length - 3} more
@@ -375,7 +387,7 @@ export default async function TagPage({ params }: PageProps) {
               </p>
               <Link
                 href="/articles"
-                className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors"
+                className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded hover:bg-primary/90 transition-colors"
               >
                 <Tag className="h-4 w-4" />
                 Browse All Articles

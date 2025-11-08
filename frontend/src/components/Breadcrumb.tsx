@@ -29,30 +29,30 @@ export const Breadcrumb: React.FC<BreadcrumbProps> = ({ items, className = "" })
   };
 
   return (
-    <>
+    <div>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(generateBreadcrumbData())
         }}
       />
-      <nav 
-        aria-label="Breadcrumb" 
+      <nav
+        aria-label="Breadcrumb"
         className={`flex items-center space-x-2 text-sm text-muted-foreground ${className}`}
       >
         {items.map((item, index) => (
           <React.Fragment key={index}>
             {index > 0 && <ChevronRight className="w-4 h-4" />}
             {item.href && index < items.length - 1 ? (
-              <Link 
-                href={item.href} 
+              <Link
+                href={item.href}
                 className="hover:text-foreground transition-colors"
                 aria-label={`Navigate to ${item.label}`}
               >
                 {item.label}
               </Link>
             ) : (
-              <span 
+              <span
                 className="text-foreground font-medium"
                 aria-current={index === items.length - 1 ? "page" : undefined}
               >
@@ -62,7 +62,7 @@ export const Breadcrumb: React.FC<BreadcrumbProps> = ({ items, className = "" })
           </React.Fragment>
         ))}
       </nav>
-    </>
+    </div>
   );
 };
 

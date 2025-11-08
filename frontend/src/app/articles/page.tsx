@@ -14,6 +14,7 @@ import { CalendarDays, Clock, User, Folder } from "lucide-react";
 import { Article } from "@/data/blog-data";
 import { Metadata } from "next";
 import Script from "next/script";
+import { Breadcrumb } from "@/components/Breadcrumb";
 
 export const metadata: Metadata = {
   title: "Articles | Software engineer & Frontend Tutorials",
@@ -197,7 +198,7 @@ export default function ArticlesPage() {
   const allArticles = getAllArticles();
   const categories = getAllCategories();
 
-  // JSON-LD structured data
+  // Enhanced JSON-LD structured data
   const blogData = {
     "@context": "https://schema.org",
     "@type": "Blog",
@@ -229,8 +230,32 @@ export default function ArticlesPage() {
       articleSection: article.frontmatter.category,
       keywords: article.frontmatter.tags.join(", "),
       wordCount: article.content.length,
-      timeRequired: article.frontmatter.readTime,
+      timeRequired: `PT${article.frontmatter.readTime.split(" ")[0]}M`,
+      image: {
+        "@type": "ImageObject",
+        url: article.frontmatter.coverImage || "https://kyyril.pages.dev/assets/profile.webp",
+        width: 1200,
+        height: 630,
+        alt: article.frontmatter.title,
+      },
     })),
+    breadcrumb: {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: "https://kyyril.pages.dev",
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Articles",
+          item: "https://kyyril.pages.dev/articles",
+        },
+      ],
+    },
   };
 
   return (
@@ -245,6 +270,15 @@ export default function ArticlesPage() {
       />
 
       <div className="container mx-auto px-4 py-8 max-w-6xl">
+        {/* Breadcrumb Navigation */}
+        <Breadcrumb
+          items={[
+            { label: "Home", href: "/" },
+            { label: "Articles" }
+          ]}
+          className="mb-8"
+        />
+
         {/* Header Section */}
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-foreground mb-4">Articles</h1>

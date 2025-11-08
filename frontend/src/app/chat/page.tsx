@@ -382,10 +382,10 @@ export default function Chat() {
     <MusicPlayerProvider>
       <FloatingMusicPlayer />
       <section className="max-w-7xl w-full h-full px-4 md:px-16 overflow-hidden mx-auto pb-16">
-        <div className="mb-4 pt-4">
+        <div className="mb-4">
           <Breadcrumb items={breadcrumbItems} />
         </div>
-        <div className="flex flex-col md:flex-row pt-4 gap-4">
+        <div className="flex flex-col md:flex-row gap-4">
           {/* Delete Confirmation Dialog */}
           <AlertDialog
             open={!!chatToDelete}

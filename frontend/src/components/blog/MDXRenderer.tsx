@@ -10,7 +10,16 @@ import {
   oneDark,
   oneLight,
 } from "react-syntax-highlighter/dist/cjs/styles/prism";
-import { Copy, Check, ExternalLink, Sparkles } from "lucide-react";
+import {
+  Copy,
+  Check,
+  ExternalLink,
+  Sparkles,
+  AlertCircle,
+  AlertTriangle,
+  CheckCircle,
+  XCircle,
+} from "lucide-react";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
@@ -39,7 +48,7 @@ interface MDXRendererProps {
   content: string;
 }
 
-type CalloutType = 'info' | 'warning' | 'success' | 'error';
+type CalloutType = "info" | "warning" | "success" | "error";
 
 export function MDXRenderer({ content }: MDXRendererProps) {
   const [copiedCode, setCopiedCode] = useState<string | null>(null);
@@ -135,11 +144,11 @@ export function MDXRenderer({ content }: MDXRendererProps) {
                   variants={codeBlockVariants}
                   initial="initial"
                   animate="animate"
-                  className="relative group my-8 rounded-lg overflow-hidden dark:border-white/10"
+                  className="relative group my-8 rounded overflow-hidden shadow-md"
                 >
-                  <div className="flex dark:bg-slate-600/50 border-none outline-none items-center justify-between px-4 py-2 dark:border-white/10">
+                  <div className="flex bg-secondary border-none outline-none items-center justify-between px-4 py-2 shadow-md">
                     <div className="flex items-center gap-3">
-                      <span className="text-xs font-medium text-foreground/60">
+                      <span className="text-xs font-medium text-custom">
                         {language}
                       </span>
                     </div>
@@ -150,7 +159,7 @@ export function MDXRenderer({ content }: MDXRendererProps) {
                       className="opacity-0 group-hover:opacity-100 transition-all"
                     >
                       {copiedCode === code ? (
-                        <Check className="h-4 w-4 text-primary" />
+                        <Check className="h-4 w-4 text-custom" />
                       ) : (
                         <Copy className="h-4 w-4 text-foreground/50" />
                       )}
@@ -160,7 +169,7 @@ export function MDXRenderer({ content }: MDXRendererProps) {
                     style={isDark ? oneDark : oneLight}
                     language={language}
                     PreTag="div"
-                    className="!mt-0 !rounded-none !border-none"
+                    className="!mt-0 bg-transparent !rounded-none !border-none"
                     customStyle={{
                       margin: 0,
                       padding: "1.25rem",
@@ -203,7 +212,7 @@ export function MDXRenderer({ content }: MDXRendererProps) {
                 initial="initial"
                 whileInView="animate"
                 viewport={{ once: true }}
-                className={`my-8 pl-6 py-3 text-foreground/60 italic border-l-2 border-primary/30 ${
+                className={`my-8 pl-6 py-3 text-foreground/60 italic bg-custom/10 rounded border-l-2 border-primary/30 ${
                   author ? "relative" : ""
                 }`}
               >
@@ -256,7 +265,7 @@ export function MDXRenderer({ content }: MDXRendererProps) {
             // For images inside paragraphs, use inline styling to avoid block elements
             return (
               <span className="inline-block relative w-full max-w-full my-4">
-                <span className="block relative w-full h-64 overflow-hidden rounded-lg">
+                <span className="block relative w-full h-64 overflow-hidden rounded">
                   <Image
                     src={src}
                     alt={alt || ""}
@@ -278,35 +287,64 @@ export function MDXRenderer({ content }: MDXRendererProps) {
           // Callout boxes
           div: ({ className, children, ...props }) => {
             if (className && className.includes("callout")) {
-              const extractedType = className.split(" ")[0].split("-")[1] || "info";
-              const type: CalloutType = (['info', 'warning', 'success', 'error'] as const).includes(extractedType as CalloutType) ? extractedType as CalloutType : 'info';
+              const extractedType =
+                className.split(" ")[0].split("-")[1] || "info";
+              const type: CalloutType = (
+                ["info", "warning", "success", "error"] as const
+              ).includes(extractedType as CalloutType)
+                ? (extractedType as CalloutType)
+                : "info";
               const iconMap: Record<CalloutType, string> = {
                 info: "i",
                 warning: "!",
                 success: "✓",
                 error: "✕",
               };
+
+              const childrenArray = React.Children.toArray(children);
+              let titleElement = null;
+              let content = children;
+
+              // Check if first child is a strong element (title)
+              if (
+                childrenArray.length > 0 &&
+                React.isValidElement(childrenArray[0]) &&
+                childrenArray[0].type === "strong"
+              ) {
+                titleElement = childrenArray[0];
+                content = childrenArray.slice(1);
+              }
+
               return (
                 <motion.div
                   variants={fadeInUp}
                   initial="initial"
                   whileInView="animate"
                   viewport={{ once: true }}
-                  className={`my-6 p-4 rounded-lg border-l-4 ${
+                  className={`my-6 p-4 rounded border-l-4 shadow-sm ${
                     type === "warning"
-                      ? "border-yellow-500 bg-yellow-50 dark:bg-yellow-900/20"
+                      ? "border-yellow-500 bg-yellow-50 dark:bg-yellow-900/20 text-yellow-800 dark:text-yellow-200"
                       : type === "error"
-                      ? "border-red-500 bg-red-50 dark:bg-red-900/20"
+                      ? "border-red-500 bg-red-50 dark:bg-red-900/20 text-red-800 dark:text-red-200"
                       : type === "success"
-                      ? "border-green-500 bg-green-50 dark:bg-green-900/20"
-                      : "border-blue-500 bg-blue-50 dark:bg-blue-900/20"
+                      ? "border-green-500 bg-green-50 dark:bg-green-900/20 text-green-800 dark:text-green-200"
+                      : "border-blue-500 bg-blue-50 dark:bg-blue-900/20 text-blue-800 dark:text-blue-200"
                   }`}
                 >
                   <div className="flex items-start gap-3">
-                    <span className="text-lg">
-                      {iconMap[type]}
-                    </span>
-                    <div>{children}</div>
+                    {iconMap[type]}
+                    <div className="flex-1">
+                      {titleElement ? (
+                        <>
+                          <div className="font-semibold text-base mb-2">
+                            {titleElement}
+                          </div>
+                          {content}
+                        </>
+                      ) : (
+                        children
+                      )}
+                    </div>
                   </div>
                 </motion.div>
               );
@@ -345,8 +383,8 @@ export function MDXRenderer({ content }: MDXRendererProps) {
 
           // Enhanced table styling
           table: ({ children, ...props }) => (
-            <div className="my-8 overflow-x-auto">
-              <table className="min-w-full divide-y divide-border" {...props}>
+            <div className="my-8 rounded overflow-x-auto">
+              <table className="min-w-full" {...props}>
                 {children}
               </table>
             </div>
@@ -357,7 +395,7 @@ export function MDXRenderer({ content }: MDXRendererProps) {
             </thead>
           ),
           tbody: ({ children, ...props }) => (
-            <tbody className="bg-background divide-y divide-border" {...props}>
+            <tbody className="bg-background" {...props}>
               {children}
             </tbody>
           ),
@@ -367,12 +405,18 @@ export function MDXRenderer({ content }: MDXRendererProps) {
             </tr>
           ),
           th: ({ children, ...props }) => (
-            <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider" {...props}>
+            <th
+              className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider"
+              {...props}
+            >
               {children}
             </th>
           ),
           td: ({ children, ...props }) => (
-            <td className="px-6 py-4 whitespace-nowrap text-sm text-foreground" {...props}>
+            <td
+              className="px-6 py-4 whitespace-nowrap text-sm text-foreground"
+              {...props}
+            >
               {children}
             </td>
           ),
