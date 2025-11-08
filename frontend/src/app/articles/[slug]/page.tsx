@@ -1,14 +1,26 @@
-import React from 'react';
-import Link from 'next/link';
-import { notFound } from 'next/navigation';
-import { getArticleBySlug, getAllArticles, getRelatedArticles } from '@/data/blog-data';
-import { Badge } from '@/components/ui/badge';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { CalendarDays, Clock, User, ArrowLeft, Share2, BookOpen } from 'lucide-react';
-import { format } from 'date-fns';
-import { Metadata } from 'next';
-import { TableOfContents, BackToTop } from '@/components/blog/TableOfContents';
-import { ClientCommentSection } from '@/components/blog/ClientCommentSection';
+import React from "react";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import {
+  getArticleBySlug,
+  getAllArticles,
+  getRelatedArticles,
+} from "@/data/blog-data";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  CalendarDays,
+  Clock,
+  User,
+  ArrowLeft,
+  Share2,
+  BookOpen,
+} from "lucide-react";
+import { format } from "date-fns";
+import { Metadata } from "next";
+import Script from "next/script";
+import { TableOfContents, BackToTop } from "@/components/blog/TableOfContents";
+import { ClientCommentSection } from "@/components/blog/ClientCommentSection";
 
 interface PageProps {
   params: Promise<{
@@ -16,31 +28,72 @@ interface PageProps {
   }>;
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const post = getArticleBySlug(slug);
-  
+
   if (!post) {
     return {
-      title: 'Article Not Found',
+      title: "Article Not Found ",
+      description: "The requested article could not be found.",
     };
   }
-  
+
   return {
-    title: post.frontmatter.title,
+    title: `${post.frontmatter.title} `,
     description: post.frontmatter.description,
+    keywords: post.frontmatter.tags,
+    authors: [{ name: post.frontmatter.author }],
+    creator: post.frontmatter.author,
+    publisher: post.frontmatter.author,
+    formatDetection: {
+      email: false,
+      address: false,
+      telephone: false,
+    },
     openGraph: {
+      type: "article",
+      locale: "en_US",
+      url: `https://kyyril.pages.dev/articles/${post.slug}`,
       title: post.frontmatter.title,
       description: post.frontmatter.description,
-      type: 'article',
+      siteName: "Khairil Rahman Hakiki",
       publishedTime: post.frontmatter.date,
       authors: [post.frontmatter.author],
+      section: post.frontmatter.category,
       tags: post.frontmatter.tags,
+      images: [
+        {
+          url: post.frontmatter.coverImage || "/assets/profile.webp",
+          width: 1200,
+          height: 630,
+          alt: post.frontmatter.title,
+        },
+      ],
     },
     twitter: {
-      card: 'summary_large_image',
+      card: "summary_large_image",
+      site: "@khairilrahmanhakiki",
+      creator: "@khairilrahmanhakiki",
       title: post.frontmatter.title,
       description: post.frontmatter.description,
+      images: [post.frontmatter.coverImage || "/assets/profile.webp"],
+    },
+    alternates: {
+      canonical: `https://kyyril.pages.dev/articles/${post.slug}`,
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
     },
   };
 }
@@ -55,24 +108,85 @@ export async function generateStaticParams() {
 export default async function ArticlePage({ params }: PageProps) {
   const { slug } = await params;
   const post = getArticleBySlug(slug);
-  
+
   if (!post) {
     notFound();
   }
-  
+
   const relatedPosts = getRelatedArticles(post, 3);
-  
+
+  // JSON-LD structured data for article
+  const articleData = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.frontmatter.title,
+    description: post.frontmatter.description,
+    url: `https://kyyril.pages.dev/articles/${post.slug}`,
+    datePublished: post.frontmatter.date,
+    dateModified: post.frontmatter.date,
+    author: {
+      "@type": "Person",
+      name: post.frontmatter.author,
+      url: "https://kyyril.pages.dev",
+    },
+    publisher: {
+      "@type": "Person",
+      name: "Kilo Code",
+      url: "https://kyyril.pages.dev",
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `https://kyyril.pages.dev/articles/${post.slug}`,
+    },
+    image: {
+      "@type": "ImageObject",
+      url:
+        post.frontmatter.coverImage ||
+        "https://kyyril.pages.dev/assets/profile.webp",
+      width: 1200,
+      height: 630,
+    },
+    articleSection: post.frontmatter.category,
+    keywords: post.frontmatter.tags.join(", "),
+    wordCount: post.content.length,
+    timeRequired: `PT${post.frontmatter.readTime.split(" ")[0]}M`,
+    about: post.frontmatter.tags.map((tag) => ({
+      "@type": "Thing",
+      name: tag,
+    })),
+    mentions: relatedPosts.map((relatedPost) => ({
+      "@type": "BlogPosting",
+      headline: relatedPost.frontmatter.title,
+      url: `https://kyyril.pages.dev/articles/${relatedPost.slug}`,
+      datePublished: relatedPost.frontmatter.date,
+    })),
+  };
+
   return (
     <>
+      {/* Structured Data Script */}
+      <Script
+        id="article-structured-data"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(articleData, null, 2),
+        }}
+      />
+
       {/* Breadcrumb Navigation */}
       <div className="container mx-auto px-4 py-8 max-w-6xl">
         <nav className="flex items-center space-x-2 text-sm text-muted-foreground mb-8">
-          <Link href="/articles" className="hover:text-foreground transition-colors">
+          <Link
+            href="/articles"
+            className="hover:text-foreground transition-colors"
+          >
             Articles
           </Link>
           <span>/</span>
-          <Link 
-            href={`/articles/category/${post.frontmatter.category.toLowerCase().replace(/\s+/g, '-')}`}
+          <Link
+            href={`/articles/category/${post.frontmatter.category
+              .toLowerCase()
+              .replace(/\s+/g, "-")}`}
             className="hover:text-foreground transition-colors"
           >
             {post.frontmatter.category}
@@ -80,11 +194,11 @@ export default async function ArticlePage({ params }: PageProps) {
           <span>/</span>
           <span className="text-foreground">{post.frontmatter.title}</span>
         </nav>
-        
+
         {/* Back Button */}
         <div className="mb-6">
-          <Link 
-            href="/articles" 
+          <Link
+            href="/articles"
             className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
           >
             <ArrowLeft className="h-4 w-4" />
@@ -92,7 +206,7 @@ export default async function ArticlePage({ params }: PageProps) {
           </Link>
         </div>
       </div>
-      
+
       {/* Main Content Layout with TOC */}
       <div className="container mx-auto px-4 max-w-7xl">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
@@ -100,7 +214,7 @@ export default async function ArticlePage({ params }: PageProps) {
           <div className="lg:col-span-1">
             <TableOfContents headings={post.headings} />
           </div>
-          
+
           {/* Main Article Content */}
           <div className="lg:col-span-3">
             <article className="mb-12">
@@ -114,15 +228,15 @@ export default async function ArticlePage({ params }: PageProps) {
                     </Badge>
                   ))}
                 </div>
-                
+
                 <h1 className="text-4xl font-bold text-foreground mb-4 leading-tight">
                   {post.frontmatter.title}
                 </h1>
-                
+
                 <p className="text-xl text-muted-foreground mb-6 leading-relaxed">
                   {post.frontmatter.description}
                 </p>
-                
+
                 <div className="flex flex-wrap items-center gap-6 text-sm text-muted-foreground">
                   <div className="flex items-center gap-2">
                     <User className="h-4 w-4" />
@@ -131,7 +245,7 @@ export default async function ArticlePage({ params }: PageProps) {
                   <div className="flex items-center gap-2">
                     <CalendarDays className="h-4 w-4" />
                     <time dateTime={post.frontmatter.date}>
-                      {format(new Date(post.frontmatter.date), 'MMMM dd, yyyy')}
+                      {format(new Date(post.frontmatter.date), "MMMM dd, yyyy")}
                     </time>
                   </div>
                   <div className="flex items-center gap-2">
@@ -144,16 +258,19 @@ export default async function ArticlePage({ params }: PageProps) {
                   </button>
                 </div>
               </header>
-              
+
               {/* Article Content */}
               <div className="prose prose-lg dark:prose-invert max-w-none">
-                <div className="whitespace-pre-line" dangerouslySetInnerHTML={{ __html: post.content }} />
+                <div
+                  className="whitespace-pre-line"
+                  dangerouslySetInnerHTML={{ __html: post.content }}
+                />
               </div>
             </article>
-            
+
             {/* Comments Section */}
             <ClientCommentSection article={post} />
-            
+
             {/* Related Posts */}
             {relatedPosts.length > 0 && (
               <section className="mb-12">
@@ -163,7 +280,10 @@ export default async function ArticlePage({ params }: PageProps) {
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                   {relatedPosts.map((relatedPost) => (
-                    <Card key={relatedPost.slug} className="hover:shadow-lg transition-shadow">
+                    <Card
+                      key={relatedPost.slug}
+                      className="hover:shadow-lg transition-shadow"
+                    >
                       <CardHeader>
                         <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
                           <Badge variant="secondary" className="text-xs">
@@ -171,7 +291,10 @@ export default async function ArticlePage({ params }: PageProps) {
                           </Badge>
                           <span>•</span>
                           <span>
-                            {format(new Date(relatedPost.frontmatter.date), 'MMM dd, yyyy')}
+                            {format(
+                              new Date(relatedPost.frontmatter.date),
+                              "MMM dd, yyyy"
+                            )}
                           </span>
                         </div>
                         <CardTitle className="text-lg line-clamp-2 hover:text-primary transition-colors">
@@ -185,11 +308,17 @@ export default async function ArticlePage({ params }: PageProps) {
                           {relatedPost.frontmatter.description}
                         </p>
                         <div className="mt-3 flex flex-wrap gap-1">
-                          {relatedPost.frontmatter.tags.slice(0, 2).map((tag) => (
-                            <Badge key={tag} variant="secondary" className="text-xs">
-                              {tag}
-                            </Badge>
-                          ))}
+                          {relatedPost.frontmatter.tags
+                            .slice(0, 2)
+                            .map((tag) => (
+                              <Badge
+                                key={tag}
+                                variant="secondary"
+                                className="text-xs"
+                              >
+                                {tag}
+                              </Badge>
+                            ))}
                         </div>
                       </CardContent>
                     </Card>
@@ -197,18 +326,19 @@ export default async function ArticlePage({ params }: PageProps) {
                 </div>
               </section>
             )}
-            
+
             {/* Call to Action */}
             <section className="text-center py-12 border-t border-border">
               <h3 className="text-2xl font-bold text-foreground mb-4">
                 Enjoyed this article?
               </h3>
               <p className="text-muted-foreground mb-6">
-                Follow me for more insights on web development and modern frontend technologies.
+                Follow me for more insights on web development and modern
+                frontend technologies.
               </p>
               <div className="flex flex-wrap justify-center gap-3">
-                <Link 
-                  href="/articles" 
+                <Link
+                  href="/articles"
                   className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors"
                 >
                   <BookOpen className="h-4 w-4" />
@@ -219,7 +349,7 @@ export default async function ArticlePage({ params }: PageProps) {
           </div>
         </div>
       </div>
-      
+
       {/* Back to Top Button */}
       <BackToTop />
     </>

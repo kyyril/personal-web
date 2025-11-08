@@ -1,15 +1,87 @@
-import React from 'react';
-import Link from 'next/link';
-import { getAllArticles, getAllCategories } from '@/data/blog-data';
-import { ClientFilterWrapper } from '@/components/blog/ClientFilterWrapper';
-import { Badge } from '@/components/ui/badge';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { CalendarDays, Clock, User, Folder } from 'lucide-react';
-import { Article } from '@/data/blog-data';
+import React from "react";
+import Link from "next/link";
+import { getAllArticles, getAllCategories } from "@/data/blog-data";
+import { ClientFilterWrapper } from "@/components/blog/ClientFilterWrapper";
+import { Badge } from "@/components/ui/badge";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { CalendarDays, Clock, User, Folder } from "lucide-react";
+import { Article } from "@/data/blog-data";
+import { Metadata } from "next";
+import Script from "next/script";
 
-export const metadata = {
-  title: 'Articles | Blog',
-  description: 'Read the latest articles about web development, React, Next.js, and modern frontend technologies.',
+export const metadata: Metadata = {
+  title: "Articles | Blog - Software engineer & Frontend Tutorials",
+  description:
+    "Read the latest articles about software engineer, React, Next.js, and modern frontend technologies. Learn from comprehensive tutorials and best practices.",
+  keywords: [
+    "software engineer",
+    "React",
+    "Next.js",
+    "frontend",
+    "tutorials",
+    "JavaScript",
+    "TypeScript",
+    "app router",
+    "MDX",
+    "modern react patterns",
+  ],
+  authors: [{ name: "Khairil Rahman Hakiki" }],
+  creator: "Khairil Rahman Hakiki",
+  publisher: "Khairil Rahman Hakiki",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://kyyril.pages.dev/articles",
+    title: "Articles | Blog - software engineer & Software Tutorials",
+    description:
+      "Read the latest articles about software engineer, React, Next.js, and modern frontend technologies. Learn from comprehensive tutorials and best practices.",
+    siteName: "Khairil Rahman Hakiki Blog",
+    images: [
+      {
+        url: "/assets/profile.webp",
+        width: 1200,
+        height: 630,
+        alt: "Khairil Rahman Hakiki Blog - software engineer Articles",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: "@kilocode",
+    creator: "@kilocode",
+    title: "Articles | Blog - software engineer & Frontend Tutorials",
+    description:
+      "Read the latest articles about software engineer, React, Next.js, and modern frontend technologies.",
+    images: ["/assets/profile.webp"],
+  },
+  alternates: {
+    canonical: "https://kyyril.pages.dev/articles",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  verification: {
+    google: "google24f9cc081f9ae37b",
+  },
 };
 
 function ArticlesList({ articles }: { articles: Article[] }) {
@@ -20,7 +92,7 @@ function ArticlesList({ articles }: { articles: Article[] }) {
           <Folder className="h-12 w-12 mx-auto mb-4 opacity-50" />
           <h3 className="text-lg font-semibold mb-2">No articles found</h3>
           <p>Try adjusting your search criteria or clearing the filters.</p>
-          <Link 
+          <Link
             href="/articles"
             className="text-primary hover:underline mt-2 inline-block"
           >
@@ -34,17 +106,20 @@ function ArticlesList({ articles }: { articles: Article[] }) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {articles.map((post) => (
-        <Card key={post.slug} className="h-full hover:shadow-lg transition-shadow">
+        <Card
+          key={post.slug}
+          className="h-full hover:shadow-lg transition-shadow"
+        >
           <CardHeader>
             <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
               <Badge variant="secondary">{post.frontmatter.category}</Badge>
               <span>•</span>
               <span className="flex items-center gap-1">
                 <CalendarDays className="h-3 w-3" />
-                {new Date(post.frontmatter.date).toLocaleDateString('en-US', {
-                  year: 'numeric',
-                  month: 'short',
-                  day: 'numeric',
+                {new Date(post.frontmatter.date).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "short",
+                  day: "numeric",
                 })}
               </span>
             </div>
@@ -68,7 +143,7 @@ function ArticlesList({ articles }: { articles: Article[] }) {
                 {post.frontmatter.readTime}
               </span>
             </div>
-            
+
             {/* Tags */}
             {post.frontmatter.tags && post.frontmatter.tags.length > 0 && (
               <div className="mt-4 flex flex-wrap gap-1">
@@ -84,9 +159,9 @@ function ArticlesList({ articles }: { articles: Article[] }) {
                 )}
               </div>
             )}
-            
+
             <div className="mt-4">
-              <Link 
+              <Link
                 href={`/articles/${post.slug}`}
                 className="text-primary hover:underline font-medium"
               >
@@ -104,43 +179,100 @@ export default function ArticlesPage() {
   const allArticles = getAllArticles();
   const categories = getAllCategories();
 
-  return (
-    <div className="container mx-auto px-4 py-8 max-w-6xl">
-      {/* Header Section */}
-      <div className="text-center mb-12">
-        <h1 className="text-4xl font-bold text-foreground mb-4">Articles</h1>
-        <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-          Discover insights, tutorials, and best practices in modern web development.
-        </p>
-      </div>
+  // JSON-LD structured data
+  const blogData = {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    name: "Khairil Rahman Hakiki Blog",
+    description:
+      "Articles about software engineer, React, Next.js, and modern frontend technologies",
+    url: "https://kyyril.pages.dev/articles",
+    author: {
+      "@type": "Person",
+      name: "Khairil Rahman Hakiki",
+      url: "https://kyyril.pages.dev",
+    },
+    publisher: {
+      "@type": "Person",
+      name: "Khairil Rahman Hakiki",
+      url: "https://kyyril.pages.dev",
+    },
+    blogPost: allArticles.map((article) => ({
+      "@type": "BlogPosting",
+      headline: article.frontmatter.title,
+      description: article.frontmatter.description,
+      url: `https://kyyril.pages.dev/articles/${article.slug}`,
+      author: {
+        "@type": "Person",
+        name: article.frontmatter.author,
+      },
+      datePublished: article.frontmatter.date,
+      dateModified: article.frontmatter.date,
+      articleSection: article.frontmatter.category,
+      keywords: article.frontmatter.tags.join(", "),
+      wordCount: article.content.length,
+      timeRequired: article.frontmatter.readTime,
+    })),
+  };
 
-      {/* Client-side Filter Component */}
-      <ClientFilterWrapper 
-        allArticles={allArticles} 
-        categories={categories}
+  return (
+    <>
+      {/* Structured Data Script */}
+      <Script
+        id="blog-structured-data"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(blogData, null, 2),
+        }}
       />
 
-      {/* Quick Category Links */}
-      <div className="mb-6">
-        <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
-          <Folder className="h-5 w-5" />
-          Quick Category Links
-        </h2>
-        <div className="flex flex-wrap gap-2">
-          <Link href="/articles">
-            <Badge variant="secondary" className="cursor-pointer hover:bg-accent">
-              All ({allArticles.length})
-            </Badge>
-          </Link>
-          {categories.map((category) => (
-            <Link key={category.slug} href={`/articles/category/${category.slug}`}>
-              <Badge variant="secondary" className="cursor-pointer hover:bg-accent">
-                {category.name} ({category.count})
+      <div className="container mx-auto px-4 py-8 max-w-6xl">
+        {/* Header Section */}
+        <div className="text-center mb-12">
+          <h1 className="text-4xl font-bold text-foreground mb-4">Articles</h1>
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            Discover insights, tutorials, and best practices in modern software
+            engineer.
+          </p>
+        </div>
+
+        {/* Client-side Filter Component */}
+        <ClientFilterWrapper
+          allArticles={allArticles}
+          categories={categories}
+        />
+
+        {/* Quick Category Links */}
+        <div className="mb-6">
+          <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
+            <Folder className="h-5 w-5" />
+            Quick Category Links
+          </h2>
+          <div className="flex flex-wrap gap-2">
+            <Link href="/articles">
+              <Badge
+                variant="secondary"
+                className="cursor-pointer hover:bg-accent"
+              >
+                All ({allArticles.length})
               </Badge>
             </Link>
-          ))}
+            {categories.map((category) => (
+              <Link
+                key={category.slug}
+                href={`/articles/category/${category.slug}`}
+              >
+                <Badge
+                  variant="secondary"
+                  className="cursor-pointer hover:bg-accent"
+                >
+                  {category.name} ({category.count})
+                </Badge>
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
