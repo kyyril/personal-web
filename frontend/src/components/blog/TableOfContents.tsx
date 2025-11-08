@@ -64,7 +64,7 @@ export function TableOfContents({
   headings,
   content,
   className,
-  showProgress = true,
+  showProgress = false,
   isMobile = false,
 }: TableOfContentsProps) {
   const [activeId, setActiveId] = useState<string>("");
@@ -237,29 +237,29 @@ export function TableOfContents({
 
   return (
     <>
+      {/* Full Screen Progress Bar */}
+      {showProgress && (
+        <div className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm border-b">
+          <div className="w-full bg-secondary h-1">
+            <div
+              className="bg-primary h-1 transition-all duration-300"
+              style={{ width: `${scrollProgress}%` }}
+            />
+          </div>
+          <div className="flex items-center justify-between px-4 py-1 text-xs text-muted-foreground">
+            <span>Reading Progress</span>
+            <span>{Math.round(scrollProgress)}%</span>
+          </div>
+        </div>
+      )}
+
       {/* Desktop TOC */}
       <div
         className={cn(
-          "hidden md:block shadow-md sticky top-24 w-64 max-h-[calc(100vh-6rem)] bg-background p-4",
+          "hidden md:block shadow-md sticky top-32 w-64 max-h-[calc(100vh-8rem)] bg-background p-4",
           className
         )}
       >
-        {/* Progress Bar */}
-        {showProgress && (
-          <div className="mb-4">
-            <div className="flex items-center justify-between text-xs text-muted-foreground mb-1">
-              <span>Reading Progress</span>
-              <span>{Math.round(scrollProgress)}%</span>
-            </div>
-            <div className="w-full bg-secondary rounded-full h-1.5">
-              <div
-                className="bg-primary h-1.5 rounded-full transition-all duration-300"
-                style={{ width: `${scrollProgress}%` }}
-              />
-            </div>
-          </div>
-        )}
-
         {/* TOC Header */}
         <div className="flex items-center gap-2 mb-3">
           <List className="h-4 w-4" />

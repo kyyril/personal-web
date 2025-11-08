@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
@@ -12,7 +13,7 @@ import {
 import { Copy, Check, ExternalLink, Sparkles } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import Image from "next/image";
 
 // Update the animation variants
@@ -37,6 +38,8 @@ const codeBlockVariants = {
 interface MDXRendererProps {
   content: string;
 }
+
+type CalloutType = 'info' | 'warning' | 'success' | 'error';
 
 export function MDXRenderer({ content }: MDXRendererProps) {
   const [copiedCode, setCopiedCode] = useState<string | null>(null);
@@ -113,7 +116,7 @@ export function MDXRenderer({ content }: MDXRendererProps) {
           ),
           h4: ({ children, ...props }) => (
             <h4
-              className="text-xl font-semibold mt-8 mb-3 text-foreground/80 scroll-mt-20 border-l-2 border-primary/30 pl-4"
+              className="text-xl font-semibold mt-8 mb-3 text-foreground/80 scroll-mt-20 pl-4"
               {...props}
             >
               {children}
@@ -132,9 +135,9 @@ export function MDXRenderer({ content }: MDXRendererProps) {
                   variants={codeBlockVariants}
                   initial="initial"
                   animate="animate"
-                  className="relative group my-8 rounded-lg overflow-hidden border border-border/30 dark:border-white/10"
+                  className="relative group my-8 rounded-lg overflow-hidden dark:border-white/10"
                 >
-                  <div className="flex dark:bg-slate-600/50 border-none outline-none items-center justify-between px-4 py-2 border-b border-border/30 dark:border-white/10">
+                  <div className="flex dark:bg-slate-600/50 border-none outline-none items-center justify-between px-4 py-2 dark:border-white/10">
                     <div className="flex items-center gap-3">
                       <span className="text-xs font-medium text-foreground/60">
                         {language}
@@ -179,18 +182,40 @@ export function MDXRenderer({ content }: MDXRendererProps) {
             );
           },
 
-          // Simplified blockquote
-          blockquote: ({ children }) => (
-            <motion.blockquote
-              variants={fadeInUp}
-              initial="initial"
-              whileInView="animate"
-              viewport={{ once: true }}
-              className="my-8 border-l-2 border-primary/30 pl-6 py-3 text-foreground/60 italic"
-            >
-              {children}
-            </motion.blockquote>
-          ),
+          // Enhanced blockquote with author support
+          blockquote: ({ children }) => {
+            const childrenArray = React.Children.toArray(children);
+            let quoteContent = children;
+            let author = null;
+            if (childrenArray.length > 0) {
+              const lastChild = childrenArray[childrenArray.length - 1];
+              if (React.isValidElement(lastChild) && lastChild.type === "p") {
+                const text = lastChild.props.children;
+                if (typeof text === "string" && text.trim().startsWith("-- ")) {
+                  author = text.trim().slice(3).trim();
+                  quoteContent = childrenArray.slice(0, -1);
+                }
+              }
+            }
+            return (
+              <motion.blockquote
+                variants={fadeInUp}
+                initial="initial"
+                whileInView="animate"
+                viewport={{ once: true }}
+                className={`my-8 pl-6 py-3 text-foreground/60 italic border-l-2 border-primary/30 ${
+                  author ? "relative" : ""
+                }`}
+              >
+                {quoteContent}
+                {author && (
+                  <cite className="block mt-2 text-right text-sm font-medium text-foreground/50 not-italic">
+                    — {author}
+                  </cite>
+                )}
+              </motion.blockquote>
+            );
+          },
 
           // Cleaner link style
           a: ({ children, href, ...props }) => (
@@ -225,21 +250,132 @@ export function MDXRenderer({ content }: MDXRendererProps) {
               {children}
             </strong>
           ),
-          img: ({ src, alt, width, height, ...props }) => {
+          img: ({ src, alt, title, width, height, ...props }) => {
             if (!src) return null;
+
+            // For images inside paragraphs, use inline styling to avoid block elements
             return (
-              <div className="relative my-8 h-auto w-full overflow-hidden rounded-lg">
-                <Image
-                  src={src}
-                  alt={alt || ""}
-                  fill
-                  className="object-contain"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  {...props}
-                />
+              <span className="inline-block relative w-full max-w-full my-4">
+                <span className="block relative w-full h-64 overflow-hidden rounded-lg">
+                  <Image
+                    src={src}
+                    alt={alt || ""}
+                    fill
+                    className="object-contain"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    {...props}
+                  />
+                </span>
+                {title && (
+                  <span className="block text-center text-sm text-muted-foreground mt-2 italic">
+                    {title}
+                  </span>
+                )}
+              </span>
+            );
+          },
+
+          // Callout boxes
+          div: ({ className, children, ...props }) => {
+            if (className && className.includes("callout")) {
+              const extractedType = className.split(" ")[0].split("-")[1] || "info";
+              const type: CalloutType = (['info', 'warning', 'success', 'error'] as const).includes(extractedType as CalloutType) ? extractedType as CalloutType : 'info';
+              const iconMap: Record<CalloutType, string> = {
+                info: "i",
+                warning: "!",
+                success: "✓",
+                error: "✕",
+              };
+              return (
+                <motion.div
+                  variants={fadeInUp}
+                  initial="initial"
+                  whileInView="animate"
+                  viewport={{ once: true }}
+                  className={`my-6 p-4 rounded-lg border-l-4 ${
+                    type === "warning"
+                      ? "border-yellow-500 bg-yellow-50 dark:bg-yellow-900/20"
+                      : type === "error"
+                      ? "border-red-500 bg-red-50 dark:bg-red-900/20"
+                      : type === "success"
+                      ? "border-green-500 bg-green-50 dark:bg-green-900/20"
+                      : "border-blue-500 bg-blue-50 dark:bg-blue-900/20"
+                  }`}
+                >
+                  <div className="flex items-start gap-3">
+                    <span className="text-lg">
+                      {iconMap[type]}
+                    </span>
+                    <div>{children}</div>
+                  </div>
+                </motion.div>
+              );
+            }
+            return (
+              <div className={className} {...props}>
+                {children}
               </div>
             );
           },
+
+          // Collapsible sections
+          details: ({ children, ...props }) => (
+            <details className="my-6" {...props}>
+              {children}
+            </details>
+          ),
+          summary: ({ children, ...props }) => (
+            <summary
+              className="cursor-pointer font-medium text-foreground/80 hover:text-foreground"
+              {...props}
+            >
+              {children}
+            </summary>
+          ),
+
+          // Highlight text
+          mark: ({ children, ...props }) => (
+            <mark
+              className="bg-yellow-200 dark:bg-yellow-800 px-1 rounded"
+              {...props}
+            >
+              {children}
+            </mark>
+          ),
+
+          // Enhanced table styling
+          table: ({ children, ...props }) => (
+            <div className="my-8 overflow-x-auto">
+              <table className="min-w-full divide-y divide-border" {...props}>
+                {children}
+              </table>
+            </div>
+          ),
+          thead: ({ children, ...props }) => (
+            <thead className="bg-muted/50" {...props}>
+              {children}
+            </thead>
+          ),
+          tbody: ({ children, ...props }) => (
+            <tbody className="bg-background divide-y divide-border" {...props}>
+              {children}
+            </tbody>
+          ),
+          tr: ({ children, ...props }) => (
+            <tr className="hover:bg-muted/25 transition-colors" {...props}>
+              {children}
+            </tr>
+          ),
+          th: ({ children, ...props }) => (
+            <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider" {...props}>
+              {children}
+            </th>
+          ),
+          td: ({ children, ...props }) => (
+            <td className="px-6 py-4 whitespace-nowrap text-sm text-foreground" {...props}>
+              {children}
+            </td>
+          ),
         }}
       >
         {content}

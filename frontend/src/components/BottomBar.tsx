@@ -8,10 +8,12 @@ import {
   CodeIcon,
   PaperPlaneIcon,
 } from "@radix-ui/react-icons";
+import { BookOpen } from "lucide-react";
 import { motion } from "framer-motion";
 
 export const navigationItems = [
   { name: "Projects", href: "/projects", icon: CodeIcon },
+  { name: "Articles", href: "/articles", icon: BookOpen },
   { name: "GuestBooks", href: "/guestbook", icon: PaperPlaneIcon },
   { name: "Chat", href: "/chat", icon: ChatBubbleIcon },
 ];
