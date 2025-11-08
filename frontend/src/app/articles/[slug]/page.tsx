@@ -21,6 +21,7 @@ import { Metadata } from "next";
 import Script from "next/script";
 import { TableOfContents, BackToTop } from "@/components/blog/TableOfContents";
 import { ClientCommentSection } from "@/components/blog/ClientCommentSection";
+import { MDXRenderer } from "@/components/blog/MDXRenderer";
 
 interface PageProps {
   params: Promise<{
@@ -219,7 +220,7 @@ export default async function ArticlePage({ params }: PageProps) {
           {/* Table of Contents Sidebar - Hidden on mobile, shown on lg+ */}
           <div className="hidden lg:block lg:col-span-1">
             <div className="sticky top-8">
-              <TableOfContents headings={post.headings} />
+              <TableOfContents content={post.content} />
             </div>
           </div>
 
@@ -283,12 +284,7 @@ export default async function ArticlePage({ params }: PageProps) {
               </header>
 
               {/* Article Content */}
-              <div className="prose prose-base sm:prose-lg dark:prose-invert max-w-none prose-headings:scroll-mt-20">
-                <div
-                  className="whitespace-pre-line leading-relaxed"
-                  dangerouslySetInnerHTML={{ __html: post.content }}
-                />
-              </div>
+              <MDXRenderer content={post.content} />
             </article>
 
             {/* Comments Section */}

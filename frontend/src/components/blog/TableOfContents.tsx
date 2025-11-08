@@ -13,6 +13,39 @@ import {
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
+// Function to extract headings from MDX content
+function extractHeadingsFromContent(content: string): Heading[] {
+  const headings: Heading[] = [];
+  // Handle different line endings (Windows \r\n, Unix \n, old Mac \r)
+  const lines = content.split(/\r?\n/);
+
+  console.log("Extracting headings from content:", content.substring(0, 500));
+
+  for (const line of lines) {
+    // Trim the line to remove any extra whitespace
+    const trimmedLine = line.trim();
+    const headingMatch = trimmedLine.match(/^(#{1,6})\s+(.+)$/);
+    if (headingMatch) {
+      const level = headingMatch[1].length;
+      const text = headingMatch[2].trim();
+      const id = text
+        .toLowerCase()
+        .replace(/[^\w\s-]/g, "")
+        .replace(/\s+/g, "-");
+
+      console.log("Found heading:", { level, text, id });
+      headings.push({
+        id,
+        text,
+        level,
+      });
+    }
+  }
+
+  console.log("Total headings extracted:", headings.length);
+  return headings;
+}
+
 interface Heading {
   id: string;
   text: string;
@@ -20,23 +53,42 @@ interface Heading {
 }
 
 interface TableOfContentsProps {
-  headings: Heading[];
+  headings?: Heading[];
+  content?: string;
   className?: string;
   showProgress?: boolean;
+  isMobile?: boolean;
 }
 
 export function TableOfContents({
   headings,
+  content,
   className,
   showProgress = true,
+  isMobile = false,
 }: TableOfContentsProps) {
   const [activeId, setActiveId] = useState<string>("");
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
 
+  // Extract headings from content if provided, otherwise use headings prop
+  const extractedHeadings = content
+    ? extractHeadingsFromContent(content)
+    : headings || [];
+
   // Filter out h1 headings from TOC (they're usually the main title)
-  const filteredHeadings = headings.filter((heading) => heading.level > 1);
+  const filteredHeadings = extractedHeadings.filter(
+    (heading: Heading) => heading.level > 1
+  );
+
+  console.log("TOC Debug:", {
+    content: !!content,
+    headings: headings?.length,
+    extractedHeadings: extractedHeadings.length,
+    filteredHeadings: filteredHeadings.length,
+    contentPreview: content?.substring(0, 200),
+  });
 
   // Track scroll progress and active section - MUST be called before any conditional returns
   useEffect(() => {
@@ -50,11 +102,14 @@ export function TableOfContents({
 
       // Find active section
       const sections = filteredHeadings
-        .map((heading) => ({
+        .map((heading: Heading) => ({
           id: heading.id,
           element: document.getElementById(heading.id),
         }))
-        .filter((section) => section.element);
+        .filter(
+          (section: { id: string; element: HTMLElement | null }) =>
+            section.element
+        );
 
       let currentActive = "";
 

@@ -90,22 +90,16 @@ async function processAllArticles() {
       const slug = file.replace(/\.mdx$/, "");
       const headings = extractHeadings(rawContent);
 
-      // Process markdown to HTML
-      const processedHtml = await processMarkdownToHtml(rawContent);
-
-      // Generate excerpt
-      const excerpt =
-        rawContent
-          .replace(/[#*`]/g, "")
-          .replace(/\n+/g, " ")
-          .trim()
-          .slice(0, 160) + "...";
-
+      // Store raw MDX content instead of processed HTML
       const article = {
         slug,
         frontmatter: data,
-        content: processedHtml, // Store processed HTML content
-        excerpt,
+        content: rawContent, // Store raw MDX content
+        excerpt: rawContent
+          .replace(/[#*`]/g, "")
+          .replace(/\n+/g, " ")
+          .trim()
+          .slice(0, 160) + "...",
         headings,
       };
 
