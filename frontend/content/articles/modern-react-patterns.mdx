@@ -1,6 +1,6 @@
 ---
-title: "Modern React Patterns untuk 2025"
-description: "Mengenal pattern-pattern React terbaru yang akan ruling di tahun 2025"
+title: "Modern React Patterns for 2025"
+description: "Learn about the latest React patterns that will be trending in 2025"
 date: "2025-11-06"
 category: "library"
 tags: ["react", "patterns", "hooks", "2025"]
@@ -9,9 +9,9 @@ readTime: "12 min read"
 published: true
 ---
 
-# Modern React Patterns untuk 2025
+# Modern React Patterns for 2025
 
-React terus evolve dan di tahun 2025, ada beberapa pattern yang harus kita kuasai untuk building scalable applications.
+React keeps evolving, and in 2025, there are several patterns we need to master for building scalable applications.
 
 ## Table of Contents
 
@@ -23,7 +23,7 @@ React terus evolve dan di tahun 2025, ada beberapa pattern yang harus kita kuasa
 
 ## Custom Hooks Patterns
 
-Custom hooks adalah cornerstone dari modern React development. Berikut pattern-pattern yang powerful:
+Custom hooks are the cornerstone of modern React development. Here are powerful patterns you should know:
 
 ```typescript
 // useLocalStorage.ts
@@ -62,7 +62,7 @@ function useLocalStorage<T>(key: string, initialValue: T) {
 
 ## Compound Components
 
-Pattern ini memungkinkan kita untuk membuat component yang flexible dan reusable:
+This pattern allows us to create flexible and reusable components:
 
 ```tsx
 // Modal.tsx
@@ -126,7 +126,7 @@ function App() {
 
 ## State Management
 
-Untuk state management di 2025, kita punya several options:
+For state management in 2025, we have several options:
 
 ### Zustand (Lightweight State Management)
 
@@ -159,7 +159,7 @@ const useUserStore = create<UserState>((set) => ({
 
 ## Performance Optimization
 
-### React.memo dengan useCallback
+### React.memo with useCallback
 
 ```tsx
 const ExpensiveComponent = React.memo(({ data, onUpdate }) => {
@@ -176,7 +176,7 @@ const ExpensiveComponent = React.memo(({ data, onUpdate }) => {
 });
 ```
 
-### useDeferredValue untuk Loading States
+### useDeferredValue for Loading States
 
 ```tsx
 function SearchResults({ query }: { query: string }) {
@@ -194,13 +194,13 @@ function SearchResults({ query }: { query: string }) {
 }
 ```
 
-## Kesimpulan
+## Conclusion
 
-React patterns di 2025 lebih fokus pada:
+React patterns in 2025 focus more on:
 
 - **Simplicity**: Less boilerplate, more functionality
 - **Performance**: Built-in optimizations
-- **Developer Experience**: Better tooling dan patterns
-- **Scalability**: Component composition dan state management yang lebih baik
+- **Developer Experience**: Better tooling and patterns
+- **Scalability**: Better component composition and state management
 
-Mastering patterns ini akan membuat kita lebih productive dan building aplikasi yang lebih robust!
+Mastering these patterns will make us more productive and help us build more robust applications!

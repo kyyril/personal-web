@@ -1,6 +1,6 @@
 ---
-title: "MDX: Menggabungkan Markdown dengan React Components"
-description: "Panduan lengkap menggunakan MDX untuk membuat content yang interaktif dalam Next.js"
+title: "MDX: Combining Markdown with React Components"
+description: "Complete guide to using MDX for creating interactive content in Next.js"
 date: "2025-11-05"
 category: "framework"
 tags: ["mdx", "content", "components", "nextjs"]
@@ -9,39 +9,39 @@ readTime: "10 min read"
 published: true
 ---
 
-# MDX: Menggabungkan Markdown dengan React Components
+# MDX: Combining Markdown with React Components
 
-MDX (Markdown for the component era) memungkinkan kita untuk menggunakan React components dalam markdown content. Sangat powerful untuk membuat interactive content!
+MDX (Markdown for the component era) allows us to use React components in markdown content. It's very powerful for creating interactive content!
 
 ## What is MDX?
 
-MDX adalah superset dari markdown yang memungkinkan kita untuk:
+MDX is a superset of markdown that allows us to:
 
-- Menggunakan React components dalam markdown
-- Menulis JSX expression dalam content
-- Membuat interactive content yang rich
-- Maintain content yang mudah dibaca
+- Use React components in markdown
+- Write JSX expressions in content
+- Create rich interactive content
+- Maintain content that is easy to read
 
 ## Basic MDX Syntax
 
-### Mixing Markdown dan JSX
+### Mixing Markdown and JSX
 
 ```jsx
 # Blog Post Title
 
-Ini adalah content markdown biasa.
+This is regular markdown content.
 
 <Callout type="info">
-  Ini adalah React component yang akan dirender!
+  This is a React component that will be rendered!
 </Callout>
 
-Content markdown lainnya dengan **bold** dan *italic* text.
+More markdown content with **bold** and *italic* text.
 ```
 
 ### Dynamic Content
 
 ```jsx
-const currentDate = new Date().toLocaleDateString('id-ID');
+const currentDate = new Date().toLocaleDateString('en-US');
 
 ---
 
@@ -49,10 +49,10 @@ const currentDate = new Date().toLocaleDateString('id-ID');
 
 Today is: {currentDate}
 
-Dan ini adalah <Badge variant="outline">React component</Badge> yang menggunakan data dinamis.
+And here is a <Badge variant="outline">React component</Badge> that uses dynamic data.
 ```
 
-## MDX dengan Next.js
+## MDX with Next.js
 
 ### Setup MDX in Next.js
 
@@ -106,7 +106,7 @@ export function CodeBlock({ children, filename, language }) {
   );
 }
 
-// Usage dalam MDX
+// Usage in MDX
 <CodeBlock filename="example.ts" language="typescript">
   {`
 import { useState } from 'react';
@@ -207,7 +207,7 @@ export function CodePlayground({ initialCode }) {
 }
 ```
 
-## MDX dengan Content Management
+## MDX with Content Management
 
 ### Frontmatter Processing
 
@@ -275,7 +275,7 @@ components/
 
 ### 2. Styling Strategy
 
-- Use Tailwind classes untuk styling
+- Use Tailwind classes for styling
 - Maintain consistent design system
 - Support dark/light mode
 - Responsive design
@@ -295,13 +295,13 @@ const BlogChart = dynamic(() => import("./BlogChart"), {
 <BlogChart data={chartData} />;
 ```
 
-## Kesimpulan
+## Conclusion
 
-MDX adalah powerful tool untuk:
+MDX is a powerful tool for:
 
-- Membuat content yang interactive
-- Menulis dokumentasi yang rich
-- Building developer blogs yang engaging
-- Menggabungkan static content dengan dynamic components
+- Creating interactive content
+- Writing rich documentation
+- Building engaging developer blogs
+- Combining static content with dynamic components
 
-Dengan MDX, kita bisa membuat content yang tidak hanya informatif, tetapi juga interaktif dan engaging untuk readers!
+With MDX, we can create content that is not only informative, but also interactive and engaging for readers!
