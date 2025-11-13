@@ -36,8 +36,8 @@ export const blogData = {
   {
     "slug": "getting-started-nextjs",
     "frontmatter": {
-      "title": "Getting Started dengan Next.js 15 App Router",
-      "description": "Tutorial lengkap untuk memulai development dengan Next.js 15 dan fitur-fitur baru App Router",
+      "title": "Getting Started with Next.js 15 App Router",
+      "description": "Complete tutorial for starting development with Next.js 15 and the new App Router features",
       "date": "2025-11-07",
       "category": "framework",
       "tags": [
@@ -51,37 +51,15 @@ export const blogData = {
       "coverImage": "/assets/blog/nextjs-15-cover.jpg",
       "published": true
     },
-    "content": "\r\n# Introduction to Next.js 15 App Router\r\n\r\nNext.js 15 menghadirkan **App Router** yang powerful untuk building modern web applications. Dalam artikel ini, kita akan membahas dasar-dasar penggunaan Next.js 15 dengan App Router.\r\n\r\n## What is App Router?\r\n\r\nApp Router adalah sistem routing baru di Next.js yang memberikan kita kemampuan untuk:\r\n\r\n- Server Components\r\n- Streaming\r\n- Built-in optimization\r\n- dan banyak lagi...\r\n\r\n## Setting Up Your First Project\r\n\r\nUntuk memulai project Next.js 15, kita bisa menggunakan:\r\n\r\n```bash\r\nnpx create-next-app@latest my-app --typescript --tailwind --eslint\r\n```\r\n\r\n### Directory Structure\r\n\r\nApp Router menggunakan struktur folder yang berbeda:\r\n\r\n```\r\napp/\r\n├── layout.tsx\r\n├── page.tsx\r\n├── blog/\r\n│   ├── page.tsx\r\n│   └── [slug]/\r\n│       └── page.tsx\r\n```\r\n\r\n## Basic Component Example\r\n\r\nMari kita buat component sederhana:\r\n\r\n```tsx\r\n// components/HelloWorld.tsx\r\nexport default function HelloWorld() {\r\n  return (\r\n    <div className=\"text-center py-8\">\r\n      <h1 className=\"text-3xl font-bold text-blue-600\">\r\n        Hello World with Next.js 15!\r\n      </h1>\r\n      <p className=\"mt-4 text-gray-600\">\r\n        Building modern web applications has never been easier.\r\n      </p>\r\n    </div>\r\n  );\r\n}\r\n```\r\n\r\n## Key Features\r\n\r\n### 1. Server Components\r\n\r\nServer components memungkinkan kita untuk:\r\n\r\n- Reduce bundle size\r\n- Better performance\r\n- Automatic code splitting\r\n\r\n### 2. Streaming\r\n\r\nStreaming membuat aplikasi terasa lebih cepat dengan:\r\n\r\n- Progressive rendering\r\n- Selective hydration\r\n- Better user experience\r\n\r\n## Conclusion\r\n\r\nNext.js 15 dengan App Router memberikan developer experience yang luar biasa untuk building modern web applications. Stay tuned untuk artikel selanjutnya tentang advanced features!\r\n",
-    "excerpt": "Introduction to Next.js 15 App Router\r \r Next.js 15 menghadirkan App Router yang powerful untuk building modern web applications. Dalam artikel ini, kita akan m...",
-    "headings": []
-  },
-  {
-    "slug": "nextjs-15-app-router",
-    "frontmatter": {
-      "title": "Introduction to Next.js 15 App Router",
-      "description": "Membahas dasar-dasar penggunaan Next.js 15 dengan App Router, dari Server Components hingga Streaming.",
-      "date": "2025-11-07",
-      "category": "framework",
-      "tags": [
-        "nextjs",
-        "app-router",
-        "tutorial",
-        "react",
-        "v15"
-      ],
-      "author": "Khairil Rahman",
-      "readTime": "6 min read",
-      "published": true
-    },
-    "content": "\r\n# Introduction to Next.js 15 App Router\r\n\r\nNext.js 15 menghadirkan App Router yang powerful untuk building modern web applications. Dalam artikel ini, kita akan membahas dasar-dasar penggunaan Next.js 15 dengan App Router.\r\n\r\n## What is App Router?\r\n\r\nApp Router adalah sistem routing baru di Next.js yang memberikan kita kemampuan untuk:\r\n\r\n- Server Components\r\n- Streaming\r\n- Built-in optimization\r\n- dan banyak lagi...\r\n\r\n## Setting Up Your First Project\r\n\r\nUntuk memulai project Next.js 15, kita bisa menggunakan:\r\n\r\n```bash\r\nnpx create-next-app@latest my-app --typescript --tailwind --eslint\r\n```\r\n\r\n## Directory Structure\r\n\r\nApp Router menggunakan struktur folder yang berbeda:\r\n\r\n```\r\napp/\r\n├── layout.tsx\r\n├── page.tsx\r\n└── blog/\r\n    ├── page.tsx\r\n    └── [slug]/\r\n        └── page.tsx\r\n```\r\n\r\n## Basic Component Example\r\n\r\nMari kita buat component sederhana:\r\n\r\n```tsx\r\n// components/HelloWorld.tsx\r\nexport default function HelloWorld() {\r\n  return (\r\n    <div>\r\n      <h1>Hello World with Next.js 15!</h1>\r\n      <p>Building modern web applications has never been easier.</p>\r\n    </div>\r\n  );\r\n}\r\n```\r\n\r\n## Key Features\r\n\r\n1.  **Server Components**\r\n    Server components memungkinkan kita untuk:\r\n\r\n    - Reduce bundle size\r\n    - Better performance\r\n    - Automatic code splitting\r\n\r\n2.  **Streaming**\r\n    Streaming membuat aplikasi terasa lebih cepat dengan:\r\n    - Progressive rendering\r\n    - Selective hydration\r\n    - Better user experience\r\n\r\n## Conclusion\r\n\r\nNext.js 15 dengan App Router memberikan developer experience yang luar biasa untuk building modern web applications. Stay tuned untuk artikel selanjutnya tentang advanced features!\r\n",
-    "excerpt": "Introduction to Next.js 15 App Router\r \r Next.js 15 menghadirkan App Router yang powerful untuk building modern web applications. Dalam artikel ini, kita akan m...",
+    "content": "\r\n# Introduction to Next.js 15 App Router\r\n\r\nNext.js 15 introduces the powerful **App Router** for building modern web applications. In this article, we'll discuss the basics of using Next.js 15 with App Router.\r\n\r\n## What is App Router?\r\n\r\nApp Router is a new routing system in Next.js that gives us the ability to use:\r\n\r\n- Server Components\r\n- Streaming\r\n- Built-in optimization\r\n- and much more...\r\n\r\n## Setting Up Your First Project\r\n\r\nTo start a Next.js 15 project, we can use:\r\n\r\n```bash\r\nnpx create-next-app@latest my-app --typescript --tailwind --eslint\r\n```\r\n\r\n### Directory Structure\r\n\r\nApp Router uses a different folder structure:\r\n\r\n```\r\napp/\r\n├── layout.tsx\r\n├── page.tsx\r\n├── blog/\r\n│   ├── page.tsx\r\n│   └── [slug]/\r\n│       └── page.tsx\r\n```\r\n\r\n## Basic Component Example\r\n\r\nLet's create a simple component:\r\n\r\n```tsx\r\n// components/HelloWorld.tsx\r\nexport default function HelloWorld() {\r\n  return (\r\n    <div className=\"text-center py-8\">\r\n      <h1 className=\"text-3xl font-bold text-blue-600\">\r\n        Hello World with Next.js 15!\r\n      </h1>\r\n      <p className=\"mt-4 text-gray-600\">\r\n        Building modern web applications has never been easier.\r\n      </p>\r\n    </div>\r\n  );\r\n}\r\n```\r\n\r\n## Key Features\r\n\r\n### 1. Server Components\r\n\r\nServer components allow us to:\r\n\r\n- Reduce bundle size\r\n- Better performance\r\n- Automatic code splitting\r\n\r\n### 2. Streaming\r\n\r\nStreaming makes applications feel faster with:\r\n\r\n- Progressive rendering\r\n- Selective hydration\r\n- Better user experience\r\n\r\n## Conclusion\r\n\r\nNext.js 15 with App Router provides an amazing developer experience for building modern web applications. Stay tuned for upcoming articles about advanced features!\r\n",
+    "excerpt": "Introduction to Next.js 15 App Router\r \r Next.js 15 introduces the powerful App Router for building modern web applications. In this article, we'll discuss the ...",
     "headings": []
   },
   {
     "slug": "modern-react-patterns",
     "frontmatter": {
-      "title": "Modern React Patterns untuk 2025",
-      "description": "Mengenal pattern-pattern React terbaru yang akan ruling di tahun 2025",
+      "title": "Modern React Patterns for 2025",
+      "description": "Learn about the latest React patterns that will be trending in 2025",
       "date": "2025-11-06",
       "category": "library",
       "tags": [
@@ -94,12 +72,12 @@ export const blogData = {
       "readTime": "12 min read",
       "published": true
     },
-    "content": "\n# Modern React Patterns untuk 2025\n\nReact terus evolve dan di tahun 2025, ada beberapa pattern yang harus kita kuasai untuk building scalable applications.\n\n## Table of Contents\n\n1. [Custom Hooks Patterns](#custom-hooks-patterns)\n2. [Compound Components](#compound-components)\n3. [Render Props Evolution](#render-props-evolution)\n4. [State Management](#state-management)\n5. [Performance Optimization](#performance-optimization)\n\n## Custom Hooks Patterns\n\nCustom hooks adalah cornerstone dari modern React development. Berikut pattern-pattern yang powerful:\n\n```typescript\n// useLocalStorage.ts\nimport { useState, useEffect } from \"react\";\n\nfunction useLocalStorage<T>(key: string, initialValue: T) {\n  const [storedValue, setStoredValue] = useState<T>(() => {\n    if (typeof window === \"undefined\") {\n      return initialValue;\n    }\n    try {\n      const item = window.localStorage.getItem(key);\n      return item ? JSON.parse(item) : initialValue;\n    } catch (error) {\n      console.log(error);\n      return initialValue;\n    }\n  });\n\n  const setValue = (value: T | ((val: T) => T)) => {\n    try {\n      const valueToStore =\n        value instanceof Function ? value(storedValue) : value;\n      setStoredValue(valueToStore);\n      if (typeof window !== \"undefined\") {\n        window.localStorage.setItem(key, JSON.stringify(valueToStore));\n      }\n    } catch (error) {\n      console.log(error);\n    }\n  };\n\n  return [storedValue, setValue] as const;\n}\n```\n\n## Compound Components\n\nPattern ini memungkinkan kita untuk membuat component yang flexible dan reusable:\n\n```tsx\n// Modal.tsx\nimport React, { createContext, useContext, useState } from \"react\";\n\ninterface ModalContextType {\n  isOpen: boolean;\n  openModal: () => void;\n  closeModal: () => void;\n}\n\nconst ModalContext = createContext<ModalContextType | undefined>(undefined);\n\nfunction Modal({ children }: { children: React.ReactNode }) {\n  const [isOpen, setIsOpen] = useState(false);\n\n  return (\n    <ModalContext.Provider\n      value={{\n        isOpen,\n        openModal: () => setIsOpen(true),\n        closeModal: () => setIsOpen(false),\n      }}\n    >\n      {children}\n    </ModalContext.Provider>\n  );\n}\n\nfunction ModalTrigger({ children }: { children: React.ReactNode }) {\n  const context = useContext(ModalContext);\n  return <div onClick={context?.openModal}>{children}</div>;\n}\n\nfunction ModalContent({ children }: { children: React.ReactNode }) {\n  const context = useContext(ModalContext);\n  if (!context?.isOpen) return null;\n\n  return (\n    <div className=\"fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center\">\n      <div className=\"bg-white p-6 rounded-lg max-w-md w-full\">{children}</div>\n    </div>\n  );\n}\n\n// Usage\nfunction App() {\n  return (\n    <Modal>\n      <ModalTrigger>\n        <button>Open Modal</button>\n      </ModalTrigger>\n      <ModalContent>\n        <h2>Modal Content</h2>\n        <p>This is a compound component pattern!</p>\n      </ModalContent>\n    </Modal>\n  );\n}\n```\n\n## State Management\n\nUntuk state management di 2025, kita punya several options:\n\n### Zustand (Lightweight State Management)\n\n```typescript\nimport { create } from \"zustand\";\n\ninterface UserState {\n  user: User | null;\n  isLoading: boolean;\n  login: (email: string, password: string) => Promise<void>;\n  logout: () => void;\n}\n\nconst useUserStore = create<UserState>((set) => ({\n  user: null,\n  isLoading: false,\n  login: async (email: string, password: string) => {\n    set({ isLoading: true });\n    try {\n      const user = await api.login(email, password);\n      set({ user, isLoading: false });\n    } catch (error) {\n      set({ isLoading: false });\n      throw error;\n    }\n  },\n  logout: () => set({ user: null }),\n}));\n```\n\n## Performance Optimization\n\n### React.memo dengan useCallback\n\n```tsx\nconst ExpensiveComponent = React.memo(({ data, onUpdate }) => {\n  const memoizedCallback = useCallback(() => {\n    onUpdate(data);\n  }, [data, onUpdate]);\n\n  return (\n    <div>\n      <h3>{data.title}</h3>\n      <button onClick={memoizedCallback}>Update</button>\n    </div>\n  );\n});\n```\n\n### useDeferredValue untuk Loading States\n\n```tsx\nfunction SearchResults({ query }: { query: string }) {\n  const deferredQuery = useDeferredValue(query);\n  const results = useMemo(() => searchResults(deferredQuery), [deferredQuery]);\n\n  return (\n    <div>\n      {query !== deferredQuery && <div>Loading...</div>}\n      {results.map((result) => (\n        <ResultItem key={result.id} {...result} />\n      ))}\n    </div>\n  );\n}\n```\n\n## Kesimpulan\n\nReact patterns di 2025 lebih fokus pada:\n\n- **Simplicity**: Less boilerplate, more functionality\n- **Performance**: Built-in optimizations\n- **Developer Experience**: Better tooling dan patterns\n- **Scalability**: Component composition dan state management yang lebih baik\n\nMastering patterns ini akan membuat kita lebih productive dan building aplikasi yang lebih robust!\n",
-    "excerpt": "Modern React Patterns untuk 2025 React terus evolve dan di tahun 2025, ada beberapa pattern yang harus kita kuasai untuk building scalable applications.  Table ...",
+    "content": "\n# Modern React Patterns for 2025\n\nReact keeps evolving, and in 2025, there are several patterns we need to master for building scalable applications.\n\n## Table of Contents\n\n1. [Custom Hooks Patterns](#custom-hooks-patterns)\n2. [Compound Components](#compound-components)\n3. [Render Props Evolution](#render-props-evolution)\n4. [State Management](#state-management)\n5. [Performance Optimization](#performance-optimization)\n\n## Custom Hooks Patterns\n\nCustom hooks are the cornerstone of modern React development. Here are powerful patterns you should know:\n\n```typescript\n// useLocalStorage.ts\nimport { useState, useEffect } from \"react\";\n\nfunction useLocalStorage<T>(key: string, initialValue: T) {\n  const [storedValue, setStoredValue] = useState<T>(() => {\n    if (typeof window === \"undefined\") {\n      return initialValue;\n    }\n    try {\n      const item = window.localStorage.getItem(key);\n      return item ? JSON.parse(item) : initialValue;\n    } catch (error) {\n      console.log(error);\n      return initialValue;\n    }\n  });\n\n  const setValue = (value: T | ((val: T) => T)) => {\n    try {\n      const valueToStore =\n        value instanceof Function ? value(storedValue) : value;\n      setStoredValue(valueToStore);\n      if (typeof window !== \"undefined\") {\n        window.localStorage.setItem(key, JSON.stringify(valueToStore));\n      }\n    } catch (error) {\n      console.log(error);\n    }\n  };\n\n  return [storedValue, setValue] as const;\n}\n```\n\n## Compound Components\n\nThis pattern allows us to create flexible and reusable components:\n\n```tsx\n// Modal.tsx\nimport React, { createContext, useContext, useState } from \"react\";\n\ninterface ModalContextType {\n  isOpen: boolean;\n  openModal: () => void;\n  closeModal: () => void;\n}\n\nconst ModalContext = createContext<ModalContextType | undefined>(undefined);\n\nfunction Modal({ children }: { children: React.ReactNode }) {\n  const [isOpen, setIsOpen] = useState(false);\n\n  return (\n    <ModalContext.Provider\n      value={{\n        isOpen,\n        openModal: () => setIsOpen(true),\n        closeModal: () => setIsOpen(false),\n      }}\n    >\n      {children}\n    </ModalContext.Provider>\n  );\n}\n\nfunction ModalTrigger({ children }: { children: React.ReactNode }) {\n  const context = useContext(ModalContext);\n  return <div onClick={context?.openModal}>{children}</div>;\n}\n\nfunction ModalContent({ children }: { children: React.ReactNode }) {\n  const context = useContext(ModalContext);\n  if (!context?.isOpen) return null;\n\n  return (\n    <div className=\"fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center\">\n      <div className=\"bg-white p-6 rounded-lg max-w-md w-full\">{children}</div>\n    </div>\n  );\n}\n\n// Usage\nfunction App() {\n  return (\n    <Modal>\n      <ModalTrigger>\n        <button>Open Modal</button>\n      </ModalTrigger>\n      <ModalContent>\n        <h2>Modal Content</h2>\n        <p>This is a compound component pattern!</p>\n      </ModalContent>\n    </Modal>\n  );\n}\n```\n\n## State Management\n\nFor state management in 2025, we have several options:\n\n### Zustand (Lightweight State Management)\n\n```typescript\nimport { create } from \"zustand\";\n\ninterface UserState {\n  user: User | null;\n  isLoading: boolean;\n  login: (email: string, password: string) => Promise<void>;\n  logout: () => void;\n}\n\nconst useUserStore = create<UserState>((set) => ({\n  user: null,\n  isLoading: false,\n  login: async (email: string, password: string) => {\n    set({ isLoading: true });\n    try {\n      const user = await api.login(email, password);\n      set({ user, isLoading: false });\n    } catch (error) {\n      set({ isLoading: false });\n      throw error;\n    }\n  },\n  logout: () => set({ user: null }),\n}));\n```\n\n## Performance Optimization\n\n### React.memo with useCallback\n\n```tsx\nconst ExpensiveComponent = React.memo(({ data, onUpdate }) => {\n  const memoizedCallback = useCallback(() => {\n    onUpdate(data);\n  }, [data, onUpdate]);\n\n  return (\n    <div>\n      <h3>{data.title}</h3>\n      <button onClick={memoizedCallback}>Update</button>\n    </div>\n  );\n});\n```\n\n### useDeferredValue for Loading States\n\n```tsx\nfunction SearchResults({ query }: { query: string }) {\n  const deferredQuery = useDeferredValue(query);\n  const results = useMemo(() => searchResults(deferredQuery), [deferredQuery]);\n\n  return (\n    <div>\n      {query !== deferredQuery && <div>Loading...</div>}\n      {results.map((result) => (\n        <ResultItem key={result.id} {...result} />\n      ))}\n    </div>\n  );\n}\n```\n\n## Conclusion\n\nReact patterns in 2025 focus more on:\n\n- **Simplicity**: Less boilerplate, more functionality\n- **Performance**: Built-in optimizations\n- **Developer Experience**: Better tooling and patterns\n- **Scalability**: Better component composition and state management\n\nMastering these patterns will make us more productive and help us build more robust applications!\n",
+    "excerpt": "Modern React Patterns for 2025 React keeps evolving, and in 2025, there are several patterns we need to master for building scalable applications.  Table of Con...",
     "headings": [
       {
-        "id": "modern-react-patterns-untuk-2025",
-        "text": "Modern React Patterns untuk 2025",
+        "id": "modern-react-patterns-for-2025",
+        "text": "Modern React Patterns for 2025",
         "level": 1
       },
       {
@@ -133,42 +111,21 @@ export const blogData = {
         "level": 2
       },
       {
-        "id": "reactmemo-dengan-usecallback",
-        "text": "React.memo dengan useCallback",
+        "id": "reactmemo-with-usecallback",
+        "text": "React.memo with useCallback",
         "level": 3
       },
       {
-        "id": "usedeferredvalue-untuk-loading-states",
-        "text": "useDeferredValue untuk Loading States",
+        "id": "usedeferredvalue-for-loading-states",
+        "text": "useDeferredValue for Loading States",
         "level": 3
       },
       {
-        "id": "kesimpulan",
-        "text": "Kesimpulan",
+        "id": "conclusion",
+        "text": "Conclusion",
         "level": 2
       }
     ]
-  },
-  {
-    "slug": "mdx-menggabungkan-markdown-react",
-    "frontmatter": {
-      "title": "MDX: Menggabungkan Markdown dengan React Components",
-      "description": "Panduan lengkap menggunakan MDX untuk membuat content yang interaktif dalam Next.js",
-      "date": "2025-11-05",
-      "category": "framework",
-      "tags": [
-        "mdx",
-        "content",
-        "components",
-        "nextjs"
-      ],
-      "author": "Khairil Rahman",
-      "readTime": "10 min read",
-      "published": true
-    },
-    "content": "\r\n# MDX: Menggabungkan Markdown dengan React Components\r\n\r\nMDX (Markdown for the component era) memungkinkan kita untuk menggunakan React components dalam markdown content. Sangat powerful untuk membuat interactive content!\r\n\r\n## What is MDX?\r\n\r\nMDX adalah superset dari markdown yang memungkinkan kita untuk:\r\n\r\n- Menggunakan React components dalam markdown\r\n- Menulis JSX expression dalam content\r\n- Membuat interactive content yang rich\r\n- Maintain content yang mudah dibaca\r\n\r\n## Basic MDX Syntax\r\n\r\n### Mixing Markdown dan JSX\r\n\r\n```jsx\r\n# Blog Post Title\r\n\r\nIni adalah content markdown biasa.\r\n\r\n<Callout type=\"info\">\r\n  Ini adalah React component yang akan dirender!\r\n</Callout>\r\n\r\nContent markdown lainnya dengan **bold** dan *italic* text.\r\n```\r\n\r\n### Dynamic Content\r\n\r\n```jsx\r\nconst currentDate = new Date().toLocaleDateString('id-ID');\r\n\r\n---\r\n\r\n# Today's Date\r\n\r\nToday is: {currentDate}\r\n\r\nDan ini adalah <Badge variant=\"outline\">React component</Badge> yang menggunakan data dinamis.\r\n```\r\n\r\n## MDX dengan Next.js\r\n\r\n### Setup MDX in Next.js\r\n\r\n1. Install dependencies:\r\n\r\n```bash\r\nnpm install @next/mdx gray-matter remark remark-gfm\r\n```\r\n\r\n2. Update `next.config.mjs`:\r\n\r\n```javascript\r\nimport { withMDX } from \"@next/mdx\";\r\n\r\nconst nextConfig = {\r\n  pageExtensions: [\"ts\", \"tsx\", \"js\", \"jsx\", \"md\", \"mdx\"],\r\n};\r\n\r\nexport default withMDX()(nextConfig);\r\n```\r\n\r\n3. Create MDX content:\r\n\r\n```mdx\r\n---\r\ntitle: \"My First MDX Post\"\r\ndate: \"2025-11-05\"\r\n---\r\n\r\n# Welcome to MDX\r\n\r\nThis is a {new Date().toLocaleDateString()} blog post.\r\n\r\n<Counter />\r\n```\r\n\r\n## Advanced MDX Features\r\n\r\n### Custom Components\r\n\r\n```jsx\r\n// components/ui/CodeBlock.tsx\r\nexport function CodeBlock({ children, filename, language }) {\r\n  return (\r\n    <div className=\"code-block\">\r\n      {filename && <div className=\"code-header\">{filename}</div>}\r\n      <pre className={`language-${language}`}>\r\n        <code>{children}</code>\r\n      </pre>\r\n    </div>\r\n  );\r\n}\r\n\r\n// Usage dalam MDX\r\n<CodeBlock filename=\"example.ts\" language=\"typescript\">\r\n  {`\r\nimport { useState } from 'react';\r\n\r\nfunction Counter() {\r\n  const [count, setCount] = useState(0);\r\n  \r\n  return (\r\n    <button onClick={() => setCount(count + 1)}>\r\n      Count: {count}\r\n    </button>\r\n  );\r\n}\r\n`}\r\n</CodeBlock>;\r\n```\r\n\r\n### Interactive Charts\r\n\r\n```jsx\r\n// components/Chart.tsx\r\nimport { Line } from \"react-chartjs-2\";\r\n\r\nexport function BlogChart({ data }) {\r\n  return (\r\n    <div className=\"my-8\">\r\n      <Line\r\n        data={data}\r\n        options={{\r\n          responsive: true,\r\n          plugins: {\r\n            legend: { position: \"top\" },\r\n          },\r\n        }}\r\n      />\r\n    </div>\r\n  );\r\n}\r\n\r\n// Usage\r\n<BlogChart\r\n  data={{\r\n    labels: [\"Jan\", \"Feb\", \"Mar\", \"Apr\", \"May\", \"Jun\"],\r\n    datasets: [\r\n      {\r\n        label: \"Performance\",\r\n        data: [12, 19, 3, 5, 2, 3],\r\n        borderColor: \"rgb(75, 192, 192)\",\r\n        tension: 0.1,\r\n      },\r\n    ],\r\n  }}\r\n/>;\r\n```\r\n\r\n### Interactive Code Playground\r\n\r\n```jsx\r\n// components/CodePlayground.tsx\r\nimport { useState } from \"react\";\r\n\r\nexport function CodePlayground({ initialCode }) {\r\n  const [code, setCode] = useState(initialCode);\r\n  const [output, setOutput] = useState(\"\");\r\n\r\n  const runCode = () => {\r\n    // Simple code execution (in real app, use sandbox)\r\n    try {\r\n      setOutput(eval(code));\r\n    } catch (error) {\r\n      setOutput(\"Error: \" + error.message);\r\n    }\r\n  };\r\n\r\n  return (\r\n    <div className=\"code-playground\">\r\n      <div className=\"code-editor\">\r\n        <textarea\r\n          value={code}\r\n          onChange={(e) => setCode(e.target.value)}\r\n          className=\"w-full h-32 p-2 border rounded\"\r\n        />\r\n        <button\r\n          onClick={runCode}\r\n          className=\"mt-2 px-4 py-2 bg-blue-500 text-white rounded\"\r\n        >\r\n          Run Code\r\n        </button>\r\n      </div>\r\n      {output && (\r\n        <div className=\"code-output\">\r\n          <h4>Output:</h4>\r\n          <pre>{output}</pre>\r\n        </div>\r\n      )}\r\n    </div>\r\n  );\r\n}\r\n```\r\n\r\n## MDX dengan Content Management\r\n\r\n### Frontmatter Processing\r\n\r\n```yaml\r\n---\r\ntitle: \"Interactive Blog Post\"\r\ndescription: \"Learn MDX with interactive components\"\r\ndate: \"2025-11-05\"\r\ntags: [\"mdx\", \"interactive\", \"nextjs\"]\r\ncomponents:\r\n  - Callout\r\n  - CodeBlock\r\n  - Chart\r\n---\r\n# Blog Content Here\r\n```\r\n\r\n### Dynamic Content Loading\r\n\r\n```jsx\r\n// lib/content/loaders.ts\r\nimport fs from \"fs\";\r\nimport path from \"path\";\r\nimport matter from \"gray-matter\";\r\nimport { serialize } from \"next-mdx-remote/serialize\";\r\n\r\nexport async function loadMdxContent(slug) {\r\n  const filePath = path.join(process.cwd(), \"content\", `${slug}.mdx`);\r\n  const fileContents = fs.readFileSync(filePath, \"utf8\");\r\n  const { data, content } = matter(fileContents);\r\n\r\n  const mdxSource = await serialize(content, {\r\n    parseFrontmatter: true,\r\n    mdxOptions: {\r\n      remarkPlugins: [require(\"remark-gfm\")],\r\n      rehypePlugins: [require(\"rehype-prism-plus\")],\r\n    },\r\n  });\r\n\r\n  return {\r\n    mdxSource,\r\n    frontmatter: data,\r\n  };\r\n}\r\n```\r\n\r\n## Best Practices\r\n\r\n### 1. Component Organization\r\n\r\n```\r\ncomponents/\r\n├── ui/\r\n│   ├── Callout.tsx\r\n│   ├── Badge.tsx\r\n│   └── CodeBlock.tsx\r\n├── blog/\r\n│   ├── CodePlayground.tsx\r\n│   ├── BlogChart.tsx\r\n│   └── InteractiveDemo.tsx\r\n└── layout/\r\n    ├── ArticleLayout.tsx\r\n    └── BlogLayout.tsx\r\n```\r\n\r\n### 2. Styling Strategy\r\n\r\n- Use Tailwind classes untuk styling\r\n- Maintain consistent design system\r\n- Support dark/light mode\r\n- Responsive design\r\n\r\n### 3. Performance\r\n\r\n```jsx\r\n// Lazy load heavy components\r\nimport dynamic from \"next/dynamic\";\r\n\r\nconst BlogChart = dynamic(() => import(\"./BlogChart\"), {\r\n  loading: () => <div>Loading chart...</div>,\r\n  ssr: false,\r\n});\r\n\r\n// Usage\r\n<BlogChart data={chartData} />;\r\n```\r\n\r\n## Kesimpulan\r\n\r\nMDX adalah powerful tool untuk:\r\n\r\n- Membuat content yang interactive\r\n- Menulis dokumentasi yang rich\r\n- Building developer blogs yang engaging\r\n- Menggabungkan static content dengan dynamic components\r\n\r\nDengan MDX, kita bisa membuat content yang tidak hanya informatif, tetapi juga interaktif dan engaging untuk readers!\r\n",
-    "excerpt": "MDX: Menggabungkan Markdown dengan React Components\r \r MDX (Markdown for the component era) memungkinkan kita untuk menggunakan React components dalam markdown ...",
-    "headings": []
   },
   {
     "slug": "enhanced-mdx-features",
@@ -204,7 +161,7 @@ export const blogData = {
     "name": "framework",
     "slug": "framework",
     "description": "framework related articles",
-    "count": 3
+    "count": 1
   },
   {
     "name": "library",
@@ -220,17 +177,13 @@ export const blogData = {
   "MDX",
   "React",
   "app-router",
-  "components",
-  "content",
   "hooks",
-  "mdx",
   "nextjs",
   "patterns",
   "react",
-  "tutorial",
-  "v15"
+  "tutorial"
 ] as string[],
-  lastUpdated: '2025-11-08T06:22:43.545Z',
+  lastUpdated: '2025-11-13T22:12:20.909Z',
 } as const;
 
 // Helper functions

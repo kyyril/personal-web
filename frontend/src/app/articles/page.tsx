@@ -233,7 +233,9 @@ export default function ArticlesPage() {
       timeRequired: `PT${article.frontmatter.readTime.split(" ")[0]}M`,
       image: {
         "@type": "ImageObject",
-        url: article.frontmatter.coverImage || "https://kyyril.pages.dev/assets/profile.webp",
+        url:
+          article.frontmatter.coverImage ||
+          "https://kyyril.pages.dev/assets/profile.webp",
         width: 1200,
         height: 630,
         alt: article.frontmatter.title,
@@ -272,10 +274,7 @@ export default function ArticlesPage() {
       <div className="container mx-auto px-4 py-8 max-w-6xl">
         {/* Breadcrumb Navigation */}
         <Breadcrumb
-          items={[
-            { label: "Home", href: "/" },
-            { label: "Articles" }
-          ]}
+          items={[{ label: "Home", href: "/" }, { label: "Articles" }]}
           className="mb-8"
         />
 

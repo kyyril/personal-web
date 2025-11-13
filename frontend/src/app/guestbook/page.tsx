@@ -1,8 +1,9 @@
-import { FirebaseGuestbook } from "../../components/FirebaseGuestbook";
+import { Metadata } from "next";
 import { guestbookMetadata } from "./metadata";
 import Breadcrumb from "../../components/Breadcrumb";
+import FirebaseGuestbookClient from "./FirebaseGuestbookClient";
 
-export const metadata = guestbookMetadata;
+export const metadata: Metadata = guestbookMetadata;
 
 export default function GuestBook() {
   const breadcrumbItems = [
@@ -14,7 +15,7 @@ export default function GuestBook() {
     <section className="max-w-6xl w-full px-4 min-h-screen md:px-16 mx-auto">
       <Breadcrumb items={breadcrumbItems} className="mb-4" />
       <div className="mt-8">
-        <FirebaseGuestbook />
+        <FirebaseGuestbookClient />
       </div>
     </section>
   );

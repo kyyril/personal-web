@@ -1,10 +1,22 @@
 import React, { Suspense } from "react";
 import { Metadata } from "next";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "../../components/ui/card";
+import { Badge } from "../../components/ui/badge";
+import { Button } from "../../components/ui/button";
+import { ExternalLinkIcon } from "@radix-ui/react-icons";
+import { GitHubLogoIcon } from "@radix-ui/react-icons";
 import ProjectListSkeleton from "../../components/Project/ProjectListSkeleton";
 import GitHubProjectsListSkeleton from "../../components/Project/github/GitHubProjectsListSkeleton";
 import ProjectListWrapper from "../../components/Project/ProjectListWrapper";
 import GitHubProjectsWrapper from "../../components/Project/github/GitHubProjectsWrapper";
 import Breadcrumb from "../../components/Breadcrumb";
+import { data } from "../../lib/data";
 
 export const metadata: Metadata = {
   title: "Projects | Khairil Rahman Hakiki",
