@@ -32,6 +32,7 @@ export default function ListProject({ projects }: ListProjectProps) {
   const [typeFilter, setTypeFilter] = useState("All");
   const [currentPage, setCurrentPage] = useState(1);
   const [hasMounted, setHasMounted] = useState(false);
+  const [visibleItems, setVisibleItems] = useState(new Set<number>());
 
   useEffect(() => {
     setHasMounted(true);
@@ -52,6 +53,27 @@ export default function ListProject({ projects }: ListProjectProps) {
     const endIndex = startIndex + PROJECTS_PER_PAGE;
     return filteredProjects.slice(startIndex, endIndex);
   }, [filteredProjects, currentPage]);
+
+  useEffect(() => {
+    if (hasMounted) {
+      // Reset visible items when page changes
+      setVisibleItems(new Set());
+      
+      // Animate items in sequence with faster delays
+      const timers: NodeJS.Timeout[] = [];
+      for (let i = 0; i < paginatedProjects.length; i++) {
+        const timer = setTimeout(() => {
+          setVisibleItems(prev => new Set([...prev, i]));
+        }, i * 30); // Faster animation: 30ms delay instead of 50ms
+        timers.push(timer);
+      }
+
+      // Cleanup timers on unmount or dependency change
+      return () => {
+        timers.forEach(clearTimeout);
+      };
+    }
+  }, [currentPage, hasMounted, paginatedProjects.length]);
 
   const generatePaginationNumbers = () => {
     const delta = 1;
@@ -134,7 +156,12 @@ export default function ListProject({ projects }: ListProjectProps) {
           <>
             {paginatedProjects.map((project, index) => (
               <li key={project.id}>
-                <CardProject project={project} index={index} />
+                <CardProject
+                  project={project}
+                  index={index}
+                  isVisible={visibleItems.has(index)}
+                  hasMounted={hasMounted}
+                />
               </li>
             ))}
             {Array.from({
