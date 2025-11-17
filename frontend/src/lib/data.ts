@@ -109,7 +109,6 @@ export const experiences: Experience[] = [
       "Supabase",
       "PostgreSQL",
       "Cloudinary",
-      "TailwindCSS",
       "ShadcnUI",
       "REST APIs",
       "Generative AI",

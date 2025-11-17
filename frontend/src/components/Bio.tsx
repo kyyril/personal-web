@@ -1,120 +1,63 @@
-"use client";
-import { Data } from "../lib/interfaces/data";
+import React from "react";
+import { GithubIcon, LinkedinIcon, DocumentIcon } from "./Icons";
+import { HERO_DATA } from "../constants";
 import Image from "next/image";
-import Link from "next/link";
-import { Button } from "./ui/button";
-import {
-  EnvelopeClosedIcon,
-  GitHubLogoIcon,
-  LinkedInLogoIcon,
-} from "@radix-ui/react-icons";
-import { Paperclip } from "lucide-react";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import { motion } from "framer-motion";
+import { contactInfo } from "@/lib/data";
 
-function Bio({ data }: { data: Data }) {
+const SOCIAL_LINKS = [
+  { name: "GitHub", url: contactInfo.github, icon: <GithubIcon /> },
+  { name: "LinkedIn", url: contactInfo.linkedin, icon: <LinkedinIcon /> },
+  { name: "Resume", url: contactInfo.cv, icon: <DocumentIcon /> },
+];
+
+const Bio: React.FC = () => {
   return (
-    <div className="flex flex-col lg:flex-row items-center justify-center gap-12">
-      <div className="w-1/2 mx-auto lg:w-1/3">
-        <Dialog>
-          <DialogTrigger asChild>
-            <Image
-              src={"/assets/profile.webp"}
-              width={280}
-              height={280}
-              alt="Profile photo"
-              loading="lazy"
-              className="mx-auto aspect-square overflow-hidden object-cover object-center rounded-full cursor-pointer hover:ring-2 hover:ring-primary transition-all duration-300"
-              aria-label="View profile photo in full size"
-            />
-          </DialogTrigger>
-          <DialogContent className="bg-transparent shadow-none border-none rounded">
-            <motion.div
-              className="flex items-center justify-center"
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.3 }}
-            >
-              <Image
-                src="/assets/profile.webp"
-                width={400}
-                height={400}
-                alt="Katou Megumin"
-                className="rounded object-cover"
-              />
-            </motion.div>
-          </DialogContent>
-        </Dialog>
-      </div>
-      <div className="w-full px-4 md:px-8 mx-auto">
-        <div className="space-y-2">
-          <h1 className="text-4xl md:text-5xl font-semibold tracking-tighter ">
-            Hey! I&apos;m Khairil
+    <section>
+      <div className="flex items-start justify-between mb-2">
+        <div>
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white tracking-tight">
+            Khairil Rahman
           </h1>
+          <p className="text-lg text-gray-700 dark:text-gray-300">
+            Software Engineer
+          </p>
         </div>
-        <p className="max-w-[600px] lg:text-lg font-light opacity-70">
+        <Image
+           src={"/assets/profile.webp"}
+           width={100}
+           height={100}
+           alt="Profile photo"
+           loading="lazy"
+           className="aspect-square h-20 w-20 overflow-hidden object-cover object-center rounded-full cursor-pointer hover:ring-2 hover:ring-primary transition-all duration-300 flex-shrink-0"
+           aria-label="View profile photo in full size"
+         />
+      </div>
+      <div className="flex items-center gap-x-6 mb-4">
+        {SOCIAL_LINKS.map((link) => (
+          <a
+            key={link.name}
+            href={link.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-x-2 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors duration-300 group"
+          >
+            {link.icon}
+            <span className="hidden md:inline text-sm font-medium">{link.name}</span>
+          </a>
+        ))}
+      </div>
+
+      <div>
+        <p className="max-w-[600px] lg:text-lg text-gray-500 dark:text-gray-400 font-light">
           Information Systems student specializing in software development. I
           leverage <span className="font-semibold">React.js</span> and{" "}
           <span className="font-semibold">Node.js</span> with{" "}
           <span className="font-semibold">Typescript</span> to build robust,
           scalable applications.{" "}
         </p>
-        <div className="space-x-4 mt-2">
-          <Link target="_blank" href={data.contactInfo.github} prefetch={false}>
-            <Button
-              className="hover:text-custom"
-              variant="secondary"
-              size="sm"
-              aria-label="Visit GitHub profile"
-            >
-              <GitHubLogoIcon />
-            </Button>
-          </Link>
-
-          <Link
-            target="_blank"
-            href={data.contactInfo.linkedin}
-            prefetch={false}
-          >
-            <Button
-              className="hover:text-custom"
-              variant="secondary"
-              size="sm"
-              aria-label="Visit LinkedIn profile"
-            >
-              <LinkedInLogoIcon />
-            </Button>
-          </Link>
-          <Link
-            target="_blank"
-            href={`mailto:${data.contactInfo.email}`}
-            prefetch={false}
-          >
-            <Button
-              className="hover:text-custom"
-              variant="secondary"
-              size="sm"
-              aria-label="Send email"
-            >
-              <EnvelopeClosedIcon />
-            </Button>
-          </Link>
-
-          <Link target="_blank" href={data.contactInfo.cv} prefetch={false}>
-            <Button
-              variant={"link"}
-              className="hover:text-custom"
-              size="sm"
-              aria-label="Download resume"
-            >
-              <Paperclip />
-              <span className="text-md">Resume</span>
-            </Button>
-          </Link>
-        </div>
       </div>
-    </div>
+    </section>
   );
-}
+};
 
 export default Bio;
