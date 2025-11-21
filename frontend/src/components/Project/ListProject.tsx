@@ -58,12 +58,12 @@ export default function ListProject({ projects }: ListProjectProps) {
     if (hasMounted) {
       // Reset visible items when page changes
       setVisibleItems(new Set());
-      
+
       // Animate items in sequence with faster delays
       const timers: NodeJS.Timeout[] = [];
       for (let i = 0; i < paginatedProjects.length; i++) {
         const timer = setTimeout(() => {
-          setVisibleItems(prev => new Set([...prev, i]));
+          setVisibleItems((prev) => new Set([...prev, i]));
         }, i * 30); // Faster animation: 30ms delay instead of 50ms
         timers.push(timer);
       }
@@ -203,8 +203,10 @@ export default function ListProject({ projects }: ListProjectProps) {
               size="sm"
               onClick={goToPreviousPage}
               disabled={currentPage === 1}
-              className="h-9 px-3 gap-1 hover:bg-primary/10 hover:text-primary disabled:opacity-50"
-              aria-label={`Go to previous page, page ${currentPage - 1} of ${totalPages}`}
+              className="h-9 px-3 gap-1 hover:bg-primary/10 hover:text-primary disabled:opacity-70"
+              aria-label={`Go to previous page, page ${
+                currentPage - 1
+              } of ${totalPages}`}
             >
               <ChevronLeftIcon className="h-4 w-4" />
               <span className="hidden sm:inline">Previous</span>
@@ -248,8 +250,10 @@ export default function ListProject({ projects }: ListProjectProps) {
               size="sm"
               onClick={goToNextPage}
               disabled={currentPage === totalPages}
-              className="h-9 px-3 gap-1 hover:bg-primary/10 hover:text-primary disabled:opacity-50"
-              aria-label={`Go to next page, page ${currentPage + 1} of ${totalPages}`}
+              className="h-9 px-3 gap-1 hover:bg-primary/10 hover:text-primary disabled:opacity-70"
+              aria-label={`Go to next page, page ${
+                currentPage + 1
+              } of ${totalPages}`}
             >
               <span className="hidden sm:inline">Next</span>
               <ChevronRightIcon className="h-4 w-4" />

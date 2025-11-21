@@ -234,7 +234,7 @@ export default function GitHubProjects({ repositories }: GitHubProjectsProps) {
               size="sm"
               onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage === 1}
-              className="h-9 px-3 gap-1 hover:bg-primary/10 hover:text-primary disabled:opacity-50"
+              className="h-9 px-3 gap-1 hover:bg-primary/10 hover:text-primary disabled:opacity-70"
               aria-label={`Go to previous page (page ${currentPage - 1})`}
             >
               <ChevronLeftIcon className="h-4 w-4" />
@@ -279,7 +279,7 @@ export default function GitHubProjects({ repositories }: GitHubProjectsProps) {
               size="sm"
               onClick={() => handlePageChange(currentPage + 1)}
               disabled={currentPage === totalPages}
-              className="h-9 px-3 gap-1 hover:bg-primary/10 hover:text-primary disabled:opacity-50"
+              className="h-9 px-3 gap-1 hover:bg-primary/10 hover:text-primary disabled:opacity-70"
               aria-label={`Go to next page (page ${currentPage + 1})`}
             >
               <span className="hidden sm:inline">Next</span>

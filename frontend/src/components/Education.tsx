@@ -13,7 +13,7 @@ function Education({ data }: { data: Data }) {
           <div className="text-sm">
             {ed.startDate} - {ed.endDate}
           </div>
-          <p className="mt-2 text-sm opacity-65">{ed.description}</p>
+          <p className="mt-2 text-sm opacity-70">{ed.description}</p>
         </div>
       ))}
     </div>

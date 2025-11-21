@@ -132,13 +132,13 @@ const VisiblePlayer = ({ onHide, position, setPosition }: any) => {
         >
           <Card className="bg-background/95 p-2 border-none backdrop-blur-sm shadow-lg max-w-[280px]">
             <div className="flex items-center gap-2">
-              <div className="flex items-center justify-center w-4 h-8 cursor-move opacity-50 hover:opacity-100 transition-opacity">
+              <div className="flex items-center justify-center w-4 h-8 cursor-move opacity-70 hover:opacity-100 transition-opacity">
                 <DragHandleDots2Icon className="h-3 w-3" />
               </div>
 
               <Dialog>
                 <DialogTrigger asChild>
-                  <div className="flex items-center gap-3 cursor-pointer hover:opacity-80 transition-opacity flex-1 min-w-0">
+                  <div className="flex items-center gap-3 cursor-pointer hover:opacity-70 transition-opacity flex-1 min-w-0">
                     <div className="w-8 h-8 bg-muted rounded flex items-center justify-center overflow-hidden flex-shrink-0">
                       {currentTrack.cover ? (
                         <Image
@@ -210,7 +210,7 @@ const VisiblePlayer = ({ onHide, position, setPosition }: any) => {
                   variant="ghost"
                   size="icon"
                   onClick={onHide}
-                  className="h-7 w-7 opacity-60 hover:opacity-100 transform-gpu"
+                  className="h-7 w-7 opacity-70 hover:opacity-100 transform-gpu"
                   aria-label="Hide music player"
                 >
                   <CaretLeftIcon className="h-3 w-3" />

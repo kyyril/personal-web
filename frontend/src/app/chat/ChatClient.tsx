@@ -420,7 +420,7 @@ export default function ChatClient() {
           <Dialog>
             <DialogTrigger asChild>
               <button
-                className="cursor-pointer hover:opacity-80 transition-opacity"
+                className="cursor-pointer hover:opacity-70 transition-opacity"
                 aria-label="View profile picture"
               >
                 <Image

@@ -237,7 +237,7 @@ export function MDXRenderer({ content }: MDXRendererProps) {
             >
               {children}
               {href?.startsWith("http") && (
-                <ExternalLink className="h-3 w-3 opacity-50" />
+                <ExternalLink className="h-3 w-3 opacity-70" />
               )}
             </a>
           ),

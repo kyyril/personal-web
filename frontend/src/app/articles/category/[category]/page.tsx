@@ -386,7 +386,7 @@ export default async function CategoryPage({ params }: PageProps) {
           /* Empty State */
           <div className="text-center py-12">
             <div className="text-muted-foreground mb-4">
-              <Folder className="h-12 w-12 mx-auto mb-4 opacity-50" />
+              <Folder className="h-12 w-12 mx-auto mb-4 opacity-70" />
               <h3 className="text-lg font-semibold mb-2">
                 No articles in this category yet
               </h3>

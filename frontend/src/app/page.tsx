@@ -93,7 +93,7 @@ export default function Home() {
           id="bio"
           role="region"
           aria-labelledby="bio-heading"
-          className="container mb-32"
+          className="container mb-24"
         >
           <h1 id="bio-heading" className="sr-only">
             Biography and Introduction

@@ -1,7 +1,6 @@
 import React from "react";
 import { GithubIcon, LinkedinIcon, DocumentIcon } from "./Icons";
 import { HERO_DATA } from "../constants";
-import Image from "next/image";
 import { contactInfo } from "@/lib/data";
 
 const SOCIAL_LINKS = [
@@ -13,24 +12,13 @@ const SOCIAL_LINKS = [
 const Bio: React.FC = () => {
   return (
     <section>
-      <div className="flex items-start justify-between mb-2">
+      <div className="mb-2">
         <div>
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white tracking-tight">
+          <h1 className="text-4xl md:text-5xl font-bold  tracking-tight">
             Khairil Rahman
           </h1>
-          <p className="text-lg text-gray-700 dark:text-gray-300">
-            Software Engineer
-          </p>
+          <p className="text-lg opacity-70">Software Engineer</p>
         </div>
-        <Image
-           src={"/assets/profile.webp"}
-           width={100}
-           height={100}
-           alt="Profile photo"
-           loading="lazy"
-           className="aspect-square h-20 w-20 overflow-hidden object-cover object-center rounded-full cursor-pointer hover:ring-2 hover:ring-primary transition-all duration-300 flex-shrink-0"
-           aria-label="View profile photo in full size"
-         />
       </div>
       <div className="flex items-center gap-x-6 mb-4">
         {SOCIAL_LINKS.map((link) => (
@@ -39,16 +27,18 @@ const Bio: React.FC = () => {
             href={link.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-x-2 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors duration-300 group"
+            className="flex items opacity-70-center gap-x-2 hover: transition-colors duration-300 group"
           >
             {link.icon}
-            <span className="hidden md:inline text-sm font-medium">{link.name}</span>
+            <span className="hidden md:inline text-sm font-medium">
+              {link.name}
+            </span>
           </a>
         ))}
       </div>
 
       <div>
-        <p className="max-w-[600px] lg:text-lg text-gray-500 dark:text-gray-400 font-light">
+        <p className="max-w-[600px] opacity-70 lg:text-lg font-light">
           Information Systems student specializing in software development. I
           leverage <span className="font-semibold">React.js</span> and{" "}
           <span className="font-semibold">Node.js</span> with{" "}
