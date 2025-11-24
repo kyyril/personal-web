@@ -6,9 +6,14 @@ import FooterWrapper from "../components/FooterWrapper";
 import { Analytics } from "@vercel/analytics/next";
 import { AuthProvider } from "../contexts/AuthContext";
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://kyyril.vercel.app";
+
 export const runtime = "edge";
 export const metadata: Metadata = {
-  title: "Khairil Rahman | Software Engineer",
+  title: {
+    default: "Khairil Rahman | Software Engineer",
+    template: "%s | Khairil Rahman Hakiki"
+  },
   description:
     "I'm an Information Systems student who loves programming, especially software development. I specialize in React.js and Node.js with TypeScript",
   keywords: [
@@ -19,15 +24,38 @@ export const metadata: Metadata = {
     "Next.js",
     "TypeScript",
     "React",
+    "Node.js",
     "Software Engineer",
     "Information Systems",
+    "Full Stack Developer",
+    "JavaScript",
+    "Frontend Developer",
+    "Backend Developer",
+    "Portfolio",
+    "Personal Website",
   ],
   authors: [{ name: "Khairil Rahman Hakiki" }],
   creator: "Khairil Rahman Hakiki Hrp",
   publisher: "Khairil Rahman Hakiki Hrp",
-  robots: "index, follow",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  metadataBase: new URL(siteUrl),
   alternates: {
-    canonical: "https://kyyril.vercel.app",
+    canonical: "/",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
   verification: {
     google: "24f9cc081f9ae37b",
@@ -35,14 +63,14 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://kyyril.vercel.app",
+    url: siteUrl,
     siteName: "Khairil Rahman Hakiki",
     title: "Khairil Rahman Hakiki | Software Engineer",
     description:
       "Software Engineer specializing in React.js and Node.js with TypeScript",
     images: [
       {
-        url: "https://kyyril.vercel.app/assets/profile.webp",
+        url: `${siteUrl}/assets/profile.webp`,
         width: 1200,
         height: 630,
         alt: "Khairil Rahman Hakiki - Software Engineer",
@@ -54,7 +82,7 @@ export const metadata: Metadata = {
     description:
       "Software Engineer specializing in React.js and Node.js with TypeScript",
     card: "summary_large_image",
-    images: ["https://kyyril.vercel.app/assets/profile.webp"],
+    images: [`${siteUrl}/assets/profile.webp`],
   },
 };
 
@@ -76,7 +104,7 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-title" content="Khairil HR" />
         <link rel="manifest" href="/manifest.json" />
         <link rel="icon" href="/favicon.ico" />
-        <link rel="apple-touch-icon" href="/assets/profile.webp" />
+        <link rel="apple-touch-icon" href={`${siteUrl}/assets/profile.webp`} />
 
         <script
           type="application/ld+json"
@@ -86,28 +114,27 @@ export default function RootLayout({
               "@graph": [
                 {
                   "@type": "WebSite",
-                  "@id": "https://kyyril.vercel.app/#website",
-                  url: "https://kyyril.vercel.app/",
+                  "@id": `${siteUrl}/#website`,
+                  url: siteUrl,
                   name: "Khairil Rahman Hakiki | Software Engineer",
                   description:
                     "Software Engineer specializing in React.js and Node.js with TypeScript",
                   potentialAction: {
                     "@type": "SearchAction",
-                    target:
-                      "https://kyyril.vercel.app/search?q={search_term_string}",
+                    target: `${siteUrl}/search?q={search_term_string}`,
                     "query-input": "required name=search_term_string",
                   },
                   publisher: {
-                    "@id": "https://kyyril.vercel.app/#person",
+                    "@id": `${siteUrl}/#person`,
                   },
                 },
                 {
                   "@type": "Person",
-                  "@id": "https://kyyril.vercel.app/#person",
+                  "@id": `${siteUrl}/#person`,
                   name: "Khairil Rahman Hakiki",
                   alternateName: "Khairil Rahman Hakiki Hrp",
-                  url: "https://kyyril.vercel.app",
-                  image: "https://kyyril.vercel.app/assets/profile.webp",
+                  url: siteUrl,
+                  image: `${siteUrl}/assets/profile.webp`,
                   jobTitle: "Software Engineer",
                   description:
                     "Information Systems student who loves programming, especially software development. Specializing in React.js and Node.js with TypeScript",
@@ -122,30 +149,45 @@ export default function RootLayout({
                     "TypeScript",
                     "React",
                     "Node.js",
+                    "JavaScript",
                     "Software Engineering",
                     "Information Systems",
+                    "Full Stack Development",
                   ],
                   alumniOf: {
                     "@type": "CollegeOrUniversity",
                     name: "Information Systems",
                   },
+                  address: {
+                    "@type": "PostalAddress",
+                    addressCountry: "ID",
+                  },
+                  contactPoint: {
+                    "@type": "ContactPoint",
+                    contactType: "professional",
+                    url: siteUrl,
+                  },
                 },
                 {
                   "@type": "WebPage",
-                  "@id": "https://kyyril.vercel.app/#webpage",
-                  url: "https://kyyril.vercel.app",
+                  "@id": `${siteUrl}/#webpage`,
+                  url: siteUrl,
                   name: "Khairil Rahman Hakiki | Software Engineer",
                   description:
                     "Software Engineer specializing in React.js and Node.js with TypeScript",
                   isPartOf: {
-                    "@id": "https://kyyril.vercel.app/#website",
+                    "@id": `${siteUrl}/#website`,
                   },
                   about: {
-                    "@id": "https://kyyril.vercel.app/#person",
+                    "@id": `${siteUrl}/#person`,
                   },
                   audience: {
                     "@type": "Audience",
                     audienceType: "Software Developers, Tech Enthusiasts",
+                  },
+                  primaryImageOfPage: {
+                    "@type": "ImageObject",
+                    url: `${siteUrl}/assets/profile.webp`,
                   },
                 },
               ],

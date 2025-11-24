@@ -36,6 +36,7 @@
     ".next/types/**/*.ts"
   ],
   "exclude": [
-    "../backend/node_modules"
+    "../backend/node_modules",
+    "website-yati-master"
   ]
 }

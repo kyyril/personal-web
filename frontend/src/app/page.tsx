@@ -6,6 +6,8 @@ import EducationSkeleton from "../components/EducationSkeleton";
 import ExperienceSkeleton from "../components/ExperienceSkeleton";
 import BioSkeleton from "../components/BioSkeleton";
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://kyyril.vercel.app";
+
 const Bio = dynamic(() => import("../components/Bio"), {
   loading: () => <BioSkeleton />,
 });
@@ -21,17 +23,17 @@ export const metadata: Metadata = {
   description:
     "Welcome to the personal website of Khairil Rahman Hakiki, a passionate Software Engineer specializing in Next.js and TypeScript. Explore my projects, experience, and feel free to get in touch.",
   alternates: {
-    canonical: "https://kyyril.vercel.app",
+    canonical: siteUrl,
   },
   openGraph: {
     title: "Khairil Rahman Hakiki | Software Engineer",
     description:
       "Welcome to the personal website of Khairil Rahman Hakiki, a passionate Software Engineer specializing in Next.js and TypeScript. Explore my projects, experience, and feel free to get in touch.",
     type: "website",
-    url: "https://kyyril.vercel.app",
+    url: siteUrl,
     images: [
       {
-        url: "https://kyyril.vercel.app/assets/profile.webp",
+        url: `${siteUrl}/assets/profile.webp`,
         width: 1200,
         height: 630,
         alt: "Khairil Rahman Hakiki - Software Engineer Portfolio",

@@ -2,8 +2,10 @@ import { MetadataRoute } from "next";
 import { data } from "../lib/data";
 import { getAllArticles, getAllCategories } from "../data/blog-data";
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://kyyril.vercel.app";
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://kyyril.vercel.app";
+  const baseUrl = siteUrl;
   const currentDate = new Date();
 
   // Static routes

@@ -1,5 +1,7 @@
 import { MetadataRoute } from "next";
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://kyyril.vercel.app";
+
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
@@ -28,7 +30,7 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/admin/", "/private/"],
       },
     ],
-    sitemap: "https://kyyril.vercel.app/sitemap.xml",
-    host: "https://kyyril.vercel.app",
+    sitemap: `${siteUrl}/sitemap.xml`,
+    host: siteUrl,
   };
 }
