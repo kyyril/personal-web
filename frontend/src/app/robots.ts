@@ -14,7 +14,7 @@ export default function robots(): MetadataRoute.Robots {
           "/node_modules/",
           "/.well-known/",
           "/temp/",
-          "/tmp/"
+          "/tmp/",
         ],
       },
       {
@@ -28,7 +28,7 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/admin/", "/private/"],
       },
     ],
-    sitemap: "https://kyyril.pages.dev/sitemap.xml",
-    host: "https://kyyril.pages.dev"
+    sitemap: "https://kyyril.vercel.app/sitemap.xml",
+    host: "https://kyyril.vercel.app",
   };
 }

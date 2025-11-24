@@ -12,25 +12,25 @@ export const guestbookMetadata: Metadata = {
     "feedback",
     "message board",
     "React developer",
-    "Next.js developer"
+    "Next.js developer",
   ],
   alternates: {
-    canonical: "https://kyyril.pages.dev/guestbook",
+    canonical: "https://kyyril.vercel.app/guestbook",
   },
   openGraph: {
     title: "Guestbook | Khairil Rahman Hakiki",
     description:
       "Sign Khairil's guestbook and share your thoughts. A place for visitors to leave messages and connect with this Software Engineer.",
-    url: "https://kyyril.pages.dev/guestbook",
+    url: "https://kyyril.vercel.app/guestbook",
     type: "website",
     images: [
       {
-        url: "https://kyyril.pages.dev/assets/profile.webp",
+        url: "https://kyyril.vercel.app/assets/profile.webp",
         width: 1200,
         height: 630,
         alt: "Khairil Rahman Hakiki - Guestbook",
-      }
-    ]
+      },
+    ],
   },
   twitter: {
     title: "Guestbook | Khairil Rahman Hakiki",

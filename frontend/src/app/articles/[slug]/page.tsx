@@ -59,7 +59,7 @@ export async function generateMetadata({
     openGraph: {
       type: "article",
       locale: "en_US",
-      url: `https://kyyril.pages.dev/articles/${post.slug}`,
+      url: `https://kyyril.vercel.app/articles/${post.slug}`,
       title: `${post.frontmatter.title} | Khairil Rahman Hakiki Blog`,
       description: post.frontmatter.description,
       siteName: "Khairil Rahman Hakiki Blog",
@@ -86,7 +86,7 @@ export async function generateMetadata({
       images: [post.frontmatter.coverImage || "/assets/profile.webp"],
     },
     alternates: {
-      canonical: `https://kyyril.pages.dev/articles/${post.slug}`,
+      canonical: `https://kyyril.vercel.app/articles/${post.slug}`,
     },
     robots: {
       index: true,

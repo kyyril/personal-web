@@ -43,7 +43,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://kyyril.pages.dev/articles",
+    url: "https://kyyril.vercel.app/articles",
     title: "Articles | Software engineer & Software Tutorials",
     description:
       "Read the latest articles about software engineer, React, Next.js, and modern frontend technologies. Learn from comprehensive tutorials and best practices.",
@@ -67,7 +67,7 @@ export const metadata: Metadata = {
     images: ["/assets/profile.webp"],
   },
   alternates: {
-    canonical: "https://kyyril.pages.dev/articles",
+    canonical: "https://kyyril.vercel.app/articles",
   },
   robots: {
     index: true,
@@ -205,22 +205,22 @@ export default function ArticlesPage() {
     name: "Khairil Rahman Hakiki Blog",
     description:
       "Articles about software engineer, React, Next.js, and modern frontend technologies",
-    url: "https://kyyril.pages.dev/articles",
+    url: "https://kyyril.vercel.app/articles",
     author: {
       "@type": "Person",
       name: "Khairil Rahman Hakiki",
-      url: "https://kyyril.pages.dev",
+      url: "https://kyyril.vercel.app",
     },
     publisher: {
       "@type": "Person",
       name: "Khairil Rahman Hakiki",
-      url: "https://kyyril.pages.dev",
+      url: "https://kyyril.vercel.app",
     },
     blogPost: allArticles.map((article) => ({
       "@type": "BlogPosting",
       headline: article.frontmatter.title,
       description: article.frontmatter.description,
-      url: `https://kyyril.pages.dev/articles/${article.slug}`,
+      url: `https://kyyril.vercel.app/articles/${article.slug}`,
       author: {
         "@type": "Person",
         name: article.frontmatter.author,
@@ -235,7 +235,7 @@ export default function ArticlesPage() {
         "@type": "ImageObject",
         url:
           article.frontmatter.coverImage ||
-          "https://kyyril.pages.dev/assets/profile.webp",
+          "https://kyyril.vercel.app/assets/profile.webp",
         width: 1200,
         height: 630,
         alt: article.frontmatter.title,
@@ -248,13 +248,13 @@ export default function ArticlesPage() {
           "@type": "ListItem",
           position: 1,
           name: "Home",
-          item: "https://kyyril.pages.dev",
+          item: "https://kyyril.vercel.app",
         },
         {
           "@type": "ListItem",
           position: 2,
           name: "Articles",
-          item: "https://kyyril.pages.dev/articles",
+          item: "https://kyyril.vercel.app/articles",
         },
       ],
     },

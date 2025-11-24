@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   publisher: "Khairil Rahman Hakiki Hrp",
   robots: "index, follow",
   alternates: {
-    canonical: "https://kyyril.pages.dev",
+    canonical: "https://kyyril.vercel.app",
   },
   verification: {
     google: "24f9cc081f9ae37b",
@@ -35,14 +35,14 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://kyyril.pages.dev",
+    url: "https://kyyril.vercel.app",
     siteName: "Khairil Rahman Hakiki",
     title: "Khairil Rahman Hakiki | Software Engineer",
     description:
       "Software Engineer specializing in React.js and Node.js with TypeScript",
     images: [
       {
-        url: "https://kyyril.pages.dev/assets/profile.webp",
+        url: "https://kyyril.vercel.app/assets/profile.webp",
         width: 1200,
         height: 630,
         alt: "Khairil Rahman Hakiki - Software Engineer",
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
     description:
       "Software Engineer specializing in React.js and Node.js with TypeScript",
     card: "summary_large_image",
-    images: ["https://kyyril.pages.dev/assets/profile.webp"],
+    images: ["https://kyyril.vercel.app/assets/profile.webp"],
   },
 };
 
@@ -86,28 +86,28 @@ export default function RootLayout({
               "@graph": [
                 {
                   "@type": "WebSite",
-                  "@id": "https://kyyril.pages.dev/#website",
-                  url: "https://kyyril.pages.dev/",
+                  "@id": "https://kyyril.vercel.app/#website",
+                  url: "https://kyyril.vercel.app/",
                   name: "Khairil Rahman Hakiki | Software Engineer",
                   description:
                     "Software Engineer specializing in React.js and Node.js with TypeScript",
                   potentialAction: {
                     "@type": "SearchAction",
                     target:
-                      "https://kyyril.pages.dev/search?q={search_term_string}",
+                      "https://kyyril.vercel.app/search?q={search_term_string}",
                     "query-input": "required name=search_term_string",
                   },
                   publisher: {
-                    "@id": "https://kyyril.pages.dev/#person",
+                    "@id": "https://kyyril.vercel.app/#person",
                   },
                 },
                 {
                   "@type": "Person",
-                  "@id": "https://kyyril.pages.dev/#person",
+                  "@id": "https://kyyril.vercel.app/#person",
                   name: "Khairil Rahman Hakiki",
                   alternateName: "Khairil Rahman Hakiki Hrp",
-                  url: "https://kyyril.pages.dev",
-                  image: "https://kyyril.pages.dev/assets/profile.webp",
+                  url: "https://kyyril.vercel.app",
+                  image: "https://kyyril.vercel.app/assets/profile.webp",
                   jobTitle: "Software Engineer",
                   description:
                     "Information Systems student who loves programming, especially software development. Specializing in React.js and Node.js with TypeScript",
@@ -132,16 +132,16 @@ export default function RootLayout({
                 },
                 {
                   "@type": "WebPage",
-                  "@id": "https://kyyril.pages.dev/#webpage",
-                  url: "https://kyyril.pages.dev",
+                  "@id": "https://kyyril.vercel.app/#webpage",
+                  url: "https://kyyril.vercel.app",
                   name: "Khairil Rahman Hakiki | Software Engineer",
                   description:
                     "Software Engineer specializing in React.js and Node.js with TypeScript",
                   isPartOf: {
-                    "@id": "https://kyyril.pages.dev/#website",
+                    "@id": "https://kyyril.vercel.app/#website",
                   },
                   about: {
-                    "@id": "https://kyyril.pages.dev/#person",
+                    "@id": "https://kyyril.vercel.app/#person",
                   },
                   audience: {
                     "@type": "Audience",

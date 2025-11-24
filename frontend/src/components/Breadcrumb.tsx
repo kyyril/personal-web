@@ -12,19 +12,22 @@ interface BreadcrumbProps {
   className?: string;
 }
 
-export const Breadcrumb: React.FC<BreadcrumbProps> = ({ items, className = "" }) => {
+export const Breadcrumb: React.FC<BreadcrumbProps> = ({
+  items,
+  className = "",
+}) => {
   const generateBreadcrumbData = () => {
     const itemsWithPosition = items.map((item, index) => ({
       "@type": "ListItem",
-      "position": index + 1,
-      "name": item.label,
-      ...(item.href && { "item": `https://kyyril.pages.dev${item.href}` })
+      position: index + 1,
+      name: item.label,
+      ...(item.href && { item: `https://kyyril.vercel.app${item.href}` }),
     }));
 
     return {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
-      "itemListElement": itemsWithPosition
+      itemListElement: itemsWithPosition,
     };
   };
 
@@ -33,7 +36,7 @@ export const Breadcrumb: React.FC<BreadcrumbProps> = ({ items, className = "" })
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(generateBreadcrumbData())
+          __html: JSON.stringify(generateBreadcrumbData()),
         }}
       />
       <nav

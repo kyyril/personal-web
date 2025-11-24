@@ -27,7 +27,7 @@ const app = new Elysia()
         "http://localhost:3000", // Next.js dev
         "http://localhost:5173", // Vite dev
         "https://kyyril.vercel.app", // Production
-        "https://kyyril.pages.dev", // Production
+        "https://kyyril.vercel.app", // Production
       ],
       credentials: true,
       methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],

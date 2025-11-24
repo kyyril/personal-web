@@ -3,7 +3,7 @@ import { data } from "../lib/data";
 import { getAllArticles, getAllCategories } from "../data/blog-data";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://kyyril.pages.dev";
+  const baseUrl = "https://kyyril.vercel.app";
   const currentDate = new Date();
 
   // Static routes
@@ -66,5 +66,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  return [...staticRoutes, ...projectRoutes, ...articleRoutes, ...categoryRoutes];
+  return [
+    ...staticRoutes,
+    ...projectRoutes,
+    ...articleRoutes,
+    ...categoryRoutes,
+  ];
 }

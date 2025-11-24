@@ -34,28 +34,28 @@ export function ArticleClient({ post, relatedPosts }: ArticleClientProps) {
     "@type": "BlogPosting",
     headline: post.frontmatter.title,
     description: post.frontmatter.description,
-    url: `https://kyyril.pages.dev/articles/${post.slug}`,
+    url: `https://kyyril.vercel.app/articles/${post.slug}`,
     datePublished: post.frontmatter.date,
     dateModified: post.frontmatter.date,
     author: {
       "@type": "Person",
       name: post.frontmatter.author,
-      url: "https://kyyril.pages.dev",
+      url: "https://kyyril.vercel.app",
     },
     publisher: {
       "@type": "Person",
       name: "Khairil Rahman Hakiki",
-      url: "https://kyyril.pages.dev",
+      url: "https://kyyril.vercel.app",
     },
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": `https://kyyril.pages.dev/articles/${post.slug}`,
+      "@id": `https://kyyril.vercel.app/articles/${post.slug}`,
     },
     image: {
       "@type": "ImageObject",
       url:
         post.frontmatter.coverImage ||
-        "https://kyyril.pages.dev/assets/profile.webp",
+        "https://kyyril.vercel.app/assets/profile.webp",
       width: 1200,
       height: 630,
       alt: post.frontmatter.title,
@@ -71,7 +71,7 @@ export function ArticleClient({ post, relatedPosts }: ArticleClientProps) {
     mentions: relatedPosts.map((relatedPost) => ({
       "@type": "BlogPosting",
       headline: relatedPost.frontmatter.title,
-      url: `https://kyyril.pages.dev/articles/${relatedPost.slug}`,
+      url: `https://kyyril.vercel.app/articles/${relatedPost.slug}`,
       datePublished: relatedPost.frontmatter.date,
     })),
     breadcrumb: {
@@ -81,19 +81,19 @@ export function ArticleClient({ post, relatedPosts }: ArticleClientProps) {
           "@type": "ListItem",
           position: 1,
           name: "Home",
-          item: "https://kyyril.pages.dev",
+          item: "https://kyyril.vercel.app",
         },
         {
           "@type": "ListItem",
           position: 2,
           name: "Articles",
-          item: "https://kyyril.pages.dev/articles",
+          item: "https://kyyril.vercel.app/articles",
         },
         {
           "@type": "ListItem",
           position: 3,
           name: post.frontmatter.category,
-          item: `https://kyyril.pages.dev/articles/category/${encodeURIComponent(
+          item: `https://kyyril.vercel.app/articles/category/${encodeURIComponent(
             post.frontmatter.category.toLowerCase().replace(/\s+/g, "-")
           )}`,
         },
@@ -101,7 +101,7 @@ export function ArticleClient({ post, relatedPosts }: ArticleClientProps) {
           "@type": "ListItem",
           position: 4,
           name: post.frontmatter.title,
-          item: `https://kyyril.pages.dev/articles/${post.slug}`,
+          item: `https://kyyril.vercel.app/articles/${post.slug}`,
         },
       ],
     },
@@ -149,7 +149,9 @@ export function ArticleClient({ post, relatedPosts }: ArticleClientProps) {
               className="inline-flex items-center gap-1 sm:gap-2 text-xs sm:text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
               <ArrowLeft className="h-3 w-3 sm:h-4 sm:w-4" />
-              <span className="hidden xs:inline sm:inline">Back to Articles</span>
+              <span className="hidden xs:inline sm:inline">
+                Back to Articles
+              </span>
               <span className="xs:hidden">Back</span>
             </Link>
           </div>
@@ -177,21 +179,23 @@ export function ArticleClient({ post, relatedPosts }: ArticleClientProps) {
               <header className="mb-6 lg:mb-8">
                 <div className="flex flex-wrap items-center gap-2 lg:gap-3 mb-4">
                   <span className="font-bold">#</span>
-                  {post.frontmatter.tags.slice(0, 3).map((tag: string, index: number) => (
-                    <Link
-                      key={`${tag}-${index}`}
-                      href={`/articles/tags/${encodeURIComponent(
-                        tag.toLowerCase().replace(/s+/g, "-")
-                      )}`}
-                    >
-                      <Badge
-                        variant="secondary"
-                        className="text-xs cursor-pointer hover:bg-secondary"
+                  {post.frontmatter.tags
+                    .slice(0, 3)
+                    .map((tag: string, index: number) => (
+                      <Link
+                        key={`${tag}-${index}`}
+                        href={`/articles/tags/${encodeURIComponent(
+                          tag.toLowerCase().replace(/s+/g, "-")
+                        )}`}
                       >
-                        {tag}
-                      </Badge>
-                    </Link>
-                  ))}
+                        <Badge
+                          variant="secondary"
+                          className="text-xs cursor-pointer hover:bg-secondary"
+                        >
+                          {tag}
+                        </Badge>
+                      </Link>
+                    ))}
                 </div>
 
                 <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-4 leading-tight">

@@ -74,7 +74,7 @@ export async function generateMetadata({
     openGraph: {
       type: "website",
       locale: "en_US",
-      url: `https://kyyril.pages.dev/articles/tags/${tag}`,
+      url: `https://kyyril.vercel.app/articles/tags/${tag}`,
       title: `${tagName} Articles | Khairil Rahman Hakiki Blog`,
       description: `Browse all articles tagged with ${tagName.toLowerCase()}. Find the latest insights and best practices.`,
       siteName: "Khairil Rahman Hakiki Blog",
@@ -96,7 +96,7 @@ export async function generateMetadata({
       images: ["/assets/profile.webp"],
     },
     alternates: {
-      canonical: `https://kyyril.pages.dev/articles/tags/${tag}`,
+      canonical: `https://kyyril.vercel.app/articles/tags/${tag}`,
     },
     robots: {
       index: true,
@@ -137,14 +137,14 @@ export default async function TagPage({ params }: PageProps) {
     "@type": "CollectionPage",
     name: `${tagData.name} Articles`,
     description: `Articles tagged with ${tagData.name}`,
-    url: `https://kyyril.pages.dev/articles/tags/${tag}`,
+    url: `https://kyyril.vercel.app/articles/tags/${tag}`,
     mainEntity: {
       "@type": "Blog",
       blogPost: articles.map((article) => ({
         "@type": "BlogPosting",
         headline: article.frontmatter.title,
         description: article.frontmatter.description,
-        url: `https://kyyril.pages.dev/articles/${article.slug}`,
+        url: `https://kyyril.vercel.app/articles/${article.slug}`,
         datePublished: article.frontmatter.date,
         author: {
           "@type": "Person",
@@ -157,7 +157,7 @@ export default async function TagPage({ params }: PageProps) {
           "@type": "ImageObject",
           url:
             article.frontmatter.coverImage ||
-            "https://kyyril.pages.dev/assets/profile.webp",
+            "https://kyyril.vercel.app/assets/profile.webp",
           width: 1200,
           height: 630,
           alt: article.frontmatter.title,
@@ -171,19 +171,19 @@ export default async function TagPage({ params }: PageProps) {
           "@type": "ListItem",
           position: 1,
           name: "Home",
-          item: "https://kyyril.pages.dev",
+          item: "https://kyyril.vercel.app",
         },
         {
           "@type": "ListItem",
           position: 2,
           name: "Articles",
-          item: "https://kyyril.pages.dev/articles",
+          item: "https://kyyril.vercel.app/articles",
         },
         {
           "@type": "ListItem",
           position: 3,
           name: tagData.name,
-          item: `https://kyyril.pages.dev/articles/tags/${tag}`,
+          item: `https://kyyril.vercel.app/articles/tags/${tag}`,
         },
       ],
     },

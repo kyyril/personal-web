@@ -21,17 +21,17 @@ export const metadata: Metadata = {
   description:
     "Welcome to the personal website of Khairil Rahman Hakiki, a passionate Software Engineer specializing in Next.js and TypeScript. Explore my projects, experience, and feel free to get in touch.",
   alternates: {
-    canonical: "https://kyyril.pages.dev",
+    canonical: "https://kyyril.vercel.app",
   },
   openGraph: {
     title: "Khairil Rahman Hakiki | Software Engineer",
     description:
       "Welcome to the personal website of Khairil Rahman Hakiki, a passionate Software Engineer specializing in Next.js and TypeScript. Explore my projects, experience, and feel free to get in touch.",
     type: "website",
-    url: "https://kyyril.pages.dev",
+    url: "https://kyyril.vercel.app",
     images: [
       {
-        url: "https://kyyril.pages.dev/assets/profile.webp",
+        url: "https://kyyril.vercel.app/assets/profile.webp",
         width: 1200,
         height: 630,
         alt: "Khairil Rahman Hakiki - Software Engineer Portfolio",
