@@ -12,10 +12,10 @@ export const runtime = "edge";
 export const metadata: Metadata = {
   title: {
     default: "Khairil Rahman | Software Engineer",
-    template: "%s | Khairil Rahman Hakiki"
+    template: "%s | Khairil Rahman Hakiki",
   },
   description:
-    "I'm an Information Systems student who loves programming, especially software development. I specialize in React.js and Node.js with TypeScript",
+    "Information Systems student specializing in software development. I leverage React.js and Node.js with Typescript to build robust, scalable applications.",
   keywords: [
     "Khairil Rahman Hakiki",
     "Khairil Rahman Hakiki Hrp",
@@ -52,9 +52,9 @@ export const metadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
     },
   },
   verification: {
