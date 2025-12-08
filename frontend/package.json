@@ -62,13 +62,14 @@
     "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {
+    "@eslint/eslintrc": "^3.3.3",
     "@next/bundle-analyzer": "^16.0.7",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@types/react-syntax-highlighter": "^15.5.13",
     "cross-env": "^10.1.0",
-    "eslint": "^8",
+    "eslint": "^9.39.1",
     "eslint-config-next": "^16.0.7",
     "postcss": "^8",
     "prisma": "^5.19.1",
