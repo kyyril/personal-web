@@ -28,7 +28,6 @@ const nextConfig = {
     formats: ["image/avif", "image/webp"],
   },
   experimental: {
-    esmExternals: "loose",
     mdxRs: true,
   },
   pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
