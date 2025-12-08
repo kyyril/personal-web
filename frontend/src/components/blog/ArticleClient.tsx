@@ -186,7 +186,7 @@ export function ArticleClient({ post, relatedPosts }: ArticleClientProps) {
                       <Link
                         key={`${tag}-${index}`}
                         href={`/articles/tags/${encodeURIComponent(
-                          tag.toLowerCase().replace(/s+/g, "-")
+                          tag.toLowerCase().replace(/\s+/g, "-")
                         )}`}
                       >
                         <Badge
@@ -262,7 +262,7 @@ export function ArticleClient({ post, relatedPosts }: ArticleClientProps) {
                             href={`/articles/category/${encodeURIComponent(
                               relatedPost.frontmatter.category
                                 .toLowerCase()
-                                .replace(/s+/g, "-")
+                                .replace(/\s+/g, "-")
                             )}`}
                           >
                             <span className="cursor-pointer hover:bg-secondary rounded font-semibold">
@@ -294,7 +294,7 @@ export function ArticleClient({ post, relatedPosts }: ArticleClientProps) {
                               <Link
                                 key={`${tag}-${index}`}
                                 href={`/articles/tags/${encodeURIComponent(
-                                  tag.toLowerCase().replace(/s+/g, "-")
+                                  tag.toLowerCase().replace(/\s+/g, "-")
                                 )}`}
                               >
                                 <Badge

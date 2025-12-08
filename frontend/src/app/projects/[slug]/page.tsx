@@ -6,8 +6,23 @@ import { GitHubLogoIcon, GlobeIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 import { Metadata } from "next";
 import { PERSONAL_KEYWORDS, siteUrl } from "../../../lib/metadata";
+import { generateAlternates, generateOpenGraph, generateTwitter } from "../../../lib/seo";
 import Breadcrumb from "../../../components/Breadcrumb";
 
+/**
+ * Generate static params for all projects at build time
+ * This enables static generation for better performance
+ */
+export async function generateStaticParams() {
+  return projects.map((project) => ({
+    slug: project.id,
+  }));
+}
+
+/**
+ * Generate dynamic metadata for project detail pages
+ * Implements proper canonical URLs to prevent duplicate content issues
+ */
 export async function generateMetadata({
   params,
 }: {
@@ -26,16 +41,16 @@ export async function generateMetadata({
   const title = `${project.title} | Khairil Rahman Hakiki`;
   const description =
     project.description || "Project details by Khairil Rahman Hakiki";
-  const url = `${siteUrl}/projects/${slug}`;
+  const projectUrl = `/projects/${slug}`;
 
   return {
     title,
     description,
     keywords: [...PERSONAL_KEYWORDS, ...(project.technologies || [])],
-    openGraph: {
+    openGraph: generateOpenGraph({
       title,
       description,
-      url,
+      path: projectUrl,
       type: "website",
       images:
         project.image.length > 0
@@ -47,17 +62,15 @@ export async function generateMetadata({
               alt: project.title,
             },
           ]
-          : [],
-    },
-    twitter: {
+          : undefined,
+    }),
+    twitter: generateTwitter({
       title,
       description,
-      card: "summary_large_image",
-      images: project.image.length > 0 ? [project.image[0]] : [],
-    },
-    alternates: {
-      canonical: url,
-    },
+      images: project.image.length > 0 ? [project.image[0]] : undefined,
+    }),
+    // Key fix: Proper canonical with language alternates
+    alternates: generateAlternates(projectUrl),
   };
 }
 

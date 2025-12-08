@@ -13,6 +13,7 @@ import {
 import { CalendarDays, Clock, User, Folder, ArrowLeft } from "lucide-react";
 import { Metadata } from "next";
 import { PERSONAL_KEYWORDS, siteUrl } from "@/lib/metadata";
+import { generateAlternates, generateOpenGraph, generateTwitter } from "@/lib/seo";
 import Script from "next/script";
 import { Breadcrumb } from "@/components/Breadcrumb";
 
@@ -29,6 +30,10 @@ export async function generateStaticParams() {
   }));
 }
 
+/**
+ * Generate dynamic metadata for category pages
+ * Implements proper canonical URLs to prevent duplicate content issues
+ */
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
@@ -43,10 +48,13 @@ export async function generateMetadata({
     };
   }
 
+  const categoryUrl = `/articles/category/${category}`;
+  const title = `${categoryData.name} Articles | Khairil Rahman Hakiki Blog`;
+  const description = `Browse all ${categoryData.name.toLowerCase()} articles and tutorials. ${categoryData.description} Find the latest insights and best practices.`;
+
   return {
-    title: `${categoryData.name} Articles | Khairil Rahman Hakiki Blog`,
-    description: `Browse all ${categoryData.name.toLowerCase()} articles and tutorials. ${categoryData.description
-      } Find the latest insights and best practices.`,
+    title,
+    description,
     keywords: [
       ...PERSONAL_KEYWORDS,
       categoryData.name,
@@ -62,35 +70,18 @@ export async function generateMetadata({
       address: false,
       telephone: false,
     },
-    openGraph: {
+    openGraph: generateOpenGraph({
+      title,
+      description,
+      path: categoryUrl,
       type: "website",
-      locale: "en_US",
-      url: `${siteUrl}/articles/category/${category}`,
-      title: `${categoryData.name} Articles | Khairil Rahman Hakiki Blog`,
-      description: `Browse all ${categoryData.name.toLowerCase()} articles and tutorials. ${categoryData.description
-        } Find the latest insights and best practices.`,
-      siteName: "Khairil Rahman Hakiki Blog",
-      images: [
-        {
-          url: `${siteUrl}/assets/profile.webp`,
-          width: 1200,
-          height: 630,
-          alt: `${categoryData.name} Articles`,
-        },
-      ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      site: "@khairilrahmanhakiki",
-      creator: "@khairilrahmanhakiki",
-      title: `${categoryData.name} Articles | Khairil Rahman Hakiki Blog`,
-      description: `Browse all ${categoryData.name.toLowerCase()} articles and tutorials. ${categoryData.description
-        }`,
-      images: [`${siteUrl}/assets/profile.webp`],
-    },
-    alternates: {
-      canonical: `${siteUrl}/articles/category/${category}`,
-    },
+    }),
+    twitter: generateTwitter({
+      title,
+      description,
+    }),
+    // Key fix: Proper canonical with language alternates
+    alternates: generateAlternates(categoryUrl),
     robots: {
       index: true,
       follow: true,
@@ -123,7 +114,7 @@ export default async function CategoryPage({ params }: PageProps) {
       } else {
         acc.push({
           name: tag,
-          slug: tag.toLowerCase().replace(/s+/g, "-"),
+          slug: tag.toLowerCase().replace(/\s+/g, "-"),
           count: 1,
         });
       }
@@ -299,7 +290,7 @@ export default async function CategoryPage({ params }: PageProps) {
                       href={`/articles/category/${encodeURIComponent(
                         article.frontmatter.category
                           .toLowerCase()
-                          .replace(/s+/g, "-")
+                          .replace(/\s+/g, "-")
                       )}`}
                     >
                       <span className="cursor-pointer hover:bg-secondary rounded font-semibold">
@@ -350,7 +341,7 @@ export default async function CategoryPage({ params }: PageProps) {
                             <Link
                               key={`${tag}-${index}`}
                               href={`/articles/tags/${encodeURIComponent(
-                                tag.toLowerCase().replace(/s+/g, "-")
+                                tag.toLowerCase().replace(/\s+/g, "-")
                               )}`}
                             >
                               <Badge

@@ -2,6 +2,10 @@ import bundleAnalyzer from "@next/bundle-analyzer";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // SEO: Ensure consistent URL structure to prevent duplicate content issues
+  // This helps fix "Alternate page with proper canonical tag" indexing issues
+  trailingSlash: false,
+
   images: {
     remotePatterns: [
       {

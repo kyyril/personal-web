@@ -106,7 +106,7 @@ export function ClientFilterWrapper({
                     <Link
                       key={`${tag}-${index}`}
                       href={`/articles/tags/${encodeURIComponent(
-                        tag.toLowerCase().replace(/s+/g, "-")
+                        tag.toLowerCase().replace(/\s+/g, "-")
                       )}`}
                     >
                       <Badge

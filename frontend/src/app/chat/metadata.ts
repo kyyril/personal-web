@@ -1,6 +1,11 @@
 import type { Metadata } from "next";
 import { PERSONAL_KEYWORDS, siteUrl, SEO_DESCRIPTION } from "../../lib/metadata";
+import { generateAlternates, generateOpenGraph, generateTwitter } from "../../lib/seo";
 
+/**
+ * Chat page metadata with proper canonical URL
+ * Helps prevent "Alternate page with proper canonical tag" issues
+ */
 export const chatMetadata: Metadata = {
   title: "Chat | Khairil Rahman Hakiki",
   description: SEO_DESCRIPTION.chat,
@@ -14,26 +19,16 @@ export const chatMetadata: Metadata = {
     "career advice",
     "Katou AI",
   ],
-  alternates: {
-    canonical: `${siteUrl}/chat`,
-  },
-  openGraph: {
+  // Key fix: Proper canonical with language alternates
+  alternates: generateAlternates("/chat"),
+  openGraph: generateOpenGraph({
     title: "Chat | Khairil Rahman Hakiki",
     description: SEO_DESCRIPTION.chat,
-    url: `${siteUrl}/chat`,
+    path: "/chat",
     type: "website",
-    images: [
-      {
-        url: `${siteUrl}/assets/profile.webp`,
-        width: 1200,
-        height: 630,
-        alt: "Khairil Rahman Hakiki - Chat with AI Assistant",
-      },
-    ],
-  },
-  twitter: {
+  }),
+  twitter: generateTwitter({
     title: "Chat | Khairil Rahman Hakiki",
     description: SEO_DESCRIPTION.chat,
-    card: "summary_large_image",
-  },
+  }),
 };

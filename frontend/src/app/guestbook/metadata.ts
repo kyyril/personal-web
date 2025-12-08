@@ -1,6 +1,11 @@
 import type { Metadata } from "next";
 import { PERSONAL_KEYWORDS, siteUrl, SEO_DESCRIPTION } from "../../lib/metadata";
+import { generateAlternates, generateOpenGraph, generateTwitter } from "../../lib/seo";
 
+/**
+ * Guestbook page metadata with proper canonical URL
+ * Helps prevent "Alternate page with proper canonical tag" issues
+ */
 export const guestbookMetadata: Metadata = {
   title: "Guestbook | Khairil Rahman Hakiki",
   description: SEO_DESCRIPTION.guestbook,
@@ -11,27 +16,18 @@ export const guestbookMetadata: Metadata = {
     "contact",
     "feedback",
     "message board",
+    "community",
   ],
-  alternates: {
-    canonical: `${siteUrl}/guestbook`,
-  },
-  openGraph: {
+  // Key fix: Proper canonical with language alternates
+  alternates: generateAlternates("/guestbook"),
+  openGraph: generateOpenGraph({
     title: "Guestbook | Khairil Rahman Hakiki",
     description: SEO_DESCRIPTION.guestbook,
-    url: `${siteUrl}/guestbook`,
+    path: "/guestbook",
     type: "website",
-    images: [
-      {
-        url: `${siteUrl}/assets/profile.webp`,
-        width: 1200,
-        height: 630,
-        alt: "Khairil Rahman Hakiki - Guestbook",
-      },
-    ],
-  },
-  twitter: {
+  }),
+  twitter: generateTwitter({
     title: "Guestbook | Khairil Rahman Hakiki",
     description: SEO_DESCRIPTION.guestbook,
-    card: "summary_large_image",
-  },
+  }),
 };

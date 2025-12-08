@@ -1,5 +1,6 @@
 import React, { Suspense } from "react";
 import { PERSONAL_KEYWORDS, siteUrl, SEO_DESCRIPTION } from "../../lib/metadata";
+import { generateAlternates, generateOpenGraph, generateTwitter } from "../../lib/seo";
 import { Metadata } from "next";
 import {
   Card,
@@ -19,6 +20,10 @@ import GitHubProjectsWrapper from "../../components/Project/github/GitHubProject
 import Breadcrumb from "../../components/Breadcrumb";
 import { data } from "../../lib/data";
 
+/**
+ * Projects page metadata with proper canonical URL
+ * Helps prevent "Alternate page with proper canonical tag" issues
+ */
 export const metadata: Metadata = {
   title: "Projects | Khairil Rahman Hakiki",
   description: SEO_DESCRIPTION.projects,
@@ -28,32 +33,21 @@ export const metadata: Metadata = {
     "web development portfolio",
     "scalable systems",
     "clean architecture",
+    "open source",
   ],
-  alternates: {
-    canonical: `${siteUrl}/projects`,
-  },
-  openGraph: {
+  // Key fix: Proper canonical with language alternates
+  alternates: generateAlternates("/projects"),
+  openGraph: generateOpenGraph({
     title: "Projects | Khairil Rahman Hakiki",
     description: SEO_DESCRIPTION.projects,
-    url: `${siteUrl}/projects`,
+    path: "/projects",
     type: "website",
-    images: [
-      {
-        url: `${siteUrl}/assets/profile.webp`,
-        width: 1200,
-        height: 630,
-        alt: "Khairil Rahman Hakiki - Projects Portfolio",
-      },
-    ],
-  },
-  twitter: {
+  }),
+  twitter: generateTwitter({
     title: "Projects | Khairil Rahman Hakiki",
     description: SEO_DESCRIPTION.projects,
-    card: "summary_large_image",
-  },
+  }),
 };
-
-export const revalidate = 3600;
 
 export default function ProjectPage() {
   const breadcrumbItems = [{ label: "Home", href: "/" }, { label: "Projects" }];

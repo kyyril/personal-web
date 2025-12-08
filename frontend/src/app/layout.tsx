@@ -1,21 +1,27 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { PERSONAL_KEYWORDS, siteUrl } from "../lib/metadata";
+import { PERSONAL_KEYWORDS, siteUrl, SEO_DESCRIPTION } from "../lib/metadata";
+import {
+  generateAlternates,
+  generateOrganizationSchema,
+  generateWebsiteSchema,
+} from "../lib/seo";
 import { Navigation } from "../components/BottomBar";
 import { ThemeProvider } from "../components/ThemeProvider";
 import FooterWrapper from "../components/FooterWrapper";
 import { Analytics } from "@vercel/analytics/next";
 import { AuthProvider } from "../contexts/AuthContext";
 
-
-export const runtime = "edge";
+/**
+ * Root layout metadata following Google's SEO best practices
+ * https://developers.google.com/search/docs
+ */
 export const metadata: Metadata = {
   title: {
-    default: "Khairil Rahman | Software Engineer",
+    default: "Khairil Rahman Hakiki | Software Engineer",
     template: "%s | Khairil Rahman Hakiki",
   },
-  description:
-    "Software Engineer specializing in building scalable, maintainable systems. Combining a strong academic foundation in Information Systems with hands-on experience in full-stack development and clean architecture principles.",
+  description: SEO_DESCRIPTION.main,
   keywords: [
     ...PERSONAL_KEYWORDS,
     "Web Development",
@@ -42,6 +48,9 @@ export const metadata: Metadata = {
   },
   metadataBase: new URL(siteUrl),
 
+  // Default alternates with canonical - helps fix "Alternate page with proper canonical tag"
+  alternates: generateAlternates(),
+
   robots: {
     index: true,
     follow: true,
@@ -62,8 +71,7 @@ export const metadata: Metadata = {
     url: siteUrl,
     siteName: "Khairil Rahman Hakiki",
     title: "Khairil Rahman Hakiki | Software Engineer",
-    description:
-      "Software Engineer specializing in React.js and Node.js with TypeScript",
+    description: SEO_DESCRIPTION.main,
     images: [
       {
         url: `${siteUrl}/assets/profile.webp`,
@@ -75,10 +83,17 @@ export const metadata: Metadata = {
   },
   twitter: {
     title: "Khairil Rahman Hakiki | Software Engineer",
-    description:
-      "Software Engineer specializing in React.js and Node.js with TypeScript",
+    description: SEO_DESCRIPTION.main,
     card: "summary_large_image",
+    site: "@kyyril_dev",
+    creator: "@kyyril_dev",
     images: [`${siteUrl}/assets/profile.webp`],
+  },
+  // Additional metadata for better SEO
+  category: "Technology",
+  classification: "Portfolio",
+  other: {
+    "google-site-verification": "24f9cc081f9ae37b",
   },
 };
 
@@ -87,6 +102,40 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Generate structured data for the entire site
+  const organizationSchema = generateOrganizationSchema();
+  const websiteSchema = generateWebsiteSchema();
+
+  // Combined @graph for linked structured data
+  const combinedSchema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      websiteSchema,
+      organizationSchema,
+      {
+        "@type": "WebPage",
+        "@id": `${siteUrl}/#webpage`,
+        url: siteUrl,
+        name: "Khairil Rahman Hakiki | Software Engineer",
+        description: SEO_DESCRIPTION.main,
+        isPartOf: {
+          "@id": `${siteUrl}/#website`,
+        },
+        about: {
+          "@id": `${siteUrl}/#person`,
+        },
+        audience: {
+          "@type": "Audience",
+          audienceType: "Software Developers, Tech Enthusiasts",
+        },
+        primaryImageOfPage: {
+          "@type": "ImageObject",
+          url: `${siteUrl}/assets/profile.webp`,
+        },
+      },
+    ],
+  };
+
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
@@ -98,96 +147,20 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="Khairil HR" />
+
+        {/* Preconnect to external domains for performance */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+
         <link rel="manifest" href="/manifest.json" />
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href={`${siteUrl}/assets/profile.webp`} />
 
+        {/* Structured Data - Combined Schema Graph */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@graph": [
-                {
-                  "@type": "WebSite",
-                  "@id": `${siteUrl}/#website`,
-                  url: siteUrl,
-                  name: "Khairil Rahman Hakiki | Software Engineer",
-                  description:
-                    "Software Engineer specializing in React.js and Node.js with TypeScript",
-                  potentialAction: {
-                    "@type": "SearchAction",
-                    target: `${siteUrl}/search?q={search_term_string}`,
-                    "query-input": "required name=search_term_string",
-                  },
-                  publisher: {
-                    "@id": `${siteUrl}/#person`,
-                  },
-                },
-                {
-                  "@type": "Person",
-                  "@id": `${siteUrl}/#person`,
-                  name: "Khairil Rahman Hakiki",
-                  alternateName: "Khairil Rahman Hakiki Hrp",
-                  url: siteUrl,
-                  image: `${siteUrl}/assets/profile.webp`,
-                  jobTitle: "Software Engineer",
-                  description:
-                    "Information Systems student who loves programming, especially software development. Specializing in React.js and Node.js with TypeScript",
-                  sameAs: [
-                    "https://github.com/kyyril",
-                    "https://www.linkedin.com/in/khairilrahman/",
-                    "https://twitter.com/kyyril_dev",
-                  ],
-                  knowsAbout: [
-                    "Web Development",
-                    "Next.js",
-                    "TypeScript",
-                    "React",
-                    "Node.js",
-                    "JavaScript",
-                    "Software Engineering",
-                    "Information Systems",
-                    "Full Stack Development",
-                  ],
-                  alumniOf: {
-                    "@type": "CollegeOrUniversity",
-                    name: "Information Systems",
-                  },
-                  address: {
-                    "@type": "PostalAddress",
-                    addressCountry: "ID",
-                  },
-                  contactPoint: {
-                    "@type": "ContactPoint",
-                    contactType: "professional",
-                    url: siteUrl,
-                  },
-                },
-                {
-                  "@type": "WebPage",
-                  "@id": `${siteUrl}/#webpage`,
-                  url: siteUrl,
-                  name: "Khairil Rahman Hakiki | Software Engineer",
-                  description:
-                    "Software Engineer specializing in React.js and Node.js with TypeScript",
-                  isPartOf: {
-                    "@id": `${siteUrl}/#website`,
-                  },
-                  about: {
-                    "@id": `${siteUrl}/#person`,
-                  },
-                  audience: {
-                    "@type": "Audience",
-                    audienceType: "Software Developers, Tech Enthusiasts",
-                  },
-                  primaryImageOfPage: {
-                    "@type": "ImageObject",
-                    url: `${siteUrl}/assets/profile.webp`,
-                  },
-                },
-              ],
-            }),
+            __html: JSON.stringify(combinedSchema),
           }}
         />
       </head>

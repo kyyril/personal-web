@@ -1,30 +1,14 @@
 import React from "react";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
   getArticleBySlug,
-  getAllArticles,
   getRelatedArticles,
+  getAllArticles,
 } from "@/data/blog-data";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import {
-  CalendarDays,
-  Clock,
-  User,
-  ArrowLeft,
-  Share2,
-  BookOpen,
-} from "lucide-react";
-import { format } from "date-fns";
 import { Metadata } from "next";
 import { PERSONAL_KEYWORDS, siteUrl } from "@/lib/metadata";
-import Script from "next/script";
-import { TableOfContents } from "@/components/blog/TableOfContents";
-import { ClientCommentSection } from "@/components/blog/ClientCommentSection";
-import { MDXRenderer } from "@/components/blog/MDXRenderer";
-import { Breadcrumb } from "@/components/Breadcrumb";
-import { ReadingProgressBar } from "@/components/blog/ReadingProgressBar";
+import { generateAlternates, generateArticleSchema } from "@/lib/seo";
+import { ArticleClient } from "@/components/blog/ArticleClient";
 
 interface PageProps {
   params: Promise<{
@@ -32,6 +16,21 @@ interface PageProps {
   }>;
 }
 
+/**
+ * Generate static params for all articles at build time
+ * This enables static generation for better performance
+ */
+export async function generateStaticParams() {
+  const articles = getAllArticles();
+  return articles.map((article) => ({
+    slug: article.slug,
+  }));
+}
+
+/**
+ * Generate dynamic metadata for article pages
+ * Implements proper canonical URLs to prevent duplicate content issues
+ */
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
@@ -44,6 +43,8 @@ export async function generateMetadata({
       description: "The requested article could not be found.",
     };
   }
+
+  const articleUrl = `/articles/${post.slug}`;
 
   return {
     title: `${post.frontmatter.title} | Khairil Rahman Hakiki Blog`,
@@ -60,7 +61,7 @@ export async function generateMetadata({
     openGraph: {
       type: "article",
       locale: "en_US",
-      url: `${siteUrl}/articles/${post.slug}`,
+      url: `${siteUrl}${articleUrl}`,
       title: `${post.frontmatter.title} | Khairil Rahman Hakiki Blog`,
       description: post.frontmatter.description,
       siteName: "Khairil Rahman Hakiki Blog",
@@ -80,15 +81,14 @@ export async function generateMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      site: "@kilocode",
-      creator: "@kilocode",
+      site: "@kyyril_dev",
+      creator: "@kyyril_dev",
       title: `${post.frontmatter.title} | Khairil Rahman Hakiki Blog`,
       description: post.frontmatter.description,
       images: [post.frontmatter.coverImage || `${siteUrl}/assets/profile.webp`],
     },
-    alternates: {
-      canonical: `${siteUrl}/articles/${post.slug}`,
-    },
+    // Key fix: Proper canonical URL with language alternates
+    alternates: generateAlternates(articleUrl),
     robots: {
       index: true,
       follow: true,
@@ -103,14 +103,6 @@ export async function generateMetadata({
   };
 }
 
-import { ArticleClient } from "@/components/blog/ArticleClient";
-
-interface PageProps {
-  params: Promise<{
-    slug: string;
-  }>;
-}
-
 export default async function ArticlePage({ params }: PageProps) {
   const { slug } = await params;
   const post = getArticleBySlug(slug);
@@ -121,5 +113,30 @@ export default async function ArticlePage({ params }: PageProps) {
 
   const relatedPosts = getRelatedArticles(post, 3);
 
-  return <ArticleClient post={post} relatedPosts={relatedPosts} />;
+  // Generate article structured data for rich results
+  const articleSchema = generateArticleSchema({
+    title: post.frontmatter.title,
+    description: post.frontmatter.description,
+    slug: post.slug,
+    author: post.frontmatter.author,
+    datePublished: post.frontmatter.date,
+    category: post.frontmatter.category,
+    tags: post.frontmatter.tags,
+    wordCount: post.content.split(/\s+/).length,
+    readTime: post.frontmatter.readTime,
+    coverImage: post.frontmatter.coverImage,
+  });
+
+  return (
+    <>
+      {/* Article Structured Data for rich search results */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(articleSchema),
+        }}
+      />
+      <ArticleClient post={post} relatedPosts={relatedPosts} />
+    </>
+  );
 }

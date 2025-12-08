@@ -13,6 +13,7 @@ import {
 import { CalendarDays, Clock, User, Tag, ArrowLeft } from "lucide-react";
 import { Metadata } from "next";
 import { PERSONAL_KEYWORDS, siteUrl } from "@/lib/metadata";
+import { generateAlternates, generateOpenGraph, generateTwitter } from "@/lib/seo";
 import Script from "next/script";
 import { Breadcrumb } from "@/components/Breadcrumb";
 
@@ -27,7 +28,7 @@ export async function generateStaticParams() {
   const tagSet = new Set<string>();
   articles.forEach((article) => {
     article.frontmatter.tags.forEach((tag) => {
-      tagSet.add(tag.toLowerCase().replace(/s+/g, "-"));
+      tagSet.add(tag.toLowerCase().replace(/\s+/g, "-"));
     });
   });
   return Array.from(tagSet).map((tag) => ({
@@ -35,6 +36,10 @@ export async function generateStaticParams() {
   }));
 }
 
+/**
+ * Generate dynamic metadata for tag pages
+ * Implements proper canonical URLs to prevent duplicate content issues
+ */
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
@@ -42,7 +47,7 @@ export async function generateMetadata({
   const articles = getAllArticles();
   const tagArticles = articles.filter((article) =>
     article.frontmatter.tags.some(
-      (t) => t.toLowerCase().replace(/s+/g, "-") === tag
+      (t) => t.toLowerCase().replace(/\s+/g, "-") === tag
     )
   );
 
@@ -55,13 +60,16 @@ export async function generateMetadata({
 
   const tagName =
     tagArticles[0].frontmatter.tags.find(
-      (t) => t.toLowerCase().replace(/s+/g, "-") === tag
+      (t) => t.toLowerCase().replace(/\s+/g, "-") === tag
     ) || tag;
 
+  const tagUrl = `/articles/tags/${tag}`;
+  const title = `${tagName} Articles | Khairil Rahman Hakiki Blog`;
+  const description = `Browse all articles tagged with ${tagName.toLowerCase()}. Find the latest insights and best practices. (${tagArticles.length} article${tagArticles.length !== 1 ? "s" : ""})`;
+
   return {
-    title: `${tagName} Articles | Khairil Rahman Hakiki Blog`,
-    description: `Browse all articles tagged with ${tagName.toLowerCase()}. Find the latest insights and best practices. (${tagArticles.length
-      } article${tagArticles.length !== 1 ? "s" : ""})`,
+    title,
+    description,
     keywords: [...PERSONAL_KEYWORDS, tagName, "articles", "tutorials", tagName.toLowerCase()],
     authors: [{ name: "Khairil Rahman Hakiki" }],
     creator: "Khairil Rahman Hakiki",
@@ -71,33 +79,18 @@ export async function generateMetadata({
       address: false,
       telephone: false,
     },
-    openGraph: {
+    openGraph: generateOpenGraph({
+      title,
+      description,
+      path: tagUrl,
       type: "website",
-      locale: "en_US",
-      url: `${siteUrl}/articles/tags/${tag}`,
-      title: `${tagName} Articles | Khairil Rahman Hakiki Blog`,
-      description: `Browse all articles tagged with ${tagName.toLowerCase()}. Find the latest insights and best practices.`,
-      siteName: "Khairil Rahman Hakiki Blog",
-      images: [
-        {
-          url: `${siteUrl}/assets/profile.webp`,
-          width: 1200,
-          height: 630,
-          alt: `${tagName} Articles`,
-        },
-      ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      site: "@khairilrahmanhakiki",
-      creator: "@khairilrahmanhakiki",
-      title: `${tagName} Articles | Khairil Rahman Hakiki Blog`,
-      description: `Browse all articles tagged with ${tagName.toLowerCase()}.`,
-      images: [`${siteUrl}/assets/profile.webp`],
-    },
-    alternates: {
-      canonical: `${siteUrl}/articles/tags/${tag}`,
-    },
+    }),
+    twitter: generateTwitter({
+      title,
+      description,
+    }),
+    // Key fix: Proper canonical with language alternates
+    alternates: generateAlternates(tagUrl),
     robots: {
       index: true,
       follow: true,
@@ -117,7 +110,7 @@ export default async function TagPage({ params }: PageProps) {
   const allArticles = getAllArticles();
   const articles = allArticles.filter((article) =>
     article.frontmatter.tags.some(
-      (t) => t.toLowerCase().replace(/s+/g, "-") === tag
+      (t) => t.toLowerCase().replace(/\s+/g, "-") === tag
     )
   );
 
@@ -127,7 +120,7 @@ export default async function TagPage({ params }: PageProps) {
 
   const tagName =
     articles[0].frontmatter.tags.find(
-      (t) => t.toLowerCase().replace(/s+/g, "-") === tag
+      (t) => t.toLowerCase().replace(/\s+/g, "-") === tag
     ) || tag;
   const tagData = { name: tagName, slug: tag, count: articles.length };
 
@@ -247,7 +240,7 @@ export default async function TagPage({ params }: PageProps) {
               {allArticles
                 .reduce((acc, article) => {
                   article.frontmatter.tags.forEach((t) => {
-                    const slug = t.toLowerCase().replace(/s+/g, "-");
+                    const slug = t.toLowerCase().replace(/\s+/g, "-");
                     const existing = acc.find((tag) => tag.slug === slug);
                     if (existing) {
                       existing.count++;
@@ -288,7 +281,7 @@ export default async function TagPage({ params }: PageProps) {
                       href={`/articles/category/${encodeURIComponent(
                         article.frontmatter.category
                           .toLowerCase()
-                          .replace(/s+/g, "-")
+                          .replace(/\s+/g, "-")
                       )}`}
                     >
                       <span className="cursor-pointer hover:bg-secondary rounded font-semibold">
@@ -339,12 +332,12 @@ export default async function TagPage({ params }: PageProps) {
                             <Link
                               key={`${tag}-${index}`}
                               href={`/articles/tags/${encodeURIComponent(
-                                tag.toLowerCase().replace(/s+/g, "-")
+                                tag.toLowerCase().replace(/\s+/g, "-")
                               )}`}
                             >
                               <Badge
                                 variant={
-                                  tag.toLowerCase().replace(/s+/g, "-") === tag
+                                  tag.toLowerCase().replace(/\s+/g, "-") === tag
                                     ? "default"
                                     : "secondary"
                                 }

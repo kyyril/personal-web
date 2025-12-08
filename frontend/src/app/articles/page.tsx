@@ -14,9 +14,14 @@ import { CalendarDays, Clock, User, Folder } from "lucide-react";
 import { Article } from "@/data/blog-data";
 import { Metadata } from "next";
 import { PERSONAL_KEYWORDS, siteUrl, SEO_DESCRIPTION } from "@/lib/metadata";
+import { generateAlternates, generateOpenGraph, generateTwitter } from "@/lib/seo";
 import Script from "next/script";
 import { Breadcrumb } from "@/components/Breadcrumb";
 
+/**
+ * Articles page metadata with proper canonical URL
+ * Helps prevent "Alternate page with proper canonical tag" issues
+ */
 export const metadata: Metadata = {
   title: "Articles | Software Engineering Insights",
   description: SEO_DESCRIPTION.articles,
@@ -26,6 +31,8 @@ export const metadata: Metadata = {
     "tutorials",
     "best practices",
     "development insights",
+    "programming blog",
+    "web development articles",
   ],
   authors: [{ name: "Khairil Rahman Hakiki" }],
   creator: "Khairil Rahman Hakiki",
@@ -35,33 +42,18 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  openGraph: {
+  openGraph: generateOpenGraph({
+    title: "Articles | Software Engineering Insights",
+    description: SEO_DESCRIPTION.articles,
+    path: "/articles",
     type: "website",
-    locale: "en_US",
-    url: `${siteUrl}/articles`,
+  }),
+  twitter: generateTwitter({
     title: "Articles | Software Engineering Insights",
     description: SEO_DESCRIPTION.articles,
-    siteName: "Khairil Rahman Hakiki Blog",
-    images: [
-      {
-        url: `${siteUrl}/assets/profile.webp`,
-        width: 1200,
-        height: 630,
-        alt: "Khairil Rahman Hakiki Blog - Software Engineering Articles",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    site: "@kilocode",
-    creator: "@kilocode",
-    title: "Articles | Software Engineering Insights",
-    description: SEO_DESCRIPTION.articles,
-    images: [`${siteUrl}/assets/profile.webp`],
-  },
-  alternates: {
-    canonical: `${siteUrl}/articles`,
-  },
+  }),
+  // Key fix: Proper canonical with language alternates
+  alternates: generateAlternates("/articles"),
   robots: {
     index: true,
     follow: true,
@@ -72,9 +64,6 @@ export const metadata: Metadata = {
       "max-image-preview": "large",
       "max-snippet": -1,
     },
-  },
-  verification: {
-    google: "google24f9cc081f9ae37b",
   },
 };
 
@@ -108,7 +97,7 @@ function ArticlesList({ articles }: { articles: Article[] }) {
             <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
               <Link
                 href={`/articles/category/${encodeURIComponent(
-                  post.frontmatter.category.toLowerCase().replace(/s+/g, "-")
+                  post.frontmatter.category.toLowerCase().replace(/\s+/g, "-")
                 )}`}
               >
                 <span className="cursor-pointer hover:bg-secondary rounded font-semibold">
@@ -153,7 +142,7 @@ function ArticlesList({ articles }: { articles: Article[] }) {
                   <Link
                     key={`${tag}-${index}`}
                     href={`/articles/tags/${encodeURIComponent(
-                      tag.toLowerCase().replace(/s+/g, "-")
+                      tag.toLowerCase().replace(/\s+/g, "-")
                     )}`}
                   >
                     <Badge
