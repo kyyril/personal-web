@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import { format } from "date-fns";
 import { Metadata } from "next";
+import { PERSONAL_KEYWORDS, siteUrl } from "@/lib/metadata";
 import Script from "next/script";
 import { TableOfContents } from "@/components/blog/TableOfContents";
 import { ClientCommentSection } from "@/components/blog/ClientCommentSection";
@@ -47,7 +48,7 @@ export async function generateMetadata({
   return {
     title: `${post.frontmatter.title} | Khairil Rahman Hakiki Blog`,
     description: post.frontmatter.description,
-    keywords: post.frontmatter.tags.join(", "),
+    keywords: [...PERSONAL_KEYWORDS, ...post.frontmatter.tags],
     authors: [{ name: post.frontmatter.author }],
     creator: "Khairil Rahman Hakiki",
     publisher: "Khairil Rahman Hakiki",
@@ -59,7 +60,7 @@ export async function generateMetadata({
     openGraph: {
       type: "article",
       locale: "en_US",
-      url: `https://kyyril.vercel.app/articles/${post.slug}`,
+      url: `${siteUrl}/articles/${post.slug}`,
       title: `${post.frontmatter.title} | Khairil Rahman Hakiki Blog`,
       description: post.frontmatter.description,
       siteName: "Khairil Rahman Hakiki Blog",
@@ -70,7 +71,7 @@ export async function generateMetadata({
       tags: post.frontmatter.tags,
       images: [
         {
-          url: post.frontmatter.coverImage || "/assets/profile.webp",
+          url: post.frontmatter.coverImage || `${siteUrl}/assets/profile.webp`,
           width: 1200,
           height: 630,
           alt: post.frontmatter.title,
@@ -83,10 +84,10 @@ export async function generateMetadata({
       creator: "@kilocode",
       title: `${post.frontmatter.title} | Khairil Rahman Hakiki Blog`,
       description: post.frontmatter.description,
-      images: [post.frontmatter.coverImage || "/assets/profile.webp"],
+      images: [post.frontmatter.coverImage || `${siteUrl}/assets/profile.webp`],
     },
     alternates: {
-      canonical: `https://kyyril.vercel.app/articles/${post.slug}`,
+      canonical: `${siteUrl}/articles/${post.slug}`,
     },
     robots: {
       index: true,

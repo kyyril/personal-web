@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/card";
 import { CalendarDays, Clock, User, Folder, ArrowLeft } from "lucide-react";
 import { Metadata } from "next";
+import { PERSONAL_KEYWORDS, siteUrl } from "@/lib/metadata";
 import Script from "next/script";
 import { Breadcrumb } from "@/components/Breadcrumb";
 
@@ -44,10 +45,10 @@ export async function generateMetadata({
 
   return {
     title: `${categoryData.name} Articles | Khairil Rahman Hakiki Blog`,
-    description: `Browse all ${categoryData.name.toLowerCase()} articles and tutorials. ${
-      categoryData.description
-    } Find the latest insights and best practices.`,
+    description: `Browse all ${categoryData.name.toLowerCase()} articles and tutorials. ${categoryData.description
+      } Find the latest insights and best practices.`,
     keywords: [
+      ...PERSONAL_KEYWORDS,
       categoryData.name,
       "articles",
       "tutorials",
@@ -64,15 +65,14 @@ export async function generateMetadata({
     openGraph: {
       type: "website",
       locale: "en_US",
-      url: `https://kyyril.vercel.app/articles/category/${category}`,
+      url: `${siteUrl}/articles/category/${category}`,
       title: `${categoryData.name} Articles | Khairil Rahman Hakiki Blog`,
-      description: `Browse all ${categoryData.name.toLowerCase()} articles and tutorials. ${
-        categoryData.description
-      } Find the latest insights and best practices.`,
+      description: `Browse all ${categoryData.name.toLowerCase()} articles and tutorials. ${categoryData.description
+        } Find the latest insights and best practices.`,
       siteName: "Khairil Rahman Hakiki Blog",
       images: [
         {
-          url: "/assets/profile.webp",
+          url: `${siteUrl}/assets/profile.webp`,
           width: 1200,
           height: 630,
           alt: `${categoryData.name} Articles`,
@@ -84,13 +84,12 @@ export async function generateMetadata({
       site: "@khairilrahmanhakiki",
       creator: "@khairilrahmanhakiki",
       title: `${categoryData.name} Articles | Khairil Rahman Hakiki Blog`,
-      description: `Browse all ${categoryData.name.toLowerCase()} articles and tutorials. ${
-        categoryData.description
-      }`,
-      images: ["/assets/profile.webp"],
+      description: `Browse all ${categoryData.name.toLowerCase()} articles and tutorials. ${categoryData.description
+        }`,
+      images: [`${siteUrl}/assets/profile.webp`],
     },
     alternates: {
-      canonical: `https://kyyril.vercel.app/articles/category/${category}`,
+      canonical: `${siteUrl}/articles/category/${category}`,
     },
     robots: {
       index: true,
@@ -138,14 +137,14 @@ export default async function CategoryPage({ params }: PageProps) {
     "@type": "CollectionPage",
     name: `${categoryData.name} Articles`,
     description: `${categoryData.description}`,
-    url: `https://kyyril.vercel.app/articles/category/${category}`,
+    url: `${siteUrl}/articles/category/${category}`,
     mainEntity: {
       "@type": "Blog",
       blogPost: articles.map((article) => ({
         "@type": "BlogPosting",
         headline: article.frontmatter.title,
         description: article.frontmatter.description,
-        url: `https://kyyril.vercel.app/articles/${article.slug}`,
+        url: `${siteUrl}/articles/${article.slug}`,
         datePublished: article.frontmatter.date,
         author: {
           "@type": "Person",
@@ -159,7 +158,7 @@ export default async function CategoryPage({ params }: PageProps) {
           "@type": "ImageObject",
           url:
             article.frontmatter.coverImage ||
-            "https://kyyril.vercel.app/assets/profile.webp",
+            `${siteUrl}/assets/profile.webp`,
           width: 1200,
           height: 630,
           alt: article.frontmatter.title,
@@ -173,19 +172,19 @@ export default async function CategoryPage({ params }: PageProps) {
           "@type": "ListItem",
           position: 1,
           name: "Home",
-          item: "https://kyyril.vercel.app",
+          item: siteUrl,
         },
         {
           "@type": "ListItem",
           position: 2,
           name: "Articles",
-          item: "https://kyyril.vercel.app/articles",
+          item: `${siteUrl}/articles`,
         },
         {
           "@type": "ListItem",
           position: 3,
           name: categoryData.name,
-          item: `https://kyyril.vercel.app/articles/category/${category}`,
+          item: `${siteUrl}/articles/category/${category}`,
         },
       ],
     },

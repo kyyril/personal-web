@@ -1,31 +1,28 @@
 import type { Metadata } from "next";
+import { PERSONAL_KEYWORDS, siteUrl, SEO_DESCRIPTION } from "../../lib/metadata";
 
 export const guestbookMetadata: Metadata = {
   title: "Guestbook | Khairil Rahman Hakiki",
-  description:
-    "Sign Khairil's guestbook and share your thoughts. A place for visitors to leave messages and connect with this Software Engineer specializing in React.js and TypeScript.",
+  description: SEO_DESCRIPTION.guestbook,
   keywords: [
+    ...PERSONAL_KEYWORDS,
     "guestbook",
-    "Khairil Rahman Hakiki",
     "software engineer",
     "contact",
     "feedback",
     "message board",
-    "React developer",
-    "Next.js developer",
   ],
   alternates: {
-    canonical: "https://kyyril.vercel.app/guestbook",
+    canonical: `${siteUrl}/guestbook`,
   },
   openGraph: {
     title: "Guestbook | Khairil Rahman Hakiki",
-    description:
-      "Sign Khairil's guestbook and share your thoughts. A place for visitors to leave messages and connect with this Software Engineer.",
-    url: "https://kyyril.vercel.app/guestbook",
+    description: SEO_DESCRIPTION.guestbook,
+    url: `${siteUrl}/guestbook`,
     type: "website",
     images: [
       {
-        url: "https://kyyril.vercel.app/assets/profile.webp",
+        url: `${siteUrl}/assets/profile.webp`,
         width: 1200,
         height: 630,
         alt: "Khairil Rahman Hakiki - Guestbook",
@@ -34,8 +31,7 @@ export const guestbookMetadata: Metadata = {
   },
   twitter: {
     title: "Guestbook | Khairil Rahman Hakiki",
-    description:
-      "Sign Khairil's guestbook and share your thoughts. A place for visitors to leave messages and connect.",
+    description: SEO_DESCRIPTION.guestbook,
     card: "summary_large_image",
   },
 };

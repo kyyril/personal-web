@@ -19,6 +19,7 @@ import { ClientCommentSection } from "@/components/blog/ClientCommentSection";
 import { MDXRenderer } from "@/components/blog/MDXRenderer";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { ReadingProgressBar } from "@/components/blog/ReadingProgressBar";
+import { siteUrl } from "@/lib/metadata";
 
 interface ArticleClientProps {
   post: any;
@@ -34,28 +35,28 @@ export function ArticleClient({ post, relatedPosts }: ArticleClientProps) {
     "@type": "BlogPosting",
     headline: post.frontmatter.title,
     description: post.frontmatter.description,
-    url: `https://kyyril.vercel.app/articles/${post.slug}`,
+    url: `${siteUrl}/articles/${post.slug}`,
     datePublished: post.frontmatter.date,
     dateModified: post.frontmatter.date,
     author: {
       "@type": "Person",
       name: post.frontmatter.author,
-      url: "https://kyyril.vercel.app",
+      url: siteUrl,
     },
     publisher: {
       "@type": "Person",
       name: "Khairil Rahman Hakiki",
-      url: "https://kyyril.vercel.app",
+      url: siteUrl,
     },
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": `https://kyyril.vercel.app/articles/${post.slug}`,
+      "@id": `${siteUrl}/articles/${post.slug}`,
     },
     image: {
       "@type": "ImageObject",
       url:
         post.frontmatter.coverImage ||
-        "https://kyyril.vercel.app/assets/profile.webp",
+        `${siteUrl}/assets/profile.webp`,
       width: 1200,
       height: 630,
       alt: post.frontmatter.title,
@@ -71,7 +72,7 @@ export function ArticleClient({ post, relatedPosts }: ArticleClientProps) {
     mentions: relatedPosts.map((relatedPost) => ({
       "@type": "BlogPosting",
       headline: relatedPost.frontmatter.title,
-      url: `https://kyyril.vercel.app/articles/${relatedPost.slug}`,
+      url: `${siteUrl}/articles/${relatedPost.slug}`,
       datePublished: relatedPost.frontmatter.date,
     })),
     breadcrumb: {
@@ -81,19 +82,19 @@ export function ArticleClient({ post, relatedPosts }: ArticleClientProps) {
           "@type": "ListItem",
           position: 1,
           name: "Home",
-          item: "https://kyyril.vercel.app",
+          item: siteUrl,
         },
         {
           "@type": "ListItem",
           position: 2,
           name: "Articles",
-          item: "https://kyyril.vercel.app/articles",
+          item: `${siteUrl}/articles`,
         },
         {
           "@type": "ListItem",
           position: 3,
           name: post.frontmatter.category,
-          item: `https://kyyril.vercel.app/articles/category/${encodeURIComponent(
+          item: `${siteUrl}/articles/category/${encodeURIComponent(
             post.frontmatter.category.toLowerCase().replace(/\s+/g, "-")
           )}`,
         },
@@ -101,7 +102,7 @@ export function ArticleClient({ post, relatedPosts }: ArticleClientProps) {
           "@type": "ListItem",
           position: 4,
           name: post.frontmatter.title,
-          item: `https://kyyril.vercel.app/articles/${post.slug}`,
+          item: `${siteUrl}/articles/${post.slug}`,
         },
       ],
     },

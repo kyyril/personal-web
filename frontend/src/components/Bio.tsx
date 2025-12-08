@@ -39,11 +39,7 @@ const Bio: React.FC = () => {
 
       <div>
         <p className="max-w-[600px] opacity-70 lg:text-lg font-light">
-          Information Systems student specializing in software development. I
-          leverage <span className="font-semibold">React.js</span> and{" "}
-          <span className="font-semibold">Node.js</span> with{" "}
-          <span className="font-semibold">Typescript</span> to build robust,
-          scalable applications.{" "}
+          Software Engineer specializing in building scalable, maintainable systems. Combining a strong academic foundation in Information Systems with hands-on experience in full-stack development and clean architecture principles.
         </p>
       </div>
     </section>

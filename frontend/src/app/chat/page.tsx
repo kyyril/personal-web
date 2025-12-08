@@ -1,6 +1,5 @@
 "use client";
-import { Metadata } from "next";
-import { chatMetadata } from "./metadata";
+
 import Breadcrumb from "../../components/Breadcrumb";
 import { MusicPlayerProvider } from "../../contexts/MusicPlayerContext";
 import FloatingMusicPlayer from "../../components/FloatingMusicPlayer";

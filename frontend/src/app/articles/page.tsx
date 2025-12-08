@@ -13,24 +13,19 @@ import {
 import { CalendarDays, Clock, User, Folder } from "lucide-react";
 import { Article } from "@/data/blog-data";
 import { Metadata } from "next";
+import { PERSONAL_KEYWORDS, siteUrl, SEO_DESCRIPTION } from "@/lib/metadata";
 import Script from "next/script";
 import { Breadcrumb } from "@/components/Breadcrumb";
 
 export const metadata: Metadata = {
-  title: "Articles | Software engineer & Frontend Tutorials",
-  description:
-    "Read the latest articles about software engineer, React, Next.js, and modern frontend technologies. Learn from comprehensive tutorials and best practices.",
+  title: "Articles | Software Engineering Insights",
+  description: SEO_DESCRIPTION.articles,
   keywords: [
+    ...PERSONAL_KEYWORDS,
     "software engineer",
-    "React",
-    "Next.js",
-    "frontend",
     "tutorials",
-    "JavaScript",
-    "TypeScript",
-    "app router",
-    "MDX",
-    "modern react patterns",
+    "best practices",
+    "development insights",
   ],
   authors: [{ name: "Khairil Rahman Hakiki" }],
   creator: "Khairil Rahman Hakiki",
@@ -43,17 +38,16 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://kyyril.vercel.app/articles",
-    title: "Articles | Software engineer & Software Tutorials",
-    description:
-      "Read the latest articles about software engineer, React, Next.js, and modern frontend technologies. Learn from comprehensive tutorials and best practices.",
+    url: `${siteUrl}/articles`,
+    title: "Articles | Software Engineering Insights",
+    description: SEO_DESCRIPTION.articles,
     siteName: "Khairil Rahman Hakiki Blog",
     images: [
       {
-        url: "/assets/profile.webp",
+        url: `${siteUrl}/assets/profile.webp`,
         width: 1200,
         height: 630,
-        alt: "Khairil Rahman Hakiki Blog - software engineer Articles",
+        alt: "Khairil Rahman Hakiki Blog - Software Engineering Articles",
       },
     ],
   },
@@ -61,13 +55,12 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     site: "@kilocode",
     creator: "@kilocode",
-    title: "Articles | Blog - software engineer & Frontend Tutorials",
-    description:
-      "Read the latest articles about software engineer, React, Next.js, and modern frontend technologies.",
-    images: ["/assets/profile.webp"],
+    title: "Articles | Software Engineering Insights",
+    description: SEO_DESCRIPTION.articles,
+    images: [`${siteUrl}/assets/profile.webp`],
   },
   alternates: {
-    canonical: "https://kyyril.vercel.app/articles",
+    canonical: `${siteUrl}/articles`,
   },
   robots: {
     index: true,
@@ -203,24 +196,23 @@ export default function ArticlesPage() {
     "@context": "https://schema.org",
     "@type": "Blog",
     name: "Khairil Rahman Hakiki Blog",
-    description:
-      "Articles about software engineer, React, Next.js, and modern frontend technologies",
-    url: "https://kyyril.vercel.app/articles",
+    description: SEO_DESCRIPTION.articles,
+    url: `${siteUrl}/articles`,
     author: {
       "@type": "Person",
       name: "Khairil Rahman Hakiki",
-      url: "https://kyyril.vercel.app",
+      url: siteUrl,
     },
     publisher: {
       "@type": "Person",
       name: "Khairil Rahman Hakiki",
-      url: "https://kyyril.vercel.app",
+      url: siteUrl,
     },
     blogPost: allArticles.map((article) => ({
       "@type": "BlogPosting",
       headline: article.frontmatter.title,
       description: article.frontmatter.description,
-      url: `https://kyyril.vercel.app/articles/${article.slug}`,
+      url: `${siteUrl}/articles/${article.slug}`,
       author: {
         "@type": "Person",
         name: article.frontmatter.author,
@@ -235,7 +227,7 @@ export default function ArticlesPage() {
         "@type": "ImageObject",
         url:
           article.frontmatter.coverImage ||
-          "https://kyyril.vercel.app/assets/profile.webp",
+          `${siteUrl}/assets/profile.webp`,
         width: 1200,
         height: 630,
         alt: article.frontmatter.title,
@@ -248,13 +240,13 @@ export default function ArticlesPage() {
           "@type": "ListItem",
           position: 1,
           name: "Home",
-          item: "https://kyyril.vercel.app",
+          item: siteUrl,
         },
         {
           "@type": "ListItem",
           position: 2,
           name: "Articles",
-          item: "https://kyyril.vercel.app/articles",
+          item: `${siteUrl}/articles`,
         },
       ],
     },

@@ -5,13 +5,61 @@ import { projects } from "../../../lib/data";
 import { GitHubLogoIcon, GlobeIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 import { Metadata } from "next";
+import { PERSONAL_KEYWORDS, siteUrl } from "../../../lib/metadata";
 import Breadcrumb from "../../../components/Breadcrumb";
 
-export const metadata: Metadata = {
-  title: `PROJECT - khairil rahman hakiki`,
-  description:
-    "I'm an Information Systems student who loves programming, especially software development. I specialize in React.js and Node.js with TypeScript",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const project = projects.find((project) => project.id === slug);
+
+  if (!project) {
+    return {
+      title: "Project Not Found",
+      description: "The requested project could not be found.",
+    };
+  }
+
+  const title = `${project.title} | Khairil Rahman Hakiki`;
+  const description =
+    project.description || "Project details by Khairil Rahman Hakiki";
+  const url = `${siteUrl}/projects/${slug}`;
+
+  return {
+    title,
+    description,
+    keywords: [...PERSONAL_KEYWORDS, ...(project.technologies || [])],
+    openGraph: {
+      title,
+      description,
+      url,
+      type: "website",
+      images:
+        project.image.length > 0
+          ? [
+            {
+              url: project.image[0],
+              width: 1200,
+              height: 630,
+              alt: project.title,
+            },
+          ]
+          : [],
+    },
+    twitter: {
+      title,
+      description,
+      card: "summary_large_image",
+      images: project.image.length > 0 ? [project.image[0]] : [],
+    },
+    alternates: {
+      canonical: url,
+    },
+  };
+}
 
 export default async function Detailproject({
   params,

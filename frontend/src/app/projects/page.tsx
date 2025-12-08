@@ -1,4 +1,5 @@
 import React, { Suspense } from "react";
+import { PERSONAL_KEYWORDS, siteUrl, SEO_DESCRIPTION } from "../../lib/metadata";
 import { Metadata } from "next";
 import {
   Card,
@@ -20,28 +21,25 @@ import { data } from "../../lib/data";
 
 export const metadata: Metadata = {
   title: "Projects | Khairil Rahman Hakiki",
-  description:
-    "Explore a collection of Khairil's projects, including web applications, open-source contributions, and personal experiments. See his skills in React.js, Next.js, and TypeScript in action.",
+  description: SEO_DESCRIPTION.projects,
   keywords: [
-    "Khairil Rahman Hakiki projects",
-    "React projects",
-    "Next.js applications",
-    "TypeScript development",
-    "web development portfolio",
+    ...PERSONAL_KEYWORDS,
     "software engineer projects",
+    "web development portfolio",
+    "scalable systems",
+    "clean architecture",
   ],
   alternates: {
-    canonical: "https://kyyril.vercel.app/projects",
+    canonical: `${siteUrl}/projects`,
   },
   openGraph: {
     title: "Projects | Khairil Rahman Hakiki",
-    description:
-      "Explore a collection of Khairil's projects, including web applications, open-source contributions, and personal experiments. See his skills in React.js, Next.js, and TypeScript in action.",
-    url: "https://kyyril.vercel.app/projects",
+    description: SEO_DESCRIPTION.projects,
+    url: `${siteUrl}/projects`,
     type: "website",
     images: [
       {
-        url: "https://kyyril.vercel.app/assets/profile.webp",
+        url: `${siteUrl}/assets/profile.webp`,
         width: 1200,
         height: 630,
         alt: "Khairil Rahman Hakiki - Projects Portfolio",
@@ -50,8 +48,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     title: "Projects | Khairil Rahman Hakiki",
-    description:
-      "Explore a collection of Khairil's projects, including web applications, open-source contributions, and personal experiments. See his skills in action.",
+    description: SEO_DESCRIPTION.projects,
     card: "summary_large_image",
   },
 };

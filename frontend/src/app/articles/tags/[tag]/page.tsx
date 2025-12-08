@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/card";
 import { CalendarDays, Clock, User, Tag, ArrowLeft } from "lucide-react";
 import { Metadata } from "next";
+import { PERSONAL_KEYWORDS, siteUrl } from "@/lib/metadata";
 import Script from "next/script";
 import { Breadcrumb } from "@/components/Breadcrumb";
 
@@ -59,10 +60,9 @@ export async function generateMetadata({
 
   return {
     title: `${tagName} Articles | Khairil Rahman Hakiki Blog`,
-    description: `Browse all articles tagged with ${tagName.toLowerCase()}. Find the latest insights and best practices. (${
-      tagArticles.length
-    } article${tagArticles.length !== 1 ? "s" : ""})`,
-    keywords: [tagName, "articles", "tutorials", tagName.toLowerCase()],
+    description: `Browse all articles tagged with ${tagName.toLowerCase()}. Find the latest insights and best practices. (${tagArticles.length
+      } article${tagArticles.length !== 1 ? "s" : ""})`,
+    keywords: [...PERSONAL_KEYWORDS, tagName, "articles", "tutorials", tagName.toLowerCase()],
     authors: [{ name: "Khairil Rahman Hakiki" }],
     creator: "Khairil Rahman Hakiki",
     publisher: "Khairil Rahman Hakiki",
@@ -74,13 +74,13 @@ export async function generateMetadata({
     openGraph: {
       type: "website",
       locale: "en_US",
-      url: `https://kyyril.vercel.app/articles/tags/${tag}`,
+      url: `${siteUrl}/articles/tags/${tag}`,
       title: `${tagName} Articles | Khairil Rahman Hakiki Blog`,
       description: `Browse all articles tagged with ${tagName.toLowerCase()}. Find the latest insights and best practices.`,
       siteName: "Khairil Rahman Hakiki Blog",
       images: [
         {
-          url: "/assets/profile.webp",
+          url: `${siteUrl}/assets/profile.webp`,
           width: 1200,
           height: 630,
           alt: `${tagName} Articles`,
@@ -93,10 +93,10 @@ export async function generateMetadata({
       creator: "@khairilrahmanhakiki",
       title: `${tagName} Articles | Khairil Rahman Hakiki Blog`,
       description: `Browse all articles tagged with ${tagName.toLowerCase()}.`,
-      images: ["/assets/profile.webp"],
+      images: [`${siteUrl}/assets/profile.webp`],
     },
     alternates: {
-      canonical: `https://kyyril.vercel.app/articles/tags/${tag}`,
+      canonical: `${siteUrl}/articles/tags/${tag}`,
     },
     robots: {
       index: true,
@@ -137,14 +137,14 @@ export default async function TagPage({ params }: PageProps) {
     "@type": "CollectionPage",
     name: `${tagData.name} Articles`,
     description: `Articles tagged with ${tagData.name}`,
-    url: `https://kyyril.vercel.app/articles/tags/${tag}`,
+    url: `${siteUrl}/articles/tags/${tag}`,
     mainEntity: {
       "@type": "Blog",
       blogPost: articles.map((article) => ({
         "@type": "BlogPosting",
         headline: article.frontmatter.title,
         description: article.frontmatter.description,
-        url: `https://kyyril.vercel.app/articles/${article.slug}`,
+        url: `${siteUrl}/articles/${article.slug}`,
         datePublished: article.frontmatter.date,
         author: {
           "@type": "Person",
@@ -157,7 +157,7 @@ export default async function TagPage({ params }: PageProps) {
           "@type": "ImageObject",
           url:
             article.frontmatter.coverImage ||
-            "https://kyyril.vercel.app/assets/profile.webp",
+            `${siteUrl}/assets/profile.webp`,
           width: 1200,
           height: 630,
           alt: article.frontmatter.title,
@@ -171,19 +171,19 @@ export default async function TagPage({ params }: PageProps) {
           "@type": "ListItem",
           position: 1,
           name: "Home",
-          item: "https://kyyril.vercel.app",
+          item: siteUrl,
         },
         {
           "@type": "ListItem",
           position: 2,
           name: "Articles",
-          item: "https://kyyril.vercel.app/articles",
+          item: `${siteUrl}/articles`,
         },
         {
           "@type": "ListItem",
           position: 3,
           name: tagData.name,
-          item: `https://kyyril.vercel.app/articles/tags/${tag}`,
+          item: `${siteUrl}/articles/tags/${tag}`,
         },
       ],
     },

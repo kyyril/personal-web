@@ -2,11 +2,11 @@ import dynamic from "next/dynamic";
 import React from "react";
 import { data } from "../lib/data";
 import { Metadata } from "next";
+import { PERSONAL_KEYWORDS, siteUrl } from "../lib/metadata";
 import EducationSkeleton from "../components/EducationSkeleton";
 import ExperienceSkeleton from "../components/ExperienceSkeleton";
 import BioSkeleton from "../components/BioSkeleton";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://kyyril.vercel.app";
 
 const Bio = dynamic(() => import("../components/Bio"), {
   loading: () => <BioSkeleton />,
@@ -21,14 +21,23 @@ const Education = dynamic(() => import("../components/Education"), {
 export const metadata: Metadata = {
   title: "Khairil Rahman Hakiki | Software Engineer",
   description:
-    "Welcome to the personal website of Khairil Rahman Hakiki, a passionate Software Engineer specializing in Next.js and TypeScript. Explore my projects, experience, and feel free to get in touch.",
+    "Software Engineer specializing in building scalable, maintainable systems. Combining a strong academic foundation in Information Systems with hands-on experience in full-stack development and clean architecture principles.",
+  keywords: [
+    ...PERSONAL_KEYWORDS,
+    "Software Engineer",
+    "Full Stack Developer",
+    "Web Development",
+    "React",
+    "Node.js",
+    "TypeScript",
+  ],
   alternates: {
     canonical: siteUrl,
   },
   openGraph: {
     title: "Khairil Rahman Hakiki | Software Engineer",
     description:
-      "Welcome to the personal website of Khairil Rahman Hakiki, a passionate Software Engineer specializing in Next.js and TypeScript. Explore my projects, experience, and feel free to get in touch.",
+      "Software Engineer specializing in building scalable, maintainable systems. Combining a strong academic foundation in Information Systems with hands-on experience in full-stack development and clean architecture principles.",
     type: "website",
     url: siteUrl,
     images: [

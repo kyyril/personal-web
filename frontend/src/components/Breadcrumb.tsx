@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
+import { siteUrl } from "../lib/metadata";
 
 interface BreadcrumbItem {
   label: string;
@@ -21,7 +22,7 @@ export const Breadcrumb: React.FC<BreadcrumbProps> = ({
       "@type": "ListItem",
       position: index + 1,
       name: item.label,
-      ...(item.href && { item: `https://kyyril.vercel.app${item.href}` }),
+      ...(item.href && { item: `${siteUrl}${item.href}` }),
     }));
 
     return {

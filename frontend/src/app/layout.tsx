@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { PERSONAL_KEYWORDS, siteUrl } from "../lib/metadata";
 import { Navigation } from "../components/BottomBar";
 import { ThemeProvider } from "../components/ThemeProvider";
 import FooterWrapper from "../components/FooterWrapper";
 import { Analytics } from "@vercel/analytics/next";
 import { AuthProvider } from "../contexts/AuthContext";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://kyyril.vercel.app";
 
 export const runtime = "edge";
 export const metadata: Metadata = {
@@ -15,11 +15,9 @@ export const metadata: Metadata = {
     template: "%s | Khairil Rahman Hakiki",
   },
   description:
-    "Information Systems student specializing in software development. I leverage React.js and Node.js with Typescript to build robust, scalable applications.",
+    "Software Engineer specializing in building scalable, maintainable systems. Combining a strong academic foundation in Information Systems with hands-on experience in full-stack development and clean architecture principles.",
   keywords: [
-    "Khairil Rahman Hakiki",
-    "Khairil Rahman Hakiki Hrp",
-    "Khairil Rahman Hakiki Harahap",
+    ...PERSONAL_KEYWORDS,
     "Web Development",
     "Next.js",
     "TypeScript",
@@ -43,9 +41,7 @@ export const metadata: Metadata = {
     telephone: false,
   },
   metadataBase: new URL(siteUrl),
-  alternates: {
-    canonical: "/",
-  },
+
   robots: {
     index: true,
     follow: true,
@@ -140,7 +136,7 @@ export default function RootLayout({
                     "Information Systems student who loves programming, especially software development. Specializing in React.js and Node.js with TypeScript",
                   sameAs: [
                     "https://github.com/kyyril",
-                    "https://www.linkedin.com/in/khairil-rahman-hakiki/",
+                    "https://www.linkedin.com/in/khairilrahman/",
                     "https://twitter.com/kyyril_dev",
                   ],
                   knowsAbout: [
