@@ -10,14 +10,13 @@
   "scope": "/",
   "lang": "en",
   "dir": "ltr",
-  "categories": ["portfolio", "personal", "developer", "tech"],
+  "categories": [
+    "portfolio",
+    "personal",
+    "developer",
+    "tech"
+  ],
   "icons": [
-    {
-      "src": "/favicon.ico",
-      "sizes": "any",
-      "type": "image/x-icon",
-      "purpose": "any"
-    },
     {
       "src": "/assets/profile.webp",
       "sizes": "192x192",

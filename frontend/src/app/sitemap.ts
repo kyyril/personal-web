@@ -41,15 +41,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     {
       url: `${baseUrl}/guestbook`,
       lastModified: currentDate,
-      changeFrequency: "daily",
+      changeFrequency: "weekly",
       priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/chat`,
-      lastModified: currentDate,
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
+    }
   ];
 
   // Dynamic routes for projects

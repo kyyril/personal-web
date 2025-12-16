@@ -92,9 +92,11 @@ export const metadata: Metadata = {
   // Additional metadata for better SEO
   category: "Technology",
   classification: "Portfolio",
-  other: {
-    "google-site-verification": "24f9cc081f9ae37b",
+  icons: {
+    icon: "/assets/profile.webp",
+    apple: "/assets/profile.webp",
   },
+  manifest: "/manifest.json",
 };
 
 export default function RootLayout({
@@ -151,10 +153,6 @@ export default function RootLayout({
         {/* Preconnect to external domains for performance */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-
-        <link rel="manifest" href="/manifest.json" />
-        <link rel="icon" href="/favicon.ico" />
-        <link rel="apple-touch-icon" href={`${siteUrl}/assets/profile.webp`} />
 
         {/* Structured Data - Combined Schema Graph */}
         <script
