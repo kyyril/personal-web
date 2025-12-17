@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import { Button } from "./ui/button";
 import { Card, CardHeader } from "./ui/card";
-import { PersonIcon } from "@radix-ui/react-icons";
 import { GuestbookUserInfo, GuestbookEntry } from "./guestbook";
 import { useGuestbook } from "../hooks/useGuestbook";
 import {
@@ -179,7 +178,11 @@ export function FirebaseGuestbook() {
                   Sign in with Google to leave a message and reply to entries.
                 </p>
                 <Button onClick={signIn} className="flex items-center gap-2">
-                  <PersonIcon className="w-4 h-4" />
+                  <img
+                    src="/icon/google-icon.svg"
+                    alt="Google Icon"
+                    className="w-4 h-4"
+                  />
                   Sign in
                 </Button>
               </div>

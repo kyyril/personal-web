@@ -2,7 +2,6 @@
 
 import { Button } from '../ui/button';
 import { Card, CardHeader } from '../ui/card';
-import { PersonIcon } from '@radix-ui/react-icons';
 
 interface GuestbookAuthProps {
   onSignIn: () => void;
@@ -18,7 +17,11 @@ export function GuestbookAuth({ onSignIn }: GuestbookAuthProps) {
               Please sign in with Google to leave a message in the guestbook.
             </p>
             <Button onClick={onSignIn} className="flex items-center gap-2">
-              <PersonIcon className="w-4 h-4" />
+              <img
+                src="/icon/google-icon.svg"
+                alt="Google Icon"
+                className="w-4 h-4"
+              />
               Sign in with Google
             </Button>
           </div>
