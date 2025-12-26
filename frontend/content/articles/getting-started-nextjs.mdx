@@ -6,34 +6,31 @@ category: "framework"
 tags: ["nextjs", "app-router", "tutorial", "react"]
 author: "Khairil Rahman"
 readTime: "8 min read"
-coverImage: "/assets/blog/nextjs-15-cover.jpg"
 published: true
 ---
 
-# Introduction to Next.js 15 App Router
-
-Next.js 15 introduces the powerful **App Router** for building modern web applications. In this article, we'll discuss the basics of using Next.js 15 with App Router.
+Next.js 15 introduces the powerful **App Router** for building modern web applications. In this comprehensive guide, we'll explore the fundamentals of using Next.js 15 with App Router.
 
 ## What is App Router?
 
-App Router is a new routing system in Next.js that gives us the ability to use:
+App Router is a revolutionary routing system in Next.js that provides:
 
-- Server Components
-- Streaming
-- Built-in optimization
-- and much more...
+- **Server Components** - Build components that run on the server
+- **Streaming** - Progressive rendering for better performance
+- **Built-in optimization** - Automatic code splitting and optimization
+- **Enhanced developer experience** - Better DX with file-system based routing
 
 ## Setting Up Your First Project
 
-To start a Next.js 15 project, we can use:
+To create a new Next.js 15 project with App Router, run:
 
 ```bash
 npx create-next-app@latest my-app --typescript --tailwind --eslint
 ```
 
-### Directory Structure
+### Project Directory Structure
 
-App Router uses a different folder structure:
+App Router uses a file-system based routing approach:
 
 ```
 app/
@@ -43,11 +40,14 @@ app/
 │   ├── page.tsx
 │   └── [slug]/
 │       └── page.tsx
+├── about/
+│   └── page.tsx
+└── globals.css
 ```
 
-## Basic Component Example
+## Creating Your First Component
 
-Let's create a simple component:
+Let's build a simple component to understand the basics:
 
 ```tsx
 // components/HelloWorld.tsx
@@ -65,24 +65,39 @@ export default function HelloWorld() {
 }
 ```
 
-## Key Features
+## Key App Router Features
 
-### 1. Server Components
+### Server Components
 
-Server components allow us to:
+Server Components provide several advantages:
 
-- Reduce bundle size
-- Better performance
-- Automatic code splitting
+- **Reduced bundle size** - Code only runs on the server
+- **Better performance** - Faster initial page loads
+- **Automatic code splitting** - Optimized loading automatically
+- **SEO benefits** - Better search engine optimization
 
-### 2. Streaming
+### Streaming
 
-Streaming makes applications feel faster with:
+Streaming enhances user experience with:
 
-- Progressive rendering
-- Selective hydration
-- Better user experience
+- **Progressive rendering** - Show content as it becomes available
+- **Selective hydration** - Hydrate only interactive parts
+- **Faster perceived performance** - Users see content sooner
+- **Better error boundaries** - Handle errors gracefully
+
+### Layout System
+
+App Router introduces a powerful layout system:
+
+- **Root layout** - Shared layout for entire application
+- **Nested layouts** - Layouts can be nested for different sections
+- **Loading states** - Built-in loading UI support
+- **Error handling** - Granular error boundaries
 
 ## Conclusion
 
-Next.js 15 with App Router provides an amazing developer experience for building modern web applications. Stay tuned for upcoming articles about advanced features!
+Next.js 15 with App Router represents a significant advancement in React development. It provides an exceptional developer experience while delivering superior performance and user experience.
+
+The combination of Server Components, Streaming, and the new Layout System makes Next.js 15 App Router the ideal choice for building modern web applications in 2025 and beyond.
+
+Stay tuned for upcoming articles where we'll dive deeper into advanced App Router features and best practices!

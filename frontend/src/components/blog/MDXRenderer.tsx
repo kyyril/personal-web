@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
@@ -20,10 +20,11 @@ import {
   CheckCircle,
   XCircle,
 } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import mermaid from "mermaid";
 
 // Update the animation variants
 const fadeInUp = {
@@ -43,6 +44,115 @@ const codeBlockVariants = {
     transition: { stiffness: 300, damping: 25 }, // Removed type: "spring"
   },
 };
+
+// Mermaid Diagram Component
+interface MermaidDiagramProps {
+  chart: string;
+  isDark: boolean;
+}
+
+function MermaidDiagram({ chart, isDark }: MermaidDiagramProps) {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!ref.current) return;
+
+    // Initialize mermaid with enhanced configuration
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: isDark ? 'dark' : 'default',
+      themeVariables: {
+        primaryColor: isDark ? '#1f2937' : '#f3f4f6',
+        primaryTextColor: isDark ? '#f9fafb' : '#1f2937',
+        primaryBorderColor: isDark ? '#374151' : '#d1d5db',
+        lineColor: isDark ? '#9ca3af' : '#6b7280',
+        secondaryColor: isDark ? '#374151' : '#e5e7eb',
+        tertiaryColor: isDark ? '#1f2937' : '#f9fafb',
+        background: isDark ? '#0f172a' : '#ffffff',
+        mainBkg: isDark ? '#1e293b' : '#ffffff',
+        secondBkg: isDark ? '#334155' : '#f8fafc',
+        tertiaryBkg: isDark ? '#475569' : '#f1f5f9',
+        edgeLabelBackground: isDark ? '#374151' : '#ffffff',
+        clusterBkg: isDark ? '#374151' : '#f9fafb',
+        clusterBorder: isDark ? '#6b7280' : '#d1d5db',
+        defaultLinkColor: isDark ? '#9ca3af' : '#6b7280',
+        titleColor: isDark ? '#f9fafb' : '#1f2937',
+        fillType0: isDark ? '#374151' : '#e5e7eb',
+        fillType1: isDark ? '#4b5563' : '#d1d5db',
+      },
+      fontFamily: 'ui-monospace, SFMono-Regular, "SF Mono", Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
+      fontSize: 14,
+      flowchart: {
+        useMaxWidth: true,
+        htmlLabels: true,
+        curve: 'basis',
+      },
+      sequence: {
+        useMaxWidth: true,
+        wrap: true,
+      },
+      gantt: {
+        useMaxWidth: true,
+      },
+      journey: {
+        useMaxWidth: true,
+      },
+      er: {
+        useMaxWidth: true,
+      },
+      gitGraph: {
+        useMaxWidth: true,
+      },
+    });
+
+    const renderDiagram = async () => {
+      try {
+        // Clean the chart content and validate
+        const cleanedChart = chart.trim();
+        if (!cleanedChart) {
+          throw new Error('Empty Mermaid diagram');
+        }
+
+        // Generate unique ID for this diagram
+        const diagramId = `mermaid-${Math.random().toString(36).substr(2, 9)}`;
+        
+        const { svg } = await mermaid.render(diagramId, cleanedChart);
+        if (ref.current) {
+          ref.current.innerHTML = svg;
+          // Add responsive behavior
+          const svgElement = ref.current.querySelector('svg');
+          if (svgElement) {
+            svgElement.style.width = '100%';
+            svgElement.style.height = 'auto';
+            svgElement.style.maxWidth = '100%';
+          }
+        }
+      } catch (error) {
+        console.error('Mermaid rendering error:', error);
+        if (ref.current) {
+          ref.current.innerHTML = `
+            <div class="text-red-500 p-4 border border-red-300 rounded bg-red-50 dark:bg-red-900/20">
+              <div class="font-semibold mb-2">Failed to render Mermaid diagram</div>
+              <div class="text-sm opacity-80 mb-3">${error instanceof Error ? error.message : 'Unknown error'}</div>
+              <details class="text-xs">
+                <summary class="cursor-pointer hover:underline">View diagram source</summary>
+                <pre class="mt-2 p-2 bg-gray-100 dark:bg-gray-800 rounded overflow-x-auto">${chart}</pre>
+              </details>
+            </div>
+          `;
+        }
+      }
+    };
+
+    renderDiagram();
+  }, [chart, isDark]);
+
+  return (
+    <div className="mermaid-container my-8 p-4 bg-background rounded-lg border overflow-x-auto">
+      <div ref={ref} className="mermaid-diagram" />
+    </div>
+  );
+}
 
 interface MDXRendererProps {
   content: string;
@@ -107,25 +217,23 @@ export function MDXRenderer({ content }: MDXRendererProps) {
           ),
           h2: ({ children, className, ...props }) => (
             <h2
-              className="text-3xl font-bold mt-16 mb-6 text-foreground/90 scroll-mt-20 flex items-center gap-3"
+              className="text-3xl font-bold mt-16 mb-6 text-foreground/90 scroll-mt-20"
               {...props}
             >
-              <div className="w-1 h-8 bg-primary/60 rounded-full"></div>
               {children}
             </h2>
           ),
           h3: ({ children, ...props }) => (
             <h3
-              className="text-2xl font-semibold mt-12 mb-4 text-foreground/80 scroll-mt-20 flex items-center gap-2"
+              className="text-2xl font-semibold mt-12 mb-4 text-foreground/80 scroll-mt-20"
               {...props}
             >
-              <div className="w-1 h-6 bg-primary/40 rounded-full"></div>
               {children}
             </h3>
           ),
           h4: ({ children, ...props }) => (
             <h4
-              className="text-xl font-semibold mt-8 mb-3 text-foreground/80 scroll-mt-20 pl-4"
+              className="text-xl font-semibold mt-8 mb-3 text-foreground/80 scroll-mt-20"
               {...props}
             >
               {children}
@@ -137,6 +245,34 @@ export function MDXRenderer({ content }: MDXRendererProps) {
             const match = /language-(\w+)/.exec(className || "");
             const language = match ? match[1] : "";
             const code = String(children).replace(/\n$/, "");
+
+            // Handle Mermaid diagrams - check both className language and direct mermaid syntax
+            const isMermaid = !inline && (
+              language === "mermaid" || 
+              // Check if the code starts with common mermaid diagram types
+              code.trim().startsWith('sequenceDiagram') ||
+              code.trim().startsWith('flowchart') ||
+              code.trim().startsWith('graph') ||
+              code.trim().startsWith('stateDiagram') ||
+              code.trim().startsWith('classDiagram') ||
+              code.trim().startsWith('erDiagram') ||
+              code.trim().startsWith('journey') ||
+              code.trim().startsWith('gitgraph') ||
+              code.trim().startsWith('quadrantChart')
+            );
+
+            if (isMermaid) {
+              return (
+                <motion.div
+                  variants={codeBlockVariants}
+                  initial="initial"
+                  animate="animate"
+                  className="my-8"
+                >
+                  <MermaidDiagram chart={code} isDark={isDark} />
+                </motion.div>
+              );
+            }
 
             if (!inline && match) {
               return (

@@ -6,11 +6,12 @@ category: "Development"
 tags: ["MDX", "React", "Frontend", "Content"]
 author: "Khairil Rahman"
 readTime: "8 min read"
-coverImage: "/assets/blog/nextjs-15-cover.jpg"
 published: true
 ---
 
 Welcome to this comprehensive showcase of enhanced MDX rendering capabilities. This article demonstrates various rich content elements that make your blog posts more engaging and visually appealing.
+
+MDX (Markdown + JSX) is a powerful format that combines the simplicity of Markdown with the power of React components. This comprehensive guide showcases various rich content elements you can use in your blog posts.
 
 ## Blockquotes with Author Attribution
 
@@ -32,18 +33,26 @@ Images now support captions using the `title` attribute in markdown:
 
 Use callout boxes to highlight important information:
 
+### Info Callout
+
 <div class="callout-info">
   Info: This is useful for general information that readers should pay attention
   to.
 </div>
 
+### Warning Callout
+
 <div class="callout-warning">
   Warning: Be careful with this important warning message.
 </div>
 
+### Success Callout
+
 <div class="callout-success">
   Success: Great job! This indicates successful completion of a task.
 </div>
+
+### Error Callout
 
 <div class="callout-error">
   Error: Something went wrong. Check your code and try again.
@@ -67,13 +76,15 @@ MDX files are processed by remark and rehype plugins that transform the content 
 
 </details>
 
-## Highlighted Text
+## Text Formatting
+
+### Highlighted Text
 
 Use the `<mark>` tag to highlight important text:
 
 The `<mark>` element represents text which is <mark>marked or highlighted</mark> for reference or notation purposes.
 
-## Code Blocks with Copy Functionality
+### Code Blocks with Copy Functionality
 
 Code blocks now include syntax highlighting and copy-to-clipboard functionality:
 
@@ -94,11 +105,11 @@ def calculate_fibonacci(n):
         return n
     return calculate_fibonacci(n-1) + calculate_fibonacci(n-2)
 
-## Example usage
+# Example usage
 print(calculate_fibonacci(10))  ## Output: 55
 ```
 
-## Advanced Lists
+### Advanced Lists
 
 - **Feature 1:** Enhanced list styling with custom bullets
 - **Feature 2:** Better spacing and typography
@@ -107,6 +118,71 @@ print(calculate_fibonacci(10))  ## Output: 55
 ## Mathematical Expressions
 
 While not natively supported in this renderer, you can use inline code for simple expressions: `E = mc²` or `a² + b² = c²`.
+
+## Mermaid Diagrams
+
+Mermaid diagrams are now supported! You can create various types of diagrams directly in your MDX content using the `mermaid` language syntax.
+
+### Flowchart Example
+
+```mermaid
+flowchart TD
+    A[Start] --> B{Is it working?}
+    B -->|Yes| C[Great!]
+    B -->|No| D[Debug]
+    D --> B
+    C --> E[End]
+```
+
+### Sequence Diagram Example
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant Frontend
+    participant API
+    participant Database
+    
+    User->>Frontend: Submit form
+    Frontend->>API: POST /api/users
+    API->>Database: Insert user data
+    Database-->>API: Confirmation
+    API-->>Frontend: 201 Created
+    Frontend-->>User: Success message
+```
+
+### Class Diagram Example
+
+```mermaid
+classDiagram
+    class User {
+        +string id
+        +string email
+        +string name
+        +login() bool
+        +logout() void
+    }
+    
+    class Post {
+        +string id
+        +string title
+        +string content
+        +datetime createdAt
+        +publish() void
+    }
+```
+
+### State Diagram Example
+
+```mermaid
+stateDiagram-v2
+    [*] --> Idle
+    Idle --> Loading: Start request
+    Loading --> Success: Data received
+    Loading --> Error: Request failed
+    Success --> [*]
+    Error --> Idle: Retry
+```
 
 ## Tables with Enhanced Styling
 
@@ -120,9 +196,16 @@ While not natively supported in this renderer, you can use inline code for simpl
 
 ## Conclusion
 
-These enhanced MDX features provide a rich set of tools for creating engaging and interactive blog content. From author-attributed quotes to collapsible sections and callout boxes, your articles can now be more visually appealing and user-friendly.
+These enhanced MDX features provide a rich set of tools for creating engaging and interactive blog content. From author-attributed quotes to collapsible sections, callout boxes, and now **Mermaid diagrams**, your articles can now be more visually appealing and user-friendly.
+
+Mermaid diagrams support various types including:
+- Flowcharts for process visualization
+- Sequence diagrams for interaction flows
+- Class diagrams for system architecture
+- State diagrams for state management
+- And many more diagram types!
 
 > The future of web content is interactive and engaging. With enhanced MDX rendering, we're just scratching the surface of what's possible.
 > -- Modern Web Developer
 
-_This article showcases the enhanced MDX renderer capabilities. Try creating your own content with these features!_
+_This article showcases the enhanced MDX renderer capabilities, including the new Mermaid diagram support. Try creating your own content with these features!_

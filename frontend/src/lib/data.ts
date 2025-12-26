@@ -58,6 +58,7 @@ export const experiences: Experience[] = [
       "OAuth",
       "JWT",
       "Xendit",
+      "CI/CD",
       "Systems Design",
       "Domain-Driven Design (DDD)",
       "Event Driven Programming",
