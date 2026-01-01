@@ -290,7 +290,7 @@ export function GuestbookEntry({
 
               {/* Replies list */}
               {showReplies && entry.replies.length > 0 && (
-                <div className="pl-0 md:pl-4 pt-2 border-l-2 border-muted ml-2 space-y-3">
+                <div className="pl-0 md:pl-4 pt-2 ml-2 space-y-3">
                   {entry.replies.map((reply) => (
                     <Reply
                       key={reply.id}

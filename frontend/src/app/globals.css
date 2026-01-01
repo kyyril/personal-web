@@ -18,6 +18,8 @@
     --muted-foreground: 0 0% 35%;
     --accent: 240 5% 85%;
     --accent-foreground: 0 0% 10%;
+    --custom: 48 96% 53%;
+    --custom-reverse: 221 83% 53%;
     --destructive: 0 80% 60%;
     --destructive-foreground: 0 0% 98%;
     --input: 0 0% 90%;
@@ -31,7 +33,8 @@
   }
 
   .dark {
-    --background: 0 0% 4%; /* Lebih hitam */
+    --background: 0 0% 4%;
+    /* Lebih hitam */
     --foreground: 0 0% 88%;
     --card: 0 0% 6%;
     --card-foreground: 0 0% 88%;
@@ -45,6 +48,8 @@
     --muted-foreground: 0 0% 60%;
     --accent: 0 0% 14%;
     --accent-foreground: 0 0% 90%;
+    --custom: 221 83% 53%;
+    --custom-reverse: 48 96% 53%;
     --destructive: 0 60% 45%;
     --destructive-foreground: 0 0% 98%;
     --input: 0 0% 20%;
@@ -61,6 +66,7 @@
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
   }
@@ -70,10 +76,12 @@
       transform: scale(0.8) rotate(0deg);
       opacity: 0.4;
     }
+
     50% {
       transform: scale(1) rotate(180deg);
       opacity: 1;
     }
+
     100% {
       transform: scale(0.8) rotate(360deg);
       opacity: 0.4;
@@ -82,13 +90,11 @@
 
   /* Music Player Slider Styles */
   .slider {
-    background: linear-gradient(
-      to right,
-      hsl(var(--primary)) 0%,
-      hsl(var(--primary)) var(--value, 0%),
-      hsl(var(--muted)) var(--value, 0%),
-      hsl(var(--muted)) 100%
-    );
+    background: linear-gradient(to right,
+        hsl(var(--primary)) 0%,
+        hsl(var(--primary)) var(--value, 0%),
+        hsl(var(--muted)) var(--value, 0%),
+        hsl(var(--muted)) 100%);
     transition: all 0.2s ease;
   }
 

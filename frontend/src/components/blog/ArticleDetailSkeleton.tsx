@@ -17,22 +17,22 @@ export default function ArticleDetailSkeleton() {
             <nav className="flex items-center space-x-2 text-xs sm:text-sm text-muted-foreground" aria-label="Breadcrumb">
               {/* Home */}
               <Skeleton className="h-3 w-8 sm:w-12" />
-              
+
               {/* Separator */}
               <Skeleton className="h-3 w-3 sm:w-4" />
-              
+
               {/* Articles */}
               <Skeleton className="h-3 w-14 sm:w-20" />
-              
+
               {/* Separator */}
               <Skeleton className="h-3 w-3 sm:w-4" />
-              
+
               {/* Category */}
               <Skeleton className="h-3 w-12 sm:w-20" />
-              
+
               {/* Separator */}
               <Skeleton className="h-3 w-3 sm:w-4" />
-              
+
               {/* Article title */}
               <span className="text-foreground font-medium">
                 <Skeleton className="h-3 w-12 sm:w-28" />
@@ -194,7 +194,7 @@ export default function ArticleDetailSkeleton() {
             </section>
 
             {/* Call to Action */}
-            <section className="text-center py-8 lg:py-12 border-t border-border">
+            <section className="text-center py-8 lg:py-12 bg-secondary/5 rounded-lg mt-8">
               <Skeleton className="h-6 w-48 mx-auto mb-4" />
               <Skeleton className="h-4 w-80 mx-auto mb-6" />
               <Skeleton className="h-10 w-32 mx-auto" />

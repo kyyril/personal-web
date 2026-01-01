@@ -310,7 +310,7 @@ export function ArticleClient({ post, relatedPosts }: ArticleClientProps) {
             )}
 
             {/* Call to Action */}
-            <section className="text-center py-8 lg:py-12 border-t border-border">
+            <section className="text-center py-8 lg:py-12 bg-secondary/5 rounded-lg mt-8">
               <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-4">
                 Enjoyed this article?
               </h3>

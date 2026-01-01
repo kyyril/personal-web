@@ -133,7 +133,7 @@ function MermaidDiagram({ chart, isDark }: MermaidDiagramProps) {
         console.error('Mermaid rendering error:', error);
         if (ref.current) {
           ref.current.innerHTML = `
-            <div class="text-red-500 p-4 border border-red-300 rounded bg-red-50 dark:bg-red-900/20">
+            <div class="text-red-500 p-4 rounded bg-red-50 dark:bg-red-900/20">
               <div class="font-semibold mb-2">Failed to render Mermaid diagram</div>
               <div class="text-sm opacity-80 mb-3">${error instanceof Error ? error.message : 'Unknown error'}</div>
               <details class="text-xs">
@@ -150,7 +150,7 @@ function MermaidDiagram({ chart, isDark }: MermaidDiagramProps) {
   }, [chart, isDark]);
 
   return (
-    <div className="mermaid-container my-8 p-4 bg-background rounded-lg border overflow-x-auto">
+    <div className="mermaid-container my-8 p-4 bg-background rounded-lg shadow-sm overflow-x-auto">
       <div ref={ref} className="mermaid-diagram" />
     </div>
   );
@@ -212,7 +212,7 @@ export function MDXRenderer({ content }: MDXRendererProps) {
           // Clean heading styles
           h1: ({ children, ...props }) => (
             <h1
-              className="text-4xl font-bold mb-8 text-foreground border-b border-border/20 pb-4"
+              className="text-4xl font-bold mb-8 text-foreground pb-4"
               {...props}
             >
               {children}
@@ -351,7 +351,7 @@ export function MDXRenderer({ content }: MDXRendererProps) {
                 initial="initial"
                 whileInView="animate"
                 viewport={{ once: true }}
-                className={`my-8 pl-6 py-3 text-foreground/60 italic bg-custom/10 rounded border-l-2 border-primary/30 ${author ? "relative" : ""
+                className={`my-8 pl-6 py-3 text-foreground/60 italic bg-custom/10 rounded ${author ? "relative" : ""
                   }`}
               >
                 {quoteContent}
@@ -461,13 +461,13 @@ export function MDXRenderer({ content }: MDXRendererProps) {
                   initial="initial"
                   whileInView="animate"
                   viewport={{ once: true }}
-                  className={`my-6 p-4 rounded border-l-4 shadow-sm ${type === "warning"
-                    ? "border-yellow-500 bg-yellow-50 dark:bg-yellow-900/20 text-yellow-800 dark:text-yellow-200"
+                  className={`my-6 p-4 rounded shadow-sm ${type === "warning"
+                    ? "bg-yellow-50 dark:bg-yellow-900/20 text-yellow-800 dark:text-yellow-200"
                     : type === "error"
-                      ? "border-red-500 bg-red-50 dark:bg-red-900/20 text-red-800 dark:text-red-200"
+                      ? "bg-red-50 dark:bg-red-900/20 text-red-800 dark:text-red-200"
                       : type === "success"
-                        ? "border-green-500 bg-green-50 dark:bg-green-900/20 text-green-800 dark:text-green-200"
-                        : "border-blue-500 bg-blue-50 dark:bg-blue-900/20 text-blue-800 dark:text-blue-200"
+                        ? "bg-green-50 dark:bg-green-900/20 text-green-800 dark:text-green-200"
+                        : "bg-blue-50 dark:bg-blue-900/20 text-blue-800 dark:text-blue-200"
                     }`}
                 >
                   <div className="flex items-start gap-3">

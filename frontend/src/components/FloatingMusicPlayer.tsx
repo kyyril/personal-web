@@ -68,7 +68,7 @@ const HiddenPlayer = ({ onShow }: any) => {
         variant="default"
         size="icon"
         onClick={onShow}
-        className="rounded-full ring-1 ring-custom p-0 overflow-hidden"
+        className="rounded-full p-0 overflow-hidden shadow-lg hover:shadow-xl transition-shadow"
         aria-label="Show music player"
       >
         {isPlaying ? (

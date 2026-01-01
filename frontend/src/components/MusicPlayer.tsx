@@ -340,7 +340,7 @@ export default function MusicPlayer({
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
-              className="mt-4 border-t pt-4"
+              className="mt-4 pt-4 bg-secondary/5 rounded-md p-2"
             >
               <h4 className="font-medium mb-2">Playlist</h4>
               <div

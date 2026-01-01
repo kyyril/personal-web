@@ -97,7 +97,7 @@ export default async function Detailproject({
       <Breadcrumb items={breadcrumbItems} className="mb-4" />
       <div className="border-none shadow-none">
         {project && project.image.length > 0 ? (
-          <div className="animate-in fade-in slide-in-from-bottom-4 duration-700 aspect-video w-full overflow-hidden rounded-xl bg-muted/20">
+          <div className="animate-in fade-in slide-in-from-bottom-4 duration-700 w-full overflow-hidden rounded-xl bg-muted/20">
             <ProjectCarousel images={project.image} />
           </div>
         ) : (

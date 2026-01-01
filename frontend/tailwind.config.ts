@@ -19,8 +19,9 @@ const config: Config = {
       },
       colors: {
         custom: {
-          DEFAULT: "#2563eb",
+          DEFAULT: "hsl(var(--custom))",
           foreground: "#ffffff",
+          reverse: "hsl(var(--custom-reverse))",
         },
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",

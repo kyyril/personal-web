@@ -11,7 +11,7 @@ const SOCIAL_LINKS = [
 
 const Bio: React.FC = () => {
   return (
-    <section>
+    <section className="flex flex-col items-start text-left">
       <div className="mb-2">
         <div>
           <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground">
@@ -40,7 +40,7 @@ const Bio: React.FC = () => {
 
       <div>
         <p className="max-w-[600px] text-muted-foreground lg:text-lg leading-relaxed">
-          Software Engineer specializing in building scalable, maintainable systems. Combining a strong academic foundation in Information Systems with hands-on experience in full-stack development and clean architecture principles.
+          Specializing in building scalable, maintainable systems. Combining a strong academic foundation in Information Systems with hands-on experience in full-stack development and clean architecture principles.
         </p>
       </div>
     </section>

@@ -53,11 +53,10 @@ export function Navigation() {
                 width={28}
                 height={28}
                 quality={100}
-                className={`rounded-full border-spacing-3 transition-all w-6 h-6 duration-300 object-cover  ${
-                  pathname === "/"
+                className={`rounded-full border-spacing-3 transition-all w-6 h-6 duration-300 object-cover  ${pathname === "/"
                     ? "ring-1 ring-custom"
                     : "ring-1 ring-primary/10"
-                }`}
+                  }`}
               />
             </motion.div>
           </Link>
@@ -70,11 +69,10 @@ export function Navigation() {
               aria-current={isActive(item.href) ? "page" : undefined}
             >
               <item.icon
-                className={`w-5 h-5 transition-colors ${
-                  isActive(item.href)
-                    ? "text-custom"
-                    : "group-hover:text-custom/80"
-                }`}
+                className={`w-5 h-5 transition-colors ${isActive(item.href)
+                  ? "text-custom"
+                  : "group-hover:text-custom/80"
+                  }`}
                 aria-hidden="true"
               />
             </Link>
