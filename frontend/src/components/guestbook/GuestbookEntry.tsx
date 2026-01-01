@@ -108,14 +108,14 @@ export function GuestbookEntry({
               <div className="w-10 h-10 md:w-12 md:h-12 relative">
                 <Image
                   src={entry.user.avatarUrl}
-                  alt={entry.user.username}
+                  alt={`Avatar of ${entry.user.username}`}
                   fill
                   className="rounded-full object-cover"
                 />
               </div>
             ) : (
               <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-secondary flex items-center justify-center">
-                <PersonIcon className="w-5 h-5 md:w-6 md:h-6" />
+                <PersonIcon className="w-5 h-5 md:w-6 md:h-6" aria-hidden="true" />
               </div>
             )}
           </div>
@@ -148,9 +148,9 @@ export function GuestbookEntry({
                     disabled={isEditingEntry || isDeletingEntry}
                   >
                     {isEditingEntry && editingEntry === entry.id ? (
-                      <Loader className="h-4 w-4 animate-spin" />
+                      <Loader className="h-4 w-4 animate-spin" aria-hidden="true" />
                     ) : (
-                      <Pencil1Icon className="w-4 h-4" />
+                      <Pencil1Icon className="w-4 h-4" aria-hidden="true" />
                     )}
                   </Button>
                   <Button
@@ -162,9 +162,9 @@ export function GuestbookEntry({
                     disabled={isDeletingEntry || isEditingEntry}
                   >
                     {isDeletingEntry ? (
-                      <Loader className="h-4 w-4 animate-spin" />
+                      <Loader className="h-4 w-4 animate-spin" aria-hidden="true" />
                     ) : (
-                      <TrashIcon className="w-4 h-4" />
+                      <TrashIcon className="w-4 h-4" aria-hidden="true" />
                     )}
                   </Button>
                 </div>
@@ -175,11 +175,13 @@ export function GuestbookEntry({
             {editingEntry === entry.id ? (
               <div className="mt-3 space-y-2">
                 <Input
+                  id={`edit-entry-${entry.id}`}
                   value={editContent}
                   onChange={(e) => onEditContentChange(e.target.value)}
                   maxLength={500}
                   className="w-full"
                   disabled={isEditingEntry}
+                  aria-label="Edit your guestbook message"
                 />
                 <div className="flex gap-2">
                   <Button
@@ -189,10 +191,10 @@ export function GuestbookEntry({
                     disabled={isEditingEntry}
                   >
                     {isEditingEntry ? (
-                      <Loader className="mr-2 h-4 w-4 animate-spin" />
+                      <Loader className="mr-2 h-4 w-4 animate-spin" aria-hidden="true" />
                     ) : (
                       <>
-                        <CheckIcon className="w-4 h-4 mr-1" />
+                        <CheckIcon className="w-4 h-4 mr-1" aria-hidden="true" />
                         Save
                       </>
                     )}
@@ -204,7 +206,7 @@ export function GuestbookEntry({
                     aria-label="Cancel editing"
                     disabled={isEditingEntry}
                   >
-                    <Cross2Icon className="w-4 h-4 mr-1" />
+                    <Cross2Icon className="w-4 h-4 mr-1" aria-hidden="true" />
                     Cancel
                   </Button>
                 </div>
@@ -230,7 +232,7 @@ export function GuestbookEntry({
                   }
                   className="h-8"
                 >
-                  <ChatBubbleIcon className="w-4 h-4 mr-1.5" />
+                  <ChatBubbleIcon className="w-4 h-4 mr-1.5" aria-hidden="true" />
                   {replyingTo === entry.id ? "Cancel Reply" : "Reply"}
                 </Button>
 
@@ -250,9 +252,9 @@ export function GuestbookEntry({
                     {entry.replies.length}{" "}
                     {entry.replies.length === 1 ? "reply" : "replies"}
                     <ChevronDown
-                      className={`ml-1.5 h-4 w-4 transition-transform ${
-                        showReplies ? "rotate-180" : ""
-                      }`}
+                      className={`ml-1.5 h-4 w-4 transition-transform ${showReplies ? "rotate-180" : ""
+                        }`}
+                      aria-hidden="true"
                     />
                   </Button>
                 )}
@@ -262,12 +264,14 @@ export function GuestbookEntry({
               {replyingTo === entry.id && (
                 <div className="flex gap-2 pl-0 md:pl-4">
                   <Input
+                    id={`reply-input-${entry.id}`}
                     value={replyContent}
                     onChange={(e) => onReplyContentChange(e.target.value)}
                     placeholder="Write a reply..."
                     maxLength={300}
                     disabled={isAddingReply}
                     className="flex-1"
+                    aria-label="Write a reply to this message"
                   />
                   <Button
                     size="sm"
@@ -276,7 +280,7 @@ export function GuestbookEntry({
                     disabled={isAddingReply || !replyContent.trim()}
                   >
                     {isAddingReply ? (
-                      <Loader className="h-4 w-4 animate-spin" />
+                      <Loader className="h-4 w-4 animate-spin" aria-hidden="true" />
                     ) : (
                       "Send"
                     )}

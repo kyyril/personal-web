@@ -27,12 +27,12 @@ export default function ProjectCarousel({ images }: ProjectCarouselProps) {
           <CarouselItem className="lg:basis-1/2" key={index}>
             <Image
               src={img}
-              alt={`Image ${index + 1}`}
-              height={200}
-              width={500}
-              loading="lazy"
-              quality={100}
-              className="rounded"
+              alt={`Project illustration ${index + 1}`}
+              height={450}
+              width={800}
+              priority={index === 0}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 800px"
+              className="rounded object-cover w-full h-auto aspect-video shadow-sm"
             />
           </CarouselItem>
         ))}

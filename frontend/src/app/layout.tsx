@@ -151,8 +151,8 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-title" content="Khairil HR" />
 
         {/* Preconnect to external domains for performance */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://res.cloudinary.com" />
+        <link rel="dns-prefetch" href="https://res.cloudinary.com" />
 
         {/* Structured Data - Combined Schema Graph */}
         <script

@@ -19,10 +19,12 @@ import {
   AlertTriangle,
   CheckCircle,
   XCircle,
+  X,
+  ZoomIn,
 } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import mermaid from "mermaid";
 
@@ -115,7 +117,7 @@ function MermaidDiagram({ chart, isDark }: MermaidDiagramProps) {
 
         // Generate unique ID for this diagram
         const diagramId = `mermaid-${Math.random().toString(36).substr(2, 9)}`;
-        
+
         const { svg } = await mermaid.render(diagramId, cleanedChart);
         if (ref.current) {
           ref.current.innerHTML = svg;
@@ -163,6 +165,7 @@ type CalloutType = "info" | "warning" | "success" | "error";
 export function MDXRenderer({ content }: MDXRendererProps) {
   const [copiedCode, setCopiedCode] = useState<string | null>(null);
   const [isDark, setIsDark] = useState(false);
+  const [zoomImage, setZoomImage] = useState<{ src: string; alt: string } | null>(null);
 
   useEffect(() => {
     const checkDarkMode = () => {
@@ -248,7 +251,7 @@ export function MDXRenderer({ content }: MDXRendererProps) {
 
             // Handle Mermaid diagrams - check both className language and direct mermaid syntax
             const isMermaid = !inline && (
-              language === "mermaid" || 
+              language === "mermaid" ||
               // Check if the code starts with common mermaid diagram types
               code.trim().startsWith('sequenceDiagram') ||
               code.trim().startsWith('flowchart') ||
@@ -348,9 +351,8 @@ export function MDXRenderer({ content }: MDXRendererProps) {
                 initial="initial"
                 whileInView="animate"
                 viewport={{ once: true }}
-                className={`my-8 pl-6 py-3 text-foreground/60 italic bg-custom/10 rounded border-l-2 border-primary/30 ${
-                  author ? "relative" : ""
-                }`}
+                className={`my-8 pl-6 py-3 text-foreground/60 italic bg-custom/10 rounded border-l-2 border-primary/30 ${author ? "relative" : ""
+                  }`}
               >
                 {quoteContent}
                 {author && (
@@ -398,22 +400,24 @@ export function MDXRenderer({ content }: MDXRendererProps) {
           img: ({ src, alt, title, width, height, ...props }) => {
             if (!src) return null;
 
-            // For images inside paragraphs, use inline styling to avoid block elements
             return (
-              <span className="inline-block relative w-full max-w-full my-4">
-                <span className="block relative w-full h-64 overflow-hidden rounded">
+              <span className="block my-4">
+                <span
+                  className="block relative w-full h-[250px] xs:h-[300px] sm:h-[400px] md:h-[500px] overflow-hidden rounded-lg cursor-zoom-in"
+                  onClick={() => setZoomImage({ src, alt: alt || "" })}
+                >
                   <Image
                     src={src}
                     alt={alt || ""}
                     fill
                     className="object-contain"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 80vw, 1200px"
                     {...props}
                   />
                 </span>
-                {title && (
-                  <span className="block text-center text-sm text-muted-foreground mt-2 italic">
-                    {title}
+                {alt && (
+                  <span className="block text-center text-sm text-muted-foreground mt-3 italic font-medium">
+                    {alt}
                   </span>
                 )}
               </span>
@@ -457,15 +461,14 @@ export function MDXRenderer({ content }: MDXRendererProps) {
                   initial="initial"
                   whileInView="animate"
                   viewport={{ once: true }}
-                  className={`my-6 p-4 rounded border-l-4 shadow-sm ${
-                    type === "warning"
-                      ? "border-yellow-500 bg-yellow-50 dark:bg-yellow-900/20 text-yellow-800 dark:text-yellow-200"
-                      : type === "error"
+                  className={`my-6 p-4 rounded border-l-4 shadow-sm ${type === "warning"
+                    ? "border-yellow-500 bg-yellow-50 dark:bg-yellow-900/20 text-yellow-800 dark:text-yellow-200"
+                    : type === "error"
                       ? "border-red-500 bg-red-50 dark:bg-red-900/20 text-red-800 dark:text-red-200"
                       : type === "success"
-                      ? "border-green-500 bg-green-50 dark:bg-green-900/20 text-green-800 dark:text-green-200"
-                      : "border-blue-500 bg-blue-50 dark:bg-blue-900/20 text-blue-800 dark:text-blue-200"
-                  }`}
+                        ? "border-green-500 bg-green-50 dark:bg-green-900/20 text-green-800 dark:text-green-200"
+                        : "border-blue-500 bg-blue-50 dark:bg-blue-900/20 text-blue-800 dark:text-blue-200"
+                    }`}
                 >
                   <div className="flex items-start gap-3">
                     {iconMap[type]}
@@ -560,6 +563,61 @@ export function MDXRenderer({ content }: MDXRendererProps) {
       >
         {content}
       </ReactMarkdown>
+
+      {/* Enhanced Lightbox Overlay */}
+      <AnimatePresence>
+        {zoomImage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-background/90 backdrop-blur-xl p-4 sm:p-8 md:p-12"
+            onClick={() => setZoomImage(null)}
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              className="relative w-full h-full max-w-5xl max-h-[85vh] flex flex-col items-center justify-center gap-4"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Close Button */}
+              <button
+                onClick={() => setZoomImage(null)}
+                className="absolute top-0 right-0 sm:-top-12 sm:-right-0 p-3 rounded-full bg-secondary/80 hover:bg-secondary text-foreground backdrop-blur-md transition-all z-[110]"
+                aria-label="Close image"
+              >
+                <X className="w-5 h-5 sm:w-6 sm:h-6" />
+              </button>
+
+              <div className="relative w-full flex-1 min-h-0 bg-transparent rounded-lg overflow-hidden">
+                {zoomImage?.src && (
+                  <Image
+                    src={zoomImage.src}
+                    alt={zoomImage.alt || ""}
+                    fill
+                    className="object-contain"
+                    priority
+                    quality={100}
+                  />
+                )}
+              </div>
+
+              {zoomImage?.alt && (
+                <motion.p
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2 }}
+                  className="text-foreground/80 text-sm sm:text-base font-medium text-center bg-secondary/50 px-6 py-2 rounded-full backdrop-blur-md"
+                >
+                  {zoomImage.alt}
+                </motion.p>
+              )}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.div>
   );
 }

@@ -34,17 +34,17 @@ export function GuestbookUserInfo({
       <CardHeader className="flex flex-col w-full">
         <div className="bg-primary-foreground rounded p-4">
           <div className="flex items-center justify-between mb-3">
-            <h3 className="text-lg font-semibold flex items-center gap-2">
-              <PersonIcon className="w-5 h-5" />
+            <h2 className="text-lg font-semibold flex items-center gap-2">
+              <PersonIcon className="w-5 h-5" aria-hidden="true" />
               Welcome back!
-            </h3>
+            </h2>
             <Button
               size="sm"
               variant={"ghost"}
               className="flex items-center gap-2"
               onClick={onLogOut}
             >
-              <ExitIcon className="w-4 h-4" />
+              <ExitIcon className="w-4 h-4" aria-hidden="true" />
               Logout
             </Button>
           </div>
@@ -64,7 +64,7 @@ export function GuestbookUserInfo({
               <div className="flex items-center gap-2">
                 <Image
                   src={currentUser.photoURL}
-                  alt="Profile"
+                  alt={`Profile of ${currentUser.displayName}`}
                   width={32}
                   height={32}
                   className="w-8 h-8 rounded-full"
@@ -81,6 +81,7 @@ export function GuestbookUserInfo({
           className="flex justify-between gap-4 flex-col md:flex-row mt-4"
         >
           <Input
+            id="guestbook-message"
             type="text"
             value={message}
             onChange={(e) => onMessageChange(e.target.value)}
@@ -88,9 +89,10 @@ export function GuestbookUserInfo({
             placeholder="Leave a message..."
             required
             disabled={isSubmitting}
+            aria-label="Your message for the guestbook"
           />
           <Button type="submit" disabled={isSubmitting}>
-            {isSubmitting && <Loader className="mr-2 h-4 w-4 animate-spin" />}
+            {isSubmitting && <Loader className="mr-2 h-4 w-4 animate-spin" aria-hidden="true" />}
             Send
           </Button>
         </form>

@@ -118,20 +118,18 @@ export default function GitHubProjects({ repositories }: GitHubProjectsProps) {
     <div className="space-y-8">
       {/* Repository Grid */}
       <div
-        className={`grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 transition-all duration-300 ${
-          isVisible && hasMounted
+        className={`grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 transition-all duration-300 ${(isVisible && hasMounted) || !hasMounted
             ? "opacity-100 translate-y-0"
             : "opacity-0 translate-y-5"
-        }`}
+          }`}
       >
         {currentRepositories.map((repo, index) => (
           <div
             key={repo.name}
-            className={`transition-all duration-100 delay-${index * 50} ${
-              isVisible && hasMounted
+            className={`transition-all duration-300 delay-${index * 50} ${(isVisible && hasMounted) || !hasMounted
                 ? "opacity-100 translate-y-0"
                 : "opacity-0 translate-y-5"
-            }`}
+              }`}
           >
             <Card className="group h-full flex flex-col hover:shadow-lg hover:shadow-black/5 transition-all duration-300 hover:-translate-y-1">
               <CardHeader className="pb-3">
@@ -150,7 +148,7 @@ export default function GitHubProjects({ repositories }: GitHubProjectsProps) {
                       {repo.description || "No description available"}
                     </p>
                   </div>
-                  <GitHubLogoIcon className="h-5 w-5 text-muted-foreground group-hover:text-foreground transition-colors duration-200 flex-shrink-0" />
+                  <GitHubLogoIcon className="h-5 w-5 text-muted-foreground group-hover:text-foreground transition-colors duration-200 flex-shrink-0" aria-hidden="true" />
                 </div>
               </CardHeader>
 
@@ -170,13 +168,13 @@ export default function GitHubProjects({ repositories }: GitHubProjectsProps) {
                   )}
                   <div className="flex items-center gap-3">
                     <div className="flex items-center gap-1 text-muted-foreground">
-                      <StarIcon className="h-3 w-3" />
+                      <StarIcon className="h-3 w-3" aria-hidden="true" />
                       <span className="font-medium">
                         {repo.stargazers_count}
                       </span>
                     </div>
                     <div className="flex items-center gap-1 text-muted-foreground">
-                      <GitFork className="h-3 w-3" />
+                      <GitFork className="h-3 w-3" aria-hidden="true" />
                       <span className="font-medium">{repo.forks_count}</span>
                     </div>
                   </div>
@@ -186,7 +184,7 @@ export default function GitHubProjects({ repositories }: GitHubProjectsProps) {
               <CardFooter className="pt-0 pb-4">
                 <div className="flex items-center justify-between w-full">
                   <div className="flex items-center gap-1 text-xs text-muted-foreground">
-                    <CalendarIcon className="h-3 w-3" />
+                    <CalendarIcon className="h-3 w-3" aria-hidden="true" />
                     <span>Created {formatDate(repo.created_at)}</span>
                   </div>
                   <Link href={repo.html_url} target="_blank">
@@ -235,9 +233,9 @@ export default function GitHubProjects({ repositories }: GitHubProjectsProps) {
               onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage === 1}
               className="h-9 px-3 gap-1 hover:bg-primary/10 hover:text-primary disabled:opacity-70"
-              aria-label={`Go to previous page (page ${currentPage - 1})`}
+              aria-label={`Go to previous page, page ${currentPage - 1} of ${totalPages}`}
             >
-              <ChevronLeftIcon className="h-4 w-4" />
+              <ChevronLeftIcon className="h-4 w-4" aria-hidden="true" />
               <span className="hidden sm:inline">Previous</span>
             </Button>
 
@@ -247,7 +245,7 @@ export default function GitHubProjects({ repositories }: GitHubProjectsProps) {
                 if (pageNum === "...") {
                   return (
                     <div key={`ellipsis-${index}`} className="px-2">
-                      <DotsHorizontalIcon className="h-4 w-4 text-muted-foreground" />
+                      <DotsHorizontalIcon className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
                     </div>
                   );
                 }
@@ -259,12 +257,11 @@ export default function GitHubProjects({ repositories }: GitHubProjectsProps) {
                     variant={isActive ? "default" : "ghost"}
                     size="sm"
                     onClick={() => handlePageChange(pageNum as number)}
-                    className={`h-9 w-9 p-0 ${
-                      isActive
+                    className={`h-9 w-9 p-0 ${isActive
                         ? "bg-primary text-primary-foreground shadow-sm"
                         : "hover:bg-primary/10 hover:text-primary"
-                    }`}
-                    aria-label={`Go to page ${pageNum}`}
+                      }`}
+                    aria-label={`Go to page ${pageNum} of ${totalPages}`}
                     aria-current={isActive ? "page" : undefined}
                   >
                     {pageNum}
@@ -280,10 +277,10 @@ export default function GitHubProjects({ repositories }: GitHubProjectsProps) {
               onClick={() => handlePageChange(currentPage + 1)}
               disabled={currentPage === totalPages}
               className="h-9 px-3 gap-1 hover:bg-primary/10 hover:text-primary disabled:opacity-70"
-              aria-label={`Go to next page (page ${currentPage + 1})`}
+              aria-label={`Go to next page, page ${currentPage + 1} of ${totalPages}`}
             >
               <span className="hidden sm:inline">Next</span>
-              <ChevronRightIcon className="h-4 w-4" />
+              <ChevronRightIcon className="h-4 w-4" aria-hidden="true" />
             </Button>
           </div>
         </div>
@@ -296,11 +293,10 @@ export default function GitHubProjects({ repositories }: GitHubProjectsProps) {
             {Array.from({ length: totalPages }, (_, i) => (
               <div
                 key={i + 1}
-                className={`h-2 w-2 rounded-full transition-all duration-200 ${
-                  currentPage === i + 1
+                className={`h-2 w-2 rounded-full transition-all duration-200 ${currentPage === i + 1
                     ? "bg-primary w-6"
                     : "bg-muted-foreground/30"
-                }`}
+                  }`}
               />
             ))}
           </div>

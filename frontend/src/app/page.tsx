@@ -1,22 +1,11 @@
-import dynamic from "next/dynamic";
 import React from "react";
 import { data } from "../lib/data";
 import { Metadata } from "next";
 import { PERSONAL_KEYWORDS, siteUrl, SEO_DESCRIPTION } from "../lib/metadata";
 import { generateAlternates, generateOpenGraph, generateTwitter } from "../lib/seo";
-import EducationSkeleton from "../components/EducationSkeleton";
-import ExperienceSkeleton from "../components/ExperienceSkeleton";
-import BioSkeleton from "../components/BioSkeleton";
-
-const Bio = dynamic(() => import("../components/Bio"), {
-  loading: () => <BioSkeleton />,
-});
-const Experience = dynamic(() => import("../components/Experience"), {
-  loading: () => <ExperienceSkeleton />,
-});
-const Education = dynamic(() => import("../components/Education"), {
-  loading: () => <EducationSkeleton />,
-});
+import Bio from "../components/Bio";
+import Experience from "../components/Experience";
+import Education from "../components/Education";
 
 /**
  * Homepage metadata with proper canonical URL
@@ -120,7 +109,7 @@ export default function Home() {
           >
             <h2
               id="experience-heading"
-              className="font-semibold text-2xl md:text-3xl text-right mb-2"
+              className="font-semibold text-2xl md:text-3xl text-right mb-6 text-foreground"
             >
               Experience
             </h2>
@@ -129,13 +118,13 @@ export default function Home() {
             </div>
           </div>
 
-          <div id="education" role="region" aria-labelledby="education-heading">
-            <h3
+          <div id="education" role="region" aria-labelledby="education-heading" className="mb-12 md:mb-24">
+            <h2
               id="education-heading"
-              className="font-semibold text-2xl md:text-3xl text-right mb-2"
+              className="font-semibold text-2xl md:text-3xl text-right mb-6 text-foreground"
             >
               Education
-            </h3>
+            </h2>
             <div>
               <Education data={data} />
             </div>

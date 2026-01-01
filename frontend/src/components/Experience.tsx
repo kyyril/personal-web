@@ -14,21 +14,23 @@ function Experience({ data }: { data: Data }) {
           key={ex.id}
           className="grid gap-1 relative"
         >
-          <div className="aspect-square w-3 bg-gray-900 rounded-full absolute left-0 translate-x-[-29.5px] z-10 top-2 dark:bg-gray-50" />
+          <div className="aspect-square w-3 bg-muted-foreground/30 rounded-full absolute left-0 translate-x-[-29.5px] z-10 top-2" />
 
-          <h3 className="text-xl font-semibold">{ex.job}</h3>
+          <h3 className="text-xl font-semibold text-foreground">{ex.job}</h3>
           <div className="flex flex-row gap-x-2">
-            <h4>
-              {ex.institution} - <span className="text-sm">{ex.status}</span>
+            <h4 className="text-foreground/90 font-medium">
+              {ex.institution} <span className="text-muted-foreground mx-1">•</span> <span className="text-sm font-normal text-muted-foreground">{ex.status}</span>
             </h4>
           </div>
-          <p>
-            {ex.location} - {ex.working}
+          <p className="text-muted-foreground text-sm">
+            {ex.location} <span className="mx-1">•</span> {ex.working}
           </p>
-          <div className="text-sm">
+          <div className="text-sm text-muted-foreground">
             {ex.startDate} - {ex.endDate}
           </div>
-          <p className="mt-2 text-sm opacity-70">{ex.description}</p>
+          <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
+            {ex.description}
+          </p>
 
           {/* Technologies Section */}
           <div className="mt-3">
@@ -38,7 +40,7 @@ function Experience({ data }: { data: Data }) {
                 .map((tech, index) => (
                   <span
                     key={tech}
-                    className="px-2 py-1 text-xs rounded-full text-custom"
+                    className="px-2 py-1 text-xs rounded-full text-custom font-medium"
                   >
                     {tech}
                   </span>
@@ -53,9 +55,8 @@ function Experience({ data }: { data: Data }) {
                       setExpandedId(expandedId === ex.id ? null : ex.id)
                     }
                     className="px-2 py-1 h-7 text-xs group"
-                    aria-label={`${
-                      expandedId === ex.id ? "Show less" : "Show more"
-                    } technologies for ${ex.job} position`}
+                    aria-label={`${expandedId === ex.id ? "Show less" : "Show more"
+                      } technologies for ${ex.job} position`}
                     aria-expanded={expandedId === ex.id}
                   >
                     {expandedId === ex.id ? (

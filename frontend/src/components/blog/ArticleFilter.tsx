@@ -139,10 +139,12 @@ export function ArticleFilter({
     <Card className="mb-6">
       <CardContent className="p-6">
         {/* Search Bar */}
-        <div className="flex items-center gap-4 mb-4">
-          <div className="relative flex-1">
-            <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+        <div className="flex flex-col sm:flex-row items-center gap-4 mb-4">
+          <div className="relative flex-1 w-full">
+            <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" aria-hidden="true" />
+            <label htmlFor="search-articles" className="sr-only">Search articles</label>
             <Input
+              id="search-articles"
               placeholder="Search articles..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
@@ -150,26 +152,28 @@ export function ArticleFilter({
             />
           </div>
 
-          <Collapsible open={showAdvanced} onOpenChange={setShowAdvanced}>
-            <CollapsibleTrigger asChild>
-              <Button variant="outline" className="gap-2">
-                <Filter className="h-4 w-4" />
-                Advanced
-                {activeFiltersCount > 0 && (
-                  <Badge variant="secondary" className="ml-1">
-                    {activeFiltersCount}
-                  </Badge>
-                )}
-              </Button>
-            </CollapsibleTrigger>
-          </Collapsible>
+          <div className="flex items-center gap-2 w-full sm:w-auto">
+            <Collapsible open={showAdvanced} onOpenChange={setShowAdvanced}>
+              <CollapsibleTrigger asChild>
+                <Button variant="outline" className="gap-2 flex-1 sm:flex-initial" aria-expanded={showAdvanced} aria-controls="advanced-filters">
+                  <Filter className="h-4 w-4" aria-hidden="true" />
+                  Filter
+                  {activeFiltersCount > 0 && (
+                    <Badge variant="secondary" className="ml-1">
+                      {activeFiltersCount}
+                    </Badge>
+                  )}
+                </Button>
+              </CollapsibleTrigger>
+            </Collapsible>
 
-          {activeFiltersCount > 0 && (
-            <Button variant="ghost" onClick={clearFilters} className="gap-2">
-              <X className="h-4 w-4" />
-              Clear
-            </Button>
-          )}
+            {activeFiltersCount > 0 && (
+              <Button variant="ghost" onClick={clearFilters} className="gap-2 flex-1 sm:flex-initial" aria-label="Clear all active filters">
+                <X className="h-4 w-4" aria-hidden="true" />
+                Clear
+              </Button>
+            )}
+          </div>
         </div>
 
         {/* Advanced Filters */}
@@ -178,15 +182,15 @@ export function ArticleFilter({
             <Separator className="mb-4" />
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {/* Category Filter */}
-              <div>
-                <label className="text-sm font-medium mb-2 block">
+              <div id="advanced-filters">
+                <label htmlFor="category-select" className="text-sm font-medium mb-2 block">
                   Category
                 </label>
                 <Select
                   value={selectedCategory}
                   onValueChange={setSelectedCategory}
                 >
-                  <SelectTrigger>
+                  <SelectTrigger id="category-select" aria-label={`Select category, current: ${selectedCategory}`}>
                     <SelectValue placeholder="All Categories" />
                   </SelectTrigger>
                   <SelectContent>
@@ -202,7 +206,7 @@ export function ArticleFilter({
 
               {/* Sort Options */}
               <div>
-                <label className="text-sm font-medium mb-2 block">
+                <label htmlFor="sort-select" className="text-sm font-medium mb-2 block">
                   Sort By
                 </label>
                 <div className="flex gap-2">
@@ -210,7 +214,7 @@ export function ArticleFilter({
                     value={sortBy}
                     onValueChange={(value: any) => setSortBy(value)}
                   >
-                    <SelectTrigger className="flex-1">
+                    <SelectTrigger id="sort-select" className="flex-1" aria-label={`Sort by ${sortBy}`}>
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
@@ -225,11 +229,12 @@ export function ArticleFilter({
                     onClick={() =>
                       setSortOrder((prev) => (prev === "asc" ? "desc" : "asc"))
                     }
+                    aria-label={`Toggle sort order, current: ${sortOrder === "desc" ? "Descending" : "Ascending"}`}
                   >
                     {sortOrder === "desc" ? (
-                      <SortDesc className="h-4 w-4" />
+                      <SortDesc className="h-4 w-4" aria-hidden="true" />
                     ) : (
-                      <SortAsc className="h-4 w-4" />
+                      <SortAsc className="h-4 w-4" aria-hidden="true" />
                     )}
                   </Button>
                 </div>
@@ -247,10 +252,13 @@ export function ArticleFilter({
                       variant="secondary"
                       className="cursor-pointer gap-1"
                       onClick={() => handleTagToggle(tag)}
+                      aria-label={`Remove tag filter: ${tag}`}
+                      role="button"
+                      tabIndex={0}
                     >
-                      <Tag className="h-3 w-3" />
+                      <Tag className="h-3 w-3" aria-hidden="true" />
                       {tag}
-                      <X className="h-3 w-3" />
+                      <X className="h-3 w-3" aria-hidden="true" />
                     </Badge>
                   ))}
                 </div>
@@ -305,14 +313,14 @@ export function SearchResultsCount({
 }) {
   if (!isFiltered) {
     return (
-      <p className="text-sm text-muted-foreground mb-4">
+      <p className="text-sm text-muted-foreground font-medium mb-6">
         Showing all {total} articles
       </p>
     );
   }
 
   return (
-    <p className="text-sm text-muted-foreground mb-4">
+    <p className="text-sm text-muted-foreground font-medium mb-6">
       Showing {filtered} of {total} articles
     </p>
   );

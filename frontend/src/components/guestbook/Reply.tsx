@@ -61,14 +61,14 @@ export function Reply({
             <div className="w-8 h-8 md:w-10 md:h-10 relative">
               <Image
                 src={reply.author.avatarUrl}
-                alt={reply.author.username}
+                alt={`Avatar of ${reply.author.username}`}
                 fill
                 className="rounded-full object-cover"
               />
             </div>
           ) : (
             <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-secondary flex items-center justify-center">
-              <PersonIcon className="w-4 h-4 md:w-5 md:h-5" />
+              <PersonIcon className="w-4 h-4 md:w-5 md:h-5" aria-hidden="true" />
             </div>
           )}
         </div>
@@ -101,9 +101,9 @@ export function Reply({
                   aria-label="Edit reply"
                 >
                   {isEditingReply && editingReply === reply.id ? (
-                    <Loader className="w-3 h-3 animate-spin" />
+                    <Loader className="w-3 h-3 animate-spin" aria-hidden="true" />
                   ) : (
-                    <Pencil1Icon className="w-3 h-3 md:w-4 md:h-4" />
+                    <Pencil1Icon className="w-3 h-3 md:w-4 md:h-4" aria-hidden="true" />
                   )}
                 </Button>
                 <Button
@@ -115,9 +115,9 @@ export function Reply({
                   aria-label="Delete reply"
                 >
                   {isDeletingReply ? (
-                    <Loader className="w-3 h-3 animate-spin" />
+                    <Loader className="w-3 h-3 animate-spin" aria-hidden="true" />
                   ) : (
-                    <TrashIcon className="w-3 h-3 md:w-4 md:h-4" />
+                    <TrashIcon className="w-3 h-3 md:w-4 md:h-4" aria-hidden="true" />
                   )}
                 </Button>
               </div>
@@ -128,11 +128,13 @@ export function Reply({
           {editingReply === reply.id ? (
             <div className="mt-3 space-y-2">
               <Input
+                id={`edit-reply-${reply.id}`}
                 value={editContent}
                 onChange={(e) => onEditContentChange(e.target.value)}
                 maxLength={300}
                 className="w-full"
                 disabled={isEditingReply}
+                aria-label="Edit your reply"
               />
               <div className="flex gap-2">
                 <Button
@@ -141,10 +143,10 @@ export function Reply({
                   disabled={isEditingReply}
                 >
                   {isEditingReply ? (
-                    <Loader className="mr-2 h-4 w-4 animate-spin" />
+                    <Loader className="mr-2 h-4 w-4 animate-spin" aria-hidden="true" />
                   ) : (
                     <>
-                      <CheckIcon className="w-4 h-4 mr-1" />
+                      <CheckIcon className="w-4 h-4 mr-1" aria-hidden="true" />
                       Save
                     </>
                   )}
@@ -155,7 +157,7 @@ export function Reply({
                   onClick={() => onCancelEdit(reply.id)}
                   disabled={isEditingReply}
                 >
-                  <Cross2Icon className="w-4 h-4 mr-1" />
+                  <Cross2Icon className="w-4 h-4 mr-1" aria-hidden="true" />
                   Cancel
                 </Button>
               </div>

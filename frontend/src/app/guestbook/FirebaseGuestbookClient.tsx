@@ -181,8 +181,9 @@ export default function FirebaseGuestbookClient() {
                 <Button onClick={signIn} className="flex items-center gap-2">
                   <img
                     src="/icon/google-icon.svg"
-                    alt="Google Icon"
+                    alt=""
                     className="w-4 h-4"
+                    aria-hidden="true"
                   />
                   Sign in
                 </Button>
@@ -193,9 +194,9 @@ export default function FirebaseGuestbookClient() {
       )}
 
       <div className="space-y-4">
-        <h3 className="text-xl font-semibold">
+        <h2 className="text-xl font-semibold">
           Messages ({entries ? entries.length : 0})
-        </h3>
+        </h2>
         {isLoading || error ? (
           <>
             <LoadingMessage />

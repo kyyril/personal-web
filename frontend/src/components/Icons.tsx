@@ -1,7 +1,7 @@
 import React from "react";
 
 const socialIconClasses =
-  "w-5 h-5 text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white transition-colors duration-300";
+  "w-5 h-5 text-muted-foreground group-hover:text-foreground transition-colors duration-300";
 
 export const GithubIcon: React.FC = () => (
   <svg
@@ -9,6 +9,7 @@ export const GithubIcon: React.FC = () => (
     viewBox="0 0 24 24"
     fill="currentColor"
     className={socialIconClasses}
+    aria-hidden="true"
   >
     <path
       fillRule="evenodd"
@@ -24,6 +25,7 @@ export const LinkedinIcon: React.FC = () => (
     viewBox="0 0 24 24"
     fill="currentColor"
     className={socialIconClasses}
+    aria-hidden="true"
   >
     <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
   </svg>
@@ -35,6 +37,7 @@ export const DocumentIcon: React.FC = () => (
     viewBox="0 0 24 24"
     fill="currentColor"
     className={socialIconClasses}
+    aria-hidden="true"
   >
     <path
       fillRule="evenodd"
@@ -52,6 +55,7 @@ export const SunIcon: React.FC<{ className?: string }> = ({ className }) => (
     viewBox="0 0 24 24"
     fill="currentColor"
     className={className}
+    aria-hidden="true"
   >
     <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.106a.75.75 0 010 1.06l-1.591 1.59a.75.75 0 11-1.06-1.06l1.59-1.59a.75.75 0 011.06 0zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.894 17.894a.75.75 0 01-1.06 0l-1.59-1.591a.75.75 0 111.06-1.06l1.59 1.59a.75.75 0 010 1.06zM12 18.75a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0v-2.25a.75.75 0 01.75-.75zM4.106 17.894a.75.75 0 010-1.06l1.59-1.59a.75.75 0 111.06 1.06l-1.59 1.59a.75.75 0 01-1.06 0zM2.25 12a.75.75 0 01.75-.75h2.25a.75.75 0 010 1.5H3a.75.75 0 01-.75-.75zM6.106 6.106a.75.75 0 011.06 0l1.591 1.59a.75.75 0 01-1.06 1.06l-1.59-1.59a.75.75 0 010-1.06z" />
   </svg>
@@ -63,6 +67,7 @@ export const MoonIcon: React.FC<{ className?: string }> = ({ className }) => (
     viewBox="0 0 24 24"
     fill="currentColor"
     className={className}
+    aria-hidden="true"
   >
     <path
       fillRule="evenodd"

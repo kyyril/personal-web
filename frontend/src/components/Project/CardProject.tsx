@@ -33,11 +33,10 @@ export default function CardProject({ project, index, isVisible = false, hasMoun
   const [imageLoading, setImageLoading] = useState(true);
 
   return (
-    <div className={`transition-all duration-100 delay-${index * 50} ${
-      isVisible && hasMounted
-        ? "opacity-100 translate-y-0"
-        : "opacity-0 translate-y-5"
-    }`}>
+    <div className={`transition-all duration-300 delay-${index * 50} ${(isVisible && hasMounted) || !hasMounted
+      ? "opacity-100 translate-y-0"
+      : "opacity-0 translate-y-5"
+      }`}>
       <Card className="flex flex-col lg:flex-row hover:shadow-lg hover:shadow-black/5 transition-all duration-300 hover:-translate-y-0.5">
         <div className="w-full lg:w-1/3 flex justify-center items-center relative group">
           {imageLoading && (
@@ -49,11 +48,11 @@ export default function CardProject({ project, index, isVisible = false, hasMoun
             width={300}
             height={156}
             quality={65}
-            className={`rounded object-cover w-full h-full transition-opacity duration-500 ${
-              imageLoading ? "opacity-0" : "opacity-100"
-            }`}
+            className={`rounded object-cover w-full h-full transition-opacity duration-500 ${imageLoading && hasMounted ? "opacity-0" : "opacity-100"
+              }`}
             loading={index === 0 ? "eager" : "lazy"}
             fetchPriority={index === 0 ? "high" : "low"}
+            priority={index === 0}
             sizes="(max-width: 768px) 100vw, (max-width: 1024px) 33vw, 300px"
             onLoad={() => setImageLoading(false)}
           />
@@ -81,7 +80,7 @@ export default function CardProject({ project, index, isVisible = false, hasMoun
                   size="sm"
                   className="h-8 px-3 text-xs hover:bg-custom/10 hover:text-custom"
                 >
-                  <GlobeIcon className="h-3 w-3 mr-0.5" />
+                  <GlobeIcon className="h-3 w-3 mr-0.5" aria-hidden="true" />
                   Visit
                 </Button>
               </Link>
@@ -94,7 +93,7 @@ export default function CardProject({ project, index, isVisible = false, hasMoun
                   size="sm"
                   className="h-8 px-3 text-xs hover:text-custom"
                 >
-                  <GitHubLogoIcon className="h-3 w-3 mr-0.5" />
+                  <GitHubLogoIcon className="h-3 w-3 mr-0.5" aria-hidden="true" />
                   Repo
                 </Button>
               </Link>

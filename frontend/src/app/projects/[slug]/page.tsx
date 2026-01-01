@@ -97,7 +97,7 @@ export default async function Detailproject({
       <Breadcrumb items={breadcrumbItems} className="mb-4" />
       <div className="border-none shadow-none">
         {project && project.image.length > 0 ? (
-          <div className="animate-in fade-in slide-in-from-bottom-4 duration-700">
+          <div className="animate-in fade-in slide-in-from-bottom-4 duration-700 aspect-video w-full overflow-hidden rounded-xl bg-muted/20">
             <ProjectCarousel images={project.image} />
           </div>
         ) : (
@@ -150,13 +150,13 @@ export default async function Detailproject({
             {project.live_url ? (
               <Link target="_blank" href={project.live_url} prefetch={false}>
                 <Button size="sm" className="hover:text-custom ">
-                  <GlobeIcon className="h-3 w-3 mr-0.5" />
+                  <GlobeIcon className="h-3 w-3 mr-0.5" aria-hidden="true" />
                   Visit
                 </Button>
               </Link>
             ) : (
               <Button size="sm" disabled className="">
-                <GlobeIcon className="h-3 w-3 mr-0.5" />
+                <GlobeIcon className="h-3 w-3 mr-0.5" aria-hidden="true" />
                 Visit (Unavailable)
               </Button>
             )}
@@ -167,13 +167,13 @@ export default async function Detailproject({
                 prefetch={false}
               >
                 <Button size="sm" className="hover:text-cus " variant="ghost">
-                  <GitHubLogoIcon className="h-3 w-3 mr-0.5" />
+                  <GitHubLogoIcon className="h-3 w-3 mr-0.5" aria-hidden="true" />
                   Repo
                 </Button>
               </Link>
             ) : (
               <Button size="sm" disabled className="" variant="ghost">
-                <GitHubLogoIcon className="h-3 w-3 mr-0.5" />
+                <GitHubLogoIcon className="h-3 w-3 mr-0.5" aria-hidden="true" />
                 Repo (Unavailable)
               </Button>
             )}

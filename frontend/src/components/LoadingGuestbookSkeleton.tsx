@@ -7,25 +7,26 @@ export function GuestBookLoadingProfile() {
       <CardHeader className="flex flex-col w-full">
         <div className="bg-primary-foreground rounded p-4">
           <div className="flex items-center justify-between mb-3">
-            <h3 className="text-lg font-semibold flex items-center gap-2">
-              <div className="w-5 h-5 bg-muted animate-pulse rounded" />
-              <div className="h-5 w-32 bg-muted animate-pulse rounded" />
-            </h3>
-            <div className="h-9 w-24 bg-muted animate-pulse rounded" />
+            <h2 className="text-lg font-semibold flex items-center gap-2">
+              <span className="sr-only">Loading profile...</span>
+              <div className="w-5 h-5 bg-muted animate-pulse rounded" aria-hidden="true" />
+              <div className="h-5 w-32 bg-muted animate-pulse rounded" aria-hidden="true" />
+            </h2>
+            <div className="h-9 w-24 bg-muted animate-pulse rounded" aria-hidden="true" />
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2" aria-hidden="true">
               <div className="h-4 w-16 bg-muted animate-pulse rounded" />
               <div className="h-4 w-32 bg-muted animate-pulse rounded" />
             </div>
 
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2" aria-hidden="true">
               <div className="h-4 w-16 bg-muted animate-pulse rounded" />
               <div className="h-4 w-48 bg-muted animate-pulse rounded" />
             </div>
 
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2" aria-hidden="true">
               <div className="w-8 h-8 bg-muted animate-pulse rounded-full" />
               <div className="h-4 w-28 bg-muted animate-pulse rounded" />
             </div>
@@ -33,7 +34,7 @@ export function GuestBookLoadingProfile() {
         </div>
 
         {/* Message Form Skeleton */}
-        <div className="flex justify-between gap-4 flex-col md:flex-row mt-4">
+        <div className="flex justify-between gap-4 flex-col md:flex-row mt-4" aria-hidden="true">
           <div className="h-10 flex-1 bg-muted animate-pulse rounded" />
           <div className="h-10 w-20 bg-muted animate-pulse rounded" />
         </div>
@@ -45,7 +46,7 @@ export function LoadingMessage() {
   return (
     <Card>
       <CardHeader className="p-4 md:p-6">
-        <div className="flex gap-3 md:gap-4">
+        <div className="flex gap-3 md:gap-4" aria-hidden="true">
           {/* Avatar Skeleton */}
           <div className="flex-shrink-0">
             <Skeleton className="w-10 h-10 md:w-12 md:h-12 rounded-full" />
@@ -81,6 +82,7 @@ export function LoadingMessage() {
             </div>
           </div>
         </div>
+        <span className="sr-only">Loading message content...</span>
       </CardHeader>
     </Card>
   );

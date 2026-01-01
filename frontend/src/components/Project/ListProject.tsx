@@ -123,43 +123,57 @@ export default function ListProject({ projects }: ListProjectProps) {
   return (
     <div className="flex flex-col justify-center">
       {/* Filter Controls */}
-      <div className="flex gap-4 mb-4 items-center">
-        <Select onValueChange={setCategoryFilter} value={categoryFilter}>
-          <SelectTrigger className="truncate ">
-            Category: {categoryFilter}
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="All">All</SelectItem>
-            <SelectItem value="Web">Web</SelectItem>
-            <SelectItem value="Mobile">Mobile</SelectItem>
-          </SelectContent>
-        </Select>
+      <div className="flex flex-wrap gap-4 mb-6 items-center">
+        <div className="flex items-center gap-2">
+          <label htmlFor="category-select" className="text-sm font-medium sr-only">Category</label>
+          <Select onValueChange={setCategoryFilter} value={categoryFilter}>
+            <SelectTrigger id="category-select" className="w-[180px] truncate" aria-label={`Filter by category, currently ${categoryFilter}`}>
+              Category: {categoryFilter}
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="All">All Categories</SelectItem>
+              <SelectItem value="Web">Web</SelectItem>
+              <SelectItem value="Mobile">Mobile</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
 
-        <Select onValueChange={setTypeFilter} value={typeFilter}>
-          <SelectTrigger className="truncate">Type: {typeFilter}</SelectTrigger>
-          <SelectContent>
-            <SelectItem value="All">All</SelectItem>
-            <SelectItem value="Frontend">Frontend</SelectItem>
-            <SelectItem value="Backend">Backend</SelectItem>
-            <SelectItem value="Fullstack">Fullstack</SelectItem>
-          </SelectContent>
-        </Select>
+        <div className="flex items-center gap-2">
+          <label htmlFor="type-select" className="text-sm font-medium sr-only">Type</label>
+          <Select onValueChange={setTypeFilter} value={typeFilter}>
+            <SelectTrigger id="type-select" className="w-[180px] truncate" aria-label={`Filter by type, currently ${typeFilter}`}>
+              Type: {typeFilter}
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="All">All Types</SelectItem>
+              <SelectItem value="Frontend">Frontend</SelectItem>
+              <SelectItem value="Backend">Backend</SelectItem>
+              <SelectItem value="Fullstack">Fullstack</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
 
-        <Button variant="ghost" onClick={clearFilters}>
-          Clear
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={clearFilters}
+          className="h-9"
+          aria-label="Clear all filters"
+        >
+          Clear Filters
         </Button>
       </div>
 
       {/* Project List */}
       <ul className="grid grid-cols-1 gap-4">
-        {hasMounted && paginatedProjects.length > 0 ? (
+        {(hasMounted || typeof window === "undefined") && paginatedProjects.length > 0 ? (
           <>
             {paginatedProjects.map((project, index) => (
               <li key={project.id}>
                 <CardProject
                   project={project}
                   index={index}
-                  isVisible={visibleItems.has(index)}
+                  isVisible={visibleItems.has(index) || !hasMounted}
                   hasMounted={hasMounted}
                 />
               </li>
@@ -204,11 +218,10 @@ export default function ListProject({ projects }: ListProjectProps) {
               onClick={goToPreviousPage}
               disabled={currentPage === 1}
               className="h-9 px-3 gap-1 hover:bg-primary/10 hover:text-primary disabled:opacity-70"
-              aria-label={`Go to previous page, page ${
-                currentPage - 1
-              } of ${totalPages}`}
+              aria-label={`Go to previous page, page ${currentPage - 1
+                } of ${totalPages}`}
             >
-              <ChevronLeftIcon className="h-4 w-4" />
+              <ChevronLeftIcon className="h-4 w-4" aria-hidden="true" />
               <span className="hidden sm:inline">Previous</span>
             </Button>
 
@@ -218,7 +231,7 @@ export default function ListProject({ projects }: ListProjectProps) {
                 if (pageNum === "...") {
                   return (
                     <div key={`ellipsis-${index}`} className="px-2">
-                      <DotsHorizontalIcon className="h-4 w-4 text-muted-foreground" />
+                      <DotsHorizontalIcon className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
                     </div>
                   );
                 }
@@ -230,11 +243,10 @@ export default function ListProject({ projects }: ListProjectProps) {
                     variant={isActive ? "default" : "ghost"}
                     size="sm"
                     onClick={() => setCurrentPage(pageNum as number)}
-                    className={`h-9 w-9 p-0 ${
-                      isActive
+                    className={`h-9 w-9 p-0 ${isActive
                         ? "bg-primary text-primary-foreground shadow-sm"
                         : "hover:bg-primary/10 hover:text-primary"
-                    }`}
+                      }`}
                     aria-label={`Go to page ${pageNum} of ${totalPages}`}
                     aria-current={isActive ? "page" : undefined}
                   >
@@ -251,12 +263,11 @@ export default function ListProject({ projects }: ListProjectProps) {
               onClick={goToNextPage}
               disabled={currentPage === totalPages}
               className="h-9 px-3 gap-1 hover:bg-primary/10 hover:text-primary disabled:opacity-70"
-              aria-label={`Go to next page, page ${
-                currentPage + 1
-              } of ${totalPages}`}
+              aria-label={`Go to next page, page ${currentPage + 1
+                } of ${totalPages}`}
             >
               <span className="hidden sm:inline">Next</span>
-              <ChevronRightIcon className="h-4 w-4" />
+              <ChevronRightIcon className="h-4 w-4" aria-hidden="true" />
             </Button>
           </div>
         </div>

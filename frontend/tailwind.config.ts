@@ -9,6 +9,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      screens: {
+        xs: "475px",
+      },
       backdropBlur: {
         sm: "4px",
         md: "8px",

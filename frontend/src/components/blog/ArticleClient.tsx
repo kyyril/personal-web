@@ -123,10 +123,10 @@ export function ArticleClient({ post, relatedPosts }: ArticleClientProps) {
       <ReadingProgressBar targetRef={commentsSectionRef} />
 
       {/* Breadcrumb Navigation and Back Button */}
-      <div className="container mx-auto px-4 py-4 sm:py-6 lg:py-8 max-w-6xl pt-12">
-        <div className="flex flex-col space-y-3 sm:space-y-0 sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-4 mb-6 lg:mb-8">
+      <div className="container mx-auto px-4 py-4 sm:py-6 lg:py-8 max-w-6xl pt-8 sm:pt-12">
+        <div className="flex flex-col space-y-8 sm:space-y-0 sm:flex-row sm:items-center sm:justify-between mb-6 lg:mb-8">
           {/* Breadcrumb Navigation */}
-          <div className="order-2 sm:order-1">
+          <div className="order-2 sm:order-1 min-w-0">
             <Breadcrumb
               items={[
                 { label: "Home", href: "/" },
@@ -139,21 +139,17 @@ export function ArticleClient({ post, relatedPosts }: ArticleClientProps) {
                 },
                 { label: post.frontmatter.title },
               ]}
-              className="text-xs sm:text-sm"
             />
           </div>
 
           {/* Back Button */}
-          <div className="order-1 sm:order-2">
+          <div className="order-1 sm:order-2 self-start sm:self-auto">
             <Link
               href="/articles"
-              className="inline-flex items-center gap-1 sm:gap-2 text-xs sm:text-sm text-muted-foreground hover:text-foreground transition-colors"
+              className="group inline-flex items-center gap-1.5 text-xs sm:text-sm text-muted-foreground hover:text-foreground transition-all duration-200"
             >
-              <ArrowLeft className="h-3 w-3 sm:h-4 sm:w-4" />
-              <span className="hidden xs:inline sm:inline">
-                Back to Articles
-              </span>
-              <span className="xs:hidden">Back</span>
+              <ArrowLeft className="h-3.5 w-3.5 sm:h-4 sm:w-4 transition-transform group-hover:-translate-x-1" />
+              <span className="font-medium">Back to Articles</span>
             </Link>
           </div>
         </div>

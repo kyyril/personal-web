@@ -67,114 +67,7 @@ export const metadata: Metadata = {
   },
 };
 
-function ArticlesList({ articles }: { articles: Article[] }) {
-  if (articles.length === 0) {
-    return (
-      <div className="text-center py-12">
-        <div className="text-muted-foreground mb-4">
-          <Folder className="h-12 w-12 mx-auto mb-4 opacity-70" />
-          <h3 className="text-lg font-semibold mb-2">No articles found</h3>
-          <p>Try adjusting your search criteria or clearing the filters.</p>
-          <Link
-            href="/articles"
-            className="text-primary hover:underline mt-2 inline-block"
-          >
-            View all articles →
-          </Link>
-        </div>
-      </div>
-    );
-  }
 
-  return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {articles.map((post) => (
-        <Card
-          key={post.slug}
-          className="h-full hover:shadow-lg transition-shadow"
-        >
-          <CardHeader>
-            <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
-              <Link
-                href={`/articles/category/${encodeURIComponent(
-                  post.frontmatter.category.toLowerCase().replace(/\s+/g, "-")
-                )}`}
-              >
-                <span className="cursor-pointer hover:bg-secondary rounded font-semibold">
-                  / {post.frontmatter.category}
-                </span>
-              </Link>
-              <span>•</span>
-              <span className="flex items-center gap-1">
-                <CalendarDays className="h-3 w-3" />
-                {new Date(post.frontmatter.date).toLocaleDateString("en-US", {
-                  year: "numeric",
-                  month: "short",
-                  day: "numeric",
-                })}
-              </span>
-            </div>
-            <CardTitle className="line-clamp-2 hover:text-primary transition-colors">
-              <Link href={`/articles/${post.slug}`}>
-                {post.frontmatter.title}
-              </Link>
-            </CardTitle>
-            <CardDescription className="line-clamp-3">
-              {post.frontmatter.description}
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="flex items-center justify-between text-sm text-muted-foreground">
-              <span className="flex items-center gap-1">
-                <User className="h-3 w-3" />
-                {post.frontmatter.author}
-              </span>
-              <span className="flex items-center gap-1">
-                <Clock className="h-3 w-3" />
-                {post.frontmatter.readTime}
-              </span>
-            </div>
-
-            {/* Tags */}
-            {post.frontmatter.tags && post.frontmatter.tags.length > 0 && (
-              <div className="mt-4 flex flex-wrap gap-1">
-                {post.frontmatter.tags.slice(0, 3).map((tag, index) => (
-                  <Link
-                    key={`${tag}-${index}`}
-                    href={`/articles/tags/${encodeURIComponent(
-                      tag.toLowerCase().replace(/\s+/g, "-")
-                    )}`}
-                  >
-                    <Badge
-                      variant="secondary"
-                      className="text-xs cursor-pointer hover:bg-secondary/50"
-                    >
-                      {tag}
-                    </Badge>
-                  </Link>
-                ))}
-                {post.frontmatter.tags.length > 3 && (
-                  <Badge variant="secondary" className="text-xs">
-                    +{post.frontmatter.tags.length - 3} more
-                  </Badge>
-                )}
-              </div>
-            )}
-
-            <div className="mt-4 w-full flex">
-              <Link
-                href={`/articles/${post.slug}`}
-                className="flex justify-end text-primary hover:underline font-medium"
-              >
-                Read more →
-              </Link>
-            </div>
-          </CardContent>
-        </Card>
-      ))}
-    </div>
-  );
-}
 
 export default function ArticlesPage() {
   const allArticles = getAllArticles();
@@ -260,28 +153,22 @@ export default function ArticlesPage() {
         />
 
         {/* Header Section */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-foreground mb-4">Articles</h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+        <div className="text-center mb-16">
+          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6 tracking-tight">Articles</h1>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
             Discover insights, tutorials, and best practices in modern software
             engineer.
           </p>
         </div>
 
-        {/* Client-side Filter Component */}
-        <ClientFilterWrapper
-          allArticles={allArticles}
-          categories={categories}
-        />
-
-        {/* Quick Category Links */}
-        <div className="my-6">
-          <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
-            <Folder className="h-5 w-5" />
-            Quick Category Links
+        {/* Categories Section */}
+        <section aria-labelledby="categories-heading" className="mb-12">
+          <h2 id="categories-heading" className="text-xl font-semibold mb-6 flex items-center gap-2 text-foreground">
+            <Folder className="h-5 w-5 text-muted-foreground" aria-hidden="true" />
+            Browse Categories
           </h2>
           <div className="flex flex-wrap gap-2">
-            <Link href="/articles">
+            <Link href="/articles" aria-label={`View all articles, ${allArticles.length} available`}>
               <Badge
                 variant="secondary"
                 className="cursor-pointer hover:bg-secondary"
@@ -293,6 +180,7 @@ export default function ArticlesPage() {
               <Link
                 key={category.slug}
                 href={`/articles/category/${encodeURIComponent(category.slug)}`}
+                aria-label={`View articles in ${category.name}, ${category.count} available`}
               >
                 <Badge
                   variant="secondary"
@@ -303,7 +191,16 @@ export default function ArticlesPage() {
               </Link>
             ))}
           </div>
-        </div>
+        </section>
+
+        {/* Client-side Filter & Articles List Section */}
+        <section aria-labelledby="articles-heading">
+          <h2 id="articles-heading" className="sr-only">All Articles</h2>
+          <ClientFilterWrapper
+            allArticles={allArticles}
+            categories={categories}
+          />
+        </section>
       </div>
     </>
   );
