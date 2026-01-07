@@ -1,21 +1,48 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "next-themes";
 import { BarChart3, Github, Clock, Layout } from "lucide-react";
 
 type TabType = "overview" | "languages" | "wakatime";
 
+// Skeleton component for loading states
+const ImageSkeleton: React.FC<{ className?: string }> = ({ className = "" }) => (
+    <div className={`animate-pulse bg-muted/20 rounded-lg ${className}`}>
+        <div className="w-full h-full flex items-center justify-center">
+            <div className="space-y-3 w-full p-4">
+                <div className="h-4 bg-muted/30 rounded w-3/4"></div>
+                <div className="h-4 bg-muted/30 rounded w-1/2"></div>
+                <div className="h-4 bg-muted/30 rounded w-5/6"></div>
+            </div>
+        </div>
+    </div>
+);
+
 const DevActivity: React.FC = () => {
     const [activeTab, setActiveTab] = useState<TabType>("overview");
     const [mounted, setMounted] = useState(false);
+    const [visitedTabs, setVisitedTabs] = useState<Set<TabType>>(new Set(["overview"]));
     const { theme } = useTheme();
+
+    // Loading states for each image
+    const [loadingStates, setLoadingStates] = useState({
+        githubStats: true,
+        githubStreak: true,
+        githubLangs: true,
+        wakatime: true,
+    });
 
     // Fix hydration mismatch by only rendering theme-specific content after mount
     React.useEffect(() => {
         setMounted(true);
     }, []);
+
+    // Track visited tabs
+    useEffect(() => {
+        setVisitedTabs(prev => new Set(prev).add(activeTab));
+    }, [activeTab]);
 
     const currentTheme = theme === "dark" || theme === "system" ? "dark" : "light";
     const statsTheme = currentTheme === "dark" ? "dark" : "default";
@@ -29,6 +56,10 @@ const DevActivity: React.FC = () => {
         { id: "overview", label: "GitHub", icon: Github },
         { id: "wakatime", label: "WakaTime", icon: Clock },
     ];
+
+    const handleImageLoad = (key: keyof typeof loadingStates) => {
+        setLoadingStates(prev => ({ ...prev, [key]: false }));
+    };
 
     // Placeholder or skeleton during SSR to avoid mismatch
     if (!mounted) {
@@ -66,40 +97,55 @@ const DevActivity: React.FC = () => {
                 </div>
             </div>
 
-            <div className="relative min-h-[300px]">
+            <div className="relative min-h-[580px]">
                 {/* GitHub Tab Content */}
-                <div className={activeTab === "overview" ? "block" : "hidden"}>
+                <div
+                    className={`absolute inset-0 transition-opacity duration-300 ${activeTab === "overview" ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+                        }`}
+                >
                     <motion.div
                         initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
+                        animate={{ opacity: activeTab === "overview" ? 1 : 0, y: 0 }}
                         transition={{ duration: 0.3 }}
                         className="flex flex-col gap-4"
                     >
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div className="overflow-hidden">
+                            <div className="overflow-hidden relative min-h-[195px]">
+                                {loadingStates.githubStats && (
+                                    <ImageSkeleton className="absolute inset-0 min-h-[195px]" />
+                                )}
                                 <img
                                     src={githubStatsUrl}
                                     alt="GitHub Stats"
-                                    className="w-full h-auto"
+                                    className={`w-full h-auto transition-opacity duration-300 ${loadingStates.githubStats ? 'opacity-0' : 'opacity-100'}`}
                                     loading="lazy"
+                                    onLoad={() => handleImageLoad('githubStats')}
                                 />
                             </div>
-                            <div className="overflow-hidden">
+                            <div className="overflow-hidden relative min-h-[195px]">
+                                {loadingStates.githubStreak && (
+                                    <ImageSkeleton className="absolute inset-0 min-h-[195px]" />
+                                )}
                                 <img
                                     src={githubStreakUrl}
                                     alt="GitHub Streak"
-                                    className="w-full h-auto"
+                                    className={`w-full h-auto transition-opacity duration-300 ${loadingStates.githubStreak ? 'opacity-0' : 'opacity-100'}`}
                                     loading="lazy"
+                                    onLoad={() => handleImageLoad('githubStreak')}
                                 />
                             </div>
                         </div>
                         <div className="flex justify-center w-full">
-                            <div className="w-full md:w-1/2 overflow-hidden">
+                            <div className="w-full md:w-1/2 overflow-hidden relative min-h-[165px]">
+                                {loadingStates.githubLangs && (
+                                    <ImageSkeleton className="absolute inset-0 min-h-[165px]" />
+                                )}
                                 <img
                                     src={githubLangsUrl}
                                     alt="Top Languages"
-                                    className="w-full h-auto"
+                                    className={`w-full h-auto transition-opacity duration-300 ${loadingStates.githubLangs ? 'opacity-0' : 'opacity-100'}`}
                                     loading="lazy"
+                                    onLoad={() => handleImageLoad('githubLangs')}
                                 />
                             </div>
                         </div>
@@ -107,20 +153,31 @@ const DevActivity: React.FC = () => {
                 </div>
 
                 {/* WakaTime Tab Content */}
-                <div className={activeTab === "wakatime" ? "block" : "hidden"}>
+                <div
+                    className={`absolute inset-0 transition-opacity duration-300 ${activeTab === "wakatime" ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+                        }`}
+                >
                     <motion.div
                         initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
+                        animate={{ opacity: activeTab === "wakatime" ? 1 : 0, y: 0 }}
                         transition={{ duration: 0.3 }}
                         className="flex justify-center items-center overflow-hidden py-4"
                     >
-                        <img
-                            src="https://wakatime.com/share/@kyyril/9eb071bf-655b-4fb3-a970-6fc2f7c3b2ec.svg"
-                            alt="Wakatime Stats"
-                            className={`w-full max-w-2xl h-auto transition-all duration-500 ${currentTheme === "light" ? "invert opacity-90" : "opacity-80"
-                                }`}
-                            loading="lazy"
-                        />
+                        <div className="w-full max-w-2xl relative min-h-[500px]">
+                            {loadingStates.wakatime && visitedTabs.has("wakatime") && (
+                                <ImageSkeleton className="absolute inset-0 min-h-[500px]" />
+                            )}
+                            {visitedTabs.has("wakatime") && (
+                                <img
+                                    src="https://wakatime.com/share/@kyyril/9eb071bf-655b-4fb3-a970-6fc2f7c3b2ec.svg"
+                                    alt="Wakatime Stats"
+                                    className={`w-full h-auto transition-all duration-500 ${currentTheme === "light" ? "invert opacity-90" : "opacity-80"
+                                        } ${loadingStates.wakatime ? 'opacity-0' : ''}`}
+                                    loading="eager"
+                                    onLoad={() => handleImageLoad('wakatime')}
+                                />
+                            )}
+                        </div>
                     </motion.div>
                 </div>
             </div>
