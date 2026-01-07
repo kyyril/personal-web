@@ -18,6 +18,7 @@ import { ThemeProvider } from "../components/ThemeProvider";
 import FooterWrapper from "../components/FooterWrapper";
 import { Analytics } from "@vercel/analytics/next";
 import { AuthProvider } from "../contexts/AuthContext";
+import { LazyMotion, domAnimation } from "framer-motion";
 
 /**
  * Root layout metadata following Google's SEO best practices
@@ -160,6 +161,22 @@ export default function RootLayout({
         {/* Preconnect to external domains for performance */}
         <link rel="preconnect" href="https://res.cloudinary.com" />
         <link rel="dns-prefetch" href="https://res.cloudinary.com" />
+        <link rel="preconnect" href="https://github-readme-stats-fast.vercel.app" />
+        <link rel="dns-prefetch" href="https://github-readme-stats-fast.vercel.app" />
+        <link rel="preconnect" href="https://wakatime.com" />
+        <link rel="dns-prefetch" href="https://wakatime.com" />
+
+        {/* Preload LCP Images (guessing dark theme as default) */}
+        <link
+          rel="preload"
+          as="image"
+          href="https://github-readme-stats-fast.vercel.app/api?username=kyyril&show_icons=true&theme=dark&bg_color=00000000&hide_border=true&title_color=3b82f6&text_color=888888"
+        />
+        <link
+          rel="preload"
+          as="image"
+          href="https://github-readme-stats-fast.vercel.app/api/streak?username=kyyril&theme=dark&bg_color=00000000&hide_border=true&ring=3b82f6&stroke=3b82f6&currStreakLabel=3b82f6"
+        />
 
         {/* Structured Data - Combined Schema Graph */}
         <script
@@ -176,29 +193,31 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <AuthProvider>
-            {/* Skip Links for Accessibility */}
-            <a
-              href="#main-content"
-              className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-primary text-primary-foreground px-4 py-2 rounded z-50"
-            >
-              Skip to main content
-            </a>
-            <a
-              href="#navigation"
-              className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-32 bg-primary text-primary-foreground px-4 py-2 rounded z-50"
-            >
-              Skip to navigation
-            </a>
+          <LazyMotion features={domAnimation}>
+            <AuthProvider>
+              {/* Skip Links for Accessibility */}
+              <a
+                href="#main-content"
+                className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-primary text-primary-foreground px-4 py-2 rounded z-50"
+              >
+                Skip to main content
+              </a>
+              <a
+                href="#navigation"
+                className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-32 bg-primary text-primary-foreground px-4 py-2 rounded z-50"
+              >
+                Skip to navigation
+              </a>
 
-            <Navigation />
-            <main id="main-content" role="main" className="min-h-screen">
-              {children}
-            </main>
-            {/* Analytics with proper configuration to avoid insights 404 */}
-            {process.env.VERCEL && <Analytics />}
-            <FooterWrapper />
-          </AuthProvider>
+              <Navigation />
+              <main id="main-content" role="main" className="min-h-screen">
+                {children}
+              </main>
+              {/* Analytics with proper configuration to avoid insights 404 */}
+              {process.env.VERCEL && <Analytics />}
+              <FooterWrapper />
+            </AuthProvider>
+          </LazyMotion>
         </ThemeProvider>
       </body>
     </html>

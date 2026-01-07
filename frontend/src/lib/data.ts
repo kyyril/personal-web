@@ -301,7 +301,7 @@ export const projects: Project[] = [
       "Zustand",
     ],
     live_url: "https://www.toyotarantauprapat.com",
-    code_repo_url: "/projects/toyota-labuhanbatu",
+    code_repo_url: "",
     type: "Fullstack",
     category: "Web",
     date: "2025-01-02",
@@ -357,7 +357,7 @@ export const projects: Project[] = [
     title: "WeShare",
     technologies: ["Javascript", "React Native", "Expo", "Supabase"],
     live_url:
-      "https://expo.dev/accounts/kyyril.hrp/projects/weshare/builds/98e1cc32-30a4-4332-a869-5567b32d58bf",
+      "",
     code_repo_url: "https://github.com/kyyril/weshare",
     type: "Fullstack",
     category: "Mobile",

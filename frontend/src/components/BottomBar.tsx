@@ -9,7 +9,7 @@ import {
   FileTextIcon,
   PaperPlaneIcon,
 } from "@radix-ui/react-icons";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 
 export const navigationItems = [
   { name: "Projects", href: "/projects", icon: CodeIcon },
@@ -26,7 +26,7 @@ export function Navigation() {
   return (
     <>
       {/* Bottom Navigation Bar */}
-      <motion.nav
+      <m.nav
         id="navigation"
         role="navigation"
         aria-label="Main navigation"
@@ -42,7 +42,7 @@ export function Navigation() {
             aria-label="Navigate to home page"
             aria-current={pathname === "/" ? "page" : undefined}
           >
-            <motion.div
+            <m.div
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
               transition={{ type: "spring", stiffness: 400, damping: 17 }}
@@ -58,7 +58,7 @@ export function Navigation() {
                   : "ring-1 ring-primary/10"
                   }`}
               />
-            </motion.div>
+            </m.div>
           </Link>
           {navigationItems.map((item) => (
             <Link
@@ -78,16 +78,16 @@ export function Navigation() {
             </Link>
           ))}
         </div>
-      </motion.nav>
+      </m.nav>
       {/* Theme Toggler */}
-      <motion.div
+      <m.div
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.95 }}
         transition={{ type: "spring", stiffness: 400, damping: 17 }}
         className="fixed top-2 right-2 z-50"
       >
         <ThemeToggler />
-      </motion.div>
+      </m.div>
       {/* Bottom Spacer */}
       <div className="h-12" /> {/* Increased height for bottom margin */}
     </>

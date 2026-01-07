@@ -147,35 +147,25 @@ export default async function Detailproject({
           </div>
 
           <div className="flex space-x-2 mt-4">
-            {project.live_url ? (
+            {project.live_url && (
               <Link target="_blank" href={project.live_url} prefetch={false}>
                 <Button size="sm" className="hover:text-custom ">
                   <GlobeIcon className="h-3 w-3 mr-0.5" aria-hidden="true" />
                   Visit
                 </Button>
               </Link>
-            ) : (
-              <Button size="sm" disabled className="">
-                <GlobeIcon className="h-3 w-3 mr-0.5" aria-hidden="true" />
-                Visit (Unavailable)
-              </Button>
             )}
-            {project.code_repo_url ? (
+            {project.code_repo_url && (
               <Link
                 target="_blank"
                 href={project.code_repo_url}
                 prefetch={false}
               >
-                <Button size="sm" className="hover:text-cus " variant="ghost">
+                <Button size="sm" className="hover:text-custom" variant="ghost">
                   <GitHubLogoIcon className="h-3 w-3 mr-0.5" aria-hidden="true" />
                   Repo
                 </Button>
               </Link>
-            ) : (
-              <Button size="sm" disabled className="" variant="ghost">
-                <GitHubLogoIcon className="h-3 w-3 mr-0.5" aria-hidden="true" />
-                Repo (Unavailable)
-              </Button>
             )}
           </div>
         </div>

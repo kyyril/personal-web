@@ -94,7 +94,7 @@ export default function Home() {
           id="bio"
           role="region"
           aria-labelledby="bio-heading"
-          className="container min-h-screen flex flex-col justify-center items-start pb-20"
+          className="container flex flex-col items-start py-12 md:py-20"
         >
           <h1 id="bio-heading" className="sr-only">
             Biography and Introduction

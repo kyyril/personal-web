@@ -13,6 +13,8 @@ import TechBadges from "./TechBadges";
 import { GlobeIcon, GitHubLogoIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import { Skeleton } from "../ui/skeleton";
+import ImagePreview from "../ImagePreview";
 
 interface ProjectProps {
   project: {
@@ -37,28 +39,28 @@ export default function CardProject({ project, index, isVisible = false, hasMoun
       ? "opacity-100 translate-y-0"
       : "opacity-0 translate-y-5"
       }`}>
-      <Card className="flex flex-col lg:flex-row hover:shadow-lg hover:shadow-black/5 transition-all duration-300 hover:-translate-y-0.5">
-        <div className="w-full lg:w-1/3 flex justify-center items-center relative group">
+      <Card className="group h-full flex flex-col hover:shadow-lg hover:shadow-black/5 transition-all duration-300 hover:-translate-y-1">
+        <ImagePreview
+          src={project?.image[0]}
+          alt={project?.title}
+          className="w-full aspect-video overflow-hidden relative rounded-t-lg"
+        >
           {imageLoading && (
-            <div className="absolute w-full h-full animate-pulse rounded" />
+            <Skeleton className="absolute inset-0 w-full h-full" />
           )}
           <Image
             src={project?.image[0]}
             alt={project?.title}
-            width={300}
-            height={156}
-            quality={65}
-            className={`rounded object-cover w-full h-full transition-opacity duration-500 ${imageLoading && hasMounted ? "opacity-0" : "opacity-100"
+            fill
+            quality={85}
+            className={`object-cover transition-all duration-500 group-hover:scale-110 ${imageLoading ? "opacity-0" : "opacity-100"
               }`}
             loading={index === 0 ? "eager" : "lazy"}
-            fetchPriority={index === 0 ? "high" : "low"}
-            priority={index === 0}
-            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 33vw, 300px"
             onLoad={() => setImageLoading(false)}
           />
-        </div>
+        </ImagePreview>
 
-        <div className="w-full lg:w-2/3">
+        <div className="flex-1 flex flex-col min-w-0">
           <CardHeader className="py-2 px-6">
             <Link href={`/projects/${project.id}`}>
               <CardTitle className="text-2xl pt-3 font-semibold hover:underline hover:text-custom">
@@ -74,29 +76,33 @@ export default function CardProject({ project, index, isVisible = false, hasMoun
           </CardContent>
           <CardFooter className="py-2 pb-4">
             <div className="flex space-x-2 w-full justify-end">
-              <Link target="_blank" href={project.live_url} prefetch={false}>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="h-8 px-3 text-xs hover:bg-custom/10 hover:text-custom"
+              {project.live_url && (
+                <Link target="_blank" href={project.live_url} prefetch={false}>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="h-8 px-3 text-xs hover:bg-custom/10 hover:text-custom"
+                  >
+                    <GlobeIcon className="h-3 w-3 mr-0.5" aria-hidden="true" />
+                    Visit
+                  </Button>
+                </Link>
+              )}
+              {project.code_repo_url && (
+                <Link
+                  target="_blank"
+                  href={project.code_repo_url}
+                  prefetch={false}
                 >
-                  <GlobeIcon className="h-3 w-3 mr-0.5" aria-hidden="true" />
-                  Visit
-                </Button>
-              </Link>
-              <Link
-                target="_blank"
-                href={project.code_repo_url}
-                prefetch={false}
-              >
-                <Button
-                  size="sm"
-                  className="h-8 px-3 text-xs hover:text-custom"
-                >
-                  <GitHubLogoIcon className="h-3 w-3 mr-0.5" aria-hidden="true" />
-                  Repo
-                </Button>
-              </Link>
+                  <Button
+                    size="sm"
+                    className="h-8 px-3 text-xs hover:text-custom"
+                  >
+                    <GitHubLogoIcon className="h-3 w-3 mr-0.5" aria-hidden="true" />
+                    Repo
+                  </Button>
+                </Link>
+              )}
             </div>
           </CardFooter>
         </div>

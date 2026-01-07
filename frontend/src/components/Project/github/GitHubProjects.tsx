@@ -119,16 +119,16 @@ export default function GitHubProjects({ repositories }: GitHubProjectsProps) {
       {/* Repository Grid */}
       <div
         className={`grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 transition-all duration-300 ${(isVisible && hasMounted) || !hasMounted
-            ? "opacity-100 translate-y-0"
-            : "opacity-0 translate-y-5"
+          ? "opacity-100 translate-y-0"
+          : "opacity-0 translate-y-5"
           }`}
       >
         {currentRepositories.map((repo, index) => (
           <div
             key={repo.name}
             className={`transition-all duration-300 delay-${index * 50} ${(isVisible && hasMounted) || !hasMounted
-                ? "opacity-100 translate-y-0"
-                : "opacity-0 translate-y-5"
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 translate-y-5"
               }`}
           >
             <Card className="group h-full flex flex-col hover:shadow-lg hover:shadow-black/5 transition-all duration-300 hover:-translate-y-1">
@@ -258,8 +258,8 @@ export default function GitHubProjects({ repositories }: GitHubProjectsProps) {
                     size="sm"
                     onClick={() => handlePageChange(pageNum as number)}
                     className={`h-9 w-9 p-0 ${isActive
-                        ? "bg-primary text-primary-foreground shadow-sm"
-                        : "hover:bg-primary/10 hover:text-primary"
+                      ? "bg-primary text-primary-foreground shadow-sm"
+                      : "hover:bg-primary/10 hover:text-primary"
                       }`}
                     aria-label={`Go to page ${pageNum} of ${totalPages}`}
                     aria-current={isActive ? "page" : undefined}
@@ -294,8 +294,8 @@ export default function GitHubProjects({ repositories }: GitHubProjectsProps) {
               <div
                 key={i + 1}
                 className={`h-2 w-2 rounded-full transition-all duration-200 ${currentPage === i + 1
-                    ? "bg-primary w-6"
-                    : "bg-muted-foreground/30"
+                  ? "bg-primary w-6"
+                  : "bg-muted-foreground/30"
                   }`}
               />
             ))}

@@ -201,7 +201,7 @@ export const blogData = {
   "Scaling",
   "System Design"
 ] as string[],
-  lastUpdated: '2026-01-07T11:27:29.959Z',
+  lastUpdated: '2026-01-07T13:27:44.835Z',
 } as const;
 
 // Helper functions
@@ -215,7 +215,7 @@ export function getArticleBySlug(slug: string): Article | undefined {
 
 export function getArticlesByCategory(categorySlug: string): Article[] {
   return blogData.articles.filter(article => 
-    article.frontmatter.category.toLowerCase().replace(/s+/g, '-') === categorySlug
+    article.frontmatter.category.toLowerCase().replace(/\s+/g, '-') === categorySlug
   );
 }
 

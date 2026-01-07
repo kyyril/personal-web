@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo, useEffect } from "react";
+import { Skeleton } from "../ui/skeleton";
 import { Button } from "../ui/button";
 import { Select, SelectTrigger, SelectContent, SelectItem } from "../ui/select";
 import CardProject from "./CardProject";
@@ -25,7 +26,7 @@ interface ListProjectProps {
   }[];
 }
 
-const PROJECTS_PER_PAGE = 6;
+const PROJECTS_PER_PAGE = 2;
 
 export default function ListProject({ projects }: ListProjectProps) {
   const [categoryFilter, setCategoryFilter] = useState("All");
@@ -165,8 +166,8 @@ export default function ListProject({ projects }: ListProjectProps) {
       </div>
 
       {/* Project List */}
-      <ul className="grid grid-cols-1 gap-4">
-        {(hasMounted || typeof window === "undefined") && paginatedProjects.length > 0 ? (
+      <ul className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {paginatedProjects.length > 0 ? (
           <>
             {paginatedProjects.map((project, index) => (
               <li key={project.id}>

@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { format } from "date-fns";
 import Script from "next/script";
+import { useRouter } from "next/navigation";
 import { TableOfContents } from "@/components/blog/TableOfContents";
 import { ClientCommentSection } from "@/components/blog/ClientCommentSection";
 import { MDXRenderer } from "@/components/blog/MDXRenderer";
@@ -28,6 +29,7 @@ interface ArticleClientProps {
 }
 
 export function ArticleClient({ post, relatedPosts }: ArticleClientProps) {
+  const router = useRouter();
   const commentsSectionRef = useRef<HTMLElement>(null);
   const [isCopied, setIsCopied] = useState(false);
 
@@ -149,42 +151,45 @@ export function ArticleClient({ post, relatedPosts }: ArticleClientProps) {
       {/* Reading Progress Bar */}
       <ReadingProgressBar targetRef={commentsSectionRef} />
 
-      {/* Breadcrumb Navigation and Back Button */}
-      <div className="container mx-auto px-4 py-4 sm:py-6 lg:py-8 max-w-6xl pt-8 sm:pt-12">
-        <div className="flex flex-col space-y-8 sm:space-y-0 sm:flex-row sm:items-center sm:justify-between mb-6 lg:mb-8">
-          {/* Breadcrumb Navigation */}
-          <div className="order-2 sm:order-1 min-w-0">
-            <Breadcrumb
-              sticky
-              items={[
-                { label: "Home", href: "/" },
-                { label: "Blog", href: "/blog" },
-                {
-                  label: post.frontmatter.category,
-                  href: `/blog/category/${encodeURIComponent(
-                    post.frontmatter.category.toLowerCase().replace(/\s+/g, "-")
-                  )}`,
-                },
-                { label: post.frontmatter.title },
-              ]}
-            />
-          </div>
+      {/* Sticky Navigation Bar */}
+      <div className="sticky top-0 z-40 w-full bg-background/80 backdrop-blur-md">
+        <div className="container mx-auto px-4 lg:px-8 max-w-7xl py-3">
+          <div className="flex items-center justify-between gap-4">
+            <div className="min-w-0">
+              <Breadcrumb
+                items={[
+                  { label: "Home", href: "/" },
+                  { label: "Blog", href: "/blog" },
+                  {
+                    label: post.frontmatter.category,
+                    href: `/blog/category/${encodeURIComponent(
+                      post.frontmatter.category.toLowerCase().replace(/\s+/g, "-")
+                    )}`,
+                  },
+                  { label: post.frontmatter.title },
+                ]}
+              />
+            </div>
 
-          {/* Back Button */}
-          <div className="order-1 sm:order-2 self-start sm:self-auto">
-            <Link
-              href="/blog"
-              className="group inline-flex items-center gap-1.5 text-xs sm:text-sm text-muted-foreground hover:text-foreground transition-all duration-200"
+            <button
+              onClick={() => {
+                if (window.history.length > 1) {
+                  router.back();
+                } else {
+                  router.push("/blog");
+                }
+              }}
+              className="hidden sm:inline-flex group items-center gap-1.5 text-xs sm:text-sm text-muted-foreground hover:text-foreground transition-all duration-200 flex-shrink-0"
             >
               <ArrowLeft className="h-3.5 w-3.5 sm:h-4 sm:w-4 transition-transform group-hover:-translate-x-1" />
-              <span className="font-medium">Back to Blog</span>
-            </Link>
+              <span className="font-medium">Back</span>
+            </button>
           </div>
         </div>
       </div>
 
       {/* Main Content Layout with TOC */}
-      <div className="container mx-auto px-4 max-w-7xl">
+      <div className="container mx-auto px-4 max-w-7xl pt-8 sm:pt-12">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 lg:gap-8">
           {/* Table of Contents Sidebar - Hidden on mobile, shown on lg+ */}
           <div className="hidden lg:block lg:col-span-1">
@@ -364,7 +369,7 @@ export function ArticleClient({ post, relatedPosts }: ArticleClientProps) {
               <div className="flex flex-wrap justify-center gap-3">
                 <Link
                   href="/blog"
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground roundedmd hover:bg-primary/90 transition-colors text-sm sm:text-base"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors text-sm sm:text-base"
                 >
                   <BookOpen className="h-4 w-4" />
                   Read More

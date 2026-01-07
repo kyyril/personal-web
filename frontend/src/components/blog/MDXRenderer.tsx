@@ -25,6 +25,7 @@ import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import mermaid from "mermaid";
+import ImagePreview from "../ImagePreview";
 
 // Update the animation variants
 const fadeInUp = {
@@ -132,7 +133,6 @@ type CalloutType = "info" | "warning" | "success" | "error";
 export function MDXRenderer({ content }: MDXRendererProps) {
   const [copiedCode, setCopiedCode] = useState<string | null>(null);
   const [isDark, setIsDark] = useState(false);
-  const [zoomImage, setZoomImage] = useState<{ src: string; alt: string } | null>(null);
 
   useEffect(() => {
     const checkDarkMode = () => {
@@ -161,28 +161,28 @@ export function MDXRenderer({ content }: MDXRendererProps) {
         remarkPlugins={[remarkGfm]}
         rehypePlugins={[rehypeRaw, rehypeSlug]}
         components={{
-          p: ({ children, ...props }) => (
-            <p className="leading-7 text-foreground/70 [&:not(:first-child)]:mt-6" {...props}>
+          p: ({ children }: any) => (
+            <p className="leading-7 text-foreground/70 [&:not(:first-child)]:mt-6">
               {children}
             </p>
           ),
-          h1: ({ children, ...props }) => (
-            <h1 className="text-4xl font-bold mb-8 text-foreground pb-4" {...props}>
+          h1: ({ children }: any) => (
+            <h1 className="text-4xl font-bold mb-8 text-foreground pb-4">
               {children}
             </h1>
           ),
-          h2: ({ children, ...props }) => (
-            <h2 className="text-3xl font-bold mt-16 mb-6 text-foreground/90 scroll-mt-20" {...props}>
+          h2: ({ children }: any) => (
+            <h2 className="text-3xl font-bold mt-16 mb-6 text-foreground/90 scroll-mt-20">
               {children}
             </h2>
           ),
-          h3: ({ children, ...props }) => (
-            <h3 className="text-2xl font-semibold mt-12 mb-4 text-foreground/80 scroll-mt-20" {...props}>
+          h3: ({ children }: any) => (
+            <h3 className="text-2xl font-semibold mt-12 mb-4 text-foreground/80 scroll-mt-20">
               {children}
             </h3>
           ),
-          h4: ({ children, ...props }) => (
-            <h4 className="text-xl font-semibold mt-8 mb-3 text-foreground/80 scroll-mt-20" {...props}>
+          h4: ({ children }: any) => (
+            <h4 className="text-xl font-semibold mt-8 mb-3 text-foreground/80 scroll-mt-20">
               {children}
             </h4>
           ),
@@ -294,13 +294,17 @@ export function MDXRenderer({ content }: MDXRendererProps) {
               <span>{children}</span>
             </li>
           ),
-          img: ({ src, alt, node, ...props }: any) => {
+          img: ({ src, alt }: any) => {
             if (!src) return null;
             return (
               <span className="block my-6">
-                <span className="block relative w-full h-[400px] overflow-hidden rounded-none cursor-zoom-in shadow-lg" onClick={() => setZoomImage({ src, alt: alt || "" })}>
-                  <Image src={src} alt={alt || ""} fill className="object-cover" sizes="100vw" {...props} />
-                </span>
+                <ImagePreview src={src} alt={alt || ""}>
+                  <img
+                    src={src}
+                    alt={alt || ""}
+                    className="w-full h-auto rounded-none shadow-lg cursor-zoom-in"
+                  />
+                </ImagePreview>
                 {alt && <span className="block text-center text-sm text-muted-foreground mt-3 italic">{alt}</span>}
               </span>
             );
@@ -318,17 +322,6 @@ export function MDXRenderer({ content }: MDXRendererProps) {
       >
         {content}
       </ReactMarkdown>
-
-      <AnimatePresence>
-        {zoomImage && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[100] flex items-center justify-center bg-background/90 backdrop-blur-md p-4" onClick={() => setZoomImage(null)}>
-            <motion.div initial={{ scale: 0.9 }} animate={{ scale: 1 }} exit={{ scale: 0.9 }} className="relative w-full h-full max-w-5xl flex items-center justify-center" onClick={(e) => e.stopPropagation()}>
-              <button onClick={() => setZoomImage(null)} className="absolute top-4 right-4 p-2 rounded-full bg-secondary/80 hover:bg-secondary transition-colors z-[110]"><X className="w-6 h-6" /></button>
-              {zoomImage.src && <Image src={zoomImage.src} alt={zoomImage.alt} fill className="object-contain" priority />}
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </motion.div>
   );
 }

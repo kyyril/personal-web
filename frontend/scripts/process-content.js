@@ -105,9 +105,18 @@ async function processAllArticles() {
 
       articles.push(article);
 
-      // Track categories
-      const categoryCount = categories.get(data.category) || 0;
-      categories.set(data.category, categoryCount + 1);
+      // Track categories (normalized to avoid duplicates with different casing)
+      const rawCategory = data.category || "Uncategorized";
+      // Find existing category name in map to preserve original or most common casing
+      let matchedCategory = rawCategory;
+      for (const [existingName] of categories) {
+        if (existingName.toLowerCase() === rawCategory.toLowerCase()) {
+          matchedCategory = existingName;
+          break;
+        }
+      }
+      const categoryCount = categories.get(matchedCategory) || 0;
+      categories.set(matchedCategory, categoryCount + 1);
 
       // Track tags
       if (data.tags && Array.isArray(data.tags)) {
@@ -199,7 +208,7 @@ export function getArticleBySlug(slug: string): Article | undefined {
 
 export function getArticlesByCategory(categorySlug: string): Article[] {
   return blogData.articles.filter(article => 
-    article.frontmatter.category.toLowerCase().replace(/\s+/g, '-') === categorySlug
+    article.frontmatter.category.toLowerCase().replace(/\\s+/g, '-') === categorySlug
   );
 }
 

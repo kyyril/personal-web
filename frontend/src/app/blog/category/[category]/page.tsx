@@ -16,6 +16,7 @@ import { PERSONAL_KEYWORDS, siteUrl } from "@/lib/metadata";
 import { generateAlternates, generateOpenGraph, generateTwitter } from "@/lib/seo";
 import Script from "next/script";
 import { Breadcrumb } from "@/components/Breadcrumb";
+import { ArticleCard } from "@/components/blog/ArticleCard";
 
 interface PageProps {
   params: Promise<{
@@ -193,27 +194,32 @@ export default async function CategoryPage({ params }: PageProps) {
         }}
       />
 
-      <div className="container mx-auto px-4 py-8 max-w-6xl">
-        {/* Breadcrumb Navigation */}
-        <Breadcrumb
-          items={[
-            { label: "Home", href: "/" },
-            { label: "Blog", href: "/blog" },
-            { label: categoryData.name },
-          ]}
-          className="mb-8"
-        />
+      {/* Sticky Navigation Bar */}
+      <div className="sticky top-0 z-40 w-full bg-background/80 backdrop-blur-md">
+        <div className="container mx-auto px-4 lg:px-8 py-3 max-w-6xl">
+          <div className="flex items-center justify-between gap-4">
+            <div className="min-w-0">
+              <Breadcrumb
+                items={[
+                  { label: "Home", href: "/" },
+                  { label: "Blog", href: "/blog" },
+                  { label: categoryData.name },
+                ]}
+              />
+            </div>
 
-        {/* Back Button */}
-        <div className="mb-6">
-          <Link
-            href="/blog"
-            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            Back to Blog
-          </Link>
+            <Link
+              href="/blog"
+              className="hidden sm:inline-flex group items-center gap-1.5 text-xs sm:text-sm text-muted-foreground hover:text-foreground transition-all duration-200 flex-shrink-0"
+            >
+              <ArrowLeft className="h-3.5 w-3.5 sm:h-4 sm:w-4 transition-transform group-hover:-translate-x-1" />
+              <span className="font-medium">Back to Blog</span>
+            </Link>
+          </div>
         </div>
+      </div>
+
+      <div className="container mx-auto px-4 pt-8 sm:pt-12 max-w-6xl">
 
         {/* Category Header */}
         <div className="mb-12">
@@ -281,96 +287,7 @@ export default async function CategoryPage({ params }: PageProps) {
         {articles.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {articles.map((article) => (
-              <Card
-                key={article.slug}
-                className="h-full hover:shadow-lg transition-shadow"
-              >
-                <CardHeader>
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
-                    <Link
-                      href={`/blog/category/${encodeURIComponent(
-                        article.frontmatter.category
-                          .toLowerCase()
-                          .replace(/\s+/g, "-")
-                      )}`}
-                    >
-                      <span className="cursor-pointer hover:bg-secondary rounded font-semibold">
-                        / {article.frontmatter.category}
-                      </span>
-                    </Link>
-                    <span>•</span>
-                    <span className="flex items-center gap-1">
-                      <CalendarDays className="h-3 w-3" />
-                      {new Date(article.frontmatter.date).toLocaleDateString(
-                        "en-US",
-                        {
-                          year: "numeric",
-                          month: "short",
-                          day: "numeric",
-                        }
-                      )}
-                    </span>
-                  </div>
-                  <CardTitle className="line-clamp-2 hover:text-primary transition-colors">
-                    <Link href={`/blog/${article.slug}`}>
-                      {article.frontmatter.title}
-                    </Link>
-                  </CardTitle>
-                  <CardDescription className="line-clamp-3">
-                    {article.frontmatter.description}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex items-center justify-between text-sm text-muted-foreground">
-                    <span className="flex items-center gap-1">
-                      <User className="h-3 w-3" />
-                      {article.frontmatter.author}
-                    </span>
-                    <span className="flex items-center gap-1">
-                      <Clock className="h-3 w-3" />
-                      {article.frontmatter.readTime}
-                    </span>
-                  </div>
-
-                  {/* Tags */}
-                  {article.frontmatter.tags &&
-                    article.frontmatter.tags.length > 0 && (
-                      <div className="mt-4 flex flex-wrap gap-1">
-                        {article.frontmatter.tags
-                          .slice(0, 3)
-                          .map((tag, index) => (
-                            <Link
-                              key={`${tag}-${index}`}
-                              href={`/blog/tags/${encodeURIComponent(
-                                tag.toLowerCase().replace(/\s+/g, "-")
-                              )}`}
-                            >
-                              <Badge
-                                variant="secondary"
-                                className="text-xs cursor-pointer hover:bg-secondary/50"
-                              >
-                                {tag}
-                              </Badge>
-                            </Link>
-                          ))}
-                        {article.frontmatter.tags.length > 3 && (
-                          <Badge variant="secondary" className="text-xs">
-                            +{article.frontmatter.tags.length - 3} more
-                          </Badge>
-                        )}
-                      </div>
-                    )}
-
-                  <div className="mt-4">
-                    <Link
-                      href={`/blog/${article.slug}`}
-                      className="text-primary hover:underline font-medium"
-                    >
-                      Read more →
-                    </Link>
-                  </div>
-                </CardContent>
-              </Card>
+              <ArticleCard key={article.slug} post={article} />
             ))}
           </div>
         ) : (
