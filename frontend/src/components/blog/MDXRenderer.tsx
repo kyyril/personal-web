@@ -14,13 +14,11 @@ import {
   Copy,
   Check,
   ExternalLink,
-  Sparkles,
   AlertCircle,
   AlertTriangle,
   CheckCircle,
   XCircle,
   X,
-  ZoomIn,
 } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -43,7 +41,7 @@ const codeBlockVariants = {
   animate: {
     opacity: 1,
     y: 0,
-    transition: { stiffness: 300, damping: 25 }, // Removed type: "spring"
+    transition: { stiffness: 300, damping: 25 },
   },
 };
 
@@ -59,7 +57,6 @@ function MermaidDiagram({ chart, isDark }: MermaidDiagramProps) {
   useEffect(() => {
     if (!ref.current) return;
 
-    // Initialize mermaid with enhanced configuration
     mermaid.initialize({
       startOnLoad: false,
       theme: isDark ? 'dark' : 'default',
@@ -84,44 +81,18 @@ function MermaidDiagram({ chart, isDark }: MermaidDiagramProps) {
       },
       fontFamily: 'ui-monospace, SFMono-Regular, "SF Mono", Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
       fontSize: 14,
-      flowchart: {
-        useMaxWidth: true,
-        htmlLabels: true,
-        curve: 'basis',
-      },
-      sequence: {
-        useMaxWidth: true,
-        wrap: true,
-      },
-      gantt: {
-        useMaxWidth: true,
-      },
-      journey: {
-        useMaxWidth: true,
-      },
-      er: {
-        useMaxWidth: true,
-      },
-      gitGraph: {
-        useMaxWidth: true,
-      },
+      flowchart: { useMaxWidth: true, htmlLabels: true, curve: 'basis' },
+      sequence: { useMaxWidth: true, wrap: true },
     });
 
     const renderDiagram = async () => {
       try {
-        // Clean the chart content and validate
         const cleanedChart = chart.trim();
-        if (!cleanedChart) {
-          throw new Error('Empty Mermaid diagram');
-        }
-
-        // Generate unique ID for this diagram
+        if (!cleanedChart) throw new Error('Empty Mermaid diagram');
         const diagramId = `mermaid-${Math.random().toString(36).substr(2, 9)}`;
-
         const { svg } = await mermaid.render(diagramId, cleanedChart);
         if (ref.current) {
           ref.current.innerHTML = svg;
-          // Add responsive behavior
           const svgElement = ref.current.querySelector('svg');
           if (svgElement) {
             svgElement.style.width = '100%';
@@ -135,11 +106,7 @@ function MermaidDiagram({ chart, isDark }: MermaidDiagramProps) {
           ref.current.innerHTML = `
             <div class="text-red-500 p-4 rounded bg-red-50 dark:bg-red-900/20">
               <div class="font-semibold mb-2">Failed to render Mermaid diagram</div>
-              <div class="text-sm opacity-80 mb-3">${error instanceof Error ? error.message : 'Unknown error'}</div>
-              <details class="text-xs">
-                <summary class="cursor-pointer hover:underline">View diagram source</summary>
-                <pre class="mt-2 p-2 bg-gray-100 dark:bg-gray-800 rounded overflow-x-auto">${chart}</pre>
-              </details>
+              <pre class="mt-2 p-2 bg-gray-100 dark:bg-gray-800 rounded overflow-x-auto">${chart}</pre>
             </div>
           `;
         }
@@ -171,14 +138,9 @@ export function MDXRenderer({ content }: MDXRendererProps) {
     const checkDarkMode = () => {
       setIsDark(document.documentElement.classList.contains("dark"));
     };
-
     checkDarkMode();
     const observer = new MutationObserver(checkDarkMode);
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ["class"],
-    });
-
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
     return () => observer.disconnect();
   }, []);
 
@@ -199,140 +161,108 @@ export function MDXRenderer({ content }: MDXRendererProps) {
         remarkPlugins={[remarkGfm]}
         rehypePlugins={[rehypeRaw, rehypeSlug]}
         components={{
-          // Basic text styling
           p: ({ children, ...props }) => (
-            <p
-              className="leading-7 text-foreground/70 [&:not(:first-child)]:mt-6"
-              {...props}
-            >
+            <p className="leading-7 text-foreground/70 [&:not(:first-child)]:mt-6" {...props}>
               {children}
             </p>
           ),
-
-          // Clean heading styles
           h1: ({ children, ...props }) => (
-            <h1
-              className="text-4xl font-bold mb-8 text-foreground pb-4"
-              {...props}
-            >
+            <h1 className="text-4xl font-bold mb-8 text-foreground pb-4" {...props}>
               {children}
             </h1>
           ),
-          h2: ({ children, className, ...props }) => (
-            <h2
-              className="text-3xl font-bold mt-16 mb-6 text-foreground/90 scroll-mt-20"
-              {...props}
-            >
+          h2: ({ children, ...props }) => (
+            <h2 className="text-3xl font-bold mt-16 mb-6 text-foreground/90 scroll-mt-20" {...props}>
               {children}
             </h2>
           ),
           h3: ({ children, ...props }) => (
-            <h3
-              className="text-2xl font-semibold mt-12 mb-4 text-foreground/80 scroll-mt-20"
-              {...props}
-            >
+            <h3 className="text-2xl font-semibold mt-12 mb-4 text-foreground/80 scroll-mt-20" {...props}>
               {children}
             </h3>
           ),
           h4: ({ children, ...props }) => (
-            <h4
-              className="text-xl font-semibold mt-8 mb-3 text-foreground/80 scroll-mt-20"
-              {...props}
-            >
+            <h4 className="text-xl font-semibold mt-8 mb-3 text-foreground/80 scroll-mt-20" {...props}>
               {children}
             </h4>
           ),
-
-          // Clean code block
           code: ({ node, inline, className, children, ...props }: any) => {
             const match = /language-(\w+)/.exec(className || "");
             const language = match ? match[1] : "";
             const code = String(children).replace(/\n$/, "");
-
-            // Handle Mermaid diagrams - check both className language and direct mermaid syntax
-            const isMermaid = !inline && (
-              language === "mermaid" ||
-              // Check if the code starts with common mermaid diagram types
-              code.trim().startsWith('sequenceDiagram') ||
-              code.trim().startsWith('flowchart') ||
-              code.trim().startsWith('graph') ||
-              code.trim().startsWith('stateDiagram') ||
-              code.trim().startsWith('classDiagram') ||
-              code.trim().startsWith('erDiagram') ||
-              code.trim().startsWith('journey') ||
-              code.trim().startsWith('gitgraph') ||
-              code.trim().startsWith('quadrantChart')
-            );
+            const isMermaid = !inline && (language === "mermaid" || code.trim().startsWith('sequenceDiagram') || code.trim().startsWith('flowchart') || code.trim().startsWith('graph'));
 
             if (isMermaid) {
-              return (
-                <motion.div
-                  variants={codeBlockVariants}
-                  initial="initial"
-                  animate="animate"
-                  className="my-8"
-                >
-                  <MermaidDiagram chart={code} isDark={isDark} />
-                </motion.div>
-              );
+              return <motion.div variants={codeBlockVariants} initial="initial" animate="animate" className="my-8"><MermaidDiagram chart={code} isDark={isDark} /></motion.div>;
             }
 
             if (!inline && match) {
               return (
-                <motion.div
-                  variants={codeBlockVariants}
-                  initial="initial"
-                  animate="animate"
-                  className="relative group my-8 rounded overflow-hidden shadow-md"
-                >
+                <motion.div variants={codeBlockVariants} initial="initial" animate="animate" className="relative group my-8 rounded-none overflow-hidden shadow-md">
                   <div className="flex bg-secondary border-none outline-none items-center justify-between px-4 py-2 shadow-md">
-                    <div className="flex items-center gap-3">
-                      <span className="text-xs font-medium text-custom">
-                        {language}
-                      </span>
-                    </div>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => handleCopyCode(code)}
-                      className="opacity-0 group-hover:opacity-100 transition-all"
-                    >
-                      {copiedCode === code ? (
-                        <Check className="h-4 w-4 text-custom" />
-                      ) : (
-                        <Copy className="h-4 w-4 text-foreground/50" />
-                      )}
+                    <span className="text-xs font-medium text-custom">{language}</span>
+                    <Button variant="ghost" size="sm" onClick={() => handleCopyCode(code)} className="opacity-0 group-hover:opacity-100 transition-all">
+                      {copiedCode === code ? <Check className="h-4 w-4 text-custom" /> : <Copy className="h-4 w-4 text-foreground/50" />}
                     </Button>
                   </div>
-                  <SyntaxHighlighter
-                    style={isDark ? oneDark : oneLight}
-                    language={language}
-                    PreTag="div"
-                    className="!mt-0 bg-transparent !rounded-none !border-none"
-                    customStyle={{
-                      margin: 0,
-                      padding: "1.25rem",
-                      fontSize: "0.9rem",
-                      lineHeight: "1.5",
-                    }}
-                    {...props}
-                  >
+                  <SyntaxHighlighter style={isDark ? oneDark : oneLight} language={language} PreTag="div" className="!mt-0 bg-transparent !rounded-none !border-none" customStyle={{ margin: 0, padding: "1.25rem", fontSize: "0.9rem", lineHeight: "1.5" }} {...props}>
                     {code}
                   </SyntaxHighlighter>
                 </motion.div>
               );
             }
-
-            return (
-              <code className="font-mono text-[0.9em] text-primary" {...props}>
-                {children}
-              </code>
-            );
+            return <code className="font-mono text-[0.9em] text-primary" {...props}>{children}</code>;
           },
-
-          // Enhanced blockquote with author support
           blockquote: ({ children }) => {
             const childrenArray = React.Children.toArray(children);
+            const findAlert = (nodes: any[]): { type: CalloutType; tag: string } | null => {
+              for (const node of nodes) {
+                if (typeof node === 'string') {
+                  const m = node.match(/\[!\s*(NOTE|INFO|TIP|WARNING|IMPORTANT|CAUTION|ERROR|SUCCESS)\s*\]/i);
+                  if (m) {
+                    const raw = m[1].toUpperCase();
+                    if (['NOTE', 'INFO'].includes(raw)) return { type: 'info', tag: m[0] };
+                    if (['TIP', 'SUCCESS'].includes(raw)) return { type: 'success', tag: m[0] };
+                    if (['WARNING', 'IMPORTANT'].includes(raw)) return { type: 'warning', tag: m[0] };
+                    return { type: 'error', tag: m[0] };
+                  }
+                  if (node.trim()) return null;
+                } else if (React.isValidElement(node)) {
+                  const subNodes = React.Children.toArray((node.props as any).children);
+                  const res = findAlert(subNodes);
+                  if (res) return res;
+                }
+              }
+              return null;
+            };
+
+            const alert = findAlert(childrenArray);
+            if (alert) {
+              const { type, tag } = alert;
+              const styles: Record<CalloutType, any> = {
+                info: { bg: "bg-blue-50/50 dark:bg-blue-500/10", border: "border-blue-400/50", text: "text-blue-900 dark:text-blue-100", icon: AlertCircle, accent: "text-blue-500" },
+                warning: { bg: "bg-amber-50/50 dark:bg-amber-500/10", border: "border-amber-400/50", text: "text-amber-900 dark:text-amber-100", icon: AlertTriangle, accent: "text-amber-500" },
+                success: { bg: "bg-emerald-50/50 dark:bg-emerald-600/10", border: "border-emerald-400/50", text: "text-emerald-900 dark:text-emerald-100", icon: CheckCircle, accent: "text-emerald-500" },
+                error: { bg: "bg-red-50/50 dark:bg-red-600/10", border: "border-red-400/50", text: "text-red-900 dark:text-red-100", icon: XCircle, accent: "text-red-500" }
+              };
+              const s = styles[type];
+              const Icon = s.icon;
+              const clean = (nodes: any[]): any[] => nodes.map(n => {
+                if (typeof n === 'string') return n.replace(tag, '').trimStart();
+                if (React.isValidElement(n) && (n.props as any).children) return React.cloneElement(n as any, { children: clean(React.Children.toArray((n.props as any).children)) });
+                return n;
+              });
+
+              return (
+                <motion.div variants={fadeInUp} initial="initial" whileInView="animate" viewport={{ once: true }} className={`my-8 p-5 rounded-none border-l-4 shadow-sm ${s.bg} ${s.border} ${s.text}`}>
+                  <div className="flex items-start gap-4">
+                    <Icon className={`w-6 h-6 shrink-0 mt-1 ${s.accent}`} />
+                    <div className="flex-1 prose-p:my-0">{clean(childrenArray)}</div>
+                  </div>
+                </motion.div>
+              );
+            }
+
             let quoteContent = children;
             let author = null;
             if (childrenArray.length > 0) {
@@ -346,275 +276,55 @@ export function MDXRenderer({ content }: MDXRendererProps) {
               }
             }
             return (
-              <motion.blockquote
-                variants={fadeInUp}
-                initial="initial"
-                whileInView="animate"
-                viewport={{ once: true }}
-                className={`my-8 pl-6 py-3 text-foreground/60 italic bg-custom/10 rounded ${author ? "relative" : ""
-                  }`}
-              >
+              <motion.blockquote variants={fadeInUp} initial="initial" whileInView="animate" viewport={{ once: true }} className="my-8 pl-6 py-3 text-foreground/60 italic bg-custom/5 border-l-2 border-custom/20">
                 {quoteContent}
-                {author && (
-                  <cite className="block mt-2 text-right text-sm font-medium text-foreground/50 not-italic">
-                    — {author}
-                  </cite>
-                )}
+                {author && <cite className="block mt-2 text-right text-sm font-medium text-foreground/50 not-italic">— {author}</cite>}
               </motion.blockquote>
             );
           },
-
-          // Cleaner link style
           a: ({ children, href, ...props }) => (
-            <a
-              href={href}
-              className="text-primary hover:underline underline-offset-4 inline-flex items-center gap-1"
-              target={href?.startsWith("http") ? "_blank" : undefined}
-              rel={href?.startsWith("http") ? "noopener noreferrer" : undefined}
-              {...props}
-            >
+            <a href={href} className="text-primary hover:underline underline-offset-4 inline-flex items-center gap-1" target={href?.startsWith("http") ? "_blank" : undefined} rel={href?.startsWith("http") ? "noopener noreferrer" : undefined} {...props}>
               {children}
-              {href?.startsWith("http") && (
-                <ExternalLink className="h-3 w-3 opacity-70" />
-              )}
+              {href?.startsWith("http") && <ExternalLink className="h-3 w-3 opacity-70" />}
             </a>
           ),
-
-          // Simpler list items
           li: ({ children, ...props }) => (
-            <li
-              className="text-foreground/70 leading-relaxed flex items-start gap-3 my-2"
-              {...props}
-            >
+            <li className="text-foreground/70 leading-relaxed flex items-start gap-3 my-2" {...props}>
               <div className="w-1 h-1 bg-primary/40 rounded-full mt-2.5 flex-shrink-0"></div>
               <span>{children}</span>
             </li>
           ),
-
-          // Clean strong text
-          strong: ({ children, ...props }) => (
-            <strong className="font-semibold text-foreground/90" {...props}>
-              {children}
-            </strong>
-          ),
-          img: ({ src, alt, title, width, height, ...props }) => {
+          img: ({ src, alt, node, ...props }: any) => {
             if (!src) return null;
-
             return (
-              <span className="block my-4">
-                <span
-                  className="block relative w-full h-[250px] xs:h-[300px] sm:h-[400px] md:h-[500px] overflow-hidden rounded-lg cursor-zoom-in"
-                  onClick={() => setZoomImage({ src, alt: alt || "" })}
-                >
-                  <Image
-                    src={src}
-                    alt={alt || ""}
-                    fill
-                    className="object-contain"
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 80vw, 1200px"
-                    {...props}
-                  />
+              <span className="block my-6">
+                <span className="block relative w-full h-[400px] overflow-hidden rounded-none cursor-zoom-in shadow-lg" onClick={() => setZoomImage({ src, alt: alt || "" })}>
+                  <Image src={src} alt={alt || ""} fill className="object-cover" sizes="100vw" {...props} />
                 </span>
-                {alt && (
-                  <span className="block text-center text-sm text-muted-foreground mt-3 italic font-medium">
-                    {alt}
-                  </span>
-                )}
+                {alt && <span className="block text-center text-sm text-muted-foreground mt-3 italic">{alt}</span>}
               </span>
             );
           },
-
-          // Callout boxes
-          div: ({ className, children, ...props }) => {
-            if (className && className.includes("callout")) {
-              const extractedType =
-                className.split(" ")[0].split("-")[1] || "info";
-              const type: CalloutType = (
-                ["info", "warning", "success", "error"] as const
-              ).includes(extractedType as CalloutType)
-                ? (extractedType as CalloutType)
-                : "info";
-              const iconMap: Record<CalloutType, string> = {
-                info: "i",
-                warning: "!",
-                success: "✓",
-                error: "✕",
-              };
-
-              const childrenArray = React.Children.toArray(children);
-              let titleElement = null;
-              let content = children;
-
-              // Check if first child is a strong element (title)
-              if (
-                childrenArray.length > 0 &&
-                React.isValidElement(childrenArray[0]) &&
-                childrenArray[0].type === "strong"
-              ) {
-                titleElement = childrenArray[0];
-                content = childrenArray.slice(1);
-              }
-
-              return (
-                <motion.div
-                  variants={fadeInUp}
-                  initial="initial"
-                  whileInView="animate"
-                  viewport={{ once: true }}
-                  className={`my-6 p-4 rounded shadow-sm ${type === "warning"
-                    ? "bg-yellow-50 dark:bg-yellow-900/20 text-yellow-800 dark:text-yellow-200"
-                    : type === "error"
-                      ? "bg-red-50 dark:bg-red-900/20 text-red-800 dark:text-red-200"
-                      : type === "success"
-                        ? "bg-green-50 dark:bg-green-900/20 text-green-800 dark:text-green-200"
-                        : "bg-blue-50 dark:bg-blue-900/20 text-blue-800 dark:text-blue-200"
-                    }`}
-                >
-                  <div className="flex items-start gap-3">
-                    {iconMap[type]}
-                    <div className="flex-1">
-                      {titleElement ? (
-                        <>
-                          <div className="font-semibold text-base mb-2">
-                            {titleElement}
-                          </div>
-                          {content}
-                        </>
-                      ) : (
-                        children
-                      )}
-                    </div>
-                  </div>
-                </motion.div>
-              );
-            }
-            return (
-              <div className={className} {...props}>
-                {children}
-              </div>
-            );
-          },
-
-          // Collapsible sections
-          details: ({ children, ...props }) => (
-            <details className="my-6" {...props}>
-              {children}
-            </details>
-          ),
-          summary: ({ children, ...props }) => (
-            <summary
-              className="cursor-pointer font-medium text-foreground/80 hover:text-foreground"
-              {...props}
-            >
-              {children}
-            </summary>
-          ),
-
-          // Highlight text
-          mark: ({ children, ...props }) => (
-            <mark
-              className="bg-yellow-200 dark:bg-yellow-800 px-1 rounded"
-              {...props}
-            >
-              {children}
-            </mark>
-          ),
-
-          // Enhanced table styling
-          table: ({ children, ...props }) => (
-            <div className="my-8 rounded overflow-x-auto">
-              <table className="min-w-full" {...props}>
-                {children}
-              </table>
-            </div>
-          ),
-          thead: ({ children, ...props }) => (
-            <thead className="bg-muted/50" {...props}>
-              {children}
-            </thead>
-          ),
-          tbody: ({ children, ...props }) => (
-            <tbody className="bg-background" {...props}>
-              {children}
-            </tbody>
-          ),
-          tr: ({ children, ...props }) => (
-            <tr className="hover:bg-muted/25 transition-colors" {...props}>
-              {children}
-            </tr>
-          ),
-          th: ({ children, ...props }) => (
-            <th
-              className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider"
-              {...props}
-            >
-              {children}
-            </th>
-          ),
-          td: ({ children, ...props }) => (
-            <td
-              className="px-6 py-4 whitespace-nowrap text-sm text-foreground"
-              {...props}
-            >
-              {children}
-            </td>
-          ),
+          details: ({ children, ...props }) => <details className="my-6" {...props}>{children}</details>,
+          summary: ({ children, ...props }) => <summary className="cursor-pointer font-medium text-foreground/80 hover:text-foreground" {...props}>{children}</summary>,
+          mark: ({ children, ...props }) => <mark className="bg-yellow-200 dark:bg-yellow-800 px-1 rounded" {...props}>{children}</mark>,
+          table: ({ children, ...props }) => <div className="my-8 rounded overflow-x-auto"><table className="min-w-full" {...props}>{children}</table></div>,
+          thead: ({ children, ...props }) => <thead className="bg-muted/50" {...props}>{children}</thead>,
+          tbody: ({ children, ...props }) => <tbody className="bg-background" {...props}>{children}</tbody>,
+          tr: ({ children, ...props }) => <tr className="hover:bg-muted/25 transition-colors" {...props}>{children}</tr>,
+          th: ({ children, ...props }) => <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider" {...props}>{children}</th>,
+          td: ({ children, ...props }) => <td className="px-6 py-4 whitespace-nowrap text-sm text-foreground" {...props}>{children}</td>,
         }}
       >
         {content}
       </ReactMarkdown>
 
-      {/* Enhanced Lightbox Overlay */}
       <AnimatePresence>
         {zoomImage && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-background/90 backdrop-blur-sm p-4 sm:p-8 md:p-12"
-            onClick={() => setZoomImage(null)}
-          >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
-              className="relative w-full h-full max-w-5xl max-h-[85vh] flex flex-col items-center justify-center gap-4"
-              onClick={(e) => e.stopPropagation()}
-            >
-              {/* Close Button */}
-              <button
-                onClick={() => setZoomImage(null)}
-                className="absolute top-0 right-0 sm:-top-12 sm:-right-0 p-3 rounded-full bg-secondary/80 hover:bg-secondary text-foreground backdrop-blur-md transition-all z-[110]"
-                aria-label="Close image"
-              >
-                <X className="w-5 h-5 sm:w-6 sm:h-6" />
-              </button>
-
-              <div className="relative w-full flex-1 min-h-0 bg-transparent rounded-lg overflow-hidden">
-                {zoomImage?.src && (
-                  <Image
-                    src={zoomImage.src}
-                    alt={zoomImage.alt || ""}
-                    fill
-                    className="object-contain"
-                    priority
-                    quality={100}
-                  />
-                )}
-              </div>
-
-              {zoomImage?.alt && (
-                <motion.p
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2 }}
-                  className="text-foreground/80 text-sm sm:text-base font-medium text-center bg-secondary/50 px-6 py-2 rounded-full backdrop-blur-md"
-                >
-                  {zoomImage.alt}
-                </motion.p>
-              )}
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[100] flex items-center justify-center bg-background/90 backdrop-blur-md p-4" onClick={() => setZoomImage(null)}>
+            <motion.div initial={{ scale: 0.9 }} animate={{ scale: 1 }} exit={{ scale: 0.9 }} className="relative w-full h-full max-w-5xl flex items-center justify-center" onClick={(e) => e.stopPropagation()}>
+              <button onClick={() => setZoomImage(null)} className="absolute top-4 right-4 p-2 rounded-full bg-secondary/80 hover:bg-secondary transition-colors z-[110]"><X className="w-6 h-6" /></button>
+              {zoomImage.src && <Image src={zoomImage.src} alt={zoomImage.alt} fill className="object-contain" priority />}
             </motion.div>
           </motion.div>
         )}
