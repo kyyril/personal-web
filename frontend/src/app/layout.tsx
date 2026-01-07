@@ -70,9 +70,6 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  verification: {
-    google: "24f9cc081f9ae37b",
-  },
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -100,11 +97,32 @@ export const metadata: Metadata = {
   // Additional metadata for better SEO
   category: "Technology",
   classification: "Portfolio",
+  // Enhanced icons configuration for all browsers and Google Search
   icons: {
-    icon: "/assets/profile.webp",
-    apple: "/assets/profile.webp",
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/assets/profile.webp", sizes: "32x32", type: "image/webp" },
+      { url: "/assets/profile.webp", sizes: "96x96", type: "image/webp" },
+      { url: "/assets/profile.webp", sizes: "144x144", type: "image/webp" },
+    ],
+    shortcut: "/favicon.ico",
+    apple: [
+      { url: "/assets/profile.webp", sizes: "180x180", type: "image/webp" },
+    ],
+    other: [
+      {
+        rel: "mask-icon",
+        url: "/assets/profile.webp",
+        color: "#000000",
+      },
+    ],
   },
   manifest: "/manifest.json",
+  // Verification for search consoles
+  verification: {
+    google: "24f9cc081f9ae37b",
+    // Add other verification IDs if available
+  },
 };
 
 export default function RootLayout({
