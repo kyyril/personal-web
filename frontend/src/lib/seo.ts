@@ -221,7 +221,7 @@ export function generateWebsiteSchema() {
         },
         potentialAction: {
             "@type": "SearchAction",
-            target: `${siteUrl}/articles?q={search_term_string}`,
+            target: `${siteUrl}/blog?q={search_term_string}`,
             "query-input": "required name=search_term_string",
         },
     };
@@ -277,7 +277,7 @@ export function generateArticleSchema(options: {
     readTime?: string;
     coverImage?: string;
 }) {
-    const url = `${siteUrl}/articles/${options.slug}`;
+    const url = `${siteUrl}/blog/${options.slug}`;
 
     return {
         "@context": "https://schema.org",

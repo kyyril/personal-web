@@ -12,7 +12,7 @@ import {
 } from "@/types/content";
 import { extractHeadings } from "./mdx";
 
-const ARTICLES_DIR = path.join(process.cwd(), "content", "articles");
+const BLOG_DIR = path.join(process.cwd(), "content", "blog");
 
 // Get all blog posts metadata (for listing)
 export function getAllPostsMetadata(): BlogPostMetadata[] {
@@ -20,7 +20,7 @@ export function getAllPostsMetadata(): BlogPostMetadata[] {
 
   const posts = slugs
     .map((slug) => {
-      const fullPath = path.join(ARTICLES_DIR, `${slug}.mdx`);
+      const fullPath = path.join(BLOG_DIR, `${slug}.mdx`);
       const fileContents = fs.readFileSync(fullPath, "utf8");
       const { data } = matter(fileContents);
 
@@ -39,19 +39,19 @@ export function getAllPostsMetadata(): BlogPostMetadata[] {
 
 // Get slugs for all posts
 export function getAllPostSlugs(): string[] {
-  if (!fs.existsSync(ARTICLES_DIR)) {
+  if (!fs.existsSync(BLOG_DIR)) {
     return [];
   }
 
   return fs
-    .readdirSync(ARTICLES_DIR)
+    .readdirSync(BLOG_DIR)
     .filter((file) => file.endsWith(".mdx"))
     .map((file) => file.replace(/\.mdx$/, ""));
 }
 
 // Get a single blog post by slug
 export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
-  const fullPath = path.join(ARTICLES_DIR, `${slug}.mdx`);
+  const fullPath = path.join(BLOG_DIR, `${slug}.mdx`);
 
   if (!fs.existsSync(fullPath)) {
     return null;
@@ -120,7 +120,7 @@ export function getAllCategories(): Category[] {
   return Array.from(categoryMap.entries()).map(([name, count]) => ({
     name,
     slug: name.toLowerCase().replace(/\s+/g, "-"),
-    description: `${name} related articles`,
+    description: `${name} related blog posts`,
     count,
   }));
 }

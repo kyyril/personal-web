@@ -63,14 +63,15 @@ export async function generateMetadata({
       (t) => t.toLowerCase().replace(/\s+/g, "-") === tag
     ) || tag;
 
-  const tagUrl = `/articles/tags/${tag}`;
-  const title = `${tagName} Articles | Khairil Rahman Hakiki Blog`;
-  const description = `Browse all articles tagged with ${tagName.toLowerCase()}. Find the latest insights and best practices. (${tagArticles.length} article${tagArticles.length !== 1 ? "s" : ""})`;
+  /* Metadata Update */
+  const tagUrl = `/blog/tags/${tag}`;
+  const title = `${tagName} - Blog | Khairil Rahman Hakiki`;
+  const description = `Browse all blog posts tagged with ${tagName.toLowerCase()}. Find the latest insights and best practices. (${tagArticles.length} post${tagArticles.length !== 1 ? "s" : ""})`;
 
   return {
     title,
     description,
-    keywords: [...PERSONAL_KEYWORDS, tagName, "articles", "tutorials", tagName.toLowerCase()],
+    keywords: [...PERSONAL_KEYWORDS, tagName, "blog", "tutorials", tagName.toLowerCase()],
     authors: [{ name: "Khairil Rahman Hakiki" }],
     creator: "Khairil Rahman Hakiki",
     publisher: "Khairil Rahman Hakiki",
@@ -128,16 +129,16 @@ export default async function TagPage({ params }: PageProps) {
   const tagStructuredData = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    name: `${tagData.name} Articles`,
-    description: `Articles tagged with ${tagData.name}`,
-    url: `${siteUrl}/articles/tags/${tag}`,
+    name: `${tagData.name} Blog Posts`,
+    description: `Blog posts tagged with ${tagData.name}`,
+    url: `${siteUrl}/blog/tags/${tag}`,
     mainEntity: {
       "@type": "Blog",
       blogPost: articles.map((article) => ({
         "@type": "BlogPosting",
         headline: article.frontmatter.title,
         description: article.frontmatter.description,
-        url: `${siteUrl}/articles/${article.slug}`,
+        url: `${siteUrl}/blog/${article.slug}`,
         datePublished: article.frontmatter.date,
         author: {
           "@type": "Person",
@@ -169,14 +170,14 @@ export default async function TagPage({ params }: PageProps) {
         {
           "@type": "ListItem",
           position: 2,
-          name: "Articles",
-          item: `${siteUrl}/articles`,
+          name: "Blog",
+          item: `${siteUrl}/blog`,
         },
         {
           "@type": "ListItem",
           position: 3,
           name: tagData.name,
-          item: `${siteUrl}/articles/tags/${tag}`,
+          item: `${siteUrl}/blog/tags/${tag}`,
         },
       ],
     },
@@ -198,7 +199,7 @@ export default async function TagPage({ params }: PageProps) {
         <Breadcrumb
           items={[
             { label: "Home", href: "/" },
-            { label: "Articles", href: "/articles" },
+            { label: "Blog", href: "/blog" },
             { label: tagData.name },
           ]}
           className="mb-8"
@@ -207,11 +208,11 @@ export default async function TagPage({ params }: PageProps) {
         {/* Back Button */}
         <div className="mb-6">
           <Link
-            href="/articles"
+            href="/blog"
             className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
           >
             <ArrowLeft className="h-4 w-4" />
-            Back to Articles
+            Back to Blog
           </Link>
         </div>
 
@@ -224,8 +225,8 @@ export default async function TagPage({ params }: PageProps) {
                 {tagData.name}
               </h1>
               <p className="text-lg text-muted-foreground mt-2">
-                Articles tagged with {tagData.name.toLowerCase()} (
-                {tagData.count} article
+                Blog posts tagged with {tagData.name.toLowerCase()} (
+                {tagData.count} post
                 {tagData.count !== 1 ? "s" : ""})
               </p>
             </div>
@@ -253,7 +254,7 @@ export default async function TagPage({ params }: PageProps) {
                 .map((t) => (
                   <Link
                     key={t.slug}
-                    href={`/articles/tags/${encodeURIComponent(t.slug)}`}
+                    href={`/blog/tags/${encodeURIComponent(t.slug)}`}
                   >
                     <Badge
                       variant={t.slug === tag ? "default" : "secondary"}
@@ -278,7 +279,7 @@ export default async function TagPage({ params }: PageProps) {
                 <CardHeader>
                   <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
                     <Link
-                      href={`/articles/category/${encodeURIComponent(
+                      href={`/blog/category/${encodeURIComponent(
                         article.frontmatter.category
                           .toLowerCase()
                           .replace(/\s+/g, "-")
@@ -302,7 +303,7 @@ export default async function TagPage({ params }: PageProps) {
                     </span>
                   </div>
                   <CardTitle className="line-clamp-2 hover:text-primary transition-colors">
-                    <Link href={`/articles/${article.slug}`}>
+                    <Link href={`/blog/${article.slug}`}>
                       {article.frontmatter.title}
                     </Link>
                   </CardTitle>
@@ -331,7 +332,7 @@ export default async function TagPage({ params }: PageProps) {
                           .map((tag, index) => (
                             <Link
                               key={`${tag}-${index}`}
-                              href={`/articles/tags/${encodeURIComponent(
+                              href={`/blog/tags/${encodeURIComponent(
                                 tag.toLowerCase().replace(/\s+/g, "-")
                               )}`}
                             >
@@ -357,7 +358,7 @@ export default async function TagPage({ params }: PageProps) {
 
                   <div className="mt-4">
                     <Link
-                      href={`/articles/${article.slug}`}
+                      href={`/blog/${article.slug}`}
                       className="text-primary hover:underline font-medium"
                     >
                       Read more →
@@ -379,11 +380,11 @@ export default async function TagPage({ params }: PageProps) {
                 Check back soon for new {tagData.name.toLowerCase()} content!
               </p>
               <Link
-                href="/articles"
+                href="/blog"
                 className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded hover:bg-primary/90 transition-colors"
               >
                 <Tag className="h-4 w-4" />
-                Browse All Articles
+                Browse All Posts
               </Link>
             </div>
           </div>

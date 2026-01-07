@@ -43,13 +43,13 @@ export function ClientFilterWrapper({
         <div className="text-center py-12">
           <div className="text-muted-foreground mb-4">
             <Folder className="h-12 w-12 mx-auto mb-4 opacity-70" />
-            <h3 className="text-lg font-semibold mb-2">No articles found</h3>
+            <h3 className="text-lg font-semibold mb-2">No blog posts found</h3>
             <p>Try adjusting your search criteria or clearing the filters.</p>
             <Link
-              href="/articles"
+              href="/blog"
               className="text-primary hover:underline mt-2 inline-block"
             >
-              View all articles →
+              View all posts →
             </Link>
           </div>
         </div>
@@ -61,12 +61,12 @@ export function ClientFilterWrapper({
         {articles.map((post) => (
           <Card
             key={post.slug}
-            className="h-full hover:shadow-lg transition-shadow"
+            className="flex flex-col h-full hover:shadow-lg transition-shadow border-muted/40"
           >
-            <CardHeader>
-              <div className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground mb-4">
+            <CardHeader className="flex-none pb-4">
+              <div className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground mb-3">
                 <Link
-                  href={`/articles/category/${encodeURIComponent(
+                  href={`/blog/category/${encodeURIComponent(
                     post.frontmatter.category.toLowerCase().replace(/\s+/g, "-")
                   )}`}
                   aria-label={`Category: ${post.frontmatter.category}`}
@@ -85,17 +85,17 @@ export function ClientFilterWrapper({
                   })}
                 </span>
               </div>
-              <CardTitle className="line-clamp-2 text-foreground hover:text-primary transition-colors mb-3 text-xl font-bold tracking-tight">
-                <Link href={`/articles/${post.slug}`}>
+              <CardTitle className="line-clamp-2 text-foreground hover:text-primary transition-colors mb-2 text-lg sm:text-xl font-bold tracking-tight leading-tight min-h-[3.5rem] flex items-center">
+                <Link href={`/blog/${post.slug}`}>
                   {post.frontmatter.title}
                 </Link>
               </CardTitle>
-              <CardDescription className="line-clamp-3 mb-4 text-muted-foreground leading-relaxed">
+              <CardDescription className="line-clamp-3 text-muted-foreground leading-relaxed min-h-[4.5rem]">
                 {post.frontmatter.description}
               </CardDescription>
             </CardHeader>
-            <CardContent>
-              <div className="flex items-center justify-between text-sm text-muted-foreground">
+            <CardContent className="flex flex-col flex-1 pt-0">
+              <div className="flex items-center justify-between text-sm text-muted-foreground mb-4">
                 <span className="flex items-center gap-1">
                   <User className="h-3 w-3" aria-hidden="true" />
                   {post.frontmatter.author}
@@ -108,38 +108,38 @@ export function ClientFilterWrapper({
 
               {/* Tags */}
               {post.frontmatter.tags && post.frontmatter.tags.length > 0 && (
-                <div className="mt-4 flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2 mb-4">
                   {post.frontmatter.tags.slice(0, 3).map((tag, index) => (
                     <Link
                       key={`${tag}-${index}`}
-                      href={`/articles/tags/${encodeURIComponent(
+                      href={`/blog/tags/${encodeURIComponent(
                         tag.toLowerCase().replace(/\s+/g, "-")
                       )}`}
                       aria-label={`Tag: ${tag}`}
                     >
                       <Badge
                         variant="secondary"
-                        className="text-[10px] sm:text-xs cursor-pointer hover:bg-secondary/50"
+                        className="text-[10px] sm:text-xs cursor-pointer hover:bg-secondary/50 rounded-md"
                       >
                         {tag}
                       </Badge>
                     </Link>
                   ))}
                   {post.frontmatter.tags.length > 3 && (
-                    <Badge variant="secondary" className="text-[10px] sm:text-xs">
+                    <Badge variant="secondary" className="text-[10px] sm:text-xs rounded-md">
                       +{post.frontmatter.tags.length - 3} more
                     </Badge>
                   )}
                 </div>
               )}
 
-              <div className="mt-6 flex justify-end">
+              <div className="mt-auto flex justify-end">
                 <Link
-                  href={`/articles/${post.slug}`}
+                  href={`/blog/${post.slug}`}
                   className="text-primary hover:underline font-medium text-sm flex items-center gap-1"
                   aria-label={`Read more about ${post.frontmatter.title}`}
                 >
-                  Read full article
+                  Read
                   <span aria-hidden="true">→</span>
                 </Link>
               </div>

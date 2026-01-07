@@ -44,7 +44,7 @@ export async function generateMetadata({
     };
   }
 
-  const articleUrl = `/articles/${post.slug}`;
+  const articleUrl = `/blog/${post.slug}`;
 
   return {
     title: `${post.frontmatter.title} | Khairil Rahman Hakiki Blog`,

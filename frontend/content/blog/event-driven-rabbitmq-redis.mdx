@@ -21,13 +21,13 @@ This article details how we transitioned from a brittle, synchronous HTTP-based 
 The most common mistake in microservices is the naive approach to coordinating actions.
 
 ```typescript
-// ❌ The Naive Implementation (Synchronous Coupling)
+// The Naive Implementation (Synchronous Coupling)
 async function completePurchase(user, amount) {
   // 1. Save to Payment DB (Transaction Committed)
   await paymentRepo.save({ user, amount });
 
   // 2. Call Notification Service API
-  // 💥 CRITICAL RISK: If this line throws (Timeout, 500 Error, Power Failure)
+  // CRITICAL RISK: If this line throws (Timeout, 500 Error, Power Failure)
   // The money is taken, but the user NEVER gets the email.
   await axios.post("http://notification-service/email", { user });
 }

@@ -142,10 +142,10 @@ export function ArticleFilter({
         <div className="flex flex-col sm:flex-row items-center gap-4 mb-4">
           <div className="relative flex-1 w-full">
             <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" aria-hidden="true" />
-            <label htmlFor="search-articles" className="sr-only">Search articles</label>
+            <label htmlFor="search-articles" className="sr-only">Search posts</label>
             <Input
               id="search-articles"
-              placeholder="Search articles..."
+              placeholder="Search posts..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="pl-10"
@@ -314,14 +314,14 @@ export function SearchResultsCount({
   if (!isFiltered) {
     return (
       <p className="text-sm text-muted-foreground font-medium mb-6">
-        Showing all {total} articles
+        Showing all {total} posts
       </p>
     );
   }
 
   return (
     <p className="text-sm text-muted-foreground font-medium mb-6">
-      Showing {filtered} of {total} articles
+      Showing {filtered} of {total} posts
     </p>
   );
 }

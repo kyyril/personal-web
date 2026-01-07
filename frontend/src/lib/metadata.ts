@@ -27,5 +27,5 @@ export const SEO_DESCRIPTION = {
     projects: "Explore a collection of software engineering projects demonstrating expertise in building scalable, maintainable systems with clean architecture principles.",
     guestbook: "Connect with Khairil Rahman Hakiki through the guestbook. Share your thoughts and join the community of software engineering enthusiasts.",
     chat: "Start a conversation with Khairil's AI assistant. Get insights about software engineering, career advice, or discuss technology and development practices.",
-    articles: "Read insightful articles about software engineering, best practices, and modern development approaches. Learn from comprehensive tutorials and real-world experiences.",
+    blog: "Read insightful articles about software engineering, best practices, and modern development approaches. Learn from comprehensive tutorials and real-world experiences.",
 };

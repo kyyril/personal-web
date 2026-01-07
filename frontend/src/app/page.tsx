@@ -7,6 +7,8 @@ import Bio from "../components/Bio";
 import Experience from "../components/Experience";
 import Education from "../components/Education";
 
+import DevActivity from "../components/DevActivity";
+
 /**
  * Homepage metadata with proper canonical URL
  * This ensures the homepage is correctly indexed without duplicates
@@ -92,12 +94,14 @@ export default function Home() {
           id="bio"
           role="region"
           aria-labelledby="bio-heading"
-          className="container min-h-screen flex flex-col justify-center items-start pb-[40vh]"
+          className="container min-h-screen flex flex-col justify-center items-start pb-20"
         >
           <h1 id="bio-heading" className="sr-only">
             Biography and Introduction
           </h1>
           <Bio />
+
+          <DevActivity />
         </section>
 
         <section className="container">

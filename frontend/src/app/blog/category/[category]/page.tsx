@@ -48,9 +48,10 @@ export async function generateMetadata({
     };
   }
 
-  const categoryUrl = `/articles/category/${category}`;
-  const title = `${categoryData.name} Articles | Khairil Rahman Hakiki Blog`;
-  const description = `Browse all ${categoryData.name.toLowerCase()} articles and tutorials. ${categoryData.description} Find the latest insights and best practices.`;
+  /* Metadata Update */
+  const categoryUrl = `/blog/category/${category}`;
+  const title = `${categoryData.name} - Blog | Khairil Rahman Hakiki`;
+  const description = `Browse all ${categoryData.name.toLowerCase()} blog posts and tutorials. ${categoryData.description} Find the latest insights and best practices.`;
 
   return {
     title,
@@ -58,7 +59,7 @@ export async function generateMetadata({
     keywords: [
       ...PERSONAL_KEYWORDS,
       categoryData.name,
-      "articles",
+      "blog",
       "tutorials",
       categoryData.name.toLowerCase(),
     ],
@@ -126,16 +127,16 @@ export default async function CategoryPage({ params }: PageProps) {
   const categoryStructuredData = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    name: `${categoryData.name} Articles`,
+    name: `${categoryData.name} Blog Posts`,
     description: `${categoryData.description}`,
-    url: `${siteUrl}/articles/category/${category}`,
+    url: `${siteUrl}/blog/category/${category}`,
     mainEntity: {
       "@type": "Blog",
       blogPost: articles.map((article) => ({
         "@type": "BlogPosting",
         headline: article.frontmatter.title,
         description: article.frontmatter.description,
-        url: `${siteUrl}/articles/${article.slug}`,
+        url: `${siteUrl}/blog/${article.slug}`,
         datePublished: article.frontmatter.date,
         author: {
           "@type": "Person",
@@ -168,14 +169,14 @@ export default async function CategoryPage({ params }: PageProps) {
         {
           "@type": "ListItem",
           position: 2,
-          name: "Articles",
-          item: `${siteUrl}/articles`,
+          name: "Blog",
+          item: `${siteUrl}/blog`,
         },
         {
           "@type": "ListItem",
           position: 3,
           name: categoryData.name,
-          item: `${siteUrl}/articles/category/${category}`,
+          item: `${siteUrl}/blog/category/${category}`,
         },
       ],
     },
@@ -197,7 +198,7 @@ export default async function CategoryPage({ params }: PageProps) {
         <Breadcrumb
           items={[
             { label: "Home", href: "/" },
-            { label: "Articles", href: "/articles" },
+            { label: "Blog", href: "/blog" },
             { label: categoryData.name },
           ]}
           className="mb-8"
@@ -206,11 +207,11 @@ export default async function CategoryPage({ params }: PageProps) {
         {/* Back Button */}
         <div className="mb-6">
           <Link
-            href="/articles"
+            href="/blog"
             className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
           >
             <ArrowLeft className="h-4 w-4" />
-            Back to Articles
+            Back to Blog
           </Link>
         </div>
 
@@ -238,7 +239,7 @@ export default async function CategoryPage({ params }: PageProps) {
               {categories.map((cat) => (
                 <Link
                   key={cat.slug}
-                  href={`/articles/category/${encodeURIComponent(cat.slug)}`}
+                  href={`/blog/category/${encodeURIComponent(cat.slug)}`}
                 >
                   <Badge
                     variant={cat.slug === category ? "default" : "secondary"}
@@ -261,7 +262,7 @@ export default async function CategoryPage({ params }: PageProps) {
                 {categoryTags.map((tag) => (
                   <Link
                     key={tag.slug}
-                    href={`/articles/tags/${encodeURIComponent(tag.slug)}`}
+                    href={`/blog/tags/${encodeURIComponent(tag.slug)}`}
                   >
                     <Badge
                       variant="secondary"
@@ -287,7 +288,7 @@ export default async function CategoryPage({ params }: PageProps) {
                 <CardHeader>
                   <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
                     <Link
-                      href={`/articles/category/${encodeURIComponent(
+                      href={`/blog/category/${encodeURIComponent(
                         article.frontmatter.category
                           .toLowerCase()
                           .replace(/\s+/g, "-")
@@ -311,7 +312,7 @@ export default async function CategoryPage({ params }: PageProps) {
                     </span>
                   </div>
                   <CardTitle className="line-clamp-2 hover:text-primary transition-colors">
-                    <Link href={`/articles/${article.slug}`}>
+                    <Link href={`/blog/${article.slug}`}>
                       {article.frontmatter.title}
                     </Link>
                   </CardTitle>
@@ -340,7 +341,7 @@ export default async function CategoryPage({ params }: PageProps) {
                           .map((tag, index) => (
                             <Link
                               key={`${tag}-${index}`}
-                              href={`/articles/tags/${encodeURIComponent(
+                              href={`/blog/tags/${encodeURIComponent(
                                 tag.toLowerCase().replace(/\s+/g, "-")
                               )}`}
                             >
@@ -362,7 +363,7 @@ export default async function CategoryPage({ params }: PageProps) {
 
                   <div className="mt-4">
                     <Link
-                      href={`/articles/${article.slug}`}
+                      href={`/blog/${article.slug}`}
                       className="text-primary hover:underline font-medium"
                     >
                       Read more →
@@ -385,16 +386,16 @@ export default async function CategoryPage({ params }: PageProps) {
                 content!
               </p>
               <Link
-                href="/articles"
+                href="/blog"
                 className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded hover:bg-primary/90 transition-colors"
               >
                 <Folder className="h-4 w-4" />
-                Browse All Articles
+                Browse All Posts
               </Link>
             </div>
           </div>
         )}
-      </div>
+      </div >
     </>
   );
 }

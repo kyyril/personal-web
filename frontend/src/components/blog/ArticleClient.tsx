@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -11,6 +11,7 @@ import {
   ArrowLeft,
   Share2,
   BookOpen,
+  Check,
 } from "lucide-react";
 import { format } from "date-fns";
 import Script from "next/script";
@@ -28,6 +29,32 @@ interface ArticleClientProps {
 
 export function ArticleClient({ post, relatedPosts }: ArticleClientProps) {
   const commentsSectionRef = useRef<HTMLElement>(null);
+  const [isCopied, setIsCopied] = useState(false);
+
+  const handleShare = async () => {
+    if (typeof navigator !== "undefined") {
+      if (navigator.share) {
+        try {
+          await navigator.share({
+            title: post.frontmatter.title,
+            text: post.frontmatter.description,
+            url: window.location.href,
+          });
+        } catch (err) {
+          // User cancelled or share failed
+          console.debug("Share cancelled or failed:", err);
+        }
+      } else {
+        try {
+          await navigator.clipboard.writeText(window.location.href);
+          setIsCopied(true);
+          setTimeout(() => setIsCopied(false), 2000);
+        } catch (err) {
+          console.error("Failed to copy:", err);
+        }
+      }
+    }
+  };
 
   // Enhanced JSON-LD structured data for article
   const articleData = {
@@ -35,7 +62,7 @@ export function ArticleClient({ post, relatedPosts }: ArticleClientProps) {
     "@type": "BlogPosting",
     headline: post.frontmatter.title,
     description: post.frontmatter.description,
-    url: `${siteUrl}/articles/${post.slug}`,
+    url: `${siteUrl}/blog/${post.slug}`,
     datePublished: post.frontmatter.date,
     dateModified: post.frontmatter.date,
     author: {
@@ -50,7 +77,7 @@ export function ArticleClient({ post, relatedPosts }: ArticleClientProps) {
     },
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": `${siteUrl}/articles/${post.slug}`,
+      "@id": `${siteUrl}/blog/${post.slug}`,
     },
     image: {
       "@type": "ImageObject",
@@ -72,7 +99,7 @@ export function ArticleClient({ post, relatedPosts }: ArticleClientProps) {
     mentions: relatedPosts.map((relatedPost) => ({
       "@type": "BlogPosting",
       headline: relatedPost.frontmatter.title,
-      url: `${siteUrl}/articles/${relatedPost.slug}`,
+      url: `${siteUrl}/blog/${relatedPost.slug}`,
       datePublished: relatedPost.frontmatter.date,
     })),
     breadcrumb: {
@@ -87,14 +114,14 @@ export function ArticleClient({ post, relatedPosts }: ArticleClientProps) {
         {
           "@type": "ListItem",
           position: 2,
-          name: "Articles",
-          item: `${siteUrl}/articles`,
+          name: "Blog",
+          item: `${siteUrl}/blog`,
         },
         {
           "@type": "ListItem",
           position: 3,
           name: post.frontmatter.category,
-          item: `${siteUrl}/articles/category/${encodeURIComponent(
+          item: `${siteUrl}/blog/category/${encodeURIComponent(
             post.frontmatter.category.toLowerCase().replace(/\s+/g, "-")
           )}`,
         },
@@ -102,7 +129,7 @@ export function ArticleClient({ post, relatedPosts }: ArticleClientProps) {
           "@type": "ListItem",
           position: 4,
           name: post.frontmatter.title,
-          item: `${siteUrl}/articles/${post.slug}`,
+          item: `${siteUrl}/blog/${post.slug}`,
         },
       ],
     },
@@ -130,10 +157,10 @@ export function ArticleClient({ post, relatedPosts }: ArticleClientProps) {
             <Breadcrumb
               items={[
                 { label: "Home", href: "/" },
-                { label: "Articles", href: "/articles" },
+                { label: "Blog", href: "/blog" },
                 {
                   label: post.frontmatter.category,
-                  href: `/articles/category/${encodeURIComponent(
+                  href: `/blog/category/${encodeURIComponent(
                     post.frontmatter.category.toLowerCase().replace(/\s+/g, "-")
                   )}`,
                 },
@@ -145,11 +172,11 @@ export function ArticleClient({ post, relatedPosts }: ArticleClientProps) {
           {/* Back Button */}
           <div className="order-1 sm:order-2 self-start sm:self-auto">
             <Link
-              href="/articles"
+              href="/blog"
               className="group inline-flex items-center gap-1.5 text-xs sm:text-sm text-muted-foreground hover:text-foreground transition-all duration-200"
             >
               <ArrowLeft className="h-3.5 w-3.5 sm:h-4 sm:w-4 transition-transform group-hover:-translate-x-1" />
-              <span className="font-medium">Back to Articles</span>
+              <span className="font-medium">Back to Blog</span>
             </Link>
           </div>
         </div>
@@ -181,7 +208,7 @@ export function ArticleClient({ post, relatedPosts }: ArticleClientProps) {
                     .map((tag: string, index: number) => (
                       <Link
                         key={`${tag}-${index}`}
-                        href={`/articles/tags/${encodeURIComponent(
+                        href={`/blog/tags/${encodeURIComponent(
                           tag.toLowerCase().replace(/\s+/g, "-")
                         )}`}
                       >
@@ -223,9 +250,24 @@ export function ArticleClient({ post, relatedPosts }: ArticleClientProps) {
                       {post.frontmatter.readTime}
                     </span>
                   </div>
-                  <button className="flex items-center gap-2 hover:text-foreground transition-colors">
-                    <Share2 className="h-4 w-4 flex-shrink-0" />
-                    <span className="hidden sm:inline">Share</span>
+                  <button
+                    onClick={handleShare}
+                    className="flex items-center gap-2 hover:text-foreground transition-colors"
+                    aria-label="Share this article"
+                  >
+                    {isCopied ? (
+                      <>
+                        <Check className="h-4 w-4 flex-shrink-0 text-green-500" />
+                        <span className="hidden sm:inline text-green-500 font-medium">
+                          Copied!
+                        </span>
+                      </>
+                    ) : (
+                      <>
+                        <Share2 className="h-4 w-4 flex-shrink-0" />
+                        <span className="hidden sm:inline">Share</span>
+                      </>
+                    )}
                   </button>
                 </div>
               </header>
@@ -244,7 +286,7 @@ export function ArticleClient({ post, relatedPosts }: ArticleClientProps) {
               <section className="mb-8 lg:mb-12 mt-12">
                 <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-4 lg:mb-6 flex items-center gap-2">
                   <BookOpen className="h-5 w-5 lg:h-6 lg:w-6 flex-shrink-0" />
-                  Related Articles
+                  Related Posts
                 </h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
                   {relatedPosts.map((relatedPost) => (
@@ -255,7 +297,7 @@ export function ArticleClient({ post, relatedPosts }: ArticleClientProps) {
                       <CardHeader className="pb-3">
                         <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
                           <Link
-                            href={`/articles/category/${encodeURIComponent(
+                            href={`/blog/category/${encodeURIComponent(
                               relatedPost.frontmatter.category
                                 .toLowerCase()
                                 .replace(/\s+/g, "-")
@@ -274,7 +316,7 @@ export function ArticleClient({ post, relatedPosts }: ArticleClientProps) {
                           </span>
                         </div>
                         <CardTitle className="text-base lg:text-lg line-clamp-2 hover:text-primary transition-colors leading-tight">
-                          <Link href={`/articles/${relatedPost.slug}`}>
+                          <Link href={`/blog/${relatedPost.slug}`}>
                             {relatedPost.frontmatter.title}
                           </Link>
                         </CardTitle>
@@ -289,7 +331,7 @@ export function ArticleClient({ post, relatedPosts }: ArticleClientProps) {
                             .map((tag: string, index: number) => (
                               <Link
                                 key={`${tag}-${index}`}
-                                href={`/articles/tags/${encodeURIComponent(
+                                href={`/blog/tags/${encodeURIComponent(
                                   tag.toLowerCase().replace(/\s+/g, "-")
                                 )}`}
                               >
@@ -320,7 +362,7 @@ export function ArticleClient({ post, relatedPosts }: ArticleClientProps) {
               </p>
               <div className="flex flex-wrap justify-center gap-3">
                 <Link
-                  href="/articles"
+                  href="/blog"
                   className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground roundedmd hover:bg-primary/90 transition-colors text-sm sm:text-base"
                 >
                   <BookOpen className="h-4 w-4" />

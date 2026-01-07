@@ -23,8 +23,8 @@ import { Breadcrumb } from "@/components/Breadcrumb";
  * Helps prevent "Alternate page with proper canonical tag" issues
  */
 export const metadata: Metadata = {
-  title: "Articles | Software Engineering Insights",
-  description: SEO_DESCRIPTION.articles,
+  title: "Blog | Software Engineering Insights",
+  description: SEO_DESCRIPTION.blog,
   keywords: [
     ...PERSONAL_KEYWORDS,
     "software engineer",
@@ -43,17 +43,17 @@ export const metadata: Metadata = {
     telephone: false,
   },
   openGraph: generateOpenGraph({
-    title: "Articles | Software Engineering Insights",
-    description: SEO_DESCRIPTION.articles,
-    path: "/articles",
+    title: "Blog | Software Engineering Insights",
+    description: SEO_DESCRIPTION.blog,
+    path: "/blog",
     type: "website",
   }),
   twitter: generateTwitter({
-    title: "Articles | Software Engineering Insights",
-    description: SEO_DESCRIPTION.articles,
+    title: "Blog | Software Engineering Insights",
+    description: SEO_DESCRIPTION.blog,
   }),
   // Key fix: Proper canonical with language alternates
-  alternates: generateAlternates("/articles"),
+  alternates: generateAlternates("/blog"),
   robots: {
     index: true,
     follow: true,
@@ -69,7 +69,7 @@ export const metadata: Metadata = {
 
 
 
-export default function ArticlesPage() {
+export default function BlogPage() {
   const allArticles = getAllArticles();
   const categories = getAllCategories();
 
@@ -78,8 +78,8 @@ export default function ArticlesPage() {
     "@context": "https://schema.org",
     "@type": "Blog",
     name: "Khairil Rahman Hakiki Blog",
-    description: SEO_DESCRIPTION.articles,
-    url: `${siteUrl}/articles`,
+    description: SEO_DESCRIPTION.blog,
+    url: `${siteUrl}/blog`,
     author: {
       "@type": "Person",
       name: "Khairil Rahman Hakiki",
@@ -94,7 +94,7 @@ export default function ArticlesPage() {
       "@type": "BlogPosting",
       headline: article.frontmatter.title,
       description: article.frontmatter.description,
-      url: `${siteUrl}/articles/${article.slug}`,
+      url: `${siteUrl}/blog/${article.slug}`,
       author: {
         "@type": "Person",
         name: article.frontmatter.author,
@@ -127,8 +127,8 @@ export default function ArticlesPage() {
         {
           "@type": "ListItem",
           position: 2,
-          name: "Articles",
-          item: `${siteUrl}/articles`,
+          name: "Blog",
+          item: `${siteUrl}/blog`,
         },
       ],
     },
@@ -148,13 +148,13 @@ export default function ArticlesPage() {
       <div className="container mx-auto px-4 py-8 max-w-6xl">
         {/* Breadcrumb Navigation */}
         <Breadcrumb
-          items={[{ label: "Home", href: "/" }, { label: "Articles" }]}
+          items={[{ label: "Home", href: "/" }, { label: "Blog" }]}
           className="mb-8"
         />
 
         {/* Header Section */}
         <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6 tracking-tight">Articles</h1>
+          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6 tracking-tight">Blog</h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
             Discover insights, tutorials, and best practices in modern software
             engineer.
@@ -168,7 +168,7 @@ export default function ArticlesPage() {
             Browse Categories
           </h2>
           <div className="flex flex-wrap gap-2">
-            <Link href="/articles" aria-label={`View all articles, ${allArticles.length} available`}>
+            <Link href="/blog" aria-label={`View all posts, ${allArticles.length} available`}>
               <Badge
                 variant="secondary"
                 className="cursor-pointer hover:bg-secondary"
@@ -179,8 +179,8 @@ export default function ArticlesPage() {
             {categories.map((category) => (
               <Link
                 key={category.slug}
-                href={`/articles/category/${encodeURIComponent(category.slug)}`}
-                aria-label={`View articles in ${category.name}, ${category.count} available`}
+                href={`/blog/category/${encodeURIComponent(category.slug)}`}
+                aria-label={`View posts in ${category.name}, ${category.count} available`}
               >
                 <Badge
                   variant="secondary"

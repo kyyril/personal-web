@@ -33,7 +33,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/articles`,
+      url: `${baseUrl}/blog`,
       lastModified: currentDate,
       changeFrequency: "daily",
       priority: 0.9,
@@ -57,7 +57,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Dynamic routes for articles
   const articles = getAllArticles();
   const articleRoutes: MetadataRoute.Sitemap = articles.map((article) => ({
-    url: `${baseUrl}/articles/${article.slug}`,
+    url: `${baseUrl}/blog/${article.slug}`,
     lastModified: new Date(article.frontmatter.date),
     changeFrequency: "monthly",
     priority: 0.8,
@@ -66,7 +66,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Dynamic routes for article categories
   const categories = getAllCategories();
   const categoryRoutes: MetadataRoute.Sitemap = categories.map((category) => ({
-    url: `${baseUrl}/articles/category/${category.slug}`,
+    url: `${baseUrl}/blog/category/${category.slug}`,
     lastModified: currentDate,
     changeFrequency: "weekly",
     priority: 0.7,
@@ -91,7 +91,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   });
 
   const tagRoutes: MetadataRoute.Sitemap = Array.from(tagsMap.values()).map((tag) => ({
-    url: `${baseUrl}/articles/tags/${tag.slug}`,
+    url: `${baseUrl}/blog/tags/${tag.slug}`,
     lastModified: tag.latestDate,
     changeFrequency: "weekly",
     priority: 0.6,

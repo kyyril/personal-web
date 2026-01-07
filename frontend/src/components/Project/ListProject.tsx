@@ -123,7 +123,7 @@ export default function ListProject({ projects }: ListProjectProps) {
   return (
     <div className="flex flex-col justify-center">
       {/* Filter Controls */}
-      <div className="flex flex-wrap gap-4 mb-6 items-center">
+      <div className="flex flex-wrap gap-4 mb-6 items-center justify-end">
         <div className="flex items-center gap-2">
           <label htmlFor="category-select" className="text-sm font-medium sr-only">Category</label>
           <Select onValueChange={setCategoryFilter} value={categoryFilter}>
@@ -160,7 +160,7 @@ export default function ListProject({ projects }: ListProjectProps) {
           className="h-9"
           aria-label="Clear all filters"
         >
-          Clear Filters
+          Clear
         </Button>
       </div>
 
@@ -244,8 +244,8 @@ export default function ListProject({ projects }: ListProjectProps) {
                     size="sm"
                     onClick={() => setCurrentPage(pageNum as number)}
                     className={`h-9 w-9 p-0 ${isActive
-                        ? "bg-primary text-primary-foreground shadow-sm"
-                        : "hover:bg-primary/10 hover:text-primary"
+                      ? "bg-primary text-primary-foreground shadow-sm"
+                      : "hover:bg-primary/10 hover:text-primary"
                       }`}
                     aria-label={`Go to page ${pageNum} of ${totalPages}`}
                     aria-current={isActive ? "page" : undefined}

@@ -15,13 +15,13 @@ export default function ArticleDetailSkeleton() {
           {/* Breadcrumb Navigation */}
           <div className="order-2 sm:order-1">
             <nav className="flex items-center space-x-2 text-xs sm:text-sm text-muted-foreground" aria-label="Breadcrumb">
-              {/* Home */}
               <Skeleton className="h-3 w-8 sm:w-12" />
+              {/* Home */}
 
               {/* Separator */}
               <Skeleton className="h-3 w-3 sm:w-4" />
 
-              {/* Articles */}
+              {/* Blog */}
               <Skeleton className="h-3 w-14 sm:w-20" />
 
               {/* Separator */}

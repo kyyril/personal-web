@@ -13,7 +13,7 @@ import { motion } from "framer-motion";
 
 export const navigationItems = [
   { name: "Projects", href: "/projects", icon: CodeIcon },
-  { name: "Articles", href: "/articles", icon: FileTextIcon },
+  { name: "Blog", href: "/blog", icon: FileTextIcon },
   { name: "GuestBooks", href: "/guestbook", icon: PaperPlaneIcon },
   // { name: "Chat", href: "/chat", icon: ChatBubbleIcon },
 ];
@@ -54,8 +54,8 @@ export function Navigation() {
                 height={28}
                 quality={100}
                 className={`rounded-full border-spacing-3 transition-all w-6 h-6 duration-300 object-cover  ${pathname === "/"
-                    ? "ring-1 ring-custom"
-                    : "ring-1 ring-primary/10"
+                  ? "ring-1 ring-custom"
+                  : "ring-1 ring-primary/10"
                   }`}
               />
             </motion.div>

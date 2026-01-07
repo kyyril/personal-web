@@ -15,7 +15,7 @@ if (!fs.existsSync(outputDir)) {
 }
 
 // Process MDX files and create static data
-const articlesDir = path.join(__dirname, "..", "content", "articles");
+const articlesDir = path.join(__dirname, "..", "content", "blog");
 
 // Process markdown to HTML using remark/rehype
 async function processMarkdownToHtml(content) {
