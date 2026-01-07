@@ -11,11 +11,13 @@ interface BreadcrumbItem {
 interface BreadcrumbProps {
   items: BreadcrumbItem[];
   className?: string;
+  sticky?: boolean;
 }
 
 export const Breadcrumb: React.FC<BreadcrumbProps> = ({
   items,
   className = "",
+  sticky = false,
 }) => {
   const generateBreadcrumbData = () => {
     const itemsWithPosition = items.map((item, index) => ({
@@ -33,7 +35,7 @@ export const Breadcrumb: React.FC<BreadcrumbProps> = ({
   };
 
   return (
-    <div>
+    <div className={sticky ? "sticky top-0 z-40 -mx-4 px-4 md:-mx-16 md:px-16 py-3 bg-background/80 backdrop-blur-md mb-2" : ""}>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

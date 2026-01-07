@@ -155,6 +155,7 @@ export function ArticleClient({ post, relatedPosts }: ArticleClientProps) {
           {/* Breadcrumb Navigation */}
           <div className="order-2 sm:order-1 min-w-0">
             <Breadcrumb
+              sticky
               items={[
                 { label: "Home", href: "/" },
                 { label: "Blog", href: "/blog" },

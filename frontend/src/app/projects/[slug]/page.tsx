@@ -94,7 +94,7 @@ export default async function Detailproject({
 
   return (
     <section className="max-w-5xl w-full px-4 min-h-screen md:px-16 mx-auto">
-      <Breadcrumb items={breadcrumbItems} className="mb-4" />
+      <Breadcrumb sticky items={breadcrumbItems} className="mb-4" />
       <div className="border-none shadow-none">
         {project && project.image.length > 0 ? (
           <div className="animate-in fade-in slide-in-from-bottom-4 duration-700 w-full overflow-hidden rounded-xl bg-muted/20">
