@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -21,6 +21,17 @@ import { AuthProvider } from "../contexts/AuthContext";
 import { LazyMotion, domAnimation } from "framer-motion";
 
 /**
+ * Viewport configuration
+ */
+export const viewport: Viewport = {
+  themeColor: "#000000",
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+};
+
+/**
  * Root layout metadata following Google's SEO best practices
  * https://developers.google.com/search/docs
  */
@@ -30,6 +41,12 @@ export const metadata: Metadata = {
     template: "%s | Khairil Rahman Hakiki",
   },
   description: SEO_DESCRIPTION.main,
+  applicationName: "Khairil Rahman Hakiki",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "Khairil Rahman Hakiki",
+  },
   keywords: [
     ...PERSONAL_KEYWORDS,
     "Web Development",
@@ -98,10 +115,11 @@ export const metadata: Metadata = {
   category: "Technology",
   classification: "Portfolio",
   // Enhanced icons configuration for all browsers and Google Search
+  // Google favicon bot prefers multiples of 48px
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
-      { url: "/assets/profile.webp", sizes: "32x32", type: "image/webp" },
+      { url: "/assets/profile.webp", sizes: "48x48", type: "image/webp" },
       { url: "/assets/profile.webp", sizes: "96x96", type: "image/webp" },
       { url: "/assets/profile.webp", sizes: "144x144", type: "image/webp" },
     ],
@@ -121,7 +139,6 @@ export const metadata: Metadata = {
   // Verification for search consoles
   verification: {
     google: "24f9cc081f9ae37b",
-    // Add other verification IDs if available
   },
 };
 
@@ -167,15 +184,6 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes"
-        />
-        <meta name="theme-color" content="#000000" />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-        <meta name="apple-mobile-web-app-title" content="Khairil HR" />
-
         {/* Preconnect to external domains for performance */}
         <link rel="preconnect" href="https://res.cloudinary.com" />
         <link rel="dns-prefetch" href="https://res.cloudinary.com" />

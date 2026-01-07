@@ -35,49 +35,52 @@ export function Navigation() {
         animate={{ y: 0, opacity: 1 }}
         transition={{ type: "spring", stiffness: 120, damping: 17, delay: 0.2 }}
       >
-        <div className="flex justify-around items-center py-3 px-2">
-          <Link
-            href="/"
-            className="relative group"
-            aria-label="Navigate to home page"
-            aria-current={pathname === "/" ? "page" : undefined}
-          >
-            <m.div
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ type: "spring", stiffness: 400, damping: 17 }}
-            >
-              <Image
-                src="/assets/profile.webp"
-                alt="Profile"
-                width={28}
-                height={28}
-                quality={100}
-                className={`rounded-full border-spacing-3 transition-all w-6 h-6 duration-300 object-cover  ${pathname === "/"
-                  ? "ring-1 ring-custom"
-                  : "ring-1 ring-primary/10"
-                  }`}
-              />
-            </m.div>
-          </Link>
-          {navigationItems.map((item) => (
+        <ul className="flex justify-around items-center py-3 px-2 m-0 p-0 list-none w-full">
+          <li>
             <Link
-              key={item.href}
-              href={item.href}
-              className="relative group flex flex-col items-center gap-1"
-              aria-label={`Navigate to ${item.name} page`}
-              aria-current={isActive(item.href) ? "page" : undefined}
+              href="/"
+              className="relative group block"
+              aria-label="Navigate to home page"
+              aria-current={pathname === "/" ? "page" : undefined}
             >
-              <item.icon
-                className={`w-5 h-5 transition-colors ${isActive(item.href)
-                  ? "text-custom"
-                  : "group-hover:text-custom/80"
-                  }`}
-                aria-hidden="true"
-              />
+              <m.div
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ type: "spring", stiffness: 400, damping: 17 }}
+              >
+                <Image
+                  src="/assets/profile.webp"
+                  alt="Profile"
+                  width={28}
+                  height={28}
+                  quality={100}
+                  className={`rounded-full border-spacing-3 transition-all w-6 h-6 duration-300 object-cover  ${pathname === "/"
+                    ? "ring-1 ring-custom"
+                    : "ring-1 ring-primary/10"
+                    }`}
+                />
+              </m.div>
             </Link>
+          </li>
+          {navigationItems.map((item) => (
+            <li key={item.href}>
+              <Link
+                href={item.href}
+                className="relative group flex flex-col items-center gap-1"
+                aria-label={`Navigate to ${item.name} page`}
+                aria-current={isActive(item.href) ? "page" : undefined}
+              >
+                <item.icon
+                  className={`w-5 h-5 transition-colors ${isActive(item.href)
+                    ? "text-custom"
+                    : "group-hover:text-custom/80"
+                    }`}
+                  aria-hidden="true"
+                />
+              </Link>
+            </li>
           ))}
-        </div>
+        </ul>
       </m.nav>
       {/* Theme Toggler */}
       <m.div

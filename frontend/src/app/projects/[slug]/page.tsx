@@ -93,83 +93,91 @@ export default async function Detailproject({
   ];
 
   return (
-    <section className="max-w-5xl w-full px-4 min-h-screen md:px-16 mx-auto">
-      <Breadcrumb sticky items={breadcrumbItems} className="mb-4" />
-      <div className="border-none shadow-none">
-        {project && project.image.length > 0 ? (
-          <div className="animate-in fade-in slide-in-from-bottom-4 duration-700 w-full overflow-hidden rounded-xl bg-muted/20">
-            <ProjectCarousel images={project.image} />
-          </div>
-        ) : (
-          <div className="text-center py-10 animate-in fade-in duration-500">
-            <p className="text-xl text-muted-foreground">
-              No images available.
-            </p>
-          </div>
-        )}
-
-        <div className="flex flex-col mt-6 w-full mx-2 gap-2">
-          <h1 className="text-3xl font-bold lg:text-4xl">
-            {project.title || "Project Title Not Available"}
-          </h1>
-          <p className="mt-2 text-muted-foreground">
-            {project.description || "Description not available."}
-          </p>
-
-          <div className="flex flex-wrap gap-1 my-4">
-            {project.technologies && project.technologies.length > 0 ? (
-              project.technologies.map((tech) => (
-                <Badge
-                  className="w-auto h-7 text-sm"
-                  key={tech}
-                  variant="secondary"
-                >
-                  {tech}
-                </Badge>
-              ))
-            ) : (
-              <p className="text-muted-foreground">No technologies listed.</p>
-            )}
-          </div>
-
-          <div className="w-full">
-            {project.features && project.features.length > 0 ? (
-              <ul className="list-disc">
-                {project.features.map((feature, index) => (
-                  <li key={index} className="ml-4">
-                    {feature}
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <p className="text-muted-foreground">No features available.</p>
-            )}
-          </div>
-
-          <div className="flex space-x-2 mt-4">
-            {project.live_url && (
-              <Link target="_blank" href={project.live_url} prefetch={false}>
-                <Button size="sm" className="hover:text-custom ">
-                  <GlobeIcon className="h-3 w-3 mr-0.5" aria-hidden="true" />
-                  Visit
-                </Button>
-              </Link>
-            )}
-            {project.code_repo_url && (
-              <Link
-                target="_blank"
-                href={project.code_repo_url}
-                prefetch={false}
-              >
-                <Button size="sm" className="hover:text-custom" variant="ghost">
-                  <GitHubLogoIcon className="h-3 w-3 mr-0.5" aria-hidden="true" />
-                  Repo
-                </Button>
-              </Link>
-            )}
-          </div>
+    <div className="min-h-screen w-full">
+      {/* Sticky Header */}
+      <div className="sticky top-0 z-40 w-full bg-background/80 backdrop-blur-md">
+        <div className="max-w-5xl w-full mx-auto px-4 md:px-16 py-6 flex items-center">
+          <Breadcrumb items={breadcrumbItems} />
         </div>
       </div>
-    </section>
+
+      <section className="max-w-5xl w-full px-4 md:px-16 mx-auto pt-6 pb-16">
+        <div className="border-none shadow-none">
+          {project && project.image.length > 0 ? (
+            <div className="animate-in fade-in slide-in-from-bottom-4 duration-700 w-full overflow-hidden rounded-xl bg-muted/20">
+              <ProjectCarousel images={project.image} />
+            </div>
+          ) : (
+            <div className="text-center py-10 animate-in fade-in duration-500">
+              <p className="text-xl text-muted-foreground">
+                No images available.
+              </p>
+            </div>
+          )}
+
+          <div className="flex flex-col mt-6 w-full mx-2 gap-2">
+            <h1 className="text-3xl font-bold lg:text-4xl">
+              {project.title || "Project Title Not Available"}
+            </h1>
+            <p className="mt-2 text-muted-foreground">
+              {project.description || "Description not available."}
+            </p>
+
+            <div className="flex flex-wrap gap-1 my-4">
+              {project.technologies && project.technologies.length > 0 ? (
+                project.technologies.map((tech) => (
+                  <Badge
+                    className="w-auto h-7 text-sm"
+                    key={tech}
+                    variant="secondary"
+                  >
+                    {tech}
+                  </Badge>
+                ))
+              ) : (
+                <p className="text-muted-foreground">No technologies listed.</p>
+              )}
+            </div>
+
+            <div className="w-full">
+              {project.features && project.features.length > 0 ? (
+                <ul className="list-disc">
+                  {project.features.map((feature, index) => (
+                    <li key={index} className="ml-4">
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="text-muted-foreground">No features available.</p>
+              )}
+            </div>
+
+            <div className="flex space-x-2 mt-4">
+              {project.live_url && (
+                <Link target="_blank" href={project.live_url} prefetch={false}>
+                  <Button size="sm" className="hover:text-custom ">
+                    <GlobeIcon className="h-3 w-3 mr-0.5" aria-hidden="true" />
+                    Visit
+                  </Button>
+                </Link>
+              )}
+              {project.code_repo_url && (
+                <Link
+                  target="_blank"
+                  href={project.code_repo_url}
+                  prefetch={false}
+                >
+                  <Button size="sm" className="hover:text-custom" variant="ghost">
+                    <GitHubLogoIcon className="h-3 w-3 mr-0.5" aria-hidden="true" />
+                    Repo
+                  </Button>
+                </Link>
+              )}
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
   );
 }

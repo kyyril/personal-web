@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import Link from "next/link";
 import { getAllArticles, getAllCategories } from "@/data/blog-data";
 import { ClientFilterWrapper } from "@/components/blog/ClientFilterWrapper";
@@ -196,10 +196,20 @@ export default function BlogPage() {
         {/* Client-side Filter & Articles List Section */}
         <section aria-labelledby="articles-heading">
           <h2 id="articles-heading" className="sr-only">All Articles</h2>
-          <ClientFilterWrapper
-            allArticles={allArticles}
-            categories={categories}
-          />
+          <Suspense
+            fallback={
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {[...Array(6)].map((_, i) => (
+                  <div key={i} className="h-96 rounded-xl bg-muted animate-pulse" />
+                ))}
+              </div>
+            }
+          >
+            <ClientFilterWrapper
+              allArticles={allArticles}
+              categories={categories}
+            />
+          </Suspense>
         </section>
       </div>
     </>

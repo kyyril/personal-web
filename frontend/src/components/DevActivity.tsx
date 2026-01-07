@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { m, AnimatePresence } from "framer-motion";
 import { useTheme } from "next-themes";
 import { BarChart3, Github, Clock, Layout, Loader2 } from "lucide-react";
 import NextImage from "next/image";
@@ -22,7 +21,6 @@ const Skeleton: React.FC<{ className?: string }> = ({ className = "" }) => (
 const DevActivity: React.FC = () => {
     const [activeTab, setActiveTab] = useState<TabType>("overview");
     const [mounted, setMounted] = useState(false);
-    const [direction, setDirection] = useState<number>(0);
     const [showMetrics, setShowMetrics] = useState(false);
     const { theme } = useTheme();
 
@@ -69,9 +67,6 @@ const DevActivity: React.FC = () => {
 
     const handleTabChange = (newTab: TabType) => {
         if (newTab === activeTab) return;
-        const currentIndex = tabs.findIndex(tab => tab.id === activeTab);
-        const newIndex = tabs.findIndex(tab => tab.id === newTab);
-        setDirection(newIndex > currentIndex ? 1 : -1);
         setActiveTab(newTab);
     };
 
@@ -98,135 +93,99 @@ const DevActivity: React.FC = () => {
                 </button>
             </div>
 
-            <AnimatePresence>
-                {showMetrics && (
-                    <m.div
-                        initial={{ opacity: 0, height: 0, marginTop: 0 }}
-                        animate={{ opacity: 1, height: "auto", marginTop: 16 }}
-                        exit={{ opacity: 0, height: 0, marginTop: 0 }}
-                        transition={{ duration: 0.3, ease: "circOut" }}
-                        className="overflow-hidden"
-                    >
-                        <div className="flex justify-end mb-8">
-                            <div className="flex p-1 bg-muted/10 rounded-xl w-fit">
-                                {tabs.map((tab) => (
-                                    <button
-                                        key={tab.id}
-                                        onClick={() => handleTabChange(tab.id as TabType)}
-                                        className={`relative flex items-center gap-2 px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-lg transition-all duration-200 ${activeTab === tab.id
-                                            ? "text-foreground"
-                                            : "text-muted-foreground hover:text-foreground/70"
-                                            }`}
-                                    >
-                                        {activeTab === tab.id && (
-                                            <m.div
-                                                layoutId="activeTab"
-                                                className="absolute inset-0 bg-background shadow-sm rounded-lg"
-                                                transition={{ type: "spring", bounce: 0, duration: 0.2 }}
-                                            />
-                                        )}
-                                        <tab.icon className="w-3.5 h-3.5 relative z-10" />
-                                        <span className="relative z-10">{tab.label}</span>
-                                    </button>
-                                ))}
-                            </div>
+            {showMetrics && (
+                <div className="overflow-hidden mt-4 animate-in fade-in-0 slide-in-from-bottom-4 duration-100">
+                    <div className="flex justify-end mb-8">
+                        <div className="flex p-1 w-fit">
+                            {tabs.map((tab) => (
+                                <button
+                                    key={tab.id}
+                                    onClick={() => handleTabChange(tab.id as TabType)}
+                                    className={`relative flex items-center gap-2 px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-lg transition-colors duration-200 ${activeTab === tab.id
+                                        ? "text-foreground"
+                                        : "text-muted-foreground hover:text-foreground/70"
+                                        }`}
+                                >
+                                    {activeTab === tab.id && (
+                                        <div className="absolute inset-0 bg-muted/50 rounded-lg" />
+                                    )}
+                                    <tab.icon className="w-3.5 h-3.5 relative z-10" />
+                                    <span className="relative z-10">{tab.label}</span>
+                                </button>
+                            ))}
                         </div>
+                    </div>
 
-                        <div className="relative w-full min-h-[480px] md:min-h-[640px] transition-all duration-300">
-                            {/* GitHub Tab Content */}
-                            <m.div
-                                initial={false}
-                                animate={{
-                                    x: activeTab === "overview" ? 0 : -20,
-                                    opacity: activeTab === "overview" ? 1 : 0,
-                                    scale: activeTab === "overview" ? 1 : 0.98,
-                                    pointerEvents: activeTab === "overview" ? "auto" : "none",
-                                }}
-                                transition={{
-                                    x: { type: "spring", stiffness: 600, damping: 50 },
-                                    opacity: { duration: 0.15 },
-                                    scale: { duration: 0.15 },
-                                }}
-                                className={`${activeTab === "overview" ? "relative" : "absolute inset-0"} w-full`}
-                            >
-                                <div className="flex flex-col items-center py-2 md:py-6 gap-0">
-                                    {/* 1. GitHub Streak */}
-                                    <div className="w-full max-w-2xl">
-                                        {loadingStates.githubStreak && <Skeleton className="absolute inset-0 w-full" />}
-                                        <div className="flex justify-center">
-                                            <NextImage
-                                                src={githubStreakUrl}
-                                                alt="GitHub Streak"
-                                                width={600}
-                                                height={240}
-                                                unoptimized
-                                                priority
-                                                className={`w-full h-auto transition-opacity duration-100 block ${loadingStates.githubStreak ? "opacity-0" : "opacity-100"
-                                                    }`}
-                                                onLoad={() => handleImageLoad("githubStreak")}
-                                            />
-                                        </div>
-                                    </div>
-
-                                    {/* 2. Stats */}
-                                    <div className="w-full max-w-2xl">
-                                        {loadingStates.githubStats && <Skeleton className="absolute inset-0 w-full" />}
-                                        <div className="flex justify-center">
-                                            <NextImage
-                                                src={githubStatsUrl}
-                                                alt="GitHub Stats"
-                                                width={600}
-                                                height={240}
-                                                unoptimized
-                                                priority
-                                                className={`w-full h-auto transition-opacity duration-100 block scale-90 md:scale-100 ${loadingStates.githubStats ? "opacity-0" : "opacity-100"
-                                                    }`}
-                                                onLoad={() => handleImageLoad("githubStats")}
-                                            />
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </m.div>
-
-                            {/* WakaTime Tab Content */}
-                            <m.div
-                                initial={false}
-                                animate={{
-                                    x: activeTab === "wakatime" ? 0 : 20,
-                                    opacity: activeTab === "wakatime" ? 1 : 0,
-                                    scale: activeTab === "wakatime" ? 1 : 0.98,
-                                    pointerEvents: activeTab === "wakatime" ? "auto" : "none",
-                                }}
-                                transition={{
-                                    x: { type: "spring", stiffness: 600, damping: 50 },
-                                    opacity: { duration: 0.15 },
-                                    scale: { duration: 0.15 },
-                                }}
-                                className={`${activeTab === "wakatime" ? "relative" : "absolute inset-0"} w-full px-2`}
-                            >
-                                <div className="flex justify-center items-center overflow-hidden py-4">
-                                    <div className="w-full max-w-2xl relative rounded-lg">
-                                        {loadingStates.wakatime && (
-                                            <Skeleton className="absolute inset-0 w-full h-full" />
-                                        )}
+                    <div className="grid grid-cols-1 grid-rows-1 w-full min-h-[480px] md:min-h-[640px]">
+                        {/* GitHub Tab Content */}
+                        <div
+                            className={`col-start-1 row-start-1 w-full transition-opacity duration-200 ${activeTab === "overview" ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"}`}
+                        >
+                            <div className="flex flex-col items-center py-2 md:py-6 gap-0">
+                                {/* 1. GitHub Streak */}
+                                <div className="w-full max-w-2xl">
+                                    {loadingStates.githubStreak && <Skeleton className="absolute inset-0 w-full" />}
+                                    <div className="flex justify-center">
                                         <NextImage
-                                            src={wakatimeUrl}
-                                            alt="Wakatime Stats"
+                                            src={githubStreakUrl}
+                                            alt="GitHub Streak"
                                             width={600}
-                                            height={400}
+                                            height={240}
                                             unoptimized
-                                            className={`w-full h-auto transition-all duration-200 ${currentTheme === "light" ? "invert" : "opacity-90"
-                                                } ${loadingStates.wakatime ? "opacity-0" : "opacity-100"}`}
-                                            onLoad={() => handleImageLoad("wakatime")}
+                                            priority
+                                            className={`w-full h-auto transition-opacity duration-100 block ${loadingStates.githubStreak ? "opacity-0" : "opacity-100"
+                                                }`}
+                                            onLoad={() => handleImageLoad("githubStreak")}
                                         />
                                     </div>
                                 </div>
-                            </m.div>
+
+                                {/* 2. Stats */}
+                                <div className="w-full max-w-2xl">
+                                    {loadingStates.githubStats && <Skeleton className="absolute inset-0 w-full" />}
+                                    <div className="flex justify-center">
+                                        <NextImage
+                                            src={githubStatsUrl}
+                                            alt="GitHub Stats"
+                                            width={600}
+                                            height={240}
+                                            unoptimized
+                                            priority
+                                            className={`w-full h-auto transition-opacity duration-100 block scale-90 md:scale-100 ${loadingStates.githubStats ? "opacity-0" : "opacity-100"
+                                                }`}
+                                            onLoad={() => handleImageLoad("githubStats")}
+                                        />
+                                    </div>
+                                </div>
+
+                            </div>
                         </div>
-                    </m.div>
-                )}
-            </AnimatePresence>
+
+                        {/* WakaTime Tab Content */}
+                        <div
+                            className={`col-start-1 row-start-1 w-full px-2 transition-opacity duration-200 ${activeTab === "wakatime" ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"}`}
+                        >
+                            <div className="flex justify-center items-center overflow-hidden py-4">
+                                <div className="w-full max-w-2xl relative rounded-lg">
+                                    {loadingStates.wakatime && (
+                                        <Skeleton className="absolute inset-0 w-full h-full" />
+                                    )}
+                                    <NextImage
+                                        src={wakatimeUrl}
+                                        alt="Wakatime Stats"
+                                        width={600}
+                                        height={400}
+                                        unoptimized
+                                        className={`w-full h-auto transition-all duration-200 ${currentTheme === "light" ? "invert" : "opacity-90"
+                                            } ${loadingStates.wakatime ? "opacity-0" : "opacity-100"}`}
+                                        onLoad={() => handleImageLoad("wakatime")}
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

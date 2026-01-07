@@ -153,7 +153,7 @@ export function ArticleClient({ post, relatedPosts }: ArticleClientProps) {
 
       {/* Sticky Navigation Bar */}
       <div className="sticky top-0 z-40 w-full bg-background/80 backdrop-blur-md">
-        <div className="container mx-auto px-4 lg:px-8 max-w-7xl py-3">
+        <div className="container mx-auto px-4 lg:px-8 max-w-7xl py-6">
           <div className="flex items-center justify-between gap-4">
             <div className="min-w-0">
               <Breadcrumb

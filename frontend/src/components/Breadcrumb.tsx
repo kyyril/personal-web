@@ -44,13 +44,13 @@ export const Breadcrumb: React.FC<BreadcrumbProps> = ({
       />
       <nav
         aria-label="Breadcrumb"
-        className={`flex items-center flex-wrap gap-y-2 text-xs sm:text-sm text-muted-foreground ${className}`}
+        className={`flex items-center flex-wrap gap-y-2 text-sm sm:text-base text-muted-foreground ${className}`}
       >
         {items.map((item, index) => (
           <div key={index} className="flex items-center min-w-0">
             {index > 0 && (
               <ChevronRight
-                className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0 mx-1 sm:mx-2"
+                className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0 mx-1 sm:mx-2"
                 aria-hidden="true"
               />
             )}

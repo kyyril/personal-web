@@ -166,23 +166,23 @@ export function MDXRenderer({ content }: MDXRendererProps) {
               {children}
             </p>
           ),
-          h1: ({ children }: any) => (
-            <h1 className="text-4xl font-bold mb-8 text-foreground pb-4">
+          h1: ({ children, ...props }: any) => (
+            <h1 className="text-4xl font-bold mb-8 text-foreground pb-4" {...props}>
               {children}
             </h1>
           ),
-          h2: ({ children }: any) => (
-            <h2 className="text-3xl font-bold mt-16 mb-6 text-foreground/90 scroll-mt-20">
+          h2: ({ children, ...props }: any) => (
+            <h2 className="text-3xl font-bold mt-16 mb-6 text-foreground/90 scroll-mt-20" {...props}>
               {children}
             </h2>
           ),
-          h3: ({ children }: any) => (
-            <h3 className="text-2xl font-semibold mt-12 mb-4 text-foreground/80 scroll-mt-20">
+          h3: ({ children, ...props }: any) => (
+            <h3 className="text-2xl font-semibold mt-12 mb-4 text-foreground/80 scroll-mt-20" {...props}>
               {children}
             </h3>
           ),
-          h4: ({ children }: any) => (
-            <h4 className="text-xl font-semibold mt-8 mb-3 text-foreground/80 scroll-mt-20">
+          h4: ({ children, ...props }: any) => (
+            <h4 className="text-xl font-semibold mt-8 mb-3 text-foreground/80 scroll-mt-20" {...props}>
               {children}
             </h4>
           ),

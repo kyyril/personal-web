@@ -13,27 +13,53 @@ import {
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
+function slugify(text: string): string {
+  return text
+    .toString()
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, "-") // Replace spaces with -
+    .replace(/&/g, "-and-") // Replace & with 'and'
+    .replace(/[^\w\-]+/g, "") // Remove all non-word chars
+    .replace(/\-\-+/g, "-"); // Replace multiple - with single -
+}
+
 // Function to extract headings from MDX content
 function extractHeadingsFromContent(content: string): Heading[] {
   const headings: Heading[] = [];
+  const slugCounts: Record<string, number> = {};
+
   // Handle different line endings (Windows \r\n, Unix \n, old Mac \r)
   const lines = content.split(/\r?\n/);
 
-  console.log("Extracting headings from content:", content.substring(0, 500));
-
   for (const line of lines) {
+    // Check if line is inside a code block (simple heuristic)
+    if (line.trim().startsWith("```")) {
+      // Logic to skip code blocks could be added here if needed, 
+      // but simplistic regex usually avoids code comments if strictly checking for # at start
+    }
+
     // Trim the line to remove any extra whitespace
     const trimmedLine = line.trim();
+    // Allow for up to 6 hashes, ensure space after hashes
     const headingMatch = trimmedLine.match(/^(#{1,6})\s+(.+)$/);
+
     if (headingMatch) {
       const level = headingMatch[1].length;
       const text = headingMatch[2].trim();
-      const id = text
-        .toLowerCase()
-        .replace(/[^\w\s-]/g, "")
-        .replace(/\s+/g, "-");
 
-      console.log("Found heading:", { level, text, id });
+      // Basic slug generation
+      let id = slugify(text);
+
+      // Handle duplicates (github-slugger style)
+      if (slugCounts[id]) {
+        const count = slugCounts[id];
+        slugCounts[id] += 1;
+        id = `${id}-${count}`;
+      } else {
+        slugCounts[id] = 1;
+      }
+
       headings.push({
         id,
         text,
@@ -42,7 +68,6 @@ function extractHeadingsFromContent(content: string): Heading[] {
     }
   }
 
-  console.log("Total headings extracted:", headings.length);
   return headings;
 }
 
