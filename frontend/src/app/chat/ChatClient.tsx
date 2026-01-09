@@ -592,7 +592,7 @@ export default function ChatClient() {
           {/* Controls */}
           <div className="ml-auto mr-2 flex items-center gap-2">
             {/* Music Player Dialog */}
-            <Dialog>
+            {/* <Dialog>
               <DialogTrigger asChild>
                 <Button
                   variant="outline"
@@ -610,7 +610,7 @@ export default function ChatClient() {
                 </DialogHeader>
                 <MusicPlayer />
               </DialogContent>
-            </Dialog>
+            </Dialog> */}
 
             {/* New Chat Button */}
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
