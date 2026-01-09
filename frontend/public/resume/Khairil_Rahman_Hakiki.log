@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.6.17)  10 JAN 2026 03:08
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.6.17)  10 JAN 2026 03:18
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**d:/repo/personal-web/frontend/public/resume/resume.tex
-(d:/repo/personal-web/frontend/public/resume/resume.tex
+**d:/repo/personal-web/frontend/public/resume/Khairil_Rahman_Hakiki.tex
+(d:/repo/personal-web/frontend/public/resume/Khairil_Rahman_Hakiki.tex
 LaTeX2e <2025-06-01>
 L3 programming layer <2025-05-26>
 (C:\Users\WorkPlus\AppData\Local\Programs\MiKTeX\tex/latex/base\article.cls
@@ -250,8 +250,8 @@ Package: array 2025/05/19 v2.6i Tabular extension package (FMi)
 ) (C:\Users\WorkPlus\AppData\Local\Programs\MiKTeX\tex/generic/pdftex\glyphtounicode.tex) (C:\Users\WorkPlus\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def
 File: l3backend-pdftex.def 2025-04-14 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count300
-) (resume.aux)
-\openout1 = `resume.aux'.
+) (Khairil_Rahman_Hakiki.aux)
+\openout1 = `Khairil_Rahman_Hakiki.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 105.
 LaTeX Font Info:    ... okay on input line 105.
@@ -286,9 +286,9 @@ LaTeX Font Info:    ... okay on input line 105.
 \everyMPtoPDFconversion=\toks27
 )
 Package hyperref Info: Link coloring OFF on input line 105.
- (resume.out) (resume.out)
+ (Khairil_Rahman_Hakiki.out) (Khairil_Rahman_Hakiki.out)
 \@outlinefile=\write3
-\openout3 = `resume.out'.
+\openout3 = `Khairil_Rahman_Hakiki.out'.
 
 
 
@@ -321,7 +321,7 @@ Package fancyhdr Warning: \footskip is too small (0.0pt):
 (fancyhdr)                Make it at least 4.08003pt, for example:
 (fancyhdr)                \setlength{\footskip}{4.08003pt}.
 
-[2] (resume.aux)
+[2] (Khairil_Rahman_Hakiki.aux)
  ***********
 LaTeX2e <2025-06-01>
 L3 programming layer <2025-05-26>
@@ -330,19 +330,19 @@ L3 programming layer <2025-05-26>
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-Package rerunfilecheck Info: File `resume.out' has not changed.
+Package rerunfilecheck Info: File `Khairil_Rahman_Hakiki.out' has not changed.
 (rerunfilecheck)             Checksum: 7DCEEDF9F8D4BEA2B00F9F6D3E69B81D;609.
  ) 
 Here is how much of TeX's memory you used:
  10906 strings out of 468225
- 174561 string characters out of 5431521
- 618439 words of memory out of 5000000
+ 174861 string characters out of 5431521
+ 618514 words of memory out of 5000000
  39305 multiletter control sequences out of 15000+600000
  630967 words of font info for 56 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,11n,79p,438b,702s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,11n,79p,453b,702s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\WorkPlus\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1000.pk><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on resume.pdf (2 pages, 122902 bytes).
+Output written on Khairil_Rahman_Hakiki.pdf (2 pages, 122902 bytes).
 PDF statistics:
  92 PDF objects out of 1000 (max. 8388607)
  9 named destinations out of 1000 (max. 500000)
