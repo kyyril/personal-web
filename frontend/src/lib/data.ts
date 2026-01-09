@@ -10,7 +10,7 @@ export const contactInfo: ContactInfo = {
   email: "khairil.4hrp@gmail.com",
   linkedin: "https://www.linkedin.com/in/khairilrahman",
   github: "https://github.com/kyyril",
-  cv: "https://drive.google.com/file/d/1T-etWAF3gRMIc_37KETi611Ip9LcP3ZL/view?usp=sharing",
+  cv: "/resume/resume.pdf",
 };
 
 export const education: Education[] = [

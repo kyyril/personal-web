@@ -15,7 +15,7 @@ export const navigationItems = [
   { name: "Projects", href: "/projects", icon: CodeIcon },
   { name: "Blog", href: "/blog", icon: FileTextIcon },
   { name: "GuestBooks", href: "/guestbook", icon: PaperPlaneIcon },
-  // { name: "Chat", href: "/chat", icon: ChatBubbleIcon },
+  { name: "Chat", href: "/chat", icon: ChatBubbleIcon },
 ];
 
 export function Navigation() {

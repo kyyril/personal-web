@@ -1,0 +1,234 @@
+%-------------------------
+% Resume in Latex
+% Author : Jake Gutierrez
+% Based off of: https://github.com/sb2nov/resume
+% License : MIT
+%------------------------
+
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\input{glyphtounicode}
+
+
+%----------FONT OPTIONS----------
+% sans-serif
+% \usepackage[sfdefault]{roboto}
+% \usepackage[sfdefault]{noto-sans}
+% \usepackage[default]{sourcesanspro}
+
+% serif
+% \usepackage{CormorantGaramond}
+% \usepackage{charter}
+
+
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Adjust margins
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-.5in}
+\addtolength{\textheight}{1.0in}
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Sections formatting
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+% Ensure that generate pdf is machine readable/ATS parsable
+\pdfgentounicode=1
+
+%-------------------------
+% Custom commands
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubSubheading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \item\small#1 & \textit{\small #2} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & #2 \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
+
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+%-------------------------------------------
+%%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+
+%----------HEADING----------
+\begin{center}
+    \textbf{\Huge \scshape Khairil Rahman Hakiki} \\ \vspace{1pt}
+    \small North Sumatera, Indonesia $|$ +6282274360915 $|$ \href{mailto:khairil.4hrp@gmail.com}{\underline{khairil.4hrp@gmail.com}} \\ \vspace{2pt}
+    \href{https://linkedin.com/in/khairilrahman}{\underline{linkedin.com/in/khairilrahman}} $|$
+    \href{https://github.com/kyyril}{\underline{github.com/kyyril}} $|$
+    \href{https://kyyril.pages.dev}{\underline{kyyril.pages.dev}}
+\end{center}
+
+
+%-----------SUMMARY-----------
+\section{Summary}
+ \small{Results-driven Software Engineer with a strong foundation in building high-performance, scalable web applications. Expertise in modern full-stack development using \textbf{React.js}, \textbf{TypeScript}, and \textbf{Go (Golang)}. Proficient in designing cloud-native architectures, implementing microservices, and optimizing system reliability.}
+
+
+%-----------EDUCATION-----------
+\section{Education}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {State Islamic University of Imam Bonjol Padang}{Padang, Indonesia}
+      {Bachelor of Information Systems}{Aug. 2022 -- Present}
+      \resumeItemListStart
+        \resumeItem{\textbf{Relevant Coursework:} Data Structures \& Algorithms, Software Engineering, Statistics, Operating System, Network, Project Management, Databases, and UI/UX Design.}
+      \resumeItemListEnd
+  \resumeSubHeadingListEnd
+
+
+%-----------TECHNICAL SKILLS-----------
+\section{Technical Skills}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \textbf{Languages}{: TypeScript, JavaScript, Go (Golang)} \\
+     \textbf{Frontend}{: React.js, Next.js, Vite, Redux Toolkit, Zustand, TanStack Query, Tailwind CSS, Shadcn UI} \\
+     \textbf{Backend}{: Node.js, Express.js, GoFiber, RESTful APIs, gRPC, Microservices, OAuth2.0, JWT} \\
+     \textbf{Database \& ORM}{: PostgreSQL, Redis, MySQL, Prisma, TypeORM, GORM, Firebase, Supabase} \\
+     \textbf{DevOps \& Tools}{: Docker, Kubernetes, NGINX Ingress, RabbitMQ, CI/CD (GitHub Actions), Git, Postman}
+    }}
+ \end{itemize}
+
+
+%-----------EXPERIENCE-----------
+\section{Work Experience}
+  \resumeSubHeadingListStart
+
+    \resumeSubheading
+      {Software Engineer}{Sep. 2025 -- Des. 2025}
+      {TIME Language Centre}{Padang, Indonesia}
+      \resumeItemListStart
+        \resumeItem{Spearheaded the modernization of legacy systems into a scalable \textbf{Microservices} architecture using \textbf{Go (Fiber)} and \textbf{Node.js}, significantly improving system maintainability and fault tolerance.}
+        \resumeItem{Implemented \textbf{Domain-Driven Design (DDD)} principles to align software architecture with complex business logic, ensuring a robust and evolvable codebase.}
+        \resumeItem{Optimized backend performance by integrating \textbf{Redis} for caching hot data and \textbf{RabbitMQ} for asynchronous event-driven processing, reducing API latency by 40\%.}
+        \resumeItem{Orchestrated containerized deployments using \textbf{Docker} and \textbf{Kubernetes}, configuring \textbf{Horizontal Pod Autoscaling (HPA)} to handle high-traffic spikes seamlessly.}
+        \resumeItem{Secured payment workflows by integrating \textbf{Xendit} payment gateway and enforced rigorous security standards with \textbf{OAuth2.0} and \textbf{JWT} authentication.}
+      \resumeItemListEnd
+
+    \resumeSubheading
+      {Junior Frontend Developer}{Apr. 2025 -- Present}
+      {CodeAtHome}{Lampung, Indonesia}
+      \resumeItemListStart
+        \resumeItem{Collaborated with cross-functional teams to build and maintain responsive web applications using \textbf{React.js} and \textbf{Next.js}, strictly adhering to clean code practices.}
+        \resumeItem{Standardized frontend development workflows by implementing reusable component libraries with \textbf{Tailwind CSS} and \textbf{Shadcn UI}, accelerating feature delivery time.}
+        \resumeItem{Enhanced application performance and state management efficiency using \textbf{TanStack Query} and \textbf{Redux}, resulting in a smoother user experience.}
+      \resumeItemListEnd
+
+    \resumeSubheading
+      {Software Engineer Intern}{Jan. 2025 -- Mar. 2025}
+      {PT Astra International Tbk - TSO Auto2000}{Labuhanbatu, Rantauprapat}
+      \resumeItemListStart
+        \resumeItem{Engineered an AI-powered Car Recommendation System utilizing \textbf{Python} and \textbf{Generative AI}, streamlining the customer decision-making process sales efficiency.}
+        \resumeItem{Developed 'ReminderApp', a critical internal tool for managing vehicle document renewals (STNK/BPKB), featuring role-based access control (RBAC) and automated notifications.}
+        \resumeItem{Automated repetitive administrative tasks using \textbf{Google Apps Script}, reducing manual data entry workload by approximately 30\%.}
+      \resumeItemListEnd
+
+  \resumeSubHeadingListEnd
+
+
+%-----------PROJECTS-----------
+\section{Projects}
+    \resumeSubHeadingListStart
+      \resumeProjectHeading
+          {\href{https://kyyril.pages.dev}{\underline{\textbf{Personal Website}}} $|$ \emph{Modern Fullstack Portfolio}}{}
+          \resumeItemListStart
+            \resumeItem{Engineered a high-performance personal platform using \textbf{Next.js 15} and \textbf{React 19}, featuring a custom \textbf{MDX}-based blog engine.}
+            \resumeItem{Developed a low-latency interactive \textbf{Guestbook} service using \textbf{Bun} and \textbf{Elysia}, optimizing for rapid request handling.}
+            \resumeItem{Integrated \textbf{Gemini Flash} AI to provide a context-aware conversational assistant for portfolio exploration.}
+          \resumeItemListEnd
+      \resumeProjectHeading
+          {\href{https://designtocode-kohl.vercel.app}{\underline{\textbf{Design To Code}}} $|$ \emph{AI-Powered Frontend Generator}}{}
+          \resumeItemListStart
+            \resumeItem{Architected an AI-driven development tool leveraging \textbf{Google Gemini} to transform UI mockups into production-ready \textbf{React} code.}
+            \resumeItem{Built a scalable processing pipeline with \textbf{Next.js} and \textbf{Shadcn UI}, enabling customizable model selection.}
+            \resumeItem{Implemented robust state management and persistence using \textbf{PostgreSQL}, \textbf{Prisma}, and \textbf{Cloudinary} for asset storage.}
+          \resumeItemListEnd
+      \resumeProjectHeading
+          {\href{https://syncblog.vercel.app}{\underline{\textbf{SyncBlog}}} $|$ \emph{Full Stack Blog Platform}}{}
+          \resumeItemListStart
+            \resumeItem{Designed a scalable blogging architecture with a \textbf{Next.js} frontend and \textbf{Express.js} backend, ensuring clean separation of concerns.}
+            \resumeItem{Implemented secure \textbf{OAuth} \& \textbf{JWT} authentication flows and real-time social features like comments and follows.}
+            \resumeItem{Optimized frontend performance with \textbf{TanStack Query} for efficient data caching and \textbf{Redux} for complex state management.}
+          \resumeItemListEnd
+      \resumeProjectHeading
+          {\href{https://hadith-api-go.vercel.app}{\underline{\textbf{Hadith API}}} $|$ \emph{High-Performance REST API}}{}
+          \resumeItemListStart
+            \resumeItem{Developed a high-throughput REST API in \textbf{Go (Gin)} tailored for querying massive religious datasets with sub-millisecond latency.}
+            \resumeItem{Implemented optimized indexing strategies and efficient search algorithms to handle complex multi-parameter queries.}
+            \resumeItem{Authored comprehensive \textbf{OpenAPI/Swagger} documentation to ensure seamless third-party developer integration.}
+          \resumeItemListEnd
+      \resumeProjectHeading
+          {\href{https://saas-noteapp.vercel.app}{\underline{\textbf{SaaS NoteApp}}} $|$ \emph{Subscription Management System}}{}
+          \resumeItemListStart
+            \resumeItem{Built a secure, multi-tenant SaaS application integrating \textbf{Stripe} for sophisticated subscription billing lifecycles.}
+            \resumeItem{Secured user sessions with \textbf{Kinde Auth} and enforced strict data isolation policies using \textbf{Supabase} RLS.}
+            \resumeItem{Utilized \textbf{Prisma} with \textbf{PostgreSQL} for reliable data modeling and management.}
+          \resumeItemListEnd
+    \resumeSubHeadingListEnd
+
+
+%-----------CERTIFICATIONS-----------
+\section{Certifications}
+ \resumeItemListStart
+    \resumeItem{\textbf{Frontend Developer (React)} -- HackerRank (Feb 2025) $|$ Verified Skill in component lifecycle and state management.}
+    \resumeItem{\textbf{React (Basic) \& Problem Solving (Basic)} -- HackerRank $|$ Demonstrated proficiency in algorithmic thinking.}
+    \resumeItem{\textbf{See more at:} \href{https://linkedin.com/in/khairilrahman}{linkedin.com/in/khairilrahman}}
+ \resumeItemListEnd
+
+
+%-------------------------------------------
+\end{document}

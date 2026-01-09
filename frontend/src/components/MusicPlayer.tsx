@@ -125,39 +125,38 @@ export default function MusicPlayer({
         stiffness: 300,
         damping: 30,
       }}
-      className={cn("w-full", className)}
+      className={cn("w-full bg-background/95 backdrop-blur-sm rounded-lg p-4", className)}
       style={{
         willChange: "transform, opacity",
         transform: "translateZ(0)", // Hardware acceleration
       }}
     >
-      <Card className="p-4 bg-background/95 backdrop-blur-sm">
-        {/* Track Info */}
-        <div className="flex items-center gap-4 mb-4">
-          <div className="w-16 h-16 bg-muted rounded flex items-center justify-center overflow-hidden">
-            {currentTrack.cover ? (
-              <Image
-                width={100}
-                height={100}
-                src={currentTrack.cover}
-                alt={currentTrack.title}
-                className="w-full h-full object-cover"
-              />
-            ) : (
-              <div className="w-8 h-8 bg-primary/20 rounded" />
-            )}
-          </div>
-          <div className="flex-1">
-            <div className="overflow-hidden w-44 whitespace-nowrap">
-              <p
-                className="inline-block font-semibold text-sm sm:text-base md:text-lg lg:text-xl"
-                style={{
-                  animation: "marquee 10s linear infinite",
-                }}
-              >
-                {currentTrack.title}
-              </p>
-              <style jsx>{`
+      {/* Track Info */}
+      <div className="flex items-center gap-4 mb-6">
+        <div className="w-20 h-20 bg-muted rounded-md flex items-center justify-center overflow-hidden shadow-sm flex-shrink-0">
+          {currentTrack.cover ? (
+            <Image
+              width={100}
+              height={100}
+              src={currentTrack.cover}
+              alt={currentTrack.title}
+              className="w-full h-full object-cover"
+            />
+          ) : (
+            <div className="w-8 h-8 bg-primary/20 rounded" />
+          )}
+        </div>
+        <div className="flex-1 min-w-0 pr-2">
+          <div className="overflow-hidden w-full whitespace-nowrap mb-1">
+            <p
+              className="inline-block font-semibold text-base sm:text-lg"
+              style={{
+                animation: currentTrack.title.length > 20 ? "marquee 10s linear infinite" : "none",
+              }}
+            >
+              {currentTrack.title}
+            </p>
+            <style jsx>{`
                 @keyframes marquee {
                   0% {
                     transform: translateX(100%);
@@ -167,156 +166,119 @@ export default function MusicPlayer({
                   }
                 }
               `}</style>
-            </div>
-
-            <p className="text-sm text-muted-foreground truncate">
-              {currentTrack.artist}
-            </p>
           </div>
+
+          <p className="text-sm text-muted-foreground truncate">
+            {currentTrack.artist}
+          </p>
+        </div>
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={() => setShowPlaylist(!showPlaylist)}
+          className="h-9 w-9 hover:bg-muted"
+          aria-label={showPlaylist ? "Hide playlist" : "Show playlist"}
+        >
+          <ListBulletIcon className="h-5 w-5" />
+        </Button>
+      </div>
+
+      {/* Progress Bar */}
+      <div className="mb-6">
+        <div
+          className="w-full h-1.5 bg-muted rounded-full cursor-pointer group relative"
+          onClick={handleSeek}
+        >
+          <motion.div
+            className="h-full bg-primary rounded-full group-hover:bg-primary/80 relative"
+            style={{
+              width: `${duration ? (currentTime / duration) * 100 : 0}%`,
+            }}
+            transition={{
+              duration: 0.1,
+              ease: "linear"
+            }}
+          >
+            <div className="absolute right-0 top-1/2 -translate-y-1/2 w-3 h-3 bg-primary rounded-full shadow opacity-0 group-hover:opacity-100 transition-opacity" />
+          </motion.div>
+        </div>
+        <div className="flex justify-between text-xs text-muted-foreground mt-2 font-mono">
+          <span>{formatTime(currentTime)}</span>
+          <span>{formatTime(duration)}</span>
+        </div>
+      </div>
+
+      {/* Controls */}
+      <div className="flex items-center justify-between mb-2">
+        <div className="flex items-center gap-1">
           <Button
             variant="ghost"
             size="icon"
-            onClick={() => setShowPlaylist(!showPlaylist)}
-            className="h-8 w-8"
-            aria-label={showPlaylist ? "Hide playlist" : "Show playlist"}
+            onClick={() => setIsShuffling(!isShuffling)}
+            className={cn("h-8 w-8", isShuffling && "text-primary bg-primary/10")}
+            aria-label={isShuffling ? "Disable shuffle" : "Enable shuffle"}
           >
-            <ListBulletIcon className="h-4 w-4" />
+            <ShuffleIcon className="h-4 w-4" />
+          </Button>
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => setIsLooping(!isLooping)}
+            className={cn("h-8 w-8", isLooping && "text-primary bg-primary/10")}
+            aria-label={isLooping ? "Disable loop" : "Enable loop"}
+          >
+            <LoopIcon className="h-4 w-4" />
           </Button>
         </div>
 
-        {/* Progress Bar */}
-        <div className="mb-4">
-          <div
-            className="w-full h-2 bg-muted rounded-full cursor-pointer group"
-            onClick={handleSeek}
-            style={{ willChange: "transform" }}
-          >
-            <motion.div
-              className="h-full bg-primary rounded-full group-hover:bg-primary/80"
-              style={{
-                width: `${duration ? (currentTime / duration) * 100 : 0}%`,
-                willChange: "width",
-                transform: "translateZ(0)", // Hardware acceleration
-              }}
-              transition={{
-                duration: 0.1,
-                ease: "linear",
-              }}
-            />
-          </div>
-          <div className="flex justify-between text-xs text-muted-foreground mt-1">
-            <span>{formatTime(currentTime)}</span>
-            <span>{formatTime(duration)}</span>
-          </div>
+        <div className="flex items-center gap-4">
+          <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={handlePrevious}
+              className="h-10 w-10 hover:bg-muted"
+              aria-label="Previous track"
+            >
+              <TrackPreviousIcon className="h-6 w-6" />
+            </Button>
+          </motion.div>
+
+          <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+            <Button
+              variant="default"
+              size="icon"
+              onClick={togglePlayPause}
+              disabled={isLoading}
+              className="h-14 w-14 rounded-full shadow-lg"
+              aria-label={isPlaying ? "Pause music" : "Play music"}
+            >
+              {isLoading ? (
+                <div className="w-6 h-6 rounded-full animate-spin border-2 border-background border-t-transparent" />
+              ) : isPlaying ? (
+                <PauseIcon className="h-7 w-7" />
+              ) : (
+                <PlayIcon className="h-7 w-7 ml-1" />
+              )}
+            </Button>
+          </motion.div>
+
+          <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={handleNext}
+              className="h-10 w-10 hover:bg-muted"
+              aria-label="Next track"
+            >
+              <TrackNextIcon className="h-6 w-6" />
+            </Button>
+          </motion.div>
         </div>
 
-        {/* Controls */}
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setIsShuffling(!isShuffling)}
-              className={cn("h-8 w-8", isShuffling && "text-primary")}
-              aria-label={isShuffling ? "Disable shuffle" : "Enable shuffle"}
-            >
-              <ShuffleIcon className="h-4 w-4" />
-            </Button>
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setIsLooping(!isLooping)}
-              className={cn("h-8 w-8", isLooping && "text-primary")}
-              aria-label={isLooping ? "Disable loop" : "Enable loop"}
-            >
-              <LoopIcon className="h-4 w-4" />
-            </Button>
-          </div>
-
-          <div className="flex items-center gap-2">
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ type: "spring", stiffness: 400, damping: 17 }}
-            >
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={handlePrevious}
-                className="h-8 w-8"
-                style={{ willChange: "transform" }}
-                aria-label="Previous track"
-              >
-                <TrackPreviousIcon className="h-4 w-4" />
-              </Button>
-            </motion.div>
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ type: "spring", stiffness: 400, damping: 17 }}
-            >
-              <Button
-                variant="default"
-                size="icon"
-                onClick={togglePlayPause}
-                disabled={isLoading}
-                className="h-10 w-10"
-                style={{ willChange: "transform" }}
-                aria-label={isPlaying ? "Pause music" : "Play music"}
-              >
-                <AnimatePresence mode="wait">
-                  {isLoading ? (
-                    <motion.div
-                      key="loading"
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 0.8 }}
-                      className="w-5 h-5 rounded-full animate-spin"
-                    />
-                  ) : isPlaying ? (
-                    <motion.div
-                      key="pause"
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 0.8 }}
-                      transition={{ duration: 0.15 }}
-                    >
-                      <PauseIcon className="h-5 w-5" />
-                    </motion.div>
-                  ) : (
-                    <motion.div
-                      key="play"
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 0.8 }}
-                      transition={{ duration: 0.15 }}
-                    >
-                      <PlayIcon className="h-5 w-5" />
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </Button>
-            </motion.div>
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ type: "spring", stiffness: 400, damping: 17 }}
-            >
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={handleNext}
-                className="h-8 w-8"
-                style={{ willChange: "transform" }}
-                aria-label="Next track"
-              >
-                <TrackNextIcon className="h-4 w-4" />
-              </Button>
-            </motion.div>
-          </div>
-
-          <div className="flex items-center gap-2">
-            <VolumeIcon className="h-4 w-4 text-muted-foreground" />
+        <div className="flex items-center gap-2 w-24 justify-end">
+          <VolumeIcon className="h-4 w-4 text-muted-foreground flex-shrink-0" />
+          <div className="w-16 h-1 bg-muted rounded-full relative overflow-hidden">
             <input
               type="range"
               min="0"
@@ -324,69 +286,69 @@ export default function MusicPlayer({
               step="0.01"
               value={volume}
               onChange={(e) => setVolume(parseFloat(e.target.value))}
-              className="w-16 h-1 bg-muted rounded appearance-none cursor-pointer slider"
-              style={{
-                willChange: "transform",
-                transform: "translateZ(0)",
-              }}
+              className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
+            />
+            <div
+              className="h-full bg-primary/70"
+              style={{ width: `${volume * 100}%` }}
             />
           </div>
         </div>
+      </div>
 
-        {/* Playlist */}
-        <AnimatePresence>
-          {showPlaylist && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              className="mt-4 pt-4 bg-secondary/5 rounded-md p-2"
-            >
-              <h4 className="font-medium mb-2">Playlist</h4>
-              <div
-                className="space-y-1 max-h-32 overflow-y-auto"
-                style={{
-                  willChange: "scroll-position",
-                  transform: "translateZ(0)",
-                }}
-              >
-                {tracks.map((track, index) => (
-                  <motion.div
-                    key={track.id}
-                    onClick={() => setCurrentTrackIndex(index)}
-                    className={cn(
-                      "flex items-center gap-3 p-2 rounded cursor-pointer hover:bg-muted/50 transition-colors",
-                      index === currentTrackIndex && "bg-muted"
+      {/* Playlist */}
+      <AnimatePresence>
+        {showPlaylist && (
+          <motion.div
+            initial={{ opacity: 0, height: 0, marginTop: 0 }}
+            animate={{ opacity: 1, height: "auto", marginTop: 20 }}
+            exit={{ opacity: 0, height: 0, marginTop: 0 }}
+            className="overflow-hidden"
+          >
+            <h4 className="font-medium mb-3 text-sm uppercasetracking-wider text-muted-foreground">Playlist</h4>
+            <div className="space-y-1 max-h-48 overflow-y-auto pr-2 custom-scrollbar">
+              {tracks.map((track, index) => (
+                <motion.div
+                  key={track.id}
+                  onClick={() => setCurrentTrackIndex(index)}
+                  className={cn(
+                    "flex items-center gap-3 p-2 rounded-md cursor-pointer transition-colors group",
+                    index === currentTrackIndex ? "bg-primary/10" : "hover:bg-muted"
+                  )}
+                  whileHover={{ x: 4 }}
+                >
+                  <div className={cn(
+                    "w-6 h-6 rounded flex items-center justify-center text-xs font-mono",
+                    index === currentTrackIndex ? "text-primary" : "text-muted-foreground"
+                  )}>
+                    {index === currentTrackIndex && isPlaying ? (
+                      <div className="flex gap-0.5 h-3 items-end">
+                        <span className="w-0.5 bg-primary h-full animate-music-bar-1" />
+                        <span className="w-0.5 bg-primary h-2/3 animate-music-bar-2" />
+                        <span className="w-0.5 bg-primary h-full animate-music-bar-3" />
+                      </div>
+                    ) : (
+                      index + 1
                     )}
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                    style={{ willChange: "transform" }}
-                  >
-                    <div className="w-8 h-8 bg-muted rounded flex items-center justify-center text-xs">
-                      {index === currentTrackIndex && isPlaying ? (
-                        <div className="w-3 h-3 rounded-full animate-spin" />
-                      ) : (
-                        index + 1
-                      )}
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium truncate">
-                        {track.title.split(" ").slice(0, 4).join(" ") +
-                          (track.title.split(" ").length > 4 ? "..." : "")}
-                      </p>
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className={cn(
+                      "text-sm font-medium truncate",
+                      index === currentTrackIndex ? "text-primary" : "text-foreground"
+                    )}>
+                      {track.title}
+                    </p>
 
-                      <p className="text-xs text-muted-foreground truncate">
-                        {track.artist}
-                      </p>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </Card>
+                    <p className="text-xs text-muted-foreground truncate">
+                      {track.artist}
+                    </p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.div>
   );
 }

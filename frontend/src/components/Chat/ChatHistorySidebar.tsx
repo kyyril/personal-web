@@ -45,6 +45,7 @@ export default function ChatHistorySidebar({
       </div>
 
       <Button
+        variant="outline"
         onClick={() => {
           startNewChat();
           if (isMobile) {
@@ -54,10 +55,7 @@ export default function ChatHistorySidebar({
             if (closeButton) closeButton.click();
           }
         }}
-        className="mx-4 mb-4 bg-custom hover:bg-custom/80 text-white"
-        style={{
-          backgroundColor: "#2563eb",
-        }}
+        className="mx-4 mb-4 bg-custom text-primary hover:bg-custom/80"
       >
         <PlusIcon className="mr-2 h-4 w-4" /> New Chat
       </Button>

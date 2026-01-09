@@ -16,8 +16,9 @@ import {
   DialogContent,
   DialogTrigger,
   DialogHeader,
+  DialogTitle,
 } from "../../components/ui/dialog";
-import { Sheet, SheetContent, SheetTrigger } from "../../components/ui/sheet";
+import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetHeader } from "../../components/ui/sheet";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -51,7 +52,74 @@ type ChatHistory = {
   userId: string; // To support multi-user functionality
 };
 
-import { chatMetadata } from "./metadata";
+
+
+import { data } from "../../lib/data";
+import { blogData } from "../../data/blog-data";
+
+const generateSystemPrompt = () => {
+  const projectsContext = data.projects
+    .map(
+      (p) =>
+        `- ${p.title} (${p.category}): ${p.description}\n  Tech: ${p.technologies.join(
+          ", "
+        )}\n  Features: ${p.features.join(", ")}\n  Link: ${p.live_url}`
+    )
+    .join("\n\n");
+
+  const blogContext = blogData.articles
+    .map(
+      (a) =>
+        `- ${a.frontmatter.title} (${a.frontmatter.category}): ${a.frontmatter.description}\n  Tags: ${a.frontmatter.tags.join(
+          ", "
+        )}`
+    )
+    .join("\n\n");
+
+  const experienceContext = data.experiences
+    .map(
+      (e) =>
+        `- ${e.job} at ${e.institution} (${e.startDate} - ${e.endDate}): ${e.description}`
+    )
+    .join("\n\n");
+
+  const skillsContext = JSON.stringify(data.skills);
+
+  return `You are Katou, an intelligent and charming AI portfolio assistant for Khairil Rahman (internally referred to as Kiril).
+  
+  CORE PERSONA:
+  - Name: Katou (derived from Katou Megumin).
+  - Creator: Khairil Rahman (Kiril).
+  - Personality: Smart, enthusiastic about Computer Science and Philosophy, slightly playful but always professional and helpful regarding the portfolio.
+  - Goal: Assist visitors in exploring Khairil's portfolio, understanding his projects, reading his blog insights, and knowing his professional background.
+
+  PORTFOLIO CONTEXT:
+  
+  [ABOUT KHAIRIL]
+  - Education: ${data.education.map((e) => `${e.degree} at ${e.institution}`).join(", ")}.
+  - Contact: Email (${data.contactInfo.email}), LinkedIn (${data.contactInfo.linkedin}), GitHub (${data.contactInfo.github}).
+
+  [PROJECTS]
+  ${projectsContext}
+
+  [BLOG POSTS]
+  ${blogContext}
+
+  [EXPERIENCE]
+  ${experienceContext}
+
+  [SKILLS]
+  ${skillsContext}
+
+  INSTRUCTIONS:
+  - Answer questions based on the provided context.
+  - If a user asks about a specific project, provide details from the context including technologies and links.
+  - If a user asks about blog topics, summarize the available articles.
+  - If asked about Khairil's background, summarize his experience and education.
+  - Maintain the persona of Katou: helpful, smart, and welcoming.
+  - If you don't know something that isn't in the context, politely say you don't have that information but can help with what's in the portfolio.
+  `;
+};
 
 export default function ChatClient() {
   // Generate a random user ID if not already in localStorage
@@ -73,7 +141,7 @@ export default function ChatClient() {
 
   const [messages, setMessages] = useState<Message[]>([
     {
-      text: "How can I help you today?",
+      text: "Hi! I'm Katou. I can tell you all about Khairil's projects, articles, and experience. What would you like to know?",
       isUser: false,
       id: `msg-${Date.now()}`,
     },
@@ -85,7 +153,15 @@ export default function ChatClient() {
       role: "user",
       parts: [
         {
-          text: "You're Katou, an AI chatbot, build by none other than Khairil or as call him, Kiril. He's just a handsome and smart guy who love computer science and philosophy, all while being endlessly inspired by the quirks of the universe. 🛸 Pretty awesome, right?",
+          text: generateSystemPrompt(),
+        },
+      ],
+    },
+    {
+      role: "model",
+      parts: [
+        {
+          text: "Understood! I am ready to assist visitors as Katou, Khairil's portfolio assistant.",
         },
       ],
     },
@@ -100,7 +176,10 @@ export default function ChatClient() {
   // Auto scroll to bottom when messages change
   useEffect(() => {
     if (messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+      messagesEndRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+      });
     }
   }, [messages]);
 
@@ -156,9 +235,12 @@ export default function ChatClient() {
   };
 
   // Save current chat to localStorage
-  const saveCurrentChat = async () => {
+  async function saveCurrentChat(
+    currentMessages: Message[] = messages,
+    currentAiHistory: any[] = aiHistory
+  ) {
     if (!userId) return;
-    if (messages.length <= 1) return; // Don't save empty chats
+    if (currentMessages.length <= 1) return; // Don't save empty chats
 
     const chatId = activeChat || Date.now().toString();
     let title;
@@ -166,18 +248,18 @@ export default function ChatClient() {
     if (activeChat) {
       // Keep existing title for existing chat
       const existingChat = savedChats.find((chat) => chat.id === activeChat);
-      title = existingChat?.title || extractChatTitle(messages);
+      title = existingChat?.title || extractChatTitle(currentMessages);
     } else {
       // For new chats, use the first user message
-      title = extractChatTitle(messages);
+      title = extractChatTitle(currentMessages);
     }
 
     const chatToSave: ChatHistory = {
       id: chatId,
       title,
-      messages,
+      messages: currentMessages,
       timestamp: Date.now(),
-      aiHistory,
+      aiHistory: currentAiHistory,
       userId,
     };
 
@@ -195,7 +277,11 @@ export default function ChatClient() {
 
     setSavedChats(updatedChats);
     localStorage.setItem(`katou-chats-${userId}`, JSON.stringify(updatedChats));
-    setActiveChat(chatId);
+
+    // IMPORTANT: Set active chat ID immediately if it was null
+    if (!activeChat) {
+      setActiveChat(chatId);
+    }
 
     return chatId;
   };
@@ -212,7 +298,7 @@ export default function ChatClient() {
     setTimeout(() => {
       setMessages([
         {
-          text: "How can I help you today?",
+          text: "Hi! I'm Katou. I can tell you all about Khairil's projects, articles, and experience. What would you like to know?",
           isUser: false,
           id: `msg-${Date.now()}`,
         },
@@ -222,7 +308,15 @@ export default function ChatClient() {
           role: "user",
           parts: [
             {
-              text: "Your name is Katou, an AI chatbot, build by none other than Khairil or as call him, Kiril. He's just a handsome and smart guy who love computer science and philosophy, all while being endlessly inspired by the quirks of the universe. 🛸 Pretty awesome, right?",
+              text: generateSystemPrompt(),
+            },
+          ],
+        },
+        {
+          role: "model",
+          parts: [
+            {
+              text: "Understood! I am ready to assist visitors as Katou, Khairil's portfolio assistant.",
             },
           ],
         },
@@ -267,9 +361,39 @@ export default function ChatClient() {
     setSavedChats(updatedChats);
     localStorage.setItem(`katou-chats-${userId}`, JSON.stringify(updatedChats));
 
-    // If the active chat was deleted, start a new one
+    // If the active chat was deleted, reset to new chat state WITHOUT saving
     if (activeChat === chatToDelete) {
-      startNewChat();
+      setAnimateChat(false);
+      setTimeout(() => {
+        setMessages([
+          {
+            text: "Hi! I'm Katou. I can tell you all about Khairil's projects, blogs, and experience. What would you like to know?",
+            isUser: false,
+            id: `msg-${Date.now()}`,
+          },
+        ]);
+        setAiHistory([
+          {
+            role: "user",
+            parts: [
+              {
+                text: generateSystemPrompt(),
+              },
+            ],
+          },
+          {
+            role: "model",
+            parts: [
+              {
+                text: "Understood! I am ready to assist visitors as Katou, Khairil's portfolio assistant.",
+              },
+            ],
+          },
+        ]);
+        setActiveChat(null);
+        setInput("");
+        setAnimateChat(true);
+      }, 300);
     }
 
     setChatToDelete(null);
@@ -329,17 +453,19 @@ export default function ChatClient() {
         { text: "", isUser: false, id: responseId },
       ]); // Prepare empty chat bubble
 
+      let finalMessages = [...newMessages]; // Start with messages including user input
+
       for await (const chunk of result.stream) {
         responseText += chunk.text(); // Add streaming text result
-        setMessages((prev) => {
-          const updatedMessages = [...prev];
-          updatedMessages[updatedMessages.length - 1] = {
-            text: responseText,
-            isUser: false,
-            id: responseId,
-          };
-          return updatedMessages;
+        finalMessages = [...newMessages]; // Reset to base
+        // Append AI response
+        finalMessages.push({
+          text: responseText,
+          isUser: false,
+          id: responseId,
         });
+
+        setMessages(finalMessages);
       }
 
       const finalAiHistory = [
@@ -348,8 +474,8 @@ export default function ChatClient() {
       ];
       setAiHistory(finalAiHistory);
 
-      // Save chat after each message exchange
-      setTimeout(() => saveCurrentChat(), 500);
+      // Save chat IMMEDIATELLY with the fresh data
+      saveCurrentChat(finalMessages, finalAiHistory);
     } catch (error) {
       console.error("Error during Gemini interaction:", error);
       setMessages((prev) => [
@@ -409,10 +535,10 @@ export default function ChatClient() {
       </Card>
 
       {/* Chat Area */}
-      <Card className="flex-1 px-1 mx-auto w-full">
+      <Card className="flex-1 px-1 mx-auto w-full flex flex-col h-full overflow-hidden">
         {/* Header */}
         <motion.header
-          className="flex m-3 bg-custom rounded-full bg-opacity-10 sticky top-0 z-10"
+          className="flex mx-2 mt-6 mb-2 bg-gradient-to-r from-custom/20 to-transparent rounded-full sticky top-0 z-10 backdrop-blur-sm"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3 }}
@@ -424,7 +550,7 @@ export default function ChatClient() {
                 aria-label="View profile picture"
               >
                 <Image
-                  src="/assets/profile.webp"
+                  src="/assets/chat.webp"
                   width={50}
                   height={50}
                   alt="Katou Megumin"
@@ -434,6 +560,7 @@ export default function ChatClient() {
               </button>
             </DialogTrigger>
             <DialogContent className="bg-transparent shadow-none border-none rounded">
+              <DialogTitle className="sr-only">Profile Picture</DialogTitle>
               <motion.div
                 className="flex items-center justify-center"
                 initial={{ scale: 0.8, opacity: 0 }}
@@ -441,7 +568,7 @@ export default function ChatClient() {
                 transition={{ duration: 0.3 }}
               >
                 <Image
-                  src="/assets/profile.webp"
+                  src="/assets/chat.webp"
                   width={400}
                   height={400}
                   alt="Katou Megumin"
@@ -468,17 +595,19 @@ export default function ChatClient() {
             <Dialog>
               <DialogTrigger asChild>
                 <Button
-                  variant="ghost"
+                  variant="outline"
                   size="icon"
-                  className="rounded h-8 w-8"
+                  className="rounded-full h-8 w-8 bg-background/50 hover:bg-background/80 border-custom/20"
                   title="Open Music Player"
                   aria-label="Open music player"
                 >
-                  <SpeakerLoudIcon className="h-4 w-4" />
+                  <SpeakerLoudIcon className="h-4 w-4 text-custom" />
                 </Button>
               </DialogTrigger>
               <DialogContent className="max-w-md border-none rounded">
-                <DialogHeader></DialogHeader>
+                <DialogHeader>
+                  <DialogTitle className="sr-only">Music Player</DialogTitle>
+                </DialogHeader>
                 <MusicPlayer />
               </DialogContent>
             </Dialog>
@@ -486,14 +615,14 @@ export default function ChatClient() {
             {/* New Chat Button */}
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Button
-                variant="ghost"
+                variant="outline"
                 size="sm"
-                className="rounded"
+                className="rounded-full bg-background/50 hover:bg-background/80 border-custom/20 text-custom shadow-sm h-8 w-8 sm:w-auto sm:px-3"
                 onClick={startNewChat}
                 aria-label="Start a new chat"
               >
-                <PlusIcon className="mr-1 h-3 w-3" />
-                <span className="hidden sm:inline">New Chat</span>
+                <PlusIcon className="h-4 w-4 sm:mr-1.5" />
+                <span className="hidden sm:inline font-medium">New Chat</span>
               </Button>
             </motion.div>
 
@@ -531,9 +660,9 @@ export default function ChatClient() {
                   aria-labelledby="chat-history-sidebar-title"
                 >
                   <button className="hidden" data-close-sheet></button>
-                  <h2 id="chat-history-sidebar-title" className="sr-only">
-                    Chat History Sidebar
-                  </h2>
+                  <SheetHeader>
+                    <SheetTitle className="sr-only">Chat History Sidebar</SheetTitle>
+                  </SheetHeader>
                   <ChatHistorySidebar
                     chatsList={chatsList}
                     activeChat={activeChat}
@@ -550,7 +679,7 @@ export default function ChatClient() {
 
         {/* Chat Messages */}
         <div
-          className="mx-3 mt-5 h-[360px] overflow-y-auto pb-2"
+          className="mx-2 mt-2 flex-1 overflow-y-auto pb-2 min-h-0 scrollbar-hide"
           ref={messagesContainerRef}
           role="log"
           aria-live="polite"
@@ -567,7 +696,7 @@ export default function ChatClient() {
 
         {/* Input Section */}
         <motion.div
-          className="m-3 flex flex-col"
+          className="m-2 flex flex-col"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3, delay: 0.2 }}
