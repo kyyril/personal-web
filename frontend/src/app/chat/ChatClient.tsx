@@ -94,14 +94,15 @@ export default function ChatClient() {
   const [chatsList, setChatsList] = useState<ChatHistory[]>([]);
 
   // Auto scroll to bottom when messages change
+  // Auto-scroll to bottom whenever messages change
   useEffect(() => {
     if (messagesEndRef.current) {
       messagesEndRef.current.scrollIntoView({
-        behavior: "smooth",
+        behavior: pending ? "auto" : "smooth",
         block: "nearest",
       });
     }
-  }, [messages]);
+  }, [messages, pending]);
 
   // Separate the savedChats for rendering to avoid re-renders
   useEffect(() => {
@@ -444,7 +445,7 @@ export default function ChatClient() {
 
       {/* Desktop Chat History Sidebar */}
       <Card
-        className="hidden md:flex flex-col w-64 h-[500px] overflow-hidden"
+        className="hidden md:flex flex-col w-64 h-[500px] overflow-hidden shadow-sm"
         role="navigation"
         aria-label="Chat history sidebar"
       >
@@ -459,11 +460,11 @@ export default function ChatClient() {
       </Card>
 
       {/* Chat Area */}
-      <Card className="flex-1 px-1 mx-auto w-full flex flex-col h-full overflow-hidden">
+      <Card className="flex-1 mx-auto w-full flex flex-col h-full overflow-hidden shadow-sm bg-background/50 backdrop-blur-sm">
         {/* Header */}
         <motion.header
-          className="flex mx-2 mt-6 mb-2 bg-gradient-to-r from-custom/20 to-transparent rounded-full sticky top-0 z-10 backdrop-blur-sm"
-          initial={{ opacity: 0, y: -20 }}
+          className="flex items-center px-4 py-3 sticky top-0 z-10 bg-background/80 backdrop-blur-md"
+          initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3 }}
         >
@@ -501,16 +502,19 @@ export default function ChatClient() {
               </motion.div>
             </DialogContent>
           </Dialog>
-          <div className="flex flex-col gap-y-1">
+          <div className="flex flex-col ml-1">
             <h1
-              className="text-center text-xl  font-light"
+              className="text-lg font-semibold tracking-tight leading-none"
               aria-label="Chat assistant name"
             >
-              加藤 恵
+              Katou
             </h1>
-            <p className="text-start  text-xs text-green-600 font-light">
-              Online.
-            </p>
+            <div className="flex items-center gap-1.5 mt-1">
+              <span className="flex h-1.5 w-1.5 rounded-full bg-green-500 animate-pulse" />
+              <p className="text-[10px] text-muted-foreground font-medium uppercase tracking-wider">
+                Online
+              </p>
+            </div>
           </div>
 
           {/* Controls */}
@@ -603,7 +607,7 @@ export default function ChatClient() {
 
         {/* Chat Messages */}
         <div
-          className="mx-2 mt-2 flex-1 overflow-y-auto pb-2 min-h-0 scrollbar-hide"
+          className="flex-1 overflow-y-auto px-4 py-4 min-h-0 scrollbar-hide space-y-2"
           ref={messagesContainerRef}
           role="log"
           aria-live="polite"
@@ -612,7 +616,12 @@ export default function ChatClient() {
           <AnimatePresence mode="popLayout">
             {animateChat &&
               messages.map((msg, index) => (
-                <ChatMessage key={msg.id} msg={msg} />
+                <ChatMessage
+                  key={msg.id}
+                  msg={msg}
+                  isLast={index === messages.length - 1}
+                  isStreaming={index === messages.length - 1 && pending}
+                />
               ))}
           </AnimatePresence>
           <div ref={messagesEndRef} /> {/* Empty div for auto-scroll */}
@@ -620,14 +629,14 @@ export default function ChatClient() {
 
         {/* Input Section */}
         <motion.div
-          className="m-2 flex flex-col"
-          initial={{ opacity: 0, y: 20 }}
+          className="p-4 bg-background/50"
+          initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3, delay: 0.2 }}
+          transition={{ duration: 0.3 }}
         >
           <div className="flex gap-2">
             <Input
-              className="w-full rounded px-3 py-2"
+              className="w-full rounded-xl px-4 py-6 bg-secondary/30 focus-visible:ring-custom shadow-none"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="Ask something..."
