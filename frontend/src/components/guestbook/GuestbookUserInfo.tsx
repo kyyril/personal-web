@@ -33,43 +33,44 @@ export function GuestbookUserInfo({
     <Card>
       <CardHeader className="flex flex-col w-full">
         <div className="bg-primary-foreground rounded p-4">
-          <div className="flex items-center justify-between mb-3">
-            <h2 className="text-lg font-semibold flex items-center gap-2">
-              <PersonIcon className="w-5 h-5" aria-hidden="true" />
-              Welcome back!
+          <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
+            <h2 className="text-xl font-bold flex items-center gap-2.5">
+              <PersonIcon className="w-5 h-5 text-custom" aria-hidden="true" />
+              <span>Welcome back!</span>
             </h2>
             <Button
               size="sm"
               variant={"ghost"}
-              className="flex items-center gap-2"
+              className="flex items-center gap-2 text-foreground/60 hover:text-red-500 hover:bg-red-500/10 transition-colors"
               onClick={onLogOut}
             >
               <ExitIcon className="w-4 h-4" aria-hidden="true" />
-              Logout
+              <span className="font-semibold uppercase text-[10px] tracking-wider">Logout</span>
             </Button>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
-            <div className="flex items-center gap-2">
-              <span className="font-medium">Name:</span>
-              <span>{currentUser.displayName}</span>
+          <div className="flex flex-col gap-3 text-sm">
+            <div className="flex flex-wrap items-baseline gap-x-2">
+              <span className="font-semibold text-foreground/50 min-w-[50px]">Name</span>
+              <span className="font-medium break-words flex-1 min-w-0">{currentUser.displayName}</span>
             </div>
 
-            <div className="flex items-center gap-2">
-              <span className="font-medium">Email:</span>
-              <span>{currentUser.email}</span>
+            <div className="flex flex-wrap items-baseline gap-x-2">
+              <span className="font-semibold text-foreground/50 min-w-[50px]">Email</span>
+              <span className="font-medium truncate flex-1 min-w-0" title={currentUser.email}>{currentUser.email}</span>
             </div>
 
             {currentUser.photoURL && (
-              <div className="flex items-center gap-2">
-                <Image
-                  src={currentUser.photoURL}
-                  alt={`Profile of ${currentUser.displayName}`}
-                  width={32}
-                  height={32}
-                  className="w-8 h-8 rounded-full"
-                />
-                <span className="font-medium">Profile Picture</span>
+              <div className="flex items-center gap-3 pt-1">
+                <div className="relative w-8 h-8 rounded-full overflow-hidden ring-1 ring-border">
+                  <Image
+                    src={currentUser.photoURL}
+                    alt={`Profile of ${currentUser.displayName}`}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+                <span className="font-semibold text-foreground/50">Profile Picture</span>
               </div>
             )}
           </div>

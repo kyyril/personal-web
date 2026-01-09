@@ -9,6 +9,9 @@ import {
   ReloadIcon,
   RocketIcon,
   PlusIcon,
+  Pencil1Icon,
+  Cross2Icon,
+  CheckIcon as RadixCheckIcon,
 } from "@radix-ui/react-icons";
 import {
   Dialog,
@@ -220,21 +223,17 @@ export default function ChatClient() {
       saveCurrentChat();
     }
 
-    // Reset current chat with animation
-    setAnimateChat(false);
-    setTimeout(() => {
-      setMessages([
-        {
-          text: "Hi! I'm Katou. I can tell you all about Khairil's projects, articles, and experience. What would you like to know?",
-          isUser: false,
-          id: `msg-${Date.now()}`,
-        },
-      ]);
-      setAiHistory([]);
-      setActiveChat(null);
-      setInput("");
-      setAnimateChat(true);
-    }, 300);
+    // Direct reset without artificial delay for snappiness
+    setMessages([
+      {
+        text: "Hi! I'm Katou. I can tell you all about Khairil's projects, articles, and experience. What would you like to know?",
+        isUser: false,
+        id: `msg-${Date.now()}`,
+      },
+    ]);
+    setAiHistory([]);
+    setActiveChat(null);
+    setInput("");
   };
 
   // Load a saved chat
@@ -242,18 +241,15 @@ export default function ChatClient() {
     const chatToLoad = savedChats.find((chat) => chat.id === chatId);
     if (!chatToLoad) return;
 
-    setAnimateChat(false);
-    setTimeout(() => {
-      setMessages(
-        chatToLoad.messages.map((msg) => ({
-          ...msg,
-          id: msg.id || `msg-${Date.now()}-${Math.random()}`,
-        }))
-      );
-      setAiHistory(chatToLoad.aiHistory || []);
-      setActiveChat(chatId);
-      setAnimateChat(true);
-    }, 300);
+    // Direct load for snappiness
+    setMessages(
+      chatToLoad.messages.map((msg) => ({
+        ...msg,
+        id: msg.id || `msg-${Date.now()}-${Math.random()}`,
+      }))
+    );
+    setAiHistory(chatToLoad.aiHistory || []);
+    setActiveChat(chatId);
   };
 
   // Handle delete confirmation
@@ -292,28 +288,54 @@ export default function ChatClient() {
     setChatToDelete(null);
   };
 
-  const sendMessage = async () => {
-    if (!input.trim() || pending) return;
+  const editMessage = async (messageId: string, newText: string) => {
+    if (!newText.trim() || pending) return;
 
-    const userMessage = input.trim();
+    // Find the message index
+    const messageIndex = messages.findIndex((m) => m.id === messageId);
+    if (messageIndex === -1) return;
+
+    // Truncate history to point before this message
+    // Since history has [initial_prompt, initial_response, ...userHistory]
+    // And messages has [initial_response, ...userHistory]
+    // index in messages maps to index-1 in user part of aiHistory
+    const userHistoryIndex = messageIndex - 1;
+
+    // Filter messages and aiHistory up to this point
+    const updatedMessages = messages.slice(0, messageIndex);
+    const updatedAiHistory = aiHistory.slice(0, userHistoryIndex);
+
+    setMessages(updatedMessages);
+    setAiHistory(updatedAiHistory);
+    setInput(newText);
+
+    // Trigger sendMessage with the new input
+    // We can't call sendMessage directly because it uses the 'input' state which might not be updated yet
+    // So we manually perform the send logic with newText
+    setTimeout(() => {
+      sendMessageWithText(newText, updatedMessages, updatedAiHistory);
+    }, 0);
+  };
+
+  const sendMessageWithText = async (text: string, currentMessages: Message[], currentAiHistory: ChatHistoryItem[]) => {
+    if (pending) return;
+
+    const userMessage = text.trim();
     const userMessageId = `msg-${Date.now()}-user`;
     const newMessages: Message[] = [
-      ...messages,
+      ...currentMessages,
       { text: userMessage, isUser: true, id: userMessageId },
     ];
     setMessages(newMessages);
 
-    // Update AI history with user message
     const newAiHistory: ChatHistoryItem[] = [
-      ...aiHistory,
+      ...currentAiHistory,
       { role: "user", parts: [{ text: userMessage }] },
     ];
     setAiHistory(newAiHistory);
-
     setInput("");
     setPending(true);
 
-    // Show typing indicator while waiting for first chunk
     const responseId = `msg-${Date.now()}-ai`;
     setMessages((prev) => [
       ...prev,
@@ -321,39 +343,27 @@ export default function ChatClient() {
     ]);
 
     let responseText = "";
-    let buffer = ""; // Buffer for partial SSE data
+    let buffer = "";
 
     try {
-      // Use SSE streaming API
       const response = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: userMessage, history: aiHistory }),
+        body: JSON.stringify({ message: userMessage, history: currentAiHistory }),
       });
 
-      if (!response.ok) {
-        const errorData = await response.text();
-        console.error("API Error:", response.status, errorData);
-        throw new Error(`API Error: ${response.status}`);
-      }
+      if (!response.ok) throw new Error(`API Error: ${response.status}`);
 
       const reader = response.body?.getReader();
       const decoder = new TextDecoder();
+      if (!reader) throw new Error("No response body");
 
-      if (!reader) {
-        throw new Error("No response body");
-      }
-
-      // Read streaming response
       while (true) {
         const { done, value } = await reader.read();
         if (done) break;
 
-        // Append to buffer and process complete lines
         buffer += decoder.decode(value, { stream: true });
         const lines = buffer.split("\n");
-
-        // Keep last incomplete line in buffer
         buffer = lines.pop() || "";
 
         for (const line of lines) {
@@ -366,7 +376,6 @@ export default function ChatClient() {
               const parsed = JSON.parse(data);
               if (parsed.text) {
                 responseText += parsed.text;
-                // Update message in real-time (streaming effect!)
                 setMessages((prev) => {
                   const updated = [...prev];
                   updated[updated.length - 1] = {
@@ -377,35 +386,29 @@ export default function ChatClient() {
                   return updated;
                 });
               }
-            } catch {
-              // Skip invalid JSON lines
-            }
+            } catch { }
           }
         }
       }
 
-      // Final update
       const finalMessages: Message[] = [
         ...newMessages,
         { text: responseText, isUser: false, id: responseId },
       ];
       setMessages(finalMessages);
 
-      // Update AI history with model response
       const finalAiHistory: ChatHistoryItem[] = [
         ...newAiHistory,
         { role: "model", parts: [{ text: responseText }] },
       ];
       setAiHistory(finalAiHistory);
-
-      // Save chat immediately with fresh data
       saveCurrentChat(finalMessages, finalAiHistory);
     } catch (error) {
       console.error("Error during chat:", error);
       setMessages((prev) => {
         const updated = [...prev];
         updated[updated.length - 1] = {
-          text: "An error occurred. Please try again.",
+          text: "An error occurred. Please try знова.",
           isUser: false,
           id: responseId,
         };
@@ -414,6 +417,11 @@ export default function ChatClient() {
     } finally {
       setPending(false);
     }
+  };
+
+  const sendMessage = async () => {
+    if (!input.trim() || pending) return;
+    sendMessageWithText(input, messages, aiHistory);
   };
 
   return (
@@ -444,8 +452,8 @@ export default function ChatClient() {
       </AlertDialog>
 
       {/* Desktop Chat History Sidebar */}
-      <Card
-        className="hidden md:flex flex-col w-64 h-[500px] overflow-hidden shadow-sm"
+      <div
+        className="hidden md:flex flex-col w-64 h-full overflow-hidden"
         role="navigation"
         aria-label="Chat history sidebar"
       >
@@ -457,13 +465,13 @@ export default function ChatClient() {
           loadChat={loadChat}
           confirmDeleteChat={confirmDeleteChat}
         />
-      </Card>
+      </div>
 
       {/* Chat Area */}
-      <Card className="flex-1 mx-auto w-full flex flex-col h-full overflow-hidden shadow-sm bg-background/50 backdrop-blur-sm">
+      <div className="flex-1 mx-auto w-full flex flex-col h-full overflow-hidden bg-background/20 backdrop-blur-sm">
         {/* Header */}
         <motion.header
-          className="flex items-center px-4 py-3 sticky top-0 z-10 bg-background/80 backdrop-blur-md"
+          className="flex items-center mb-2 pb-2 sticky top-2 z-10 mx-2"
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3 }}
@@ -480,7 +488,7 @@ export default function ChatClient() {
                   height={50}
                   alt="Katou Megumin"
                   loading="lazy"
-                  className="aspect-square ring-1 ring-custom mr-2 overflow-hidden object-cover object-center rounded-full"
+                  className="aspect-square mr-2 overflow-hidden object-cover object-center rounded-full ring-[1px] ring-custom/50 transition-all"
                 />
               </button>
             </DialogTrigger>
@@ -540,17 +548,16 @@ export default function ChatClient() {
               </DialogContent>
             </Dialog> */}
 
-            {/* New Chat Button */}
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Button
-                variant="outline"
+                variant="ghost"
                 size="sm"
-                className="rounded-full bg-background/50 hover:bg-background/80 border-custom/20 text-custom shadow-sm h-8 w-8 sm:w-auto sm:px-3"
+                className="rounded-full text-custom hover:bg-custom/10 h-8 w-8 sm:w-auto sm:px-4"
                 onClick={startNewChat}
                 aria-label="Start a new chat"
               >
                 <PlusIcon className="h-4 w-4 sm:mr-1.5" />
-                <span className="hidden sm:inline font-medium">New Chat</span>
+                <span className="hidden sm:inline font-medium uppercase text-[11px] tracking-wider">New Chat</span>
               </Button>
             </motion.div>
 
@@ -584,7 +591,7 @@ export default function ChatClient() {
                 </SheetTrigger>
                 <SheetContent
                   side="left"
-                  className="w-60"
+                  className="w-[280px] p-0 border-none"
                   aria-labelledby="chat-history-sidebar-title"
                 >
                   <button className="hidden" data-close-sheet></button>
@@ -607,23 +614,21 @@ export default function ChatClient() {
 
         {/* Chat Messages */}
         <div
-          className="flex-1 overflow-y-auto px-4 py-4 min-h-0 scrollbar-hide space-y-2"
+          className="flex-1 overflow-y-auto px-4 py-4 min-h-0 scrollbar-hide space-y-4"
           ref={messagesContainerRef}
           role="log"
           aria-live="polite"
           aria-label="Chat messages"
         >
-          <AnimatePresence mode="popLayout">
-            {animateChat &&
-              messages.map((msg, index) => (
-                <ChatMessage
-                  key={msg.id}
-                  msg={msg}
-                  isLast={index === messages.length - 1}
-                  isStreaming={index === messages.length - 1 && pending}
-                />
-              ))}
-          </AnimatePresence>
+          {messages.map((msg, index) => (
+            <ChatMessage
+              key={msg.id}
+              msg={msg}
+              isLast={index === messages.length - 1}
+              isStreaming={index === messages.length - 1 && pending}
+              onEdit={(newText) => editMessage(msg.id, newText)}
+            />
+          ))}
           <div ref={messagesEndRef} /> {/* Empty div for auto-scroll */}
         </div>
 
@@ -636,7 +641,7 @@ export default function ChatClient() {
         >
           <div className="flex gap-2">
             <Input
-              className="w-full rounded-xl px-4 py-6 bg-secondary/30 focus-visible:ring-custom shadow-none"
+              className="w-full rounded-xl px-4 py-6 bg-secondary/20 border-none focus-visible:ring-0 shadow-none transition-colors focus:bg-secondary/40"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="Ask something..."
@@ -647,31 +652,32 @@ export default function ChatClient() {
             />
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Button
-                className="flex items-center p-3"
+                variant="ghost"
+                className="flex items-center p-3 h-full rounded-xl text-custom hover:bg-custom/10"
                 onClick={sendMessage}
                 disabled={pending}
                 aria-label={pending ? "Sending message" : "Send message"}
               >
                 {pending ? (
                   <div
-                    className="flex items-center text-secondary"
+                    className="flex items-center"
                     aria-hidden="true"
                   >
-                    <ReloadIcon className="animate-spin w-4 h-4 text-custom" />
+                    <ReloadIcon className="animate-spin w-5 h-5" />
                   </div>
                 ) : (
                   <div
-                    className="flex items-center gap-1 text-secondary"
+                    className="flex items-center"
                     aria-hidden="true"
                   >
-                    <RocketIcon className="h-4 w-4" />
+                    <RocketIcon className="h-5 w-5" />
                   </div>
                 )}
               </Button>
             </motion.div>
           </div>
         </motion.div>
-      </Card>
+      </div>
     </>
   );
 }
