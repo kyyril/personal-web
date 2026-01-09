@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.6.17)  9 JAN 2026 19:10
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.6.17)  10 JAN 2026 03:08
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -336,13 +336,13 @@ Package rerunfilecheck Info: File `resume.out' has not changed.
 Here is how much of TeX's memory you used:
  10906 strings out of 468225
  174561 string characters out of 5431521
- 617439 words of memory out of 5000000
+ 618439 words of memory out of 5000000
  39305 multiletter control sequences out of 15000+600000
  630967 words of font info for 56 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,11n,79p,438b,704s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,11n,79p,438b,702s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\WorkPlus\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1000.pk><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on resume.pdf (2 pages, 122759 bytes).
+Output written on resume.pdf (2 pages, 122902 bytes).
 PDF statistics:
  92 PDF objects out of 1000 (max. 8388607)
  9 named destinations out of 1000 (max. 500000)
