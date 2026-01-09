@@ -1,6 +1,6 @@
 import { MetadataRoute } from "next";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://kyyril.vercel.app";
+const siteUrl = process.env.SITE_URL ?? "https://kyyril.vercel.app";
 
 /**
  * Robots.txt configuration following Google's guidelines

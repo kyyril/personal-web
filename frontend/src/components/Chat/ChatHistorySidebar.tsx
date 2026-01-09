@@ -1,4 +1,5 @@
 "use client";
+import React from "react";
 import { Button } from "../ui/button";
 import { ScrollArea } from "../ui/scroll-area";
 import { cn } from "../../lib/utils";
@@ -22,7 +23,7 @@ interface ChatHistorySidebarProps {
   confirmDeleteChat: (chatId: string, e: React.MouseEvent) => void;
 }
 
-export default function ChatHistorySidebar({
+function ChatHistorySidebar({
   chatsList,
   activeChat,
   isMobile,
@@ -116,3 +117,6 @@ export default function ChatHistorySidebar({
     </div>
   );
 }
+
+// Memoize to prevent re-renders when parent state changes but props remain same
+export default React.memo(ChatHistorySidebar);

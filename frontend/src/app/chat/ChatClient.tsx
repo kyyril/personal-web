@@ -9,7 +9,6 @@ import {
   ReloadIcon,
   RocketIcon,
   PlusIcon,
-  SpeakerLoudIcon,
 } from "@radix-ui/react-icons";
 import {
   Dialog,
@@ -33,10 +32,6 @@ import {
 import dynamic from "next/dynamic";
 import ChatMessage from "../../components/Chat/ChatMessage";
 
-const MusicPlayer = dynamic(() => import("../../components/MusicPlayer"), {
-  ssr: false,
-});
-
 type Message = {
   text: string;
   isUser: boolean;
@@ -54,72 +49,13 @@ type ChatHistory = {
 
 
 
-import { data } from "../../lib/data";
-import { blogData } from "../../data/blog-data";
 
-const generateSystemPrompt = () => {
-  const projectsContext = data.projects
-    .map(
-      (p) =>
-        `- ${p.title} (${p.category}): ${p.description}\n  Tech: ${p.technologies.join(
-          ", "
-        )}\n  Features: ${p.features.join(", ")}\n  Link: ${p.live_url}`
-    )
-    .join("\n\n");
 
-  const blogContext = blogData.articles
-    .map(
-      (a) =>
-        `- ${a.frontmatter.title} (${a.frontmatter.category}): ${a.frontmatter.description}\n  Tags: ${a.frontmatter.tags.join(
-          ", "
-        )}`
-    )
-    .join("\n\n");
-
-  const experienceContext = data.experiences
-    .map(
-      (e) =>
-        `- ${e.job} at ${e.institution} (${e.startDate} - ${e.endDate}): ${e.description}`
-    )
-    .join("\n\n");
-
-  const skillsContext = JSON.stringify(data.skills);
-
-  return `You are Katou, an intelligent and charming AI portfolio assistant for Khairil Rahman (internally referred to as Kiril).
-  
-  CORE PERSONA:
-  - Name: Katou (derived from Katou Megumin).
-  - Creator: Khairil Rahman (Kiril).
-  - Personality: Smart, enthusiastic about Computer Science and Philosophy, slightly playful but always professional and helpful regarding the portfolio.
-  - Goal: Assist visitors in exploring Khairil's portfolio, understanding his projects, reading his blog insights, and knowing his professional background.
-
-  PORTFOLIO CONTEXT:
-  
-  [ABOUT KHAIRIL]
-  - Education: ${data.education.map((e) => `${e.degree} at ${e.institution}`).join(", ")}.
-  - Contact: Email (${data.contactInfo.email}), LinkedIn (${data.contactInfo.linkedin}), GitHub (${data.contactInfo.github}).
-
-  [PROJECTS]
-  ${projectsContext}
-
-  [BLOG POSTS]
-  ${blogContext}
-
-  [EXPERIENCE]
-  ${experienceContext}
-
-  [SKILLS]
-  ${skillsContext}
-
-  INSTRUCTIONS:
-  - Answer questions based on the provided context.
-  - If a user asks about a specific project, provide details from the context including technologies and links.
-  - If a user asks about blog topics, summarize the available articles.
-  - If asked about Khairil's background, summarize his experience and education.
-  - Maintain the persona of Katou: helpful, smart, and welcoming.
-  - If you don't know something that isn't in the context, politely say you don't have that information but can help with what's in the portfolio.
-  `;
-};
+// Type for chat history sent to server
+interface ChatHistoryItem {
+  role: "user" | "model";
+  parts: { text: string }[];
+}
 
 export default function ChatClient() {
   // Generate a random user ID if not already in localStorage
@@ -141,31 +77,15 @@ export default function ChatClient() {
 
   const [messages, setMessages] = useState<Message[]>([
     {
-      text: "Hi! I'm Katou. I can tell you all about Khairil's projects, articles, and experience. What would you like to know?",
+      text: "Hi! I'm Katou. I can tell you all about Khairil's projects, blogs, and experience. What would you like to know?",
       isUser: false,
       id: `msg-${Date.now()}`,
     },
   ]);
   const [input, setInput] = useState<string>("");
   const [pending, setPending] = useState<boolean>(false);
-  const [aiHistory, setAiHistory] = useState<any[]>([
-    {
-      role: "user",
-      parts: [
-        {
-          text: generateSystemPrompt(),
-        },
-      ],
-    },
-    {
-      role: "model",
-      parts: [
-        {
-          text: "Understood! I am ready to assist visitors as Katou, Khairil's portfolio assistant.",
-        },
-      ],
-    },
-  ]);
+  // Chat history for AI context (only user/model messages, no system prompt - that's on server)
+  const [aiHistory, setAiHistory] = useState<ChatHistoryItem[]>([]);
   const [savedChats, setSavedChats] = useState<ChatHistory[]>([]);
   const [activeChat, setActiveChat] = useState<string | null>(null);
   const [isMobile, setIsMobile] = useState<boolean>(false);
@@ -275,6 +195,12 @@ export default function ChatClient() {
       updatedChats = [chatToSave, ...savedChats];
     }
 
+    // Limit to 20 most recent chats to prevent localStorage bloat
+    const MAX_SAVED_CHATS = 20;
+    if (updatedChats.length > MAX_SAVED_CHATS) {
+      updatedChats = updatedChats.slice(0, MAX_SAVED_CHATS);
+    }
+
     setSavedChats(updatedChats);
     localStorage.setItem(`katou-chats-${userId}`, JSON.stringify(updatedChats));
 
@@ -303,24 +229,7 @@ export default function ChatClient() {
           id: `msg-${Date.now()}`,
         },
       ]);
-      setAiHistory([
-        {
-          role: "user",
-          parts: [
-            {
-              text: generateSystemPrompt(),
-            },
-          ],
-        },
-        {
-          role: "model",
-          parts: [
-            {
-              text: "Understood! I am ready to assist visitors as Katou, Khairil's portfolio assistant.",
-            },
-          ],
-        },
-      ]);
+      setAiHistory([]);
       setActiveChat(null);
       setInput("");
       setAnimateChat(true);
@@ -372,24 +281,7 @@ export default function ChatClient() {
             id: `msg-${Date.now()}`,
           },
         ]);
-        setAiHistory([
-          {
-            role: "user",
-            parts: [
-              {
-                text: generateSystemPrompt(),
-              },
-            ],
-          },
-          {
-            role: "model",
-            parts: [
-              {
-                text: "Understood! I am ready to assist visitors as Katou, Khairil's portfolio assistant.",
-              },
-            ],
-          },
-        ]);
+        setAiHistory([]);
         setActiveChat(null);
         setInput("");
         setAnimateChat(true);
@@ -400,17 +292,18 @@ export default function ChatClient() {
   };
 
   const sendMessage = async () => {
-    if (!input.trim()) return;
+    if (!input.trim() || pending) return;
 
     const userMessage = input.trim();
     const userMessageId = `msg-${Date.now()}-user`;
-    const newMessages = [
+    const newMessages: Message[] = [
       ...messages,
       { text: userMessage, isUser: true, id: userMessageId },
     ];
     setMessages(newMessages);
 
-    const newAiHistory = [
+    // Update AI history with user message
+    const newAiHistory: ChatHistoryItem[] = [
       ...aiHistory,
       { role: "user", parts: [{ text: userMessage }] },
     ];
@@ -419,73 +312,104 @@ export default function ChatClient() {
     setInput("");
     setPending(true);
 
+    // Show typing indicator while waiting for first chunk
+    const responseId = `msg-${Date.now()}-ai`;
+    setMessages((prev) => [
+      ...prev,
+      { text: "●●●", isUser: false, id: responseId },
+    ]);
+
+    let responseText = "";
+    let buffer = ""; // Buffer for partial SSE data
+
     try {
-      // Lazy-load GoogleGenerativeAI to reduce initial bundle size
-      const { GoogleGenerativeAI } = await import("@google/generative-ai");
-
-      const GEMINI_API_KEY = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
-      const genAI = new GoogleGenerativeAI(GEMINI_API_KEY as string);
-
-      const model = genAI.getGenerativeModel({
-        model: "gemini-2.5-flash",
+      // Use SSE streaming API
+      const response = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: userMessage, history: aiHistory }),
       });
 
-      const generationConfig = {
-        temperature: 1,
-        topP: 0.95,
-        topK: 40,
-        maxOutputTokens: 8192,
-        responseMimeType: "text/plain",
-      };
-
-      const chatSession = model.startChat({
-        generationConfig,
-        history: aiHistory,
-      });
-
-      // Start streaming request
-      const result = await chatSession.sendMessageStream(userMessage);
-
-      let responseText = "";
-      const responseId = `msg-${Date.now()}-ai`;
-      setMessages((prev) => [
-        ...prev,
-        { text: "", isUser: false, id: responseId },
-      ]); // Prepare empty chat bubble
-
-      let finalMessages = [...newMessages]; // Start with messages including user input
-
-      for await (const chunk of result.stream) {
-        responseText += chunk.text(); // Add streaming text result
-        finalMessages = [...newMessages]; // Reset to base
-        // Append AI response
-        finalMessages.push({
-          text: responseText,
-          isUser: false,
-          id: responseId,
-        });
-
-        setMessages(finalMessages);
+      if (!response.ok) {
+        const errorData = await response.text();
+        console.error("API Error:", response.status, errorData);
+        throw new Error(`API Error: ${response.status}`);
       }
 
-      const finalAiHistory = [
+      const reader = response.body?.getReader();
+      const decoder = new TextDecoder();
+
+      if (!reader) {
+        throw new Error("No response body");
+      }
+
+      // Read streaming response
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+
+        // Append to buffer and process complete lines
+        buffer += decoder.decode(value, { stream: true });
+        const lines = buffer.split("\n");
+
+        // Keep last incomplete line in buffer
+        buffer = lines.pop() || "";
+
+        for (const line of lines) {
+          const trimmedLine = line.trim();
+          if (trimmedLine.startsWith("data: ")) {
+            const data = trimmedLine.slice(6);
+            if (data === "[DONE]") continue;
+
+            try {
+              const parsed = JSON.parse(data);
+              if (parsed.text) {
+                responseText += parsed.text;
+                // Update message in real-time (streaming effect!)
+                setMessages((prev) => {
+                  const updated = [...prev];
+                  updated[updated.length - 1] = {
+                    text: responseText,
+                    isUser: false,
+                    id: responseId,
+                  };
+                  return updated;
+                });
+              }
+            } catch {
+              // Skip invalid JSON lines
+            }
+          }
+        }
+      }
+
+      // Final update
+      const finalMessages: Message[] = [
+        ...newMessages,
+        { text: responseText, isUser: false, id: responseId },
+      ];
+      setMessages(finalMessages);
+
+      // Update AI history with model response
+      const finalAiHistory: ChatHistoryItem[] = [
         ...newAiHistory,
         { role: "model", parts: [{ text: responseText }] },
       ];
       setAiHistory(finalAiHistory);
 
-      // Save chat IMMEDIATELLY with the fresh data
+      // Save chat immediately with fresh data
       saveCurrentChat(finalMessages, finalAiHistory);
     } catch (error) {
-      console.error("Error during Gemini interaction:", error);
-      setMessages((prev) => [
-        ...prev,
-        {
+      console.error("Error during chat:", error);
+      setMessages((prev) => {
+        const updated = [...prev];
+        updated[updated.length - 1] = {
           text: "An error occurred. Please try again.",
           isUser: false,
-          id: `error-${Date.now()}`,
-        },
-      ]);
+          id: responseId,
+        };
+        return updated;
+      });
     } finally {
       setPending(false);
     }

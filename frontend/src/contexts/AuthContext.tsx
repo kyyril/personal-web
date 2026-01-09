@@ -33,8 +33,8 @@ const AuthContext = createContext<AuthContextType>({
   currentUser: null,
   prismaUser: null,
   loading: true,
-  signIn: async () => {},
-  logOut: async () => {},
+  signIn: async () => { },
+  logOut: async () => { },
   getToken: async () => null,
 });
 
@@ -53,7 +53,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       const idToken = await result.user.getIdToken();
 
       const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
-      console.log("NEXT_PUBLIC_BACKEND_URL:", backendUrl);
+      console.log("BACKEND_URL:", backendUrl);
       const fetchUrl = `${backendUrl}/user`;
       console.log("Frontend attempting POST to:", fetchUrl);
 

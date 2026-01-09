@@ -1,4 +1,4 @@
-export const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://kyyril.vercel.app";
+export const siteUrl = process.env.SITE_URL ?? "https://kyyril.vercel.app";
 
 export const PERSONAL_KEYWORDS = [
     "kyyril",

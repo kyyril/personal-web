@@ -102,7 +102,7 @@ export function UtterancesCommentSystem({ article }: { article: Article }) {
 
       const config: UtterancesConfig = {
         repo:
-          process.env.NEXT_PUBLIC_UTTERANCES_REPO || "your-username/your-repo",
+          process.env.UTTERANCES_REPO || "your-username/your-repo",
         issueTerm: `article-${article.slug}`,
         theme: effectiveTheme === "dark" ? "github-dark" : "github-light",
         crossorigin: "anonymous",

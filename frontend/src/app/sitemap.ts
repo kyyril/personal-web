@@ -2,7 +2,7 @@ import { MetadataRoute } from "next";
 import { data } from "../lib/data";
 import { getAllArticles, getAllCategories } from "../data/blog-data";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://kyyril.vercel.app";
+const siteUrl = process.env.SITE_URL ?? "https://kyyril.vercel.app";
 
 /**
  * Generate sitemap following Google's sitemap guidelines
