@@ -127,40 +127,6 @@ export const experiences: Experience[] = [
 
 export const projects: Project[] = [
   {
-    id: "sobat-takwa",
-    title: "Sobat Takwa",
-    description:
-      "Sobat Takwa Is a web app providing prayer schedules, Quran reading with audio, and daily prayers with search functionality, designed for ease and convenience.",
-    technologies: [
-      "Typescript",
-      "Next.js",
-      "TailwindCSS",
-      "ShadcnUI",
-      "Framer-motion",
-    ],
-    live_url: "https://sobat-takwa.vercel.app/",
-    code_repo_url: "https://github.com/kyyril/sobatTakwa",
-    type: "Frontend",
-    category: "Web",
-    date: "2023-06-10",
-    features: [
-      "Search and select a city to view prayer times.",
-      "Prayer times based on the selected location.",
-      "Search for verse by verse name.",
-      "Listen to the audio of each verse.",
-      "daily prayer list.",
-      "Search for prayers by prayer name.",
-    ],
-    image: [
-      "https://res.cloudinary.com/da5ggxk01/image/upload/v1730290596/1home_wtsi7p.png",
-      "https://res.cloudinary.com/da5ggxk01/image/upload/v1730290545/2surah_ayb3kx.png",
-      "https://res.cloudinary.com/da5ggxk01/image/upload/v1730290545/3duo_had3wh.png",
-      "https://res.cloudinary.com/da5ggxk01/image/upload/v1730453159/ffa2993e-cae4-461f-accd-b4aa1d912bd8.png",
-    ],
-    featured: false,
-    isPrivate: false,
-  },
-  {
     id: "sync-blog",
     title: "SyncBlog",
     description:
@@ -379,6 +345,40 @@ export const projects: Project[] = [
     image: [
       "https://res.cloudinary.com/da5ggxk01/image/upload/v1746208810/43b2e80d-b6b5-456a-a87d-9e811d8b8232.png",
       "https://res.cloudinary.com/da5ggxk01/image/upload/v1746208916/d4f6b935-08f1-402b-a313-8bede3d49965.png",
+    ],
+    featured: false,
+    isPrivate: false,
+  },
+  {
+    id: "sobat-takwa",
+    title: "Sobat Takwa",
+    description:
+      "Sobat Takwa Is a web app providing prayer schedules, Quran reading with audio, and daily prayers with search functionality, designed for ease and convenience.",
+    technologies: [
+      "Typescript",
+      "Next.js",
+      "TailwindCSS",
+      "ShadcnUI",
+      "Framer-motion",
+    ],
+    live_url: "https://sobat-takwa.vercel.app/",
+    code_repo_url: "https://github.com/kyyril/sobatTakwa",
+    type: "Frontend",
+    category: "Web",
+    date: "2023-06-10",
+    features: [
+      "Search and select a city to view prayer times.",
+      "Prayer times based on the selected location.",
+      "Search for verse by verse name.",
+      "Listen to the audio of each verse.",
+      "daily prayer list.",
+      "Search for prayers by prayer name.",
+    ],
+    image: [
+      "https://res.cloudinary.com/da5ggxk01/image/upload/v1730290596/1home_wtsi7p.png",
+      "https://res.cloudinary.com/da5ggxk01/image/upload/v1730290545/2surah_ayb3kx.png",
+      "https://res.cloudinary.com/da5ggxk01/image/upload/v1730290545/3duo_had3wh.png",
+      "https://res.cloudinary.com/da5ggxk01/image/upload/v1730453159/ffa2993e-cae4-461f-accd-b4aa1d912bd8.png",
     ],
     featured: false,
     isPrivate: false,
