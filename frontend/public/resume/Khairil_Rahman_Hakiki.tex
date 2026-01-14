@@ -17,7 +17,8 @@
 \usepackage[hidelinks]{hyperref}
 \usepackage{fancyhdr}
 \usepackage[english]{babel}
-\usepackage{tabularx}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
 \input{glyphtounicode}
 
 
@@ -50,7 +51,6 @@
 
 \raggedbottom
 \raggedright
-\setlength{\tabcolsep}{0in}
 
 % Sections formatting
 \titleformat{\section}{
@@ -70,24 +70,21 @@
 
 \newcommand{\resumeSubheading}[4]{
   \vspace{-2pt}\item
-    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
-      \textbf{#1} & #2 \\
-      \textit{\small#3} & \textit{\small #4} \\
-    \end{tabular*}\vspace{-7pt}
+    \textbf{#1} \hfill #2 \\
+    \textit{\small#3} \hfill \textit{\small #4}
+  \vspace{-7pt}
 }
 
 \newcommand{\resumeSubSubheading}[2]{
     \item
-    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
-      \item\small#1 & \textit{\small #2} \\
-    \end{tabular*}\vspace{-7pt}
+    \small#1 \hfill \textit{\small #2}
+    \vspace{-7pt}
 }
 
 \newcommand{\resumeProjectHeading}[2]{
     \item
-    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
-      \small#1 & #2 \\
-    \end{tabular*}\vspace{-7pt}
+    \small#1 \hfill #2
+    \vspace{-7pt}
 }
 
 \newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
@@ -116,7 +113,7 @@
 
 
 %-----------TECHNICAL SKILLS-----------
-\section{Technical Skills}
+\section{Skills}
  \begin{itemize}[leftmargin=0.15in, label={}]
     \small{\item{
      \textbf{Languages}{: TypeScript, JavaScript, Go (Golang)} \\
@@ -129,7 +126,7 @@
 
 
 %-----------EXPERIENCE-----------
-\section{Work Experience}
+\section{Experience}
   \resumeSubHeadingListStart
 
     \resumeSubheading
@@ -162,18 +159,6 @@
         \resumeItem{Automated repetitive administrative tasks using \textbf{Google Apps Script}, reducing manual data entry workload by approximately 30\%.}
       \resumeItemListEnd
 
-  \resumeSubHeadingListEnd
-
-
-%-----------EDUCATION-----------
-\section{Education}
-  \resumeSubHeadingListStart
-    \resumeSubheading
-      {State Islamic University of Imam Bonjol Padang}{Padang, Indonesia}
-      {Bachelor of Information Systems}{Aug. 2022 -- Present}
-      \resumeItemListStart
-        \resumeItem{\textbf{Relevant Coursework:} Data Structures \& Algorithms, Software Engineering, Statistics, Operating System, Network, Project Management, Databases, and UI/UX Design.}
-      \resumeItemListEnd
   \resumeSubHeadingListEnd
 
 
@@ -224,11 +209,22 @@
     \resumeSubHeadingListEnd
 
 
+%-----------EDUCATION-----------
+\section{Education}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {State Islamic University of Imam Bonjol Padang}{Padang, Indonesia}
+      {Bachelor of Information Systems}{Aug. 2022 -- Present}
+      \resumeItemListStart
+        \resumeItem{\textbf{Relevant Coursework:} Data Structures \& Algorithms, Software Engineering, Statistics, Operating System, Network, Security, Project Management, Technopreneurship, Databases, and UI/UX Design.}
+      \resumeItemListEnd
+  \resumeSubHeadingListEnd
+
+
 %-----------CERTIFICATIONS-----------
 \section{Certifications}
  \resumeItemListStart
-    \resumeItem{\textbf{Frontend Developer (React)} -- HackerRank (Feb 2025) $|$ Verified Skill in component lifecycle and state management.}
-    \resumeItem{\textbf{React (Basic) \& Problem Solving (Basic)} -- HackerRank $|$ Demonstrated proficiency in algorithmic thinking.}
+    \resumeItem{\textbf{Frontend Developer (React)} -- Lorem ipsum.}
     \resumeItem{\textbf{See more at:} \href{https://linkedin.com/in/khairilrahman}{linkedin.com/in/khairilrahman}}
  \resumeItemListEnd
 
