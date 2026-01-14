@@ -127,6 +127,44 @@ export const experiences: Experience[] = [
 
 export const projects: Project[] = [
   {
+    id: "slither",
+    title: "Slither",
+    description:
+      "A high-performance, real-time multiplayer snake game demonstrating advanced networking techniques and 3D graphics optimization.",
+    technologies: [
+      "Go",
+      "Gorilla WebSocket",
+      "Redis",
+      "React",
+      "TypeScript",
+      "Vite",
+      "Three.js",
+      "React Three Fiber",
+      "Postprocessing",
+      "TailwindCSS",
+      "Docker",
+      "Vercel",
+    ],
+    live_url: "",
+    code_repo_url: "https://github.com/kyyril/slither",
+    type: "Fullstack",
+    category: "Web",
+    date: "2026-01-14",
+    features: [
+      "Delta State Compression: >95% bandwidth reduction by only transmitting state changes",
+      "Client-Side Prediction: Smooth 60 FPS gameplay even with 200ms+ latency using dead reckoning",
+      "Spatial Hash Grid: O(n) collision detection scaling to 10,000+ entities",
+      "Authoritative Server: Cheat-proof architecture with server as single source of truth",
+      "Real-time Multiplayer: WebSocket-based bi-directional communication at 30Hz tick rate"
+    ],
+    image: ["https://res.cloudinary.com/da5ggxk01/image/upload/v1768418723/0910b5bb-4aa5-4ed8-8145-c87a354dae62.png",
+      "https://res.cloudinary.com/da5ggxk01/image/upload/v1768419461/bc2c6eca-05c8-4d67-adb5-549ae2683dfd.png",
+      "https://res.cloudinary.com/da5ggxk01/image/upload/v1768419392/3984f6cb-3926-48ac-abd3-e2b6359a284c.png"
+    ],
+    featured: true,
+    isPrivate: false,
+  },
+  {
     id: "sync-blog",
     title: "SyncBlog",
     description:
