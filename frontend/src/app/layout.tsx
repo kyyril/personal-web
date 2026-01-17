@@ -19,6 +19,7 @@ import FooterWrapper from "../components/FooterWrapper";
 import { Analytics } from "@vercel/analytics/next";
 import { AuthProvider } from "../contexts/AuthContext";
 import { LazyMotion, domAnimation } from "framer-motion";
+import GuestbookPrefetcher from "../components/GuestbookPrefetcher";
 
 /**
  * Viewport configuration
@@ -242,6 +243,9 @@ export default function RootLayout({
               {/* Analytics with proper configuration to avoid insights 404 */}
               {process.env.VERCEL && <Analytics />}
               <FooterWrapper />
+
+              {/* Silent prefetcher for guestbook data - warms cache in background */}
+              <GuestbookPrefetcher />
             </AuthProvider>
           </LazyMotion>
         </ThemeProvider>

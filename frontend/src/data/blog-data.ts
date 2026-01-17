@@ -34,27 +34,6 @@ export interface Category {
 export const blogData = {
   articles: [
   {
-    "slug": "enhanced-mdx-features",
-    "frontmatter": {
-      "title": "MDX Features: Rich Content Rendering",
-      "description": "Exploring advanced MDX rendering capabilities with quotes, images, callouts, and interactive elements",
-      "date": "2024-11-08",
-      "category": "Development",
-      "tags": [
-        "MDX",
-        "React",
-        "Frontend",
-        "Content"
-      ],
-      "author": "Khairil Rahman",
-      "readTime": "8 min read",
-      "published": true
-    },
-    "content": "\r\nWelcome to this comprehensive showcase of MDX rendering capabilities. This article demonstrates various rich content elements that make your blog posts more engaging and visually appealing.\r\n\r\nMDX (Markdown + JSX) is a powerful format that combines the simplicity of Markdown with the power of React components. This comprehensive guide showcases various rich content elements you can use in your blog posts.\r\n\r\n## Blockquotes with Author Attribution\r\n\r\nBlockquotes can now include author attribution. Simply add `-- Author Name` at the end of your blockquote:\r\n\r\n> The best way to predict the future is to create it.\r\n> -- Peter Drucker\r\n\r\n> Innovation distinguishes between a leader and a follower.\r\n> -- Steve Jobs\r\n\r\n## Enhanced Images with Captions\r\n\r\nImages now support captions using the `title` attribute in markdown:\r\n\r\n![Beautiful sunset over mountains](https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=400&fit=crop \"A stunning sunset view over rugged mountain peaks\")\r\n\r\n## Callout Boxes\r\n\r\nUse callout boxes to highlight important information:\r\n\r\n### Info Callout\r\n\r\n> [!INFO]\r\n> This is useful for general information that readers should pay attention to.\r\n\r\n### Warning Callout\r\n\r\n> [!WARNING]\r\n> Be careful with this important warning message.\r\n\r\n### Success Callout\r\n\r\n> [!SUCCESS]\r\n> Great job! This indicates successful completion of a task.\r\n\r\n### Error Callout\r\n\r\n> [!ERROR]\r\n> Something went wrong. Check your code and try again.\r\n\r\n## Collapsible Sections\r\n\r\nCreate expandable content sections for better organization:\r\n\r\n<details>\r\n<summary>What is MDX?</summary>\r\n\r\nMDX is a format that allows you to write JSX in your Markdown documents. It combines the simplicity of Markdown with the power of React components, enabling you to create rich, interactive content.\r\n\r\n</details>\r\n\r\n<details>\r\n<summary>How does it work?</summary>\r\n\r\nMDX files are processed by remark and rehype plugins that transform the content into React components. This allows you to use custom components directly in your markdown while maintaining readability.\r\n\r\n</details>\r\n\r\n## Text Formatting\r\n\r\n### Highlighted Text\r\n\r\nUse the `<mark>` tag to highlight important text:\r\n\r\nThe `<mark>` element represents text which is <mark>marked or highlighted</mark> for reference or notation purposes.\r\n\r\n### Code Blocks with Copy Functionality\r\n\r\nCode blocks now include syntax highlighting and copy-to-clipboard functionality:\r\n\r\n```javascript\r\nfunction greetUser(name) {\r\n  console.log(`Hello, ${name}! Welcome to MDX rendering.`);\r\n  return `Greeting sent to ${name}`;\r\n}\r\n\r\n// Usage\r\ngreetUser(\"Developer\");\r\n```\r\n\r\n```python\r\ndef calculate_fibonacci(n):\r\n    \"\"\"Calculate the nth Fibonacci number\"\"\"\r\n    if n <= 1:\r\n        return n\r\n    return calculate_fibonacci(n-1) + calculate_fibonacci(n-2)\r\n\r\n# Example usage\r\nprint(calculate_fibonacci(10))  ## Output: 55\r\n```\r\n\r\n### Advanced Lists\r\n\r\n- **Feature 1:** Enhanced list styling with custom bullets\r\n- **Feature 2:** Better spacing and typography\r\n- **Feature 3:** Improved readability across devices\r\n\r\n## Mathematical Expressions\r\n\r\nWhile not natively supported in this renderer, you can use inline code for simple expressions: `E = mc²` or `a² + b² = c²`.\r\n\r\n## Mermaid Diagrams\r\n\r\nMermaid diagrams are now supported! You can create various types of diagrams directly in your MDX content using the `mermaid` language syntax.\r\n\r\n### Flowchart Example\r\n\r\n```mermaid\r\nflowchart TD\r\n    A[Start] --> B{Is it working?}\r\n    B -->|Yes| C[Great!]\r\n    B -->|No| D[Debug]\r\n    D --> B\r\n    C --> E[End]\r\n```\r\n\r\n### Sequence Diagram Example\r\n\r\n```mermaid\r\nsequenceDiagram\r\n    participant User\r\n    participant Frontend\r\n    participant API\r\n    participant Database\r\n    \r\n    User->>Frontend: Submit form\r\n    Frontend->>API: POST /api/users\r\n    API->>Database: Insert user data\r\n    Database-->>API: Confirmation\r\n    API-->>Frontend: 201 Created\r\n    Frontend-->>User: Success message\r\n```\r\n\r\n### Class Diagram Example\r\n\r\n```mermaid\r\nclassDiagram\r\n    class User {\r\n        +string id\r\n        +string email\r\n        +string name\r\n        +login() bool\r\n        +logout() void\r\n    }\r\n    \r\n    class Post {\r\n        +string id\r\n        +string title\r\n        +string content\r\n        +datetime createdAt\r\n        +publish() void\r\n    }\r\n```\r\n\r\n### State Diagram Example\r\n\r\n```mermaid\r\nstateDiagram-v2\r\n    [*] --> Idle\r\n    Idle --> Loading: Start request\r\n    Loading --> Success: Data received\r\n    Loading --> Error: Request failed\r\n    Success --> [*]\r\n    Error --> Idle: Retry\r\n```\r\n\r\n## Tables with Enhanced Styling\r\n\r\n| Feature     | Status   | Description                    |\r\n| ----------- | -------- | ------------------------------ |\r\n| Blockquotes | Enhanced | Now support author attribution |\r\n| Images      | Enhanced | Added caption support          |\r\n| Callouts    | New      | Multiple types available       |\r\n| Collapsible | New      | Expandable content sections    |\r\n| Highlights  | New      | Text highlighting support      |\r\n\r\n## Conclusion\r\n\r\nThese MDX features provide a rich set of tools for creating engaging and interactive blog content. From author-attributed quotes to collapsible sections, callout boxes, and now **Mermaid diagrams**, your articles can now be more visually appealing and user-friendly.\r\n\r\nMermaid diagrams support various types including:\r\n- Flowcharts for process visualization\r\n- Sequence diagrams for interaction flows\r\n- Class diagrams for system architecture\r\n- State diagrams for state management\r\n- And many more diagram types!\r\n\r\n> The future of web content is interactive and engaging. With MDX rendering, we're just scratching the surface of what's possible.\r\n> -- Modern Web Developer\r\n\r\n_This article showcases the MDX renderer capabilities, including the new Mermaid diagram support. Try creating your own content with these features!_\r\n",
-    "excerpt": "Welcome to this comprehensive showcase of MDX rendering capabilities. This article demonstrates various rich content elements that make your blog posts more eng...",
-    "headings": []
-  },
-  {
     "slug": "kubernetes-horizontal-scaling",
     "frontmatter": {
       "title": "Ship to Scale: The Journey from Containers to Kubernetes Horizontal Scaling",
@@ -146,12 +125,6 @@ export const blogData = {
 ] as Article[],
   categories: [
   {
-    "name": "Development",
-    "slug": "development",
-    "description": "Development related articles",
-    "count": 1
-  },
-  {
     "name": "Infrastructure",
     "slug": "infrastructure",
     "description": "Infrastructure related articles",
@@ -181,27 +154,23 @@ export const blogData = {
   "Backend",
   "Caching",
   "Cloud Native",
-  "Content",
   "Database",
   "DevOps",
   "Distributed Systems",
   "EDA",
-  "Frontend",
   "HPA",
   "K8s",
   "Kubernetes",
-  "MDX",
   "Message Broker",
   "Microservices",
   "Performance",
   "RabbitMQ",
-  "React",
   "Redis",
   "Scalability",
   "Scaling",
   "System Design"
 ] as string[],
-  lastUpdated: '2026-01-07T15:52:39.930Z',
+  lastUpdated: '2026-01-17T09:06:13.211Z',
 } as const;
 
 // Helper functions

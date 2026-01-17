@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, Suspense } from "react";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -18,7 +18,7 @@ import Script from "next/script";
 import { useRouter } from "next/navigation";
 import { TableOfContents } from "@/components/blog/TableOfContents";
 import { ClientCommentSection } from "@/components/blog/ClientCommentSection";
-import { MDXRenderer } from "@/components/blog/MDXRenderer";
+import { LazyMDXRenderer, MDXRendererSkeleton } from "@/components/blog/MDXRendererLazy";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { ReadingProgressBar } from "@/components/blog/ReadingProgressBar";
 import { siteUrl } from "@/lib/metadata";
@@ -155,17 +155,10 @@ export function ArticleClient({ post, relatedPosts }: ArticleClientProps) {
       <div className="sticky top-0 z-40 w-full bg-background/80 backdrop-blur-md">
         <div className="container mx-auto px-4 lg:px-8 max-w-7xl py-6">
           <div className="flex items-center justify-between gap-4">
-            <div className="min-w-0">
+            <div className="min-w-0 flex-1">
               <Breadcrumb
                 items={[
-                  { label: "Home", href: "/" },
                   { label: "Blog", href: "/blog" },
-                  {
-                    label: post.frontmatter.category,
-                    href: `/blog/category/${encodeURIComponent(
-                      post.frontmatter.category.toLowerCase().replace(/\s+/g, "-")
-                    )}`,
-                  },
                   { label: post.frontmatter.title },
                 ]}
               />
@@ -279,7 +272,9 @@ export function ArticleClient({ post, relatedPosts }: ArticleClientProps) {
               </header>
 
               {/* Article Content */}
-              <MDXRenderer content={post.content} />
+              <Suspense fallback={<MDXRendererSkeleton />}>
+                <LazyMDXRenderer content={post.content} />
+              </Suspense>
             </article>
 
             {/* Comments Section */}

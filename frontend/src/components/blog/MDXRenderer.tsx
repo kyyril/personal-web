@@ -1,15 +1,11 @@
 "use client";
 
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, lazy, Suspense, memo, useMemo } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
 import rehypeSlug from "rehype-slug";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import {
-  oneDark,
-  oneLight,
-} from "react-syntax-highlighter/dist/cjs/styles/prism";
+import dynamic from "next/dynamic";
 import {
   Copy,
   Check,
@@ -18,14 +14,71 @@ import {
   AlertTriangle,
   CheckCircle,
   XCircle,
-  X,
 } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
-import Image from "next/image";
-import mermaid from "mermaid";
-import ImagePreview from "../ImagePreview";
+import { Skeleton } from "@/components/ui/skeleton";
+
+// Lazy load heavy syntax highlighter
+const SyntaxHighlighter = dynamic(
+  () => import("react-syntax-highlighter").then((mod) => mod.Prism),
+  {
+    loading: () => <CodeBlockSkeleton />,
+    ssr: false
+  }
+);
+
+// Lazy import styles - will be loaded when SyntaxHighlighter is ready
+let oneDark: any = null;
+let oneLight: any = null;
+
+const loadStyles = async () => {
+  if (!oneDark) {
+    const styles = await import("react-syntax-highlighter/dist/cjs/styles/prism");
+    oneDark = styles.oneDark;
+    oneLight = styles.oneLight;
+  }
+  return { oneDark, oneLight };
+};
+
+// Code block skeleton for loading state
+function CodeBlockSkeleton() {
+  return (
+    <div className="my-8 rounded-none overflow-hidden shadow-md">
+      <div className="flex bg-secondary items-center justify-between px-4 py-2">
+        <Skeleton className="h-3 w-16" />
+        <Skeleton className="h-6 w-6" />
+      </div>
+      <div className="bg-muted p-5 space-y-2">
+        <Skeleton className="h-3 w-[80%]" />
+        <Skeleton className="h-3 w-[60%]" />
+        <Skeleton className="h-3 w-[70%]" />
+        <Skeleton className="h-3 w-[50%]" />
+      </div>
+    </div>
+  );
+}
+
+// Mermaid skeleton for loading state  
+function MermaidSkeleton() {
+  return (
+    <div className="my-8 p-4 bg-background rounded-lg shadow-sm">
+      <div className="flex items-center justify-center h-48">
+        <div className="animate-pulse flex flex-col items-center gap-3">
+          <Skeleton className="h-32 w-64 rounded" />
+          <Skeleton className="h-3 w-32" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Dynamically load the ImagePreview component
+const ImagePreview = dynamic(() => import("../ImagePreview"), {
+  loading: () => <span className="block w-full h-64 rounded-lg animate-pulse bg-muted" />,
+  ssr: false,
+});
 
 // Update the animation variants
 const fadeInUp = {
@@ -46,7 +99,7 @@ const codeBlockVariants = {
   },
 };
 
-// Mermaid Diagram Component
+// Mermaid Diagram Component with lazy loading
 interface MermaidDiagramProps {
   chart: string;
   isDark: boolean;
@@ -54,45 +107,56 @@ interface MermaidDiagramProps {
 
 function MermaidDiagram({ chart, isDark }: MermaidDiagramProps) {
   const ref = useRef<HTMLDivElement>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!ref.current) return;
 
-    mermaid.initialize({
-      startOnLoad: false,
-      theme: isDark ? 'dark' : 'default',
-      themeVariables: {
-        primaryColor: isDark ? '#1f2937' : '#f3f4f6',
-        primaryTextColor: isDark ? '#f9fafb' : '#1f2937',
-        primaryBorderColor: isDark ? '#374151' : '#d1d5db',
-        lineColor: isDark ? '#9ca3af' : '#6b7280',
-        secondaryColor: isDark ? '#374151' : '#e5e7eb',
-        tertiaryColor: isDark ? '#1f2937' : '#f9fafb',
-        background: isDark ? '#0f172a' : '#ffffff',
-        mainBkg: isDark ? '#1e293b' : '#ffffff',
-        secondBkg: isDark ? '#334155' : '#f8fafc',
-        tertiaryBkg: isDark ? '#475569' : '#f1f5f9',
-        edgeLabelBackground: isDark ? '#374151' : '#ffffff',
-        clusterBkg: isDark ? '#374151' : '#f9fafb',
-        clusterBorder: isDark ? '#6b7280' : '#d1d5db',
-        defaultLinkColor: isDark ? '#9ca3af' : '#6b7280',
-        titleColor: isDark ? '#f9fafb' : '#1f2937',
-        fillType0: isDark ? '#374151' : '#e5e7eb',
-        fillType1: isDark ? '#4b5563' : '#d1d5db',
-      },
-      fontFamily: 'ui-monospace, SFMono-Regular, "SF Mono", Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
-      fontSize: 14,
-      flowchart: { useMaxWidth: true, htmlLabels: true, curve: 'basis' },
-      sequence: { useMaxWidth: true, wrap: true },
-    });
+    let isMounted = true;
+    setIsLoading(true);
+    setError(null);
 
     const renderDiagram = async () => {
       try {
+        // Dynamically import mermaid only when needed
+        const mermaid = (await import("mermaid")).default;
+
+        mermaid.initialize({
+          startOnLoad: false,
+          theme: isDark ? 'dark' : 'default',
+          themeVariables: {
+            primaryColor: isDark ? '#1f2937' : '#f3f4f6',
+            primaryTextColor: isDark ? '#f9fafb' : '#1f2937',
+            primaryBorderColor: isDark ? '#374151' : '#d1d5db',
+            lineColor: isDark ? '#9ca3af' : '#6b7280',
+            secondaryColor: isDark ? '#374151' : '#e5e7eb',
+            tertiaryColor: isDark ? '#1f2937' : '#f9fafb',
+            background: isDark ? '#0f172a' : '#ffffff',
+            mainBkg: isDark ? '#1e293b' : '#ffffff',
+            secondBkg: isDark ? '#334155' : '#f8fafc',
+            tertiaryBkg: isDark ? '#475569' : '#f1f5f9',
+            edgeLabelBackground: isDark ? '#374151' : '#ffffff',
+            clusterBkg: isDark ? '#374151' : '#f9fafb',
+            clusterBorder: isDark ? '#6b7280' : '#d1d5db',
+            defaultLinkColor: isDark ? '#9ca3af' : '#6b7280',
+            titleColor: isDark ? '#f9fafb' : '#1f2937',
+            fillType0: isDark ? '#374151' : '#e5e7eb',
+            fillType1: isDark ? '#4b5563' : '#d1d5db',
+          },
+          fontFamily: 'ui-monospace, SFMono-Regular, "SF Mono", Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
+          fontSize: 14,
+          flowchart: { useMaxWidth: true, htmlLabels: true, curve: 'basis' },
+          sequence: { useMaxWidth: true, wrap: true },
+        });
+
         const cleanedChart = chart.trim();
         if (!cleanedChart) throw new Error('Empty Mermaid diagram');
+
         const diagramId = `mermaid-${Math.random().toString(36).substr(2, 9)}`;
         const { svg } = await mermaid.render(diagramId, cleanedChart);
-        if (ref.current) {
+
+        if (isMounted && ref.current) {
           ref.current.innerHTML = svg;
           const svgElement = ref.current.querySelector('svg');
           if (svgElement) {
@@ -100,22 +164,38 @@ function MermaidDiagram({ chart, isDark }: MermaidDiagramProps) {
             svgElement.style.height = 'auto';
             svgElement.style.maxWidth = '100%';
           }
+          setIsLoading(false);
         }
-      } catch (error) {
-        console.error('Mermaid rendering error:', error);
-        if (ref.current) {
-          ref.current.innerHTML = `
-            <div class="text-red-500 p-4 rounded bg-red-50 dark:bg-red-900/20">
-              <div class="font-semibold mb-2">Failed to render Mermaid diagram</div>
-              <pre class="mt-2 p-2 bg-gray-100 dark:bg-gray-800 rounded overflow-x-auto">${chart}</pre>
-            </div>
-          `;
+      } catch (err) {
+        console.error('Mermaid rendering error:', err);
+        if (isMounted) {
+          setError(`Failed to render diagram`);
+          setIsLoading(false);
         }
       }
     };
 
     renderDiagram();
+
+    return () => {
+      isMounted = false;
+    };
   }, [chart, isDark]);
+
+  if (isLoading) {
+    return <MermaidSkeleton />;
+  }
+
+  if (error) {
+    return (
+      <div className="my-8 p-4 bg-red-50 dark:bg-red-900/20 rounded-lg">
+        <div className="text-red-500 font-semibold mb-2">{error}</div>
+        <pre className="text-xs p-2 bg-gray-100 dark:bg-gray-800 rounded overflow-x-auto">
+          {chart}
+        </pre>
+      </div>
+    );
+  }
 
   return (
     <div className="mermaid-container my-8 p-4 bg-background rounded-lg shadow-sm overflow-x-auto">
@@ -133,7 +213,9 @@ type CalloutType = "info" | "warning" | "success" | "error";
 export function MDXRenderer({ content }: MDXRendererProps) {
   const [copiedCode, setCopiedCode] = useState<string | null>(null);
   const [isDark, setIsDark] = useState(false);
+  const [syntaxStyles, setSyntaxStyles] = useState<{ oneDark: any; oneLight: any } | null>(null);
 
+  // Load dark mode state
   useEffect(() => {
     const checkDarkMode = () => {
       setIsDark(document.documentElement.classList.contains("dark"));
@@ -142,6 +224,11 @@ export function MDXRenderer({ content }: MDXRendererProps) {
     const observer = new MutationObserver(checkDarkMode);
     observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
     return () => observer.disconnect();
+  }, []);
+
+  // Lazy load syntax highlighting styles
+  useEffect(() => {
+    loadStyles().then(setSyntaxStyles);
   }, []);
 
   const handleCopyCode = async (code: string) => {
@@ -197,6 +284,11 @@ export function MDXRenderer({ content }: MDXRendererProps) {
             }
 
             if (!inline && match) {
+              // Show skeleton while styles are loading
+              if (!syntaxStyles) {
+                return <CodeBlockSkeleton />;
+              }
+
               return (
                 <motion.div variants={codeBlockVariants} initial="initial" animate="animate" className="relative group my-8 rounded-none overflow-hidden shadow-md">
                   <div className="flex bg-secondary border-none outline-none items-center justify-between px-4 py-2 shadow-md">
@@ -205,7 +297,7 @@ export function MDXRenderer({ content }: MDXRendererProps) {
                       {copiedCode === code ? <Check className="h-4 w-4 text-custom" /> : <Copy className="h-4 w-4 text-foreground/50" />}
                     </Button>
                   </div>
-                  <SyntaxHighlighter style={isDark ? oneDark : oneLight} language={language} PreTag="div" className="!mt-0 bg-transparent !rounded-none !border-none" customStyle={{ margin: 0, padding: "1.25rem", fontSize: "0.9rem", lineHeight: "1.5" }} {...props}>
+                  <SyntaxHighlighter style={isDark ? syntaxStyles.oneDark : syntaxStyles.oneLight} language={language} PreTag="div" className="!mt-0 bg-transparent !rounded-none !border-none" customStyle={{ margin: 0, padding: "1.25rem", fontSize: "0.9rem", lineHeight: "1.5" }} {...props}>
                     {code}
                   </SyntaxHighlighter>
                 </motion.div>
@@ -290,7 +382,7 @@ export function MDXRenderer({ content }: MDXRendererProps) {
           ),
           li: ({ children, ...props }) => (
             <li className="text-foreground/70 leading-relaxed flex items-start gap-3 my-2" {...props}>
-              <div className="w-1 h-1 bg-primary/40 rounded-full mt-2.5 flex-shrink-0"></div>
+              <span className="w-1 h-1 bg-primary/40 rounded-full mt-2.5 flex-shrink-0 inline-block" />
               <span>{children}</span>
             </li>
           ),

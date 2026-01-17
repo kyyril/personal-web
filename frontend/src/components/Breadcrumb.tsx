@@ -44,20 +44,20 @@ export const Breadcrumb: React.FC<BreadcrumbProps> = ({
       />
       <nav
         aria-label="Breadcrumb"
-        className={`flex items-center flex-wrap gap-y-2 text-sm sm:text-base text-muted-foreground ${className}`}
+        className={`flex items-center text-sm text-muted-foreground overflow-hidden ${className}`}
       >
         {items.map((item, index) => (
-          <div key={index} className="flex items-center min-w-0">
+          <div key={index} className="flex items-center min-w-0 shrink-0 last:shrink">
             {index > 0 && (
               <ChevronRight
-                className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0 mx-1 sm:mx-2"
+                className="w-4 h-4 flex-shrink-0 mx-1"
                 aria-hidden="true"
               />
             )}
             {item.href && index < items.length - 1 ? (
               <Link
                 href={item.href}
-                className="hover:text-foreground transition-colors truncate max-w-[80px] xs:max-w-[120px] sm:max-w-[200px] md:max-w-none"
+                className="hover:text-foreground transition-colors whitespace-nowrap"
                 aria-label={`Navigate to ${item.label}`}
                 title={item.label}
               >
@@ -65,7 +65,7 @@ export const Breadcrumb: React.FC<BreadcrumbProps> = ({
               </Link>
             ) : (
               <span
-                className="text-foreground font-medium truncate max-w-[120px] xs:max-w-[150px] sm:max-w-[300px] md:max-w-none"
+                className="text-foreground font-medium truncate"
                 aria-current={index === items.length - 1 ? "page" : undefined}
                 title={item.label}
               >
@@ -80,3 +80,4 @@ export const Breadcrumb: React.FC<BreadcrumbProps> = ({
 };
 
 export default Breadcrumb;
+

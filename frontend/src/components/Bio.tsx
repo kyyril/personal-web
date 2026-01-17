@@ -6,7 +6,7 @@ import { contactInfo } from "@/lib/data";
 const SOCIAL_LINKS = [
   { name: "GitHub", url: contactInfo.github, icon: <GithubIcon /> },
   { name: "LinkedIn", url: contactInfo.linkedin, icon: <LinkedinIcon /> },
-  { name: "Resume", url: contactInfo.cv, icon: <DocumentIcon /> },
+  // { name: "Resume", url: contactInfo.cv, icon: <DocumentIcon /> },
 ];
 
 const Bio: React.FC = () => {
