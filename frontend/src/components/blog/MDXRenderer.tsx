@@ -109,10 +109,9 @@ function MermaidDiagram({ chart, isDark }: MermaidDiagramProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [svgContent, setSvgContent] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!ref.current) return;
-
     let isMounted = true;
     setIsLoading(true);
     setError(null);
@@ -156,14 +155,8 @@ function MermaidDiagram({ chart, isDark }: MermaidDiagramProps) {
         const diagramId = `mermaid-${Math.random().toString(36).substr(2, 9)}`;
         const { svg } = await mermaid.render(diagramId, cleanedChart);
 
-        if (isMounted && ref.current) {
-          ref.current.innerHTML = svg;
-          const svgElement = ref.current.querySelector('svg');
-          if (svgElement) {
-            svgElement.style.width = '100%';
-            svgElement.style.height = 'auto';
-            svgElement.style.maxWidth = '100%';
-          }
+        if (isMounted) {
+          setSvgContent(svg);
           setIsLoading(false);
         }
       } catch (err) {
@@ -199,7 +192,11 @@ function MermaidDiagram({ chart, isDark }: MermaidDiagramProps) {
 
   return (
     <div className="mermaid-container my-8 p-4 bg-background rounded-lg shadow-sm overflow-x-auto">
-      <div ref={ref} className="mermaid-diagram" />
+      <div
+        ref={ref}
+        className="mermaid-diagram [&_svg]:w-full [&_svg]:h-auto [&_svg]:max-w-full"
+        dangerouslySetInnerHTML={{ __html: svgContent || '' }}
+      />
     </div>
   );
 }
