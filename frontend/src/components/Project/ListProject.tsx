@@ -22,7 +22,7 @@ interface ListProjectProps {
     live_url: string;
     code_repo_url: string;
     type: string;
-    category: string;
+    category: string[];
   }[];
 }
 
@@ -41,15 +41,35 @@ export default function ListProject({ projects }: ListProjectProps) {
 
   const filteredProjects = useMemo(() => {
     return projects.filter((project) => {
-      const categoryMatch =
-        categoryFilter === "All" || project.category === categoryFilter;
-      const typeMatch = typeFilter === "All" || project.type === typeFilter;
-      return categoryMatch && typeMatch;
+      // Logic:
+      // 1. If Category is "All" and Type is "All" -> Show everything (return true)
+      // 2. If Category is specific and Type is "All" -> Filter by Category
+      // 3. If Category is "All" and Type is specific -> Filter by Type
+      // 4. If Both are specific -> Show if matches Category OR matches Type (Union/Combine)
+
+      const isCategoryAll = categoryFilter === "All";
+      const isTypeAll = typeFilter === "All";
+
+      // project.category is now an array
+      const matchesCategory = project.category.some(cat =>
+        cat.toLowerCase() === categoryFilter.toLowerCase()
+      );
+      const matchesType = project.type === typeFilter;
+
+      if (isCategoryAll && isTypeAll) return true;
+      if (isCategoryAll) return matchesType;
+      if (isTypeAll) return matchesCategory;
+
+      // Both specific: Combine (OR logic)
+      return matchesCategory || matchesType;
     });
   }, [projects, categoryFilter, typeFilter]);
 
   const totalPages = Math.ceil(filteredProjects.length / PROJECTS_PER_PAGE);
   const paginatedProjects = useMemo(() => {
+    // If no projects found, return empty array
+    if (filteredProjects.length === 0) return [];
+
     const startIndex = (currentPage - 1) * PROJECTS_PER_PAGE;
     const endIndex = startIndex + PROJECTS_PER_PAGE;
     return filteredProjects.slice(startIndex, endIndex);
@@ -167,36 +187,33 @@ export default function ListProject({ projects }: ListProjectProps) {
 
       {/* Project List */}
       <ul className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {paginatedProjects.length > 0 ? (
+        {!hasMounted ? (
+          // Loading skeletons
+          Array.from({ length: PROJECTS_PER_PAGE }).map((_, index) => (
+            <li key={index}>
+              <CardProjectSkeleton />
+            </li>
+          ))
+        ) : paginatedProjects.length > 0 ? (
+          // Projects list
           <>
             {paginatedProjects.map((project, index) => (
               <li key={project.id}>
                 <CardProject
                   project={project}
                   index={index}
-                  isVisible={visibleItems.has(index) || !hasMounted}
+                  isVisible={visibleItems.has(index) || !hasMounted} // Fallback to !hasMounted for visible if hydration happens fast
                   hasMounted={hasMounted}
                 />
               </li>
             ))}
-            {Array.from({
-              length: PROJECTS_PER_PAGE - paginatedProjects.length,
-            }).map((_, index) => (
-              <li
-                key={`placeholder-${index}`}
-                className="invisible"
-                aria-hidden="true"
-              >
-                <CardProjectSkeleton />
-              </li>
-            ))}
+            {/* Fill remaining space with invisible placeholders to keep grid layout consistent if wanted, or just nothing */}
           </>
         ) : (
-          Array.from({ length: PROJECTS_PER_PAGE }).map((_, index) => (
-            <li key={index}>
-              <CardProjectSkeleton />
-            </li>
-          ))
+          // Empty state
+          <li className="col-span-1 md:col-span-2 py-12 text-center text-muted-foreground">
+            No projects found matching your criteria.
+          </li>
         )}
       </ul>
 

@@ -60,7 +60,7 @@ export default function ProjectPage() {
       </Suspense>
 
       <h2 className="mb-6 text-2xl font-bold lg:text-3xl flex items-end pb-4 pt-24">
-        GitHub Repositories
+        Repositories
       </h2>
       <p className="text-muted-foreground mb-8 max-w-3xl">
         Live repositories showcasing ongoing development work and collaborative

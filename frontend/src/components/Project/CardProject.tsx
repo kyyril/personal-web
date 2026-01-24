@@ -16,16 +16,10 @@ import { useState, useEffect } from "react";
 import { Skeleton } from "../ui/skeleton";
 import ImagePreview from "../ImagePreview";
 
+import { Project } from "../types";
+
 interface ProjectProps {
-  project: {
-    id: string;
-    title: string;
-    description: string;
-    technologies: string[];
-    image: string[];
-    live_url: string;
-    code_repo_url: string;
-  };
+  project: Project;
   index: number;
   isVisible?: boolean;
   hasMounted?: boolean;

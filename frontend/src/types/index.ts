@@ -22,7 +22,7 @@ export interface Project {
   features: string[];
   image: string[];
   type: string;
-  category: string;
+  category: string[];
   featured: boolean;
   isPrivate: boolean;
 }
