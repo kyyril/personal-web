@@ -287,13 +287,13 @@ export const projects: Project[] = [
     features: [
       "Delta State Compression: >95% bandwidth reduction by only transmitting state changes",
       "Client-Side Prediction: Smooth 60 FPS gameplay even with 200ms+ latency using dead reckoning",
-      "Spatial Hash Grid: O(n) collision detection scaling to 10,000+ entities",
+      "Spatial Hash Grid: Efficient collision detection capable of handling thousands of moving entities",
       "Authoritative Server: Cheat-proof architecture with server as single source of truth",
       "Real-time Multiplayer: WebSocket-based bi-directional communication at 30Hz tick rate",
     ],
     image: [
-      "https://res.cloudinary.com/da5ggxk01/image/upload/v1768418723/0910b5bb-4aa5-4ed8-8145-c87a354dae62.png",
-      "https://res.cloudinary.com/da5ggxk01/image/upload/v1768419461/bc2c6eca-05c8-4d67-adb5-549ae2683dfd.png",
+      "https://res.cloudinary.com/da5ggxk01/image/upload/v1769285993/1f759294-4c58-454e-bd9e-39e7b3de8881.png",
+      "https://res.cloudinary.com/da5ggxk01/image/upload/v1769286274/5850f5ec-1095-46f3-992a-422d29d046b2.png",
       "https://res.cloudinary.com/da5ggxk01/image/upload/v1768419392/3984f6cb-3926-48ac-abd3-e2b6359a284c.png",
     ],
     featured: true,
