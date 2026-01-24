@@ -183,10 +183,11 @@ export const projects: Project[] = [
     isPrivate: false,
   },
   {
-    "id": "fluently",
-    "title": "Fluently",
-    "description": "A fun language learning app that uses AI to help you practice speaking English. It builds a daily habit with structured tasks and gamification features like streaks and points.",
-    "technologies": [
+    id: "fluently",
+    title: "Fluently",
+    description:
+      "A fun language learning app that uses AI to help you practice speaking English. It builds a daily habit with structured tasks and gamification features like streaks and points.",
+    technologies: [
       "React Native",
       "TailwindCSS",
       "TypeScript",
@@ -198,19 +199,19 @@ export const projects: Project[] = [
       "Redis",
       "Expo",
     ],
-    "live_url": "https://fluentlyy.vercel.app",
-    "code_repo_url": "https://github.com/kyyril/Fluently",
-    "type": "Fullstack",
-    "category": ["Web", "Mobile"],
-    "date": "2026-01-24",
-    "features": [
+    live_url: "https://fluentlyy.vercel.app",
+    code_repo_url: "https://github.com/kyyril/Fluently",
+    type: "Fullstack",
+    category: ["Web", "Mobile"],
+    date: "2026-01-24",
+    features: [
       "AI Speaking Coach: Practice conversation with an AI that listens and corrects you",
       "Daily Routine: A simple 4-step plan to learn consistently every day",
       "Gamification: Earn points (XP), level up, and compete on the leaderboard",
       "Cross-Platform: Start on your computer and continue on your phone seamlessly",
-      "Smart Articles: Read stories with instant translation and audio support"
+      "Smart Articles: Read stories with instant translation and audio support",
     ],
-    "image": [
+    image: [
       "https://res.cloudinary.com/da5ggxk01/image/upload/v1769253224/e9acb5df-70d6-4979-8983-d194634c0ec8.png",
       "https://res.cloudinary.com/da5ggxk01/image/upload/v1769253310/01383579-0c4d-4283-aec9-b3001ba93818.png",
       "https://res.cloudinary.com/da5ggxk01/image/upload/v1769253418/3b49da53-63ad-420a-89bd-d36e37076040.png",
@@ -218,10 +219,10 @@ export const projects: Project[] = [
       "https://res.cloudinary.com/da5ggxk01/image/upload/v1769255992/dba91d31-499d-4efd-811a-3d6f65c62c3a.png",
       "https://res.cloudinary.com/da5ggxk01/image/upload/v1769253847/c582a286-0612-4e38-b06c-0fbfca2fe665.png",
       "https://res.cloudinary.com/da5ggxk01/image/upload/v1769257077/68e027a8-b029-4bcd-a833-2a7a48855a24.png",
-      "https://res.cloudinary.com/da5ggxk01/image/upload/v1769257439/8f238151-0d53-40f9-86e7-ae64fe65c445.png"
+      "https://res.cloudinary.com/da5ggxk01/image/upload/v1769257439/8f238151-0d53-40f9-86e7-ae64fe65c445.png",
     ],
-    "featured": true,
-    "isPrivate": false
+    featured: true,
+    isPrivate: false,
   },
   {
     id: "cihuy-movie",
@@ -278,7 +279,7 @@ export const projects: Project[] = [
       "Docker",
       "Vercel",
     ],
-    live_url: "",
+    live_url: "https://slitherrrr.vercel.app",
     code_repo_url: "https://github.com/kyyril/slither",
     type: "Fullstack",
     category: ["Web"],
