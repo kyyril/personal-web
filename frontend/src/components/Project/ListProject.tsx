@@ -12,18 +12,10 @@ import {
   DotsHorizontalIcon,
 } from "@radix-ui/react-icons";
 
+import { Project } from "@/types";
+
 interface ListProjectProps {
-  projects: {
-    id: string;
-    title: string;
-    description: string;
-    technologies: string[];
-    image: string[];
-    live_url: string;
-    code_repo_url: string;
-    type: string;
-    category: string[];
-  }[];
+  projects: Project[];
 }
 
 const PROJECTS_PER_PAGE = 2;

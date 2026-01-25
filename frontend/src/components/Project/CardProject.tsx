@@ -15,8 +15,8 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { Skeleton } from "../ui/skeleton";
 import ImagePreview from "../ImagePreview";
+import { Project } from "@/types";
 
-import { Project } from "../types";
 
 interface ProjectProps {
   project: Project;
