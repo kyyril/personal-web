@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.6.17)  26 JAN 2026 11:20
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.6.17)  31 JAN 2026 04:47
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -312,11 +312,11 @@ Here is how much of TeX's memory you used:
  39415 multiletter control sequences out of 15000+600000
  638233 words of font info for 67 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,11n,79p,415b,742s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,11n,79p,415b,691s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\WorkPlus\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1000.pk> <C:\Users\WorkPlus\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1095.pk> <C:\Users\WorkPlus\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1000.pk> <C:\Users\WorkPlus\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti1000.pk> <C:\Users\WorkPlus\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1095.pk> <C:\Users\WorkPlus\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1095.pk> <C:\Users\WorkPlus\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\eccc1200.pk> <C:\Users\WorkPlus\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1000.pk> <C:\Users\WorkPlus\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx2488.pk><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pfb>
-Output written on Khairil_Rahman_Hakiki.pdf (2 pages, 126777 bytes).
+Output written on Khairil_Rahman_Hakiki.pdf (2 pages, 122087 bytes).
 PDF statistics:
- 376 PDF objects out of 1000 (max. 8388607)
+ 363 PDF objects out of 1000 (max. 8388607)
  8 named destinations out of 1000 (max. 500000)
  41 words of extra memory for PDF output out of 10000 (max. 10000000)
 
