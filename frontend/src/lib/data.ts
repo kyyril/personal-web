@@ -67,7 +67,6 @@ export const experiences: Experience[] = [
       "Grafana",
       "GitHub",
       "CI/CD Pipeline",
-      "Systems Design",
       "Domain-Driven Design",
       "Event-Driven Architecture",
     ],
@@ -335,6 +334,7 @@ export const projects: Project[] = [
     ],
     image: [
       "https://res.cloudinary.com/da5ggxk01/image/upload/v1769285993/1f759294-4c58-454e-bd9e-39e7b3de8881.png",
+      "https://res.cloudinary.com/da5ggxk01/image/upload/v1769732367/0c81f2e5-ce18-4d60-bef2-fb2c7f14c539.png",
       "https://res.cloudinary.com/da5ggxk01/image/upload/v1769286274/5850f5ec-1095-46f3-992a-422d29d046b2.png",
       "https://res.cloudinary.com/da5ggxk01/image/upload/v1768419392/3984f6cb-3926-48ac-abd3-e2b6359a284c.png",
     ],
