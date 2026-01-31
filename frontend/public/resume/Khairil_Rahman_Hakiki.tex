@@ -1,7 +1,7 @@
 %-------------------------
 % Resume in Latex
 % Author : Khairil Rahman Hakiki
-% Based off of: https://github.com/kyyril/personal-web
+% Based off of: https://github.com/sb2nov/resume (Jake's Resume)
 % License : MIT
 %------------------------
 
@@ -17,20 +17,8 @@
 \usepackage[hidelinks]{hyperref}
 \usepackage{fancyhdr}
 \usepackage[english]{babel}
-\usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
+\usepackage{tabularx}
 \input{glyphtounicode}
-
-
-%----------FONT OPTIONS----------
-% sans-serif
-% \usepackage[sfdefault]{roboto}
-% \usepackage[sfdefault]{noto-sans}
-% \usepackage[default]{sourcesanspro}
-
-% serif
-% \usepackage{CormorantGaramond}
-% \usepackage{charter}
 
 
 \pagestyle{fancy}
@@ -39,18 +27,19 @@
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}
 
-% Adjust margins
+% Adjust margins - tighter for 1 page
 \addtolength{\oddsidemargin}{-0.5in}
 \addtolength{\evensidemargin}{-0.5in}
 \addtolength{\textwidth}{1in}
-\addtolength{\topmargin}{-.5in}
-\addtolength{\textheight}{1.0in}
+\addtolength{\topmargin}{-.6in}
+\addtolength{\textheight}{1.2in}
 \setlength{\footskip}{4.1pt}
 
 \urlstyle{same}
 
 \raggedbottom
 \raggedright
+\setlength{\tabcolsep}{0in}
 
 % Sections formatting
 \titleformat{\section}{
@@ -70,21 +59,24 @@
 
 \newcommand{\resumeSubheading}[4]{
   \vspace{-2pt}\item
-    \textbf{#1} \hfill #2 \\
-    \textit{\small#3} \hfill \textit{\small #4}
-  \vspace{-7pt}
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
 }
 
 \newcommand{\resumeSubSubheading}[2]{
     \item
-    \small#1 \hfill \textit{\small #2}
-    \vspace{-7pt}
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \textit{\small#1} & \textit{\small #2} \\
+    \end{tabular*}\vspace{-7pt}
 }
 
 \newcommand{\resumeProjectHeading}[2]{
     \item
-    \small#1 \hfill #2
-    \vspace{-7pt}
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & #2 \\
+    \end{tabular*}\vspace{-7pt}
 }
 
 \newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
@@ -104,8 +96,8 @@
 
 %----------HEADING----------
 \begin{center}
-    \textbf{\Huge Khairil Rahman Hakiki} \\ \vspace{1pt}
-    \small West Sumatra, Indonesia $|$ +6282274360915 $|$ \href{mailto:khairil.4hrp@gmail.com}{\underline{khairil.4hrp@gmail.com}} \\ \vspace{2pt}
+    {\Huge \scshape \bfseries Khairil Rahman Hakiki} \\ \vspace{1pt}
+    \small +6282274360915 $|$ \href{mailto:khairil.4hrp@gmail.com}{\underline{khairil.4hrp@gmail.com}} $|$
     \href{https://linkedin.com/in/khairilrahman}{\underline{linkedin.com/in/khairilrahman}} $|$
     \href{https://github.com/kyyril}{\underline{github.com/kyyril}} $|$
     \href{https://kyyril.vercel.app}{\underline{kyyril.vercel.app}}
@@ -116,109 +108,90 @@
   \resumeSubHeadingListStart
     \resumeSubheading
       {State Islamic University of Imam Bonjol Padang}{Padang, Indonesia}
-      {Bachelor of Information Systems}{Aug. 2022 -- Present}
-      \resumeItemListStart
-        \resumeItem{\textbf{Availability:} Immediate -- Oct. 2026 for Full-time Internship; Expected Nov. 2026 onwards for New Grad Roles.}
-        \resumeItem{\textbf{Relevant Coursework:} Data Structures \& Algorithms, Software Engineering, Statistics, Operating System, Network, Security, Project Management, Technopreneurship, Databases, and UI/UX Design.}
-      \resumeItemListEnd
+      {Bachelor of Information Systems -- Available: Immediate for Internship; Nov. 2026 for Full-time}{Aug. 2022 -- Present}
   \resumeSubHeadingListEnd
-
-
-
-
 
 %-----------EXPERIENCE-----------
 \section{Experience}
   \resumeSubHeadingListStart
-
     \resumeSubheading
       {Software Engineer}{Sep. 2025 -- Dec. 2025}
       {TIME Language Centre}{Padang, Indonesia}
       \resumeItemListStart
-        \resumeItem{Architected a scalable \textbf{polyglot microservices} ecosystem using \textbf{Go (Golang)} and \textbf{TypeScript}, establishing \textbf{Clean Architecture} patterns to ensure long-term maintainability and independent service scaling.}
-        \resumeItem{Implemented an event-driven architecture with \textbf{RabbitMQ} for asynchronous communication between microservices, coupled with a \textbf{Redis} caching layer that significantly reduced system latency.}
-        \resumeItem{Designed robust distributed transaction handling with \textbf{Xendit} payment gateway, ensuring strict data consistency across services and preventing payment execution errors.}
-        \resumeItem{Orchestrated containerized application deployment using \textbf{Docker} and \textbf{Kubernetes}, integrating \textbf{Prometheus} and \textbf{Grafana} for comprehensive system observability and high availability.}
-        \resumeItem{Enforced high code quality standards through rigorous \textbf{Unit Testing (Go-Test/Jest)} and secured inter-service communication using \textbf{OAuth 2.0/JWT} authentication flows.}
+        \resumeItem{Architected \textbf{polyglot microservices} with \textbf{Go/TypeScript} using \textbf{Clean Architecture} and \textbf{DDD}, enabling independent scaling and deployment of each service for the ed-tech platform.}
+        \resumeItem{Implemented \textbf{event-driven architecture} with \textbf{RabbitMQ} and \textbf{Redis} caching to handle high-throughput user interactions and course enrollment processing.}
+        \resumeItem{Designed \textbf{distributed transactions} with \textbf{Xendit} payment gateway ensuring data consistency between payment and user entitlements across microservices.}
+        \resumeItem{Orchestrated \textbf{Docker/Kubernetes} deployments with \textbf{CI/CD} and \textbf{Prometheus/Grafana} for observability.}
       \resumeItemListEnd
 
     \resumeSubheading
       {Junior Frontend Developer}{Apr. 2025 -- Dec. 2025}
       {CodeAtHome}{Lampung, Indonesia}
       \resumeItemListStart
-        \resumeItem{Developed new features and resolved bugs for web applications using \textbf{React.js} and \textbf{Next.js}, refining code quality through regular code reviews and adherence to clean code standards.}
-        \resumeItem{Standardized frontend development workflows by implementing reusable component libraries with \textbf{Tailwind CSS} and \textbf{Shadcn UI}, accelerating feature delivery time.}
-        \resumeItem{Enhanced application performance and state management efficiency using \textbf{TanStack Query} and \textbf{Redux}, resulting in a smoother user experience.}
+        \resumeItem{Developed features and resolved bugs in \textbf{React.js/Next.js} applications following clean code practices with regular code reviews for quality assurance.}
+        \resumeItem{Created \textbf{reusable component library} with \textbf{Tailwind CSS/Shadcn UI} for consistent UI across projects.}
+        \resumeItem{Optimized \textbf{state management} with \textbf{TanStack Query} and \textbf{Redux} for better app performance.}
       \resumeItemListEnd
 
     \resumeSubheading
       {Software Engineer Intern}{Jan. 2025 -- Mar. 2025}
       {PT Astra International Tbk - TSO Auto2000}{Labuhanbatu, Indonesia}
       \resumeItemListStart
-        \resumeItem{Developed the official branch website for \textbf{Toyota Labuhanbatu} using \textbf{Next.js}, featuring dynamic content management via \textbf{Google Sheets API}, a vehicle catalog with credit simulation, and an \textbf{AI-powered car recommendation} system to enhance customer decision-making.}
-        \resumeItem{Solved large-scale data quality issues by building an automated \textbf{Python} script to clean, transform, and standardize thousands of raw records into structured, analysis-ready datasets across multiple years (2010--2024).}
-        \resumeItem{Developed 'ReminderApp', a critical internal tool for managing vehicle document renewals (STNK/BPKB), featuring role-based access control (RBAC) and automated notifications.}
+        \resumeItem{Developed \textbf{Toyota dealership website} with \textbf{Next.js/Google Sheets API} for easy content management and \textbf{AI-powered} car recommendations based on user preferences.}
+        \resumeItem{Built \textbf{Python ETL pipeline} to clean 15 years of legacy data, transforming raw records into structured analytics-ready format for reporting.}
+        \resumeItem{Developed \textbf{ReminderApp} for STNK/BPKB renewals with \textbf{RBAC} and automated notifications.}
       \resumeItemListEnd
-
   \resumeSubHeadingListEnd
-
 
 %-----------PROJECTS-----------
 \section{Projects}
     \resumeSubHeadingListStart
       \resumeProjectHeading
-          {\href{https://kyyril.vercel.app}{\underline{\textbf{Personal Website}}} $|$ \emph{Fullstack Portfolio}}{}
+          {\textbf{Personal Website} $|$ \emph{Next.js, MDX, Bun, Elysia, Generative AI}}{{\href{https://kyyril.vercel.app}{\underline{Live}}}}
           \resumeItemListStart
-            \resumeItem{Engineered a high-performance personal platform using \textbf{Next.js}, featuring a custom \textbf{MDX}-based blog engine.}
-            \resumeItem{Developed a low-latency interactive \textbf{Guestbook} service using \textbf{Bun} and \textbf{Elysia}, optimizing for rapid request handling.}
-            \resumeItem{Integrated \textbf{Generative AI} to provide a context-aware conversational assistant for portfolio exploration.}
+            \resumeItem{Built high-performance portfolio with custom \textbf{MDX} blog engine achieving \textbf{99+ Lighthouse score}.}
+            \resumeItem{Created \textbf{Guestbook} service with \textbf{Bun/Elysia}; integrated \textbf{Generative AI} chatbot for portfolio exploration}
           \resumeItemListEnd
       \resumeProjectHeading
-          {\href{https://fluentlyy.vercel.app}{\underline{\textbf{Fluently}}} $|$ \emph{AI-Powered Language Learning Platform}}{}
+          {\textbf{Fluently} $|$ \emph{React Native, Expo, Next.js, Gemini AI, Redis, PostgreSQL}}{{\href{https://fluentlyy.vercel.app}{\underline{Live}}}}
           \resumeItemListStart
-            \resumeItem{Engineered a cross-platform language learning application using \textbf{React Native (Expo)} and \textbf{Next.js}, featuring an \textbf{AI Speaking Coach} powered by \textbf{Gemini AI} for real-time conversation practice.}
-            \resumeItem{Implemented a complex \textbf{gamification system} with XP, streaks, and global leaderboards to drive user retention, supported by a high-performance \textbf{Redis}-backed daily task engine.}
-            \resumeItem{Developed \textbf{Smart Articles} module integrating external \textbf{Open-Source Dictionary APIs} to enable word-level interactions and instant translations, utilizing \textbf{Express.js} and \textbf{PostgreSQL} for content persistence.}
+            \resumeItem{Launched cross-platform language learning app with \textbf{AI Speaking Coach} for real-time pronunciation feedback.}
+            \resumeItem{Designed \textbf{gamification system} with XP, streaks, and leaderboards using \textbf{Redis}-backed task engine.}
           \resumeItemListEnd
       \resumeProjectHeading
-          {\href{https://github.com/kyyril/slither}{\underline{\textbf{Slither}}} $|$ \emph{Real-Time Multiplayer Game}}{}
+          {\textbf{Slither} $|$ \emph{Go, Redis, WebSocket, Three.js, Real-Time Multiplayer}}{{\href{https://github.com/kyyril/slither}{\underline{GitHub}}}}
           \resumeItemListStart
-            \resumeItem{Architected a high-performance multiplayer snake game using \textbf{Go}, \textbf{Redis}, and \textbf{WebSocket}, implementing \textbf{delta state compression} for \textbf{>95\% bandwidth reduction} in real-time sync.}
-            \resumeItem{Engineered \textbf{client-side prediction} and \textbf{spatial hash grid} collision detection, allowing the system to handle thousands of entities with smooth 60 FPS gameplay at 200ms+ latency.}
+            \resumeItem{Implemented \textbf{delta state compression} achieving \textbf{$>$95\% bandwidth reduction} with \textbf{client-side prediction} for smooth 60 FPS gameplay.}
+            \resumeItem{Built \textbf{authoritative server} architecture with \textbf{spatial hash grid} collision detection handling thousands of entities at \textbf{30Hz tick rate}.}
           \resumeItemListEnd
       \resumeProjectHeading
-          {\href{https://syncblog.vercel.app}{\underline{\textbf{SyncBlog}}} $|$ \emph{Full Stack Blog Platform}}{}
+          {\textbf{SyncBlog} $|$ \emph{Next.js, Express.js, PostgreSQL, Prisma, Cloudinary}}{{\href{https://syncblog.vercel.app}{\underline{Live}}}}
           \resumeItemListStart
-            \resumeItem{Designed a scalable blogging architecture with a \textbf{Next.js} frontend and \textbf{Express.js} backend, ensuring clean separation of concerns.}
-            \resumeItem{Implemented secure \textbf{OAuth} \& \textbf{JWT} authentication flows and real-time social features like comments and follows.}
-            \resumeItem{Optimized frontend performance with \textbf{TanStack Query} for efficient data caching and \textbf{Redux} for complex state management.}
+            \resumeItem{Built full-stack blog with \textbf{MDX editor}, social features (follow, like, bookmark), and \textbf{Cloudinary} CDN.}
           \resumeItemListEnd
     \resumeSubHeadingListEnd
-
-
-
 
 %-----------TECHNICAL SKILLS-----------
 \section{Technical Skills}
  \begin{itemize}[leftmargin=0.15in, label={}]
     \small{\item{
-     \textbf{Languages}{: TypeScript, JavaScript, Go (Golang), Python} \\
-     \textbf{Frontend}{: React.js, Next.js, Vite, Redux Toolkit, Zustand, TanStack, React Native, Expo, Tailwind CSS, Shadcn UI} \\
-     \textbf{Backend}{: Node.js, Express.js, GoFiber, RESTful APIs, Microservices, RabbitMQ, OAuth 2.0, JWT} \\
-     \textbf{Database \& ORM}{: PostgreSQL, Redis, MySQL, Prisma, TypeORM, GORM, Firebase, Supabase} \\
-     \textbf{DevOps \& Tools}{: Docker, Kubernetes, Prometheus, Grafana, NGINX, GitHub Actions, Ubuntu, Vercel, Cloudflare, Figma, Postman}
+     \textbf{Languages}{: TypeScript, JavaScript, Go (Golang), Python, SQL} \\
+     \textbf{Frontend}{: React.js, Next.js, React Native, Expo, Redux, Zustand, TanStack Query, Tailwind CSS, Shadcn UI} \\
+     \textbf{Backend}{: Node.js, Express.js, GoFiber, RESTful APIs, Microservices, RabbitMQ, WebSocket, OAuth 2.0, JWT} \\
+     \textbf{Databases}{: PostgreSQL, Redis, MySQL, Prisma, TypeORM, GORM, Firebase, Supabase} \\
+     \textbf{DevOps}{: Docker, Kubernetes, CI/CD, GitHub Actions, Prometheus, Grafana, NGINX, Vercel, Agile/Scrum}
     }}
  \end{itemize}
 
-
 %-----------CERTIFICATIONS-----------
 \section{Certifications}
- \resumeItemListStart
-    \resumeItem{\href{https://catalog-education.oracle.com/ords/certview/sharebadge?id=D4510B21F99D88A292FA173EA64DC122B01639350FCE422119EE1C499D08318E}{\underline{Oracle Cloud Infrastructure 2025 Certified AI Foundations Associate}} -- Oracle}
-    \resumeItem{\href{https://www.dicoding.com/certificates/98XWOMY0LZM3}{\underline{Dasar Cloud dan Gen AI di AWS}} -- Dicoding Indonesia}
-    \resumeItem{\href{https://www.hackerrank.com/certificates/d1bbfc8bc93f}{\underline{REST API (Intermediate)}} -- HackerRank}
-  \resumeItemListEnd
-
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \href{https://catalog-education.oracle.com/ords/certview/sharebadge?id=D4510B21F99D88A292FA173EA64DC122B01639350FCE422119EE1C499D08318E}{\underline{OCI 2025 AI Foundations}} (Oracle) $|$
+     \href{https://www.dicoding.com/certificates/98XWOMY0LZM3}{\underline{AWS Cloud \& Gen AI}} (Dicoding) $|$
+     \href{https://www.hackerrank.com/certificates/d1bbfc8bc93f}{\underline{REST API Intermediate}} (HackerRank)
+    }}
+ \end{itemize}
 
 %-------------------------------------------
 \end{document}
