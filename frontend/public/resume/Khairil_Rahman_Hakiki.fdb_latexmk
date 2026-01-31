@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1769827048.87199 "d:/repo/personal-web/frontend/public/resume/Khairil_Rahman_Hakiki.tex" "Khairil_Rahman_Hakiki.pdf" "Khairil_Rahman_Hakiki" 1769827049.75044 0
+["pdflatex"] 1769829518.67393 "d:/repo/personal-web/frontend/public/resume/Khairil_Rahman_Hakiki.tex" "Khairil_Rahman_Hakiki.pdf" "Khairil_Rahman_Hakiki" 1769829519.42705 0
   "C:/Users/WorkPlus/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1769016757 178555 c9140963d6a268257c6b68e81dafdcb4 ""
   "C:/Users/WorkPlus/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1750094563 13236390 64f3a8ae5a305fcecb52f01ed006e062 ""
   "C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmbx10.tfm" 1136765053 1328 c834bbb027764024c09d3d2bf908b5f0 ""
@@ -24,7 +24,6 @@
   "C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb" 1247596666 34811 78b52f49e893bcba91bd7581cdc144c0 ""
   "C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb" 1247596666 32080 340ef9bf63678554ee606688e7b5339d ""
   "C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmcsc10.pfb" 1247596667 32001 6aeea3afe875097b1eb0da29acd61e28 ""
-  "C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb" 1247596667 36299 5f9df58c2139e7edcf37c8fca4bd384d ""
   "C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb" 1247596667 35752 024fb6c41858982481f6968b5fc26508 ""
   "C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb" 1247596667 32569 5e5ddc8df908dea60932f3c484a54c0d ""
   "C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pfb" 1247596667 32587 65067f817f408bc71a7312f3d9828a9b ""
@@ -84,10 +83,10 @@
   "C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/tex/latex/tools/tabularx.sty" 1748713680 7243 a2c17f18e2c9b702b84fad03d5f9c78b ""
   "C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/tex/latex/tools/verbatim.sty" 1748713680 7532 26d26e9d8f2ca784270d5da8ec7d102b ""
   "C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388490452 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
-  "Khairil_Rahman_Hakiki.aux" 1769827049 822 1ef7542b2c32b248800a40063fb4490d "pdflatex"
-  "Khairil_Rahman_Hakiki.out" 1769827049 503 4f8df9144893e5c98982af022a26e615 "pdflatex"
-  "Khairil_Rahman_Hakiki.tex" 1769827048 9266 719cee63722c8bda88b2b323cc3b5e39 ""
-  "d:/repo/personal-web/frontend/public/resume/Khairil_Rahman_Hakiki.tex" 1769827048 9266 719cee63722c8bda88b2b323cc3b5e39 ""
+  "Khairil_Rahman_Hakiki.aux" 1769829519 822 1ef7542b2c32b248800a40063fb4490d "pdflatex"
+  "Khairil_Rahman_Hakiki.out" 1769829519 503 4f8df9144893e5c98982af022a26e615 "pdflatex"
+  "Khairil_Rahman_Hakiki.tex" 1769829518 9104 958714389d6c3eb50972b64ca13de3b5 ""
+  "d:/repo/personal-web/frontend/public/resume/Khairil_Rahman_Hakiki.tex" 1769829518 9104 958714389d6c3eb50972b64ca13de3b5 ""
   (generated)
   "Khairil_Rahman_Hakiki.aux"
   "Khairil_Rahman_Hakiki.log"

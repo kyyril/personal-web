@@ -216,7 +216,7 @@ export default function RootLayout({
       <body className={`${jetbrainsMono.className} antialiased`} suppressHydrationWarning>
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="dark"
           enableSystem
           disableTransitionOnChange
         >
