@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.6.17)  1 FEB 2026 16:58
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.6.17)  1 FEB 2026 17:12
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -313,9 +313,7 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 
 [1
 
-{C:/Users/WorkPlus/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}]
-
-[2] (Khairil_Rahman_Hakiki.aux)
+{C:/Users/WorkPlus/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}] (Khairil_Rahman_Hakiki.aux)
  ***********
 LaTeX2e <2025-06-01>
 L3 programming layer <2025-05-26>
@@ -328,17 +326,17 @@ Package rerunfilecheck Info: File `Khairil_Rahman_Hakiki.out' has not changed.
 (rerunfilecheck)             Checksum: 4F8DF9144893E5C98982AF022A26E615;503.
  ) 
 Here is how much of TeX's memory you used:
- 10919 strings out of 468225
- 175023 string characters out of 5431521
- 622516 words of memory out of 5000000
- 39314 multiletter control sequences out of 15000+600000
- 633315 words of font info for 65 fonts, out of 8000000 for 9000
+ 10916 strings out of 468225
+ 174998 string characters out of 5431521
+ 623516 words of memory out of 5000000
+ 39313 multiletter control sequences out of 15000+600000
+ 633017 words of font info for 64 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,11n,79p,399b,564s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,11n,79p,316b,462s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on Khairil_Rahman_Hakiki.pdf (2 pages, 122977 bytes).
+Output written on Khairil_Rahman_Hakiki.pdf (1 page, 120970 bytes).
 PDF statistics:
- 84 PDF objects out of 1000 (max. 8388607)
- 8 named destinations out of 1000 (max. 500000)
+ 80 PDF objects out of 1000 (max. 8388607)
+ 7 named destinations out of 1000 (max. 500000)
  41 words of extra memory for PDF output out of 10000 (max. 10000000)
 
