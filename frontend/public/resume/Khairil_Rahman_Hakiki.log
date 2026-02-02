@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.6.17)  1 FEB 2026 23:16
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.6.17)  2 FEB 2026 10:19
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -309,6 +309,12 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <8> on input line 111.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 111.
+LaTeX Font Info:    Trying to load font information for OML+cmr on input line 167.
+ (C:\Users\WorkPlus\AppData\Local\Programs\MiKTeX\tex/latex/base\omlcmr.fd
+File: omlcmr.fd 2024/11/19 v2.5n Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OML/cmr/bx/n' in size <10> not available
+(Font)              Font shape `OML/cmm/b/it' tried instead on input line 167.
 
 
 [1
@@ -326,17 +332,17 @@ Package rerunfilecheck Info: File `Khairil_Rahman_Hakiki.out' has not changed.
 (rerunfilecheck)             Checksum: 4F8DF9144893E5C98982AF022A26E615;503.
  ) 
 Here is how much of TeX's memory you used:
- 10916 strings out of 468225
- 174998 string characters out of 5431521
- 621516 words of memory out of 5000000
- 39313 multiletter control sequences out of 15000+600000
- 633017 words of font info for 64 fonts, out of 8000000 for 9000
+ 10937 strings out of 468225
+ 175386 string characters out of 5431521
+ 622516 words of memory out of 5000000
+ 39330 multiletter control sequences out of 15000+600000
+ 633375 words of font info for 65 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,11n,79p,338b,462s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on Khairil_Rahman_Hakiki.pdf (1 page, 118884 bytes).
+ 75i,11n,79p,394b,462s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmib10.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb>
+Output written on Khairil_Rahman_Hakiki.pdf (1 page, 129007 bytes).
 PDF statistics:
- 79 PDF objects out of 1000 (max. 8388607)
+ 84 PDF objects out of 1000 (max. 8388607)
  7 named destinations out of 1000 (max. 500000)
  41 words of extra memory for PDF output out of 10000 (max. 10000000)
 
