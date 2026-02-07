@@ -8,13 +8,15 @@
 \documentclass[letterpaper,11pt]{article}
 
 \usepackage{latexsym}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
 \usepackage[empty]{fullpage}
 \usepackage{titlesec}
 \usepackage{marvosym}
 \usepackage[usenames,dvipsnames]{color}
 \usepackage{verbatim}
 \usepackage{enumitem}
-\usepackage[hidelinks]{hyperref}
+\usepackage[colorlinks=true, urlcolor=RoyalBlue]{hyperref}
 \usepackage{fancyhdr}
 \usepackage[english]{babel}
 \usepackage{tabularx}
@@ -73,7 +75,7 @@
 }
 
 \newcommand{\resumeProjectHeading}[2]{
-    \item
+    \vspace{-2pt}\item
     \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
       \small#1 & #2 \\
     \end{tabular*}\vspace{-7pt}
@@ -83,7 +85,7 @@
 
 \renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
 
-\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}, itemsep=-2pt]}
 \newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
 \newcommand{\resumeItemListStart}{\begin{itemize}}
 \newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
@@ -96,11 +98,11 @@
 
 %----------HEADING----------
 \begin{center}
-    {\Huge \scshape \bfseries Khairil Rahman Hakiki} \\ \vspace{1pt}
-    \small Padang, Indonesia $|$ +6282274360915 $|$ \href{mailto:khairil.4hrp@gmail.com}{\underline{khairil.4hrp@gmail.com}} $|$
-    \href{https://linkedin.com/in/khairilrahman}{\underline{linkedin.com/in/khairilrahman}} $|$
-    \href{https://github.com/kyyril}{\underline{github.com/kyyril}} $|$
-    \href{https://kyyril.vercel.app}{\underline{kyyril.vercel.app}}
+    {\Huge \bfseries Khairil Rahman Hakiki} \\ \vspace{1pt}
+    \footnotesize Padang, Indonesia $|$ +6282274360915 $|$ \href{mailto:khairil.4hrp@gmail.com}{khairil.4hrp@gmail.com} $|$
+    \href{https://linkedin.com/in/khairilrahman}{linkedin.com/in/khairilrahman} $|$
+    \href{https://github.com/kyyril}{github.com/kyyril} $|$
+    \href{https://kyyril.vercel.app}{kyyril.vercel.app}
 \end{center}
 
 %-----------EDUCATION-----------
@@ -109,40 +111,38 @@
     \resumeSubheading
       {State Islamic University of Imam Bonjol Padang}{Padang, Indonesia}
       {Bachelor of Science in Information Systems -- Expected Graduation: Nov. 2026}{Aug. 2022 -- Present}
-      \resumeItemListStart
-        \resumeItem{\textbf{Relevant Coursework}: Data Structures \& Algorithms, Database Systems, OOP, Software Engineering, Security}
-      \resumeItemListEnd
+
   \resumeSubHeadingListEnd
 
 %-----------EXPERIENCE-----------
 \section{Experience}
   \resumeSubHeadingListStart
     \resumeSubheading
-      {Software Engineer (Project-Based)}{Sep. 2025 -- Jan. 2026}
-      {TIME Language Centre}{Padang, Indonesia}
+      {Software Engineer (Contract)}{Sep. 2025 -- Jan. 2026}
+      {TIME Language Centre}{Padang, Indonesia (Hybrid)}
       \resumeItemListStart
-        \resumeItem{Led technical strategy for \textbf{2 core systems}: a \textbf{Mini-ERP} for internal operations and a \textbf{Microservices-based Online Course} Platform, standardizing \textbf{Git workflows}, \textbf{CI/CD}, and \textbf{code reviews} across 3 teams.}
-        \resumeItem{Architected \textbf{polyglot microservices} (Go, TypeScript) following \textbf{Clean Architecture} and \textbf{Event-Driven Design}, deployed on \textbf{K3s} for \textbf{horizontal scaling}, utilizing \textbf{RabbitMQ} and \textbf{Redis}.}
-        \resumeItem{Implemented observability stack using \textbf{Prometheus}, \textbf{Grafana}, and \textbf{Loki} for real-time monitoring.}
-        \resumeItem{Enforced system reliability by implementing comprehensive \textbf{Unit Testing} using \textbf{Go Test} and \textbf{Jest}.}
+        \resumeItem{Orchestrated the technical development of 2 mission-critical systems (Mini-ERP \& Online Course Platform), standardizing CI/CD pipelines and code review protocols to accelerate deployment cycles.}
+        \resumeItem{Designed and implemented scalable microservices using Go and TypeScript on Kubernetes (K3s), adopting Event-Driven Architecture with RabbitMQ and Redis for high availability.}
+        \resumeItem{Built a real-time observability suite using Prometheus, Grafana, and Loki, reducing mean time to resolution (MTTR) for incidents.}
+        \resumeItem{Improved system reliability by enforcing 90\%+ Unit Test coverage using Go Test and Jest, ensuring production stability.}
       \resumeItemListEnd 
 
     \resumeSubheading
       {Frontend Developer}{Apr. 2025 -- Dec. 2025}
-      {CodeAtHome}{Lampung, Indonesia}
+      {CodeAtHome}{Remote}
       \resumeItemListStart
-        \resumeItem{Delivered features and enhanced codebase stability by enforcing \textbf{clean code standards} through \textbf{code reviews}.}
-        \resumeItem{Engineered reusable \textbf{React components} with \textbf{TypeScript} and \textbf{Redux}, accelerating feature development.}
-        \resumeItem{Optimized data fetching with \textbf{TanStack Query}, reducing API calls by \textbf{40\%} via advanced caching.}
+        \resumeItem{Optimized data fetching layer with TanStack Query, reducing redundant API calls by 40\% through advanced caching and invalidation strategies.}
+        \resumeItem{Engineered reusable React components with TypeScript and Redux, reducing boilerplate code and accelerating feature delivery.}
+        \resumeItem{Enhanced codebase maintainability by enforcing strict linting, clean architecture, and conducting rigorous code reviews.}
       \resumeItemListEnd
 
     \resumeSubheading
       {Software Engineer Intern}{Jan. 2025 -- Mar. 2025}
-      {PT Astra International Tbk - TSO Auto2000}{Labuhanbatu, Indonesia}
+      {PT Astra International Tbk - TSO Auto2000}{Labuhanbatu, Indonesia (Onsite)}
       \resumeItemListStart
-        \resumeItem{Spearheaded \textbf{Next.js} dealership platform with \textbf{AI-powered car recommendations} using \textbf{Gemini AI} to improve customer experience.}
-        \resumeItem{Developed \textbf{automated Python-based} customer reminder system for STNK/BPKB documents, streamlining administrative workflows.}
-        \resumeItem{Engineered \textbf{Python ETL pipeline} processing \textbf{legacy data} (2010--2024), reducing processing time by \textbf{98\%}.}
+        \resumeItem{Developed a Next.js dealership platform featuring AI-powered car recommendations via Gemini AI, directly increasing user engagement and potential sales leads.}
+        \resumeItem{Automated the customer reminder system for STNK/BPKB documents using Python, extending coverage to 100\% of eligible customers while eliminating manual data entry errors.}
+        \resumeItem{Engineered a high-performance Python ETL pipeline to process 15 years of legacy data, reducing processing time by 98\%.}
       \resumeItemListEnd
   \resumeSubHeadingListEnd
 
@@ -152,41 +152,53 @@
       \resumeProjectHeading
           {\textbf{Personal Website} $|$ \emph{Next.js, MDX, Bun, Elysia, Generative AI}}{{\href{https://kyyril.vercel.app}{\underline{Live}}}}
           \resumeItemListStart
-            \resumeItem{Developed high-performance portfolio with custom \textbf{MDX} blog engine achieving \textbf{98+ Lighthouse score}.}
-            \resumeItem{Integrated \textbf{Guestbook} service with \textbf{Bun/Elysia} and \textbf{Generative AI} chatbot for portfolio exploration.}
+            \resumeItem{Developed high-performance portfolio with custom MDX blog engine achieving 98+ Lighthouse score.}
+            \resumeItem{Integrated Guestbook service with Bun/Elysia and Generative AI chatbot for portfolio exploration.}
           \resumeItemListEnd
       \resumeProjectHeading
           {\textbf{Fluently} $|$ \emph{React Native, Expo, Next.js, Gemini AI, Redis, PostgreSQL}}{{\href{https://fluentlyy.vercel.app}{\underline{Live}}}}
           \resumeItemListStart
-            \resumeItem{Launched cross-platform \textbf{language learning app} with \textbf{AI speaking coach}, daily routines, and smart articles.}
-            \resumeItem{Implemented \textbf{gamification features} (XP, daily streaks, leaderboards) with \textbf{Redis} to drive user retention.}
+            \resumeItem{Launched cross-platform language learning app with AI speaking coach, daily routines, and smart articles.}
+            \resumeItem{Implemented gamification features (XP, daily streaks, leaderboards) with Redis to drive user retention.}
           \resumeItemListEnd
       \resumeProjectHeading
           {\textbf{Slither} $|$ \emph{Go, Redis, WebSocket, Three.js}}{{\href{https://github.com/kyyril/slither}{\underline{GitHub}}}}
           \resumeItemListStart
-            \resumeItem{Built real-time game server in Go, utilizing \textbf{Redis Pub/Sub} for cross-instance state synchronization and \textbf{O(1) Spatial Hashing} to handle collision for \textbf{10,000+ entities}.}
-            \resumeItem{Achieved \textbf{\textgreater 95\% bandwidth efficiency} via delta state compression and ensured \textbf{60 FPS} consistency through \textbf{Client-Side Prediction}, optimized for high-latency environments.}
+            \resumeItem{Built a high-concurrency game server in Go, leveraging Redis Pub/Sub for state synchronization and O(1) Spatial Hashing to manage collisions for 10,000+ entities.}
+            \resumeItem{Achieved 95\% bandwidth reduction implementing delta compression and maintained 60 FPS synchronization using Client-Side Prediction and Reconciliation.}
           \resumeItemListEnd
     \resumeSubHeadingListEnd
+
+%-----------OPEN SOURCE CONTRIBUTIONS-----------
+\section{Open Source Contributions}
+  \resumeSubHeadingListStart
+    \resumeProjectHeading
+        {\textbf{OpenTelemetry Collector} $|$ \emph{Documentation}}{{\href{https://github.com/open-telemetry/opentelemetry-collector-contrib/pull/45819}{\underline{Pull Request}}}}
+        \resumeItemListStart
+          \resumeItem{Resolved configuration ambiguities in Prometheus receiver documentation by deprecating legacy \texttt{batch} processor references, aligning examples 100\% with modern \texttt{sending\_queue} architectural patterns (PR \#45819).}
+        \resumeItemListEnd
+    \resumeProjectHeading
+        {\textbf{Meilisearch Go Client} $|$ \emph{Go, Type System}}{{\href{https://github.com/meilisearch/meilisearch-go/pull/753}{\underline{Pull Request}}}}
+        \resumeItemListStart
+          \resumeItem{Overcame rigid type constraints in \texttt{FacetSearchRequest.Filter} by refactoring it to \texttt{interface\{\}}, unlocking support for complex array-based filtering logic for the Go client community (PR \#753).}
+        \resumeItemListEnd
+    \resumeProjectHeading
+        {\textbf{Next AI Draw IO} $|$ \emph{React, UI/UX}}{{\href{https://github.com/DayuanJiang/next-ai-draw-io/pull/681}{\underline{Pull Request}}}}
+        \resumeItemListStart
+          \resumeItem{Engineered a conditional UI shadow system using \texttt{MutationObserver} and \texttt{React.forwardRef} to solve scroll visibility issues, significantly enhancing visual hierarchy and user experience (PR \#681).}
+        \resumeItemListEnd
+  \resumeSubHeadingListEnd
 
 %-----------TECHNICAL SKILLS-----------
 \section{Technical Skills}
  \begin{itemize}[leftmargin=0.15in, label={}]
     \small{\item{
-     \textbf{Languages}{: TypeScript, JavaScript, Go, Python, SQL} \\
+     \textbf{Languages}{: TypeScript, JavaScript, Go, Python, SQL, HTML, CSS} \\
      \textbf{Frontend}{: React, Next.js, React Native, Expo, Redux, Zustand, TanStack Query, Tailwind CSS, Shadcn UI} \\
-     \textbf{Backend}{: Node.js, Express.js, GoFiber, RESTful APIs, Microservices, RabbitMQ, WebSocket, gRPC} \\
-     \textbf{Databases}{: PostgreSQL, Redis, MySQL, GORM, Prisma, TypeORM, Firebase, Supabase} \\
-     \textbf{DevOps/Cloud}{: AWS, Docker, Kubernetes, NGINX, CI/CD, GitHub Actions, Prometheus, Grafana}
-    }}
- \end{itemize}
-
-%-----------CERTIFICATIONS-----------
-\section{Certifications}
- \begin{itemize}[leftmargin=0.15in, label={}]
-    \small{\item{
-     \href{https://catalog-education.oracle.com/ords/certview/sharebadge?id=D4510B21F99D88A292FA173EA64DC122B01639350FCE422119EE1C499D08318E}{\underline{Oracle Cloud Infrastructure (OCI) 2025 AI Foundations}} (Oracle) $|$
-     \href{https://www.dicoding.com/certificates/98XWOMY0LZM3}{\underline{AWS Cloud \& Gen AI}} (Dicoding)
+     \textbf{Backend}{: Node.js, Express.js, Fiber (Go), PostgreSQL, Redis, MySQL, GORM, Prisma, RabbitMQ, WebSocket} \\
+     \textbf{DevOps/Cloud}{: AWS, Docker, Kubernetes, NGINX, VPS, CI/CD, GitHub Actions, Prometheus, Grafana} \\
+     \textbf{Certifications}{: \href{https://catalog-education.oracle.com/ords/certview/sharebadge?id=D4510B21F99D88A292FA173EA64DC122B01639350FCE422119EE1C499D08318E}{\underline{OCI AI Foundations (2025)}} (Oracle) $|$
+     \href{https://www.dicoding.com/certificates/98XWOMY0LZM3}{\underline{AWS Cloud \& Gen AI}} (Dicoding)}
     }}
  \end{itemize}
 
