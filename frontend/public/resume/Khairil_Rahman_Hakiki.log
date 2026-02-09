@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.6.17)  7 FEB 2026 14:20
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.6.17)  10 FEB 2026 05:41
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -362,19 +362,14 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <8> on input line 113.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 125.
+(Font)              <10> on input line 128.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 125.
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 178.
- (C:\Users\WorkPlus\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmtt.fd
-File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)
+(Font)              <7> on input line 128.
+
 
 [1
 
-{C:/Users/WorkPlus/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc}{C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc}]
-
-[2] (Khairil_Rahman_Hakiki.aux)
+{C:/Users/WorkPlus/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc}{C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc}] (Khairil_Rahman_Hakiki.aux)
  ***********
 LaTeX2e <2025-06-01>
 L3 programming layer <2025-05-26>
@@ -383,17 +378,17 @@ Package rerunfilecheck Info: File `Khairil_Rahman_Hakiki.out' has not changed.
 (rerunfilecheck)             Checksum: 226E250A21F0D811423210A3A0A93507;564.
  ) 
 Here is how much of TeX's memory you used:
- 11325 strings out of 468225
- 181261 string characters out of 5431521
- 625934 words of memory out of 5000000
- 39675 multiletter control sequences out of 15000+600000
- 692452 words of font info for 84 fonts, out of 8000000 for 9000
+ 11280 strings out of 468225
+ 180523 string characters out of 5431521
+ 627943 words of memory out of 5000000
+ 39635 multiletter control sequences out of 15000+600000
+ 692133 words of font info for 83 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,12n,79p,407b,646s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx10.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmcsc10.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr9.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri10.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy6.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy9.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt10.pfb>
-Output written on Khairil_Rahman_Hakiki.pdf (2 pages, 220722 bytes).
+ 75i,11n,79p,438b,462s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx10.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmcsc10.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr9.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri10.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy6.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy9.pfb>
+Output written on Khairil_Rahman_Hakiki.pdf (1 page, 195923 bytes).
 PDF statistics:
- 102 PDF objects out of 1000 (max. 8388607)
- 8 named destinations out of 1000 (max. 500000)
+ 92 PDF objects out of 1000 (max. 8388607)
+ 7 named destinations out of 1000 (max. 500000)
  41 words of extra memory for PDF output out of 10000 (max. 10000000)
 
