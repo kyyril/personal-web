@@ -34,7 +34,7 @@ export const experiences: Experience[] = [
     location: "Padang, Indonesia",
     working: "onsite",
     startDate: "September 2025",
-    endDate: "Present",
+    endDate: "January 2026",
     description:
       "Engineered and developed high-performance systems from requirements, establishing clean architecture standards and efficient code practices to ensure long-term scalability and maintainability.",
     technologies: [
@@ -79,7 +79,7 @@ export const experiences: Experience[] = [
     location: "Lampung, Indonesia",
     working: "remote",
     startDate: "April 2025",
-    endDate: "Present",
+    endDate: "December 2025",
     description:
       "Junior Frontend Developer at CodeAtHome — added new features, fixed bugs, and followed clean code practices with help from regular code reviews.",
     technologies: [
