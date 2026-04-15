@@ -34,7 +34,7 @@ export const experiences: Experience[] = [
     location: "Padang, Indonesia",
     working: "onsite",
     startDate: "September 2025",
-    endDate: "January 2026",
+    endDate: "December 2025",
     description:
       "Engineered and developed high-performance systems from requirements, establishing clean architecture standards and efficient code practices to ensure long-term scalability and maintainability.",
     technologies: [
@@ -79,7 +79,7 @@ export const experiences: Experience[] = [
     location: "Lampung, Indonesia",
     working: "remote",
     startDate: "April 2025",
-    endDate: "December 2025",
+    endDate: "November 2025",
     description:
       "Junior Frontend Developer at CodeAtHome — added new features, fixed bugs, and followed clean code practices with help from regular code reviews.",
     technologies: [
@@ -101,8 +101,8 @@ export const experiences: Experience[] = [
     status: "internship",
     location: "Kab. Labuhanbatu, Indonesia",
     working: "onsite",
-    startDate: "Jan 2025",
-    endDate: "Mar 2025",
+    startDate: "January 2025",
+    endDate: "March 2025",
     description:
       "As a Software Engineer Intern, I developed a dynamic website with easy content management and AI car recommendations for Toyota Labuhanbatu, and built ReminderApp with role-based access and STNK/BPKB reminders for Toyota Rantauprapat.",
     technologies: [
