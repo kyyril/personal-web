@@ -74,14 +74,14 @@ export const experiences: Experience[] = [
   {
     id: "2",
     institution: "CodeAtHome",
-    job: "Junior Frontend Developer",
+    job: "Software Developer",
     status: "part-time",
     location: "Lampung, Indonesia",
     working: "remote",
     startDate: "April 2025",
     endDate: "November 2025",
     description:
-      "Junior Frontend Developer at CodeAtHome — added new features, fixed bugs, and followed clean code practices with help from regular code reviews.",
+      "Software Developer at CodeAtHome — added new features, fixed bugs, and followed clean code practices with help from regular code reviews.",
     technologies: [
       "TypeScript",
       "React.js",
