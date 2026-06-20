@@ -170,7 +170,7 @@ export const blogData = {
   "Scaling",
   "System Design"
 ] as string[],
-  lastUpdated: '2026-01-25T14:20:40.898Z',
+  lastUpdated: '2026-06-20T12:36:38.588Z',
 } as const;
 
 // Helper functions

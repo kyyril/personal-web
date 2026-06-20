@@ -2,6 +2,8 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import { data } from "../../../lib/data";
 import { blogData } from "../../../data/blog-data";
 
+export const runtime = 'edge';
+
 // Cache system prompt in memory (generated once, reused)
 let cachedSystemPrompt: string | null = null;
 
