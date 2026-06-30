@@ -1,3 +1,3 @@
 export const HERO_DATA = {
-  bio: "Information Systems student specializing in software development. I leverage React.js and Node.js with Typescript to build robust, scalable applications.",
+  bio: "Specializing in building scalable, maintainable systems. Combining a strong academic foundation in Information Systems with hands-on experience in full-stack development and clean architecture principles.",
 };

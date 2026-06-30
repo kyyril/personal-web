@@ -21,6 +21,7 @@ export const metadata: Metadata = {
     "Software Engineer",
     "Full Stack Developer",
     "Web Development",
+    "Golang",
     "React",
     "Node.js",
     "TypeScript",
