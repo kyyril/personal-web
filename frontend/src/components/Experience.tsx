@@ -28,9 +28,6 @@ function Experience({ data }: { data: Data }) {
           <div className="text-sm text-muted-foreground">
             {ex.startDate} - {ex.endDate}
           </div>
-          <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
-            {ex.description}
-          </p>
 
           {/* Technologies Section */}
           <div className="mt-3">

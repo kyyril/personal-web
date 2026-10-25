@@ -199,6 +199,10 @@ INPUT C:\Users\WorkPlus\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\lmsy7.
 INPUT C:\Users\WorkPlus\AppData\Local\Programs\MiKTeX\fonts\tfm\public\latex-fonts\lasy10.tfm
 INPUT C:\Users\WorkPlus\AppData\Local\Programs\MiKTeX\fonts\tfm\public\latex-fonts\lasy7.tfm
 INPUT C:\Users\WorkPlus\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmr12.tfm
+INPUT C:\Users\WorkPlus\AppData\Local\Programs\MiKTeX\tex\latex\lm\t1lmtt.fd
+INPUT C:\Users\WorkPlus\AppData\Local\Programs\MiKTeX\tex\latex\lm\t1lmtt.fd
+INPUT C:\Users\WorkPlus\AppData\Local\Programs\MiKTeX\tex\latex\lm\t1lmtt.fd
+INPUT C:\Users\WorkPlus\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmtt10.tfm
 INPUT C:\Users\WorkPlus\AppData\Local\MiKTeX\fonts\map\pdftex\pdftex.map
 INPUT C:\Users\WorkPlus\AppData\Local\Programs\MiKTeX\fonts\enc\dvips\lm\lm-ec.enc
 INPUT C:\Users\WorkPlus\AppData\Local\Programs\MiKTeX\fonts\enc\dvips\lm\lm-mathsy.enc
@@ -223,3 +227,5 @@ INPUT C:\Users\WorkPlus\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmsy
 INPUT C:\Users\WorkPlus\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmsy6.pfb
 INPUT C:\Users\WorkPlus\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmsy9.pfb
 INPUT C:\Users\WorkPlus\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmsy9.pfb
+INPUT C:\Users\WorkPlus\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmtt10.pfb
+INPUT C:\Users\WorkPlus\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmtt10.pfb

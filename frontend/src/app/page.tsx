@@ -67,7 +67,7 @@ export default function Home() {
         name: "How can I get in touch with Khairil?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "You can explore his projects and reach out through the guestbook, chat feature, or connect on social media profiles including GitHub and LinkedIn.",
+          text: "You can explore his projects and reach out through the guestbook, chat feature, or connect on GitHub.",
         },
       },
       {

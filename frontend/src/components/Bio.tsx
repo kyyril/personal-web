@@ -1,11 +1,10 @@
 import React from "react";
-import { GithubIcon, LinkedinIcon, DocumentIcon } from "./Icons";
+import { GithubIcon, DocumentIcon } from "./Icons";
 import { HERO_DATA } from "../constants";
 import { contactInfo } from "@/lib/data";
 
 const SOCIAL_LINKS = [
   { name: "GitHub", url: contactInfo.github, icon: <GithubIcon /> },
-  { name: "LinkedIn", url: contactInfo.linkedin, icon: <LinkedinIcon /> },
   // { name: "Resume", url: contactInfo.cv, icon: <DocumentIcon /> },
 ];
 
@@ -40,7 +39,7 @@ const Bio: React.FC = () => {
 
       <div>
         <p className="max-w-[600px] text-muted-foreground lg:text-lg leading-relaxed">
-          Specializing in building scalable, maintainable systems. Combining a strong academic foundation in Information Systems with hands-on experience in full-stack development and clean architecture principles.
+          Software Engineer focused on Go, backend systems, and distributed systems, with experience building reliable services and contributing to open-source projects.
         </p>
       </div>
     </section>

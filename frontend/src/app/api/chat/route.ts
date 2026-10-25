@@ -52,7 +52,7 @@ function generateSystemPrompt(): string {
   
   [ABOUT KHAIRIL]
   - Education: ${data.education.map((e) => `${e.degree} at ${e.institution}`).join(", ")}.
-  - Contact: Email (${data.contactInfo.email}), LinkedIn (${data.contactInfo.linkedin}), GitHub (${data.contactInfo.github}).
+  - Contact: Email (${data.contactInfo.email}), GitHub (${data.contactInfo.github}).
 
   [PROJECTS]
   ${projectsContext}

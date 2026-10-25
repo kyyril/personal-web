@@ -8,7 +8,6 @@ import type {
 
 export const contactInfo: ContactInfo = {
   email: "khairil.4hrp@gmail.com",
-  linkedin: "https://www.linkedin.com/in/khairilrahman",
   github: "https://github.com/kyyril",
   cv: "/resume/Khairil_Rahman_Hakiki.pdf",
 };
@@ -27,6 +26,19 @@ export const education: Education[] = [
 
 export const experiences: Experience[] = [
   {
+    id: "3",
+    institution: "TIME Language Centre",
+    job: "Software Engineer Intern",
+    status: "internship",
+    location: "Padang, Indonesia",
+    working: "hybrid",
+    startDate: "September 2025",
+    endDate: "December 2025",
+    description:
+      "Designed and shipped a 4-service Go/Node.js course platform, and built an MVC ERP backend that automated course scheduling for 20+ staff.",
+    technologies: [],
+  },
+  {
     id: "2",
     institution: "CodeAtHome",
     job: "Software Developer",
@@ -37,17 +49,7 @@ export const experiences: Experience[] = [
     endDate: "December 2025",
     description:
       "Software Developer at CodeAtHome — added new features, fixed bugs, and followed clean code practices with help from regular code reviews.",
-    technologies: [
-      "TypeScript",
-      "React.js",
-      "Next.js",
-      "Vite",
-      "TailwindCSS",
-      "Shadcn UI",
-      "TanStack Query",
-      "Redux",
-      "Docker",
-    ],
+    technologies: [],
   },
   {
     id: "1",
@@ -60,22 +62,7 @@ export const experiences: Experience[] = [
     endDate: "March 2025",
     description:
       "As a Software Engineer Intern, I developed a dynamic website with easy content management and AI car recommendations for Toyota Labuhanbatu, and built ReminderApp with role-based access and STNK/BPKB reminders for Toyota Rantauprapat.",
-    technologies: [
-      "TypeScript",
-      "React.js",
-      "Python",
-      "Apps Script",
-      "Next.js",
-      "Vite",
-      "TailwindCSS",
-      "Zustand",
-      "Supabase",
-      "PostgreSQL",
-      "Cloudinary",
-      "Shadcn UI",
-      "REST API",
-      "Generative AI",
-    ],
+    technologies: [],
   },
 ];
 

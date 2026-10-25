@@ -13,9 +13,6 @@ function Education({ data }: { data: Data }) {
           <div className="text-sm text-muted-foreground mt-1">
             {ed.startDate} - {ed.endDate}
           </div>
-          <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
-            {ed.description}
-          </p>
         </div>
       ))}
     </div>

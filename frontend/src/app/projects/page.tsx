@@ -14,9 +14,7 @@ import { Button } from "../../components/ui/button";
 import { ExternalLinkIcon } from "@radix-ui/react-icons";
 import { GitHubLogoIcon } from "@radix-ui/react-icons";
 import ProjectListSkeleton from "../../components/Project/ProjectListSkeleton";
-import GitHubProjectsListSkeleton from "../../components/Project/github/GitHubProjectsListSkeleton";
 import ProjectListWrapper from "../../components/Project/ProjectListWrapper";
-import GitHubProjectsWrapper from "../../components/Project/github/GitHubProjectsWrapper";
 import Breadcrumb from "../../components/Breadcrumb";
 import { data } from "../../lib/data";
 
@@ -59,7 +57,7 @@ export default function ProjectPage() {
         <ProjectListWrapper />
       </Suspense>
 
-      <h2 className="mb-6 text-2xl font-bold lg:text-3xl flex items-end pb-4 pt-24">
+      {/* <h2 className="mb-6 text-2xl font-bold lg:text-3xl flex items-end pb-4 pt-24">
         Repositories
       </h2>
       <p className="text-muted-foreground mb-8 max-w-3xl">
@@ -68,7 +66,7 @@ export default function ProjectPage() {
       </p>
       <Suspense fallback={<GitHubProjectsListSkeleton />}>
         <GitHubProjectsWrapper />
-      </Suspense>
+      </Suspense> */}
     </section>
   );
 }

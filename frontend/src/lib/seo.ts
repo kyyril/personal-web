@@ -184,7 +184,6 @@ export function generateOrganizationSchema() {
         description: SEO_DESCRIPTION.main,
         sameAs: [
             "https://github.com/kyyril",
-            "https://www.linkedin.com/in/khairilrahman/",
             "https://twitter.com/kyyril_dev",
         ],
         knowsAbout: [
