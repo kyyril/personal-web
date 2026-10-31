@@ -20,7 +20,7 @@ export const education: Education[] = [
     description:
       "Relevant coursework: Data structures, algorithms, software engineering, statistics, operating system, network, project management, databases, and UI/UX design.",
     startDate: "2022",
-    endDate: "Present",
+    endDate: "2026",
   },
 ];
 
