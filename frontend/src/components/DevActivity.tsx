@@ -36,7 +36,7 @@ const DevActivity: React.FC = () => {
     const titleColor = currentTheme === "dark" ? "3b82f6" : "0f172a";
 
     const githubStatsUrl = `https://github-readme-stats-fast.vercel.app/api?username=kyyril&show_icons=true&theme=${statsTheme}&bg_color=00000000&hide_border=true&title_color=${titleColor}&text_color=${currentTheme === "dark" ? "888888" : "475569"}`;
-    const githubStreakUrl = `https://github-readme-stats-fast.vercel.app/api/streak?username=kyyril&theme=${statsTheme}&bg_color=00000000&hide_border=true&ring=${titleColor}&stroke=${titleColor}&currStreakLabel=${titleColor}`;
+    const githubStreakUrl = `https://streak-stats.demolab.com?user=kyyril&theme=${statsTheme}&background=00000000&hide_border=true&ring=${titleColor}&stroke=${titleColor}&currStreakLabel=${titleColor}`;
     const wakatimeUrl = "https://wakatime.com/share/@kyyril/9eb071bf-655b-4fb3-a970-6fc2f7c3b2ec.svg";
 
     // Fix hydration mismatch and Pre-load images
@@ -89,7 +89,7 @@ const DevActivity: React.FC = () => {
                     className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors duration-200 text-sm font-medium py-1"
                 >
                     <div className="w-1 h-1 rounded-full bg-muted-foreground group-hover:bg-foreground" />
-                    {showMetrics ? "Hide Metrics" : "View Metrics"}
+                    {showMetrics ? "Hide Stats" : "Stats"}
                 </button>
             </div>
 
@@ -121,43 +121,21 @@ const DevActivity: React.FC = () => {
                         <div
                             className={`col-start-1 row-start-1 w-full transition-opacity duration-200 ${activeTab === "overview" ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"}`}
                         >
-                            <div className="flex flex-col items-center py-2 md:py-6 gap-0">
-                                {/* 1. GitHub Streak */}
-                                <div className="w-full max-w-2xl">
+                            <div className="flex justify-center py-2 md:py-6">
+                                <div className="w-full max-w-2xl relative">
                                     {loadingStates.githubStreak && <Skeleton className="absolute inset-0 w-full" />}
-                                    <div className="flex justify-center">
-                                        <NextImage
-                                            src={githubStreakUrl}
-                                            alt="GitHub Streak"
-                                            width={600}
-                                            height={240}
-                                            unoptimized
-                                            priority
-                                            className={`w-full h-auto transition-opacity duration-100 block ${loadingStates.githubStreak ? "opacity-0" : "opacity-100"
-                                                }`}
-                                            onLoad={() => handleImageLoad("githubStreak")}
-                                        />
-                                    </div>
+                                    <NextImage
+                                        src={githubStreakUrl}
+                                        alt="GitHub Streak"
+                                        width={600}
+                                        height={240}
+                                        unoptimized
+                                        priority
+                                        className={`w-full h-auto transition-opacity duration-100 block ${loadingStates.githubStreak ? "opacity-0" : "opacity-100"
+                                            }`}
+                                        onLoad={() => handleImageLoad("githubStreak")}
+                                    />
                                 </div>
-
-                                {/* 2. Stats */}
-                                <div className="w-full max-w-2xl">
-                                    {loadingStates.githubStats && <Skeleton className="absolute inset-0 w-full" />}
-                                    <div className="flex justify-center">
-                                        <NextImage
-                                            src={githubStatsUrl}
-                                            alt="GitHub Stats"
-                                            width={600}
-                                            height={240}
-                                            unoptimized
-                                            priority
-                                            className={`w-full h-auto transition-opacity duration-100 block scale-90 md:scale-100 ${loadingStates.githubStats ? "opacity-0" : "opacity-100"
-                                                }`}
-                                            onLoad={() => handleImageLoad("githubStats")}
-                                        />
-                                    </div>
-                                </div>
-
                             </div>
                         </div>
 

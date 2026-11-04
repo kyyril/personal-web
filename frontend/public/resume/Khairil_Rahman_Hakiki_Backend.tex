@@ -1,6 +1,6 @@
 %-------------------------
-% Resume in Latex - Version 2 (Optimized Single Page)
 % Author : Khairil Rahman Hakiki
+% Role : Backend / Platform Engineer
 % License : MIT
 %------------------------
 
@@ -26,8 +26,8 @@
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}
 
-% Geometry with clean, balanced margins (tight top to eliminate whitespace)
-\usepackage[letterpaper, left=0.5in, right=0.5in, top=0.25in, bottom=0.25in]{geometry}
+% Geometry with clean, balanced margins
+\usepackage[letterpaper, left=0.5in, right=0.5in, top=0.22in, bottom=0.22in]{geometry}
 
 \urlstyle{same}
 
@@ -39,7 +39,7 @@
 \titleformat{\section}{
   \scshape\raggedright\large
 }{}{0em}{}[\color{black}\titlerule \vspace{1pt}]
-\titlespacing*{\section}{0pt}{3.5pt}{2pt}
+\titlespacing*{\section}{0pt}{2.0pt}{1.0pt}
 
 % Ensure that generate pdf is machine readable/ATS parsable
 \pdfgentounicode=1
@@ -65,9 +65,9 @@
 
 \renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
 
-\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0in, label={}, itemsep=1.5pt, parsep=0pt, topsep=1pt]}
-\newcommand{\resumeSubHeadingListEnd}{\end{itemize}\vspace{-2pt}}
-\newcommand{\resumeItemListStart}{\begin{itemize}[leftmargin=14pt, label=\tiny$\bullet$, itemsep=1.2pt, parsep=0pt, topsep=1pt]}
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0in, label={}, itemsep=1pt, parsep=0pt, topsep=0.5pt]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}\vspace{-2.5pt}}
+\newcommand{\resumeItemListStart}{\begin{itemize}[leftmargin=12pt, label=\tiny$\bullet$, itemsep=0.8pt, parsep=0pt, topsep=0.5pt]}
 \newcommand{\resumeItemListEnd}{\end{itemize}}
 
 %-------------------------------------------
@@ -79,7 +79,7 @@
 \begin{center}\vspace*{-8pt}
     {\LARGE \bfseries [Candidate Name]} \\[2pt]
     \footnotesize [Location] $|$ [Phone] $|$ \href{mailto:email@example.com}{[Email]} $|$ \href{https://linkedin.com}{[LinkedIn]} $|$ \href{https://github.com}{[GitHub]} $|$ \href{https://example.com}{[Portfolio]} $|$ \textbf{Available Now}
-\end{center}\vspace{-10pt}
+\end{center}\vspace{-9pt}
 
 %-----------EDUCATION-----------
 \section{Education}
@@ -87,9 +87,11 @@
     \resumeSubheading
       {State Islamic University of Imam Bonjol Padang}{August 2022 -- September 2026}
       {Bachelor of Science in Information Systems (Graduated September 2026)}{Padang, Indonesia}
+    \resumeProjectHeading
+      {\textbf{Undergraduate Research Thesis}: Empirical Scaling of Event-Driven Microservices}{~}
       \resumeItemListStart
-        \resumeItem{\textbf{Relevant Coursework}: Data Structures \& Algorithms, Discrete Mathematics, OOP, Operating System, Database, Network, Security, Software Engineering, QA, Systems Analysis \& Design, Business Process Analysis.}
-        \resumeItem{\textbf{Undergraduate Thesis}: Engineered an event-driven microservices backend (Go, TypeScript, RabbitMQ, PostgreSQL, Redis) processing \textbf{14.1k+ async payment webhooks} with \textbf{0\% message loss}, sustaining \textbf{96.5 RPS (0\% error rate @ 200 VUs)} and cutting P95 latency by \textbf{58.9\% (to 55.7ms)} via horizontal scaling. \href{https://repository.uinib.ac.id/34986/}{\underline{(Thesis)}}}
+        \resumeItem{Engineered a reproducible Go/RabbitMQ benchmark harness evaluating \textbf{34,951 requests} at 200 VUs; cut P95 latency \textbf{58.9\% (135.5ms to 55.7ms)} via autoscaling and queue tuning, reaching \textbf{96.56 RPS (0\% errors)}.}
+        \resumeItem{Conducted fault-injection experiments simulating broker crashes and network partitions; proved \textbf{zero data loss} across \textbf{14,170 transactional events} using dead-letter queue (DLQ) routing. \href{https://repository.uinib.ac.id/34986/}{\underline{(Thesis Repo)}}}
       \resumeItemListEnd
   \resumeSubHeadingListEnd
 
@@ -102,7 +104,7 @@
       \resumeItemListStart
         \resumeItem{Collaborated with Operations and Academic stakeholders to translate business requirements into technical specs; directed architecture across 2 teams, standardizing service boundaries, API contracts, and CI review gates.}
         \resumeItem{Architected an event-driven Go/Node.js course platform, decoupling services via \textbf{RabbitMQ} and \textbf{Redis}; authored \textbf{119+ tests} and eliminated single-replica bottlenecks via \textbf{k6} to achieve \textbf{0\% error rate} at peak load.}
-        \resumeItem{Codified institutional compensation rules into a modular \textbf{TypeScript/Prisma} ERP with 7-role \textbf{RBAC}, automating multi-tier tutor payroll engines and geofenced attendance to eliminate error-prone Excel workflows.}
+        \resumeItem{Codified compensation rules into a modular \textbf{Serverless} internal system with 7-role \textbf{RBAC} deployed for \textbf{20+ staff}, automating multi-tier tutor payroll engines and geofenced attendance to eliminate Excel workflows.}
         \resumeItem{Drove production reliability by orchestrating containerized services on \textbf{Kubernetes (K3s)} behind an \textbf{NGINX} TLS proxy, tracking real-time latency, error spikes, and cluster health via \textbf{Prometheus, Grafana, and Loki}.}
       \resumeItemListEnd 
 
@@ -110,16 +112,16 @@
       {Software Developer (Part-time)}{April 2025 -- December 2025}
       {CodeAtHome -- Enterprise Software \& AI Agency}{Remote}
       \resumeItemListStart
-        \resumeItem{Worked with Product and Design to ship production REST APIs across 2 client platforms, accelerating delivery.}
-        \resumeItem{Optimized system performance and slashed API latency by standardizing client caching via \textbf{TanStack Query}.}
-        \resumeItem{Maintained high code quality and cut integration bugs by engineering reusable, type-safe API clients and UI components.}
+        \resumeItem{Worked with Product and Design to ship production REST APIs across 2 client platforms, standardizing data contracts.}
+        \resumeItem{Constructed type-safe API client wrappers and UI components, eliminating contract mismatches and boilerplate.}
+        \resumeItem{Optimized network performance and slashed API latency by standardizing client-side caching}
       \resumeItemListEnd
 
     \resumeSubheading
       {Software Engineer Intern}{January 2025 -- March 2025}
       {Auto2000 -- Indonesia's \#1 Toyota Dealer (Astra International AI-TSO)}{Labuhanbatu, Indonesia (Onsite)}
       \resumeItemListStart
-        \resumeItem{Partnered with Sales and Marketing to map buyer journey requirements into a \textbf{Next.js} sales portal with AI vehicle recommendations and WhatsApp routing, boosting customer lead conversion and accelerating deal closings.}
+        \resumeItem{Partnered with Sales and Marketing to ship a \textbf{Next.js} sales portal with AI recommendations and WhatsApp routing.}
         \resumeItem{Cut recurring SaaS costs by engineering an internal multi-branch operations app with \textbf{RBAC} via \textbf{Supabase}.}
         \resumeItem{Eliminated manual audits by automating \textbf{Python ETL} pipelines to sanitize \textbf{15 years} of legacy records (\textbf{38k+/year}).}
       \resumeItemListEnd
@@ -132,32 +134,36 @@
           {\textbf{PerfGuard: Statistical Regression Detector} $|$ \emph{Go, pprof, CI/CD, Statistics}}{{\href{https://github.com/kyyril/perfguard}{\underline{GitHub}}}}
           \resumeItemListStart
             \resumeItem{Built an open-source performance regression detector in \textbf{Go} to automate PR-gated A/B benchmarks; implemented \textbf{Mann-Whitney U} testing with \textbf{Benjamini-Hochberg} correction to prevent latency regressions.}
-            \resumeItem{Engineered a measurement engine with \textbf{git worktree isolation}, interleaved A/B execution to eliminate hardware/thermal bias, and bootstrap confidence intervals with coefficient of variation noise filtering.}
-            \resumeItem{Architected a clean 17-package CLI (\textbf{>80\% test coverage}) with isolated I/O boundaries and schema versioning; integrated automated \textbf{pprof} differential profiling and effect-size gating into \textbf{GitHub Actions}.}
+            \resumeItem{Implemented measurement engine with \textbf{git worktree isolation}, interleaved A/B runs to eliminate thermal bias, and bootstrap confidence intervals; integrated automated \textbf{pprof} differential profiling into \textbf{GitHub Actions}.}
+          \resumeItemListEnd
+
+      \resumeProjectHeading
+          {\textbf{Antre: High-Concurrency Flash-Sale Ticketing Platform} $|$ \emph{Go, gRPC, Redpanda, Redis, PostgreSQL}}{{\href{https://github.com/kyyril/antre}{\underline{GitHub}}}}
+          \resumeItemListStart
+            \resumeItem{Architected an event-driven ticketing platform in \textbf{Go} with \textbf{Redpanda (Kafka API)}; engineered \textbf{sharded stock counters} and conditional updates in \textbf{PostgreSQL} to prevent overselling under high concurrency.}
+            \resumeItem{Guaranteed consistency via \textbf{Transactional Outbox} pattern and idempotent webhook consumers for \textbf{Xendit payments}; implemented a \textbf{Redis token bucket} waiting room for admission control against traffic spikes.}
           \resumeItemListEnd
     \resumeSubHeadingListEnd
 
 %-----------OPEN SOURCE CONTRIBUTIONS-----------
 \section{Open Source Contributions}
-  \begin{itemize}[leftmargin=14pt, label=\tiny$\bullet$, itemsep=1.2pt, parsep=0pt, topsep=1.2pt]
-    \resumeItem{\textbf{Nushell}: Prevented pipeline crashes on invalid UTF-8 inputs with graceful stream byte recovery. \href{https://github.com/nushell/nushell/pull/18261}{\underline{(Merged PR)}}}
-    \resumeItem{\textbf{Prometheus Go Client}: Cut GC overhead and memory allocations on metric collection paths. \href{https://github.com/prometheus/client_golang/pull/2176}{\underline{(Merged PR)}}}
-    \resumeItem{\textbf{Google pprof}: Fixed cross-platform CI/CD test failures and eliminated disk I/O overhead. \href{https://github.com/google/pprof/pull/1049}{\underline{(Merged PR)}}}
-    \resumeItem{\textbf{Google go-github}: Prevented production JSON unmarshalling crashes on Enterprise billing responses. \href{https://github.com/google/go-github/pull/4002}{\underline{(Merged PR)}}}
+  \begin{itemize}[leftmargin=12pt, label=\tiny$\bullet$, itemsep=0.8pt, parsep=0pt, topsep=0.8pt]
+    \resumeItem{\textbf{Google pprof}: Reduced profile filtering latency by \textbf{33--36\%} by avoiding per-sample allocations, eliminated redundant disk I/O in cross-platform test suites, and improved colorblind accessibility on differential graphs. \href{https://github.com/google/pprof/pulls?q=author:kyyril}{\underline{(PR)}}}
+    \resumeItem{\textbf{Google go-github}: Fixed unmarshaling errors on GitHub Enterprise usage and billing endpoints. \href{https://github.com/google/go-github/pull/4002}{\underline{(Merged PR)}}}
+    \resumeItem{\textbf{Prometheus Go Client}: Optimized metric collection performance by reducing redundant memory allocations and modernizing slice sorting routines. \href{https://github.com/prometheus/client_golang/pull/2176}{\underline{(Merged PR)}}}
   \end{itemize}
-
-%-----------HONORS & CERTIFICATIONS-----------
 \section{Honors \& Certifications}
-  \begin{itemize}[leftmargin=14pt, label=\tiny$\bullet$, itemsep=1.2pt, parsep=0pt, topsep=1.2pt]
+  \begin{itemize}[leftmargin=12pt, label=\tiny$\bullet$, itemsep=0.8pt, parsep=0pt, topsep=0.8pt]
     \resumeItem{\textbf{AstraPay Hackathon 2026} -- Finalist (Top 10 nationally): Built real-time QRIS credit scoring for MSMEs.}
-    \resumeItem{\textbf{Certifications}: \textbf{Oracle} OCI 2025 Certified AI Foundations Associate \href{https://catalog-education.oracle.com/ords/certview/sharebadge?id=D4510B21F99D88A292FA173EA64DC122B01639350FCE422119EE1C499D08318E}{\underline{(Badge)}} $|$ \textbf{HackerRank} Software Engineer Intern \href{https://www.hackerrank.com/certificates/904ef6805347}{\underline{(Cred)}} $|$ \textbf{Dicoding}: Back-End JavaScript \href{https://www.dicoding.com/certificates/2VX3K9O0NXYQ}{\underline{(Cred)}}, Machine Learning Systems \href{https://www.dicoding.com/certificates/53XE16440ZRN}{\underline{(Cred)}} \& Generative AI \href{https://www.dicoding.com/certificates/81P2O07NQZOY}{\underline{(Cred)}}.}
+    \resumeItem{\textbf{PIDI DIGDAYA Hackathon 2026} -- Semifinalist (Top 400/2,500+): Built browser sandboxes preventing fraud.}
+    \resumeItem{\textbf{Certifications}: \textbf{Oracle} OCI 2025 Certified AI Foundations Associate \href{https://catalog-education.oracle.com/ords/certview/sharebadge?id=D4510B21F99D88A292FA173EA64DC122B01639350FCE422119EE1C499D08318E}{\underline{(Badge)}} $|$ \textbf{HackerRank} Software Engineer Intern \href{https://www.hackerrank.com/certificates/904ef6805347}{\underline{(Cred)}} $|$ \textbf{Dicoding}: Back-End JavaScript \href{https://www.dicoding.com/certificates/2VX3K9O0NXYQ}{\underline{(Cred)}} \& Machine Learning Systems \href{https://www.dicoding.com/certificates/53XE16440ZRN}{\underline{(Cred)}}.}
   \end{itemize}
 
 %-----------TECHNICAL SKILLS-----------
 \section{Technical Skills}
-  \begin{itemize}[leftmargin=0in, label={}, itemsep=1pt, parsep=0pt, topsep=1.2pt]
+  \begin{itemize}[leftmargin=0in, label={}, itemsep=0.5pt, parsep=0pt, topsep=0.8pt]
     \item\small{
-      \textbf{Languages}{: Go, TypeScript, Python, Rust, SQL, Bash} $|$ \textbf{Technologies}{: Docker, Kubernetes, NGINX, AWS, Prometheus, Grafana, Loki, k6, Redis, RabbitMQ, PostgreSQL, MongoDB, DynamoDB, OpenTelemetry, gRPC.}
+      \textbf{Languages}{: Go, TypeScript, Python, SQL, Bash} $|$ \textbf{Technologies}{: Docker, Kubernetes, NGINX, Redis, RabbitMQ, PostgreSQL, Kafka, gRPC, Protobuf, OpenTelemetry, Prometheus, Grafana, Loki, k6, AWS.}
     }
   \end{itemize}
 
