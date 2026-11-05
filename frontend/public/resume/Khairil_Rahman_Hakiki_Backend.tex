@@ -27,7 +27,7 @@
 \renewcommand{\footrulewidth}{0pt}
 
 % Geometry with clean, balanced margins
-\usepackage[letterpaper, left=0.5in, right=0.5in, top=0.22in, bottom=0.22in]{geometry}
+\usepackage[letterpaper, left=0.5in, right=0.5in, top=0.31in, bottom=0.30in]{geometry}
 
 \urlstyle{same}
 
@@ -39,7 +39,7 @@
 \titleformat{\section}{
   \scshape\raggedright\large
 }{}{0em}{}[\color{black}\titlerule \vspace{1pt}]
-\titlespacing*{\section}{0pt}{2.0pt}{1.0pt}
+\titlespacing*{\section}{0pt}{4.0pt}{2.0pt}
 
 % Ensure that generate pdf is machine readable/ATS parsable
 \pdfgentounicode=1
@@ -65,9 +65,9 @@
 
 \renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
 
-\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0in, label={}, itemsep=1pt, parsep=0pt, topsep=0.5pt]}
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0in, label={}, itemsep=1.2pt, parsep=0pt, topsep=0.8pt]}
 \newcommand{\resumeSubHeadingListEnd}{\end{itemize}\vspace{-2.5pt}}
-\newcommand{\resumeItemListStart}{\begin{itemize}[leftmargin=12pt, label=\tiny$\bullet$, itemsep=0.8pt, parsep=0pt, topsep=0.5pt]}
+\newcommand{\resumeItemListStart}{\begin{itemize}[leftmargin=12pt, label=\tiny$\bullet$, itemsep=1.2pt, parsep=0pt, topsep=0.8pt]}
 \newcommand{\resumeItemListEnd}{\end{itemize}}
 
 %-------------------------------------------
@@ -76,19 +76,10 @@
 \begin{document}
 
 %----------HEADING----------
-\begin{center}\vspace*{-8pt}
-    {\LARGE \bfseries [Candidate Name]} \\[2pt]
-    \footnotesize [Location] $|$ [Phone] $|$ \href{mailto:email@example.com}{[Email]} $|$ \href{https://linkedin.com}{[LinkedIn]} $|$ \href{https://github.com}{[GitHub]} $|$ \href{https://example.com}{[Portfolio]} $|$ \textbf{Available Now}
-\end{center}\vspace{-9pt}
-
-%-----------TECHNICAL SKILLS-----------
-\section{Technical Skills}
-  \begin{itemize}[leftmargin=0in, label={}, itemsep=0.5pt, parsep=0pt, topsep=0.8pt]
-    \item\small{
-      \textbf{Languages}{: Go, TypeScript, Python, SQL} \\
-      \textbf{Key Technologies}{: Docker, Kubernetes, Redis, RabbitMQ, PostgreSQL, Kafka, gRPC, Prometheus, Grafana, k6, NGINX}
-    }
-  \end{itemize}
+\begin{center}\vspace*{-3pt}
+    {\LARGE \bfseries Khairil Rahman Hakiki} \\[2pt]
+    \footnotesize Indonesia $|$ +6282274360915 $|$ \href{mailto:khairil.4hrp@gmail.com}{khairil.4hrp@gmail.com} $|$ \href{https://linkedin.com/in/khairilrahman}{in/khairilrahman} $|$ \href{https://github.com/kyyril}{github.com/kyyril} $|$ \href{https://kiril.is-a.dev}{personal-web}
+\end{center}\vspace{-5pt}
 
 %-----------EDUCATION-----------
 \section{Education}
@@ -110,7 +101,7 @@
       {Software Engineer Intern}{September 2025 -- December 2025}
       {TIME Language Centre -- Official IDP IELTS Centre}{Padang, Indonesia (Hybrid)}
       \resumeItemListStart
-        \resumeItem{Engineered service boundaries, OpenAPI specifications, and automated CI test gates adopted across 2 teams, eliminating cross-service integration regressions.}
+        \resumeItem{Engineered service boundaries, OpenAPI specs, and CI test gates across 2 teams, eliminating cross-service regressions.}
         \resumeItem{Architected an event-driven Go/Node.js course platform, decoupling services via \textbf{RabbitMQ} and \textbf{Redis}; authored \textbf{119+ tests} and eliminated single-replica bottlenecks via \textbf{k6} to achieve \textbf{0\% error rate} at peak load.}
         \resumeItem{Codified institutional payroll rules into a modular \textbf{TypeScript} internal system with 7-role \textbf{RBAC} for \textbf{20+ staff}, automating multi-tier tutor compensation engines and geofenced attendance to eliminate Excel workflows.}
         \resumeItem{Drove production reliability by orchestrating containerized services on \textbf{Kubernetes (K3s)} behind an \textbf{NGINX} TLS proxy, tracking real-time latency, error spikes, and cluster health via \textbf{Prometheus, Grafana, and Loki}.}
@@ -137,10 +128,11 @@
 
 %-----------OPEN SOURCE CONTRIBUTIONS-----------
 \section{Open Source Contributions}
-  \begin{itemize}[leftmargin=12pt, label=\tiny$\bullet$, itemsep=0.8pt, parsep=0pt, topsep=0.8pt]
-    \resumeItem{\textbf{Google pprof}: Reduced profile filtering latency by \textbf{33--36\%} by avoiding per-sample allocations, eliminated redundant disk I/O in cross-platform test suites, and improved colorblind accessibility on differential graphs. \href{https://github.com/google/pprof/pulls?q=author:kyyril}{\underline{(PR)}}}
+  \begin{itemize}[leftmargin=12pt, label=\tiny$\bullet$, itemsep=1.2pt, parsep=0pt, topsep=0.8pt]
+    \resumeItem{\textbf{Google pprof}: Reduced profile filtering latency by \textbf{33--36\%} by avoiding per-sample allocations, eliminated redundant disk I/O in cross-platform test suites, and improved colorblind accessibility on differential graphs. \href{https://github.com/google/pprof/pulls?q=author:kyyril}{\underline{(Merged PR)}}}
     \resumeItem{\textbf{Google go-github}: Fixed unmarshaling errors on GitHub Enterprise usage and billing endpoints. \href{https://github.com/google/go-github/pull/4002}{\underline{(Merged PR)}}}
     \resumeItem{\textbf{Prometheus Go Client}: Cut redundant memory allocations and modernized slice sorting routines. \href{https://github.com/prometheus/client_golang/pull/2176}{\underline{(Merged PR)}}}
+    \resumeItem{\textbf{Nushell}: Hardened ByteStream line iterators against invalid UTF-8 crashes via lossy conversion fallbacks. \href{https://github.com/nushell/nushell/pull/18261}{\underline{(Merged PR)}}}
   \end{itemize}
 %-----------PROJECTS-----------
 \section[Projects]{Projects \hfill \normalfont\footnotesize\raisebox{1.5pt}{Additional projects at \href{https://kiril.is-a.dev/projects}{kiril.is-a.dev/projects}}}
@@ -153,19 +145,28 @@
           \resumeItemListEnd
 
       \resumeProjectHeading
-          {\textbf{Antre: High-Concurrency Flash-Sale Ticketing Platform} $|$ \emph{Go, gRPC, Redpanda, Redis, PostgreSQL}}{{\href{https://github.com/kyyril/antre}{\underline{GitHub}}}}
+          {\textbf{Shortlink: Production URL Shortener API} $|$ \emph{Go, PostgreSQL, sqlc, Prometheus, Docker}}{{\href{https://shortlink-production-1c53.up.railway.app/docs}{\underline{Live Demo}}} $|$ {\href{https://github.com/kyyril/shortlink}{\underline{GitHub}}}}
           \resumeItemListStart
-            \resumeItem{Architected an event-driven ticketing platform in \textbf{Go} with \textbf{Redpanda (Kafka API)}; engineered \textbf{sharded stock counters} and conditional updates in \textbf{PostgreSQL} to prevent overselling under high concurrency.}
-            \resumeItem{Guaranteed consistency via \textbf{Transactional Outbox} pattern and idempotent webhook consumers for \textbf{Xendit payments}; implemented a \textbf{Redis token bucket} waiting room for admission control against traffic spikes.}
+            \resumeItem{Architected a high-throughput URL shortener in \textbf{Go} with sub-millisecond redirects; decoupled click telemetry via a non-blocking \textbf{buffered channel} and background batch flusher streaming via PostgreSQL binary \textbf{COPY FROM}.}
+            \resumeItem{Engineered an \textbf{Idempotency-Key} engine with \textbf{SHA-256} hashing to prevent duplicate links during network retries; eliminated table-scan overhead via \textbf{keyset cursor pagination} and enforced per-IP \textbf{token bucket rate limiting}.}
           \resumeItemListEnd
     \resumeSubHeadingListEnd
 
 \section{Honors \& Certifications}
-  \begin{itemize}[leftmargin=12pt, label=\tiny$\bullet$, itemsep=0.8pt, parsep=0pt, topsep=0.8pt]
+  \begin{itemize}[leftmargin=12pt, label=\tiny$\bullet$, itemsep=1.2pt, parsep=0pt, topsep=0.8pt]
     \resumeItem{\textbf{AstraPay Hackathon 2026} -- Finalist (Top 10 nationally): Built real-time QRIS credit scoring for MSMEs.}
     \resumeItem{\textbf{PIDI DIGDAYA Hackathon 2026} -- Semifinalist (Top 400/2,500+): Built browser sandboxes preventing fraud.}
     \resumeItem{\textbf{Certifications}: \textbf{Oracle} OCI 2025 AI Foundations Associate \href{https://catalog-education.oracle.com/ords/certview/sharebadge?id=D4510B21F99D88A292FA173EA64DC122B01639350FCE422119EE1C499D08318E}{\underline{(Badge)}} $|$ \textbf{HackerRank} Software Engineer Intern \href{https://www.hackerrank.com/certificates/904ef6805347}{\underline{(Cred)}} $|$ \textbf{Dicoding}: Back-End JavaScript \href{https://www.dicoding.com/certificates/2VX3K9O0NXYQ}{\underline{(Cred)}} \& Machine Learning Systems \href{https://www.dicoding.com/certificates/53XE16440ZRN}{\underline{(Cred)}}.}
   \end{itemize}
 
 %-------------------------------------------
+%-----------TECHNICAL SKILLS-----------
+\section{Technical Skills}
+  \begin{itemize}[leftmargin=0in, label={}, itemsep=0.5pt, parsep=0pt, topsep=0.8pt]
+    \item\small{
+      \textbf{Languages}{: Go, TypeScript, Python, Rust, SQL} \\
+      \textbf{Key Technologies}{: Docker, Kubernetes, Redis, RabbitMQ, gRPC, Prometheus, Grafana, NGINX, React.js, Next.js}
+    }
+  \end{itemize}
+
 \end{document}

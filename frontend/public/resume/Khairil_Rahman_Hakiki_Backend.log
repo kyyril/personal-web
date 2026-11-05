@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2026.10.23)  4 NOV 2026 14:16
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2026.10.23)  5 NOV 2026 15:14
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -453,14 +453,14 @@ Package hyperref Info: Link coloring ON on input line 76.
 * layoutoffset:(h,v)=(0.0pt,0.0pt)
 * modes: 
 * h-part:(L,W,R)=(36.135pt, 542.02501pt, 36.135pt)
-* v-part:(T,H,B)=(15.89948pt, 763.17104pt, 15.89948pt)
+* v-part:(T,H,B)=(22.40352pt, 750.88525pt, 21.68121pt)
 * \paperwidth=614.295pt
 * \paperheight=794.96999pt
 * \textwidth=542.02501pt
-* \textheight=763.17104pt
+* \textheight=750.88525pt
 * \oddsidemargin=-36.135pt
 * \evensidemargin=-36.135pt
-* \topmargin=-93.37051pt
+* \topmargin=-86.86647pt
 * \headheight=12.0pt
 * \headsep=25.0pt
 * \topskip=11.0pt
@@ -514,13 +514,13 @@ LaTeX Font Info:    Trying to load font information for U+lasy on input line 81
 File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10.95> on input line 98.
+(Font)              <10.95> on input line 89.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 98.
+(Font)              <8> on input line 89.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 102.
+(Font)              <10> on input line 93.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 102.
+(Font)              <7> on input line 93.
 
 
 [1
@@ -535,30 +535,29 @@ L3 programming layer <2025-05-26>
  ***********
 Package rerunfilecheck Info: File `Khairil_Rahman_Hakiki_Backend.out' has not c
 hanged.
-(rerunfilecheck)             Checksum: 7B1B8B6CA6499012D632009B348530B0;731.
+(rerunfilecheck)             Checksum: 4BBA9397DD648DA331B611CAC88516CC;731.
  ) 
 Here is how much of TeX's memory you used:
- 11743 strings out of 468225
- 187601 string characters out of 5431520
- 637016 words of memory out of 10000000
- 40093 multiletter control sequences out of 15000+600000
- 698128 words of font info for 85 fonts, out of 8000000 for 9000
+ 11741 strings out of 468225
+ 187580 string characters out of 5431520
+ 638018 words of memory out of 10000000
+ 40092 multiletter control sequences out of 15000+600000
+ 695132 words of font info for 84 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,11n,79p,672b,462s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx10
 .pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmb
 x12.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/
-lmbx9.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/l
-m/lmcsc10.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/publ
-ic/lm/lmr10.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/pu
-blic/lm/lmr9.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/p
-ublic/lm/lmri10.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type
-1/public/lm/lmsy10.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/t
-ype1/public/lm/lmsy6.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts
-/type1/public/lm/lmsy9.pfb>
-Output written on Khairil_Rahman_Hakiki_Backend.pdf (1 page, 222969 bytes).
+lmcsc10.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public
+/lm/lmr10.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/publ
+ic/lm/lmr9.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/pub
+lic/lm/lmri10.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/
+public/lm/lmsy10.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/typ
+e1/public/lm/lmsy6.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/t
+ype1/public/lm/lmsy9.pfb>
+Output written on Khairil_Rahman_Hakiki_Backend.pdf (1 page, 201018 bytes).
 PDF statistics:
- 105 PDF objects out of 1000 (max. 8388607)
+ 102 PDF objects out of 1000 (max. 8388607)
  8 named destinations out of 1000 (max. 500000)
  49 words of extra memory for PDF output out of 10000 (max. 10000000)
 
