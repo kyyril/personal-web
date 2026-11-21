@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2026.10.23)  21 NOV 2026 16:27
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2026.10.23)  21 NOV 2026 17:15
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -415,11 +415,6 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <7> on input line 94.
 
-Overfull \hbox (12.62334pt too wide) in alignment at lines 144--144
-[] [] 
- []
-
-
 
 [1
 
@@ -434,13 +429,13 @@ Package rerunfilecheck Info: File `Khairil_Rahman_Hakiki_Fullstack.out' has not 
 Here is how much of TeX's memory you used:
  11739 strings out of 468225
  187706 string characters out of 5431520
- 641022 words of memory out of 10000000
+ 640022 words of memory out of 10000000
  40088 multiletter control sequences out of 15000+600000
  695132 words of font info for 84 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,11n,79p,820b,462s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx10.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmcsc10.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr9.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri10.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy6.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy9.pfb>
-Output written on Khairil_Rahman_Hakiki_Fullstack.pdf (1 page, 205119 bytes).
+Output written on Khairil_Rahman_Hakiki_Fullstack.pdf (1 page, 205098 bytes).
 PDF statistics:
  104 PDF objects out of 1000 (max. 8388607)
  8 named destinations out of 1000 (max. 500000)
