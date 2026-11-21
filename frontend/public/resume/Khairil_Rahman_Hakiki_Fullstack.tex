@@ -27,7 +27,7 @@
 \renewcommand{\footrulewidth}{0pt}
 
 % Geometry with clean, balanced margins
-\usepackage[letterpaper, left=0.5in, right=0.5in, top=0.20in, bottom=0.15in]{geometry}
+\usepackage[letterpaper, left=0.5in, right=0.5in, top=0.30in, bottom=0.22in]{geometry}
 
 \urlstyle{same}
 
@@ -39,7 +39,7 @@
 \titleformat{\section}{
   \scshape\raggedright\large
 }{}{0em}{}[\color{black}\titlerule \vspace{1pt}]
-\titlespacing*{\section}{0pt}{1.5pt}{0.5pt}
+\titlespacing*{\section}{0pt}{2.5pt}{1.0pt}
 
 % Ensure that generate pdf is machine readable/ATS parsable
 \pdfgentounicode=1
@@ -65,9 +65,9 @@
 
 \renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
 
-\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0in, label={}, itemsep=0.4pt, parsep=0pt, topsep=0.3pt]}
-\newcommand{\resumeSubHeadingListEnd}{\end{itemize}\vspace{-3pt}}
-\newcommand{\resumeItemListStart}{\begin{itemize}[leftmargin=12pt, label=\tiny$\bullet$, itemsep=0.4pt, parsep=0pt, topsep=0.3pt]}
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0in, label={}, itemsep=0.8pt, parsep=0pt, topsep=0.4pt]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}\vspace{-2pt}}
+\newcommand{\resumeItemListStart}{\begin{itemize}[leftmargin=12pt, label=\tiny$\bullet$, itemsep=0.8pt, parsep=0pt, topsep=0.4pt]}
 \newcommand{\resumeItemListEnd}{\end{itemize}}
 
 %-------------------------------------------
@@ -79,7 +79,7 @@
 \begin{center}\vspace*{-4pt}
     {\LARGE \bfseries Khairil Rahman Hakiki} \\[2pt]
     \footnotesize Jakarta, Indonesia $|$ +6282274360915 $|$ \href{mailto:khairil.4hrp@gmail.com}{khairil.4hrp@gmail.com} $|$ \href{https://linkedin.com/in/khairilrahman}{LinkedIn} $|$ \href{https://github.com/kyyril}{GitHub} $|$ \href{https://kiril.is-a.dev}{Portfolio}
-\end{center}\vspace{-7pt}
+\end{center}\vspace{-4pt}
 
 
 
@@ -102,14 +102,14 @@
       {Software Engineer Intern}{September 2025 -- January 2026}
       {TIME Language Centre -- 10+ Yr Institution \& Official IDP IELTS Centre}{Padang, Indonesia (Hybrid)}
       \resumeItemListStart
-        \resumeItem{Built an internal operations platform in \textbf{Node.js} and \textbf{Prisma}, automating class scheduling, room allocation, and tutor payroll to prevent timetable clashes and ensure accurate monthly payouts based on logged teaching hours.}
+        \resumeItem{Served as \textbf{de facto Tech Lead} coordinating a \textbf{16-member squad} and client founders; built an internal system in \textbf{Node.js} and \textbf{Prisma}, automating class scheduling, attendance tracking, and payroll/financial workflows.}
         \resumeItem{Architected a polyglot, event-driven microservices course platform (\textbf{Go}, \textbf{Node.js}) using \textbf{Database-per-Service} and \textbf{RabbitMQ}; configured direct exchanges, thread-safe publishing, and \textbf{AMQP QoS} to prevent event-loop blocking.}
         \resumeItem{Engineered a secure payment service in \textbf{Go} integrating \textbf{Xendit}, implementing the \textbf{Transactional Outbox} pattern, idempotent webhooks, and server-side price verification to eliminate discrepancies and checkout tampering.}
         \resumeItem{Containerized services with \textbf{Docker} behind an \textbf{NGINX} TLS reverse proxy with load balancing; established \textbf{Prometheus}, \textbf{Grafana}, and \textbf{Loki} pipelines for health, latency, and log tracking.}
       \resumeItemListEnd 
 
     \resumeSubheading
-      {Fullstack Developer (Part-time)}{April 2025 -- September 2025}
+      {Software Engineer (Fullstack)}{April 2025 -- September 2025}
       {CodeAtHome -- Enterprise Software \& AI Agency}{Lampung, Indonesia (Remote)}
       \resumeItemListStart
         \resumeItem{Shipped fullstack features and \textbf{REST APIs} across 2 client platforms, engineering multi-provider AI workspace integrations and automated healthcare appointment booking workflows with real-time availability tracking.}
@@ -123,7 +123,7 @@
       \resumeItemListStart
         \resumeItem{Analyzed dealership workflows with sales and admin supervisors, translating business requirements into SRS/FRS.}
         \resumeItem{Built the official dealership portal (\textbf{Next.js}) featuring vehicle catalogs, sales team profiles, credit simulation, and personalized \textbf{Gemini AI} car recommendations to drive organic traffic and capture qualified customer leads.}
-        \resumeItem{Replaced vendor software with an admin-tailored STNK/BPKB reminder app featuring \textbf{WhatsApp API} alerts.}
+        \resumeItem{Cut admin notification delays by replacing vendor software with an internal STNK/BPKB reminder app featuring automated \textbf{WhatsApp API} alerts, Excel synchronization, and \textbf{XP} test suites.}
         \resumeItem{Eliminated manual data processing across \textbf{15 years of records (38k+/year)} via an automated \textbf{Python} script.}
       \resumeItemListEnd
   \resumeSubHeadingListEnd
@@ -135,7 +135,7 @@
     \resumeItem{\textbf{Google go-github} \emph{(Go)}: Fixed unmarshaling errors on GitHub Enterprise usage and billing endpoints. \href{https://github.com/google/go-github/pull/4002}{\underline{(Merged PR)}}}
     \resumeItem{\textbf{Prometheus Go Client} \emph{(Go)}: Cut redundant memory allocations and modernized slice sorting routines. \href{https://github.com/prometheus/client_golang/pull/2176}{\underline{(Merged PR)}}}
     \resumeItem{\textbf{next-ai-draw-io}: Improved conditional model selector shadow logic in a \textbf{Next.js} AI diagramming app. \href{https://github.com/DayuanJiang/next-ai-draw-io/pull/681}{\underline{(Merged PR)}}}
-  \end{itemize}\vspace{-3pt}
+  \end{itemize}\vspace{-2pt}
 
 %-----------PROJECTS-----------
 \section[Projects]{Projects \hfill \normalfont\footnotesize\raisebox{1.5pt}{Additional projects at \href{https://kiril.is-a.dev/projects}{kiril.is-a.dev/projects}}}
@@ -143,22 +143,23 @@
       \resumeProjectHeading
           {\textbf{Shortlink: Production URL Shortener API} $|$ \emph{Go, PostgreSQL, sqlc, Prometheus, Docker}}{{\href{https://shortlink-production-1c53.up.railway.app/docs}{\underline{Live Demo}}} $|$ {\href{https://github.com/kyyril/shortlink}{\underline{GitHub}}}}
           \resumeItemListStart
-            \resumeItem{Architected a high-throughput URL shortener in \textbf{Go} with \textbf{sub-millisecond} redirects; decoupled click telemetry via a non-blocking buffered channel and background batch flusher streaming via \textbf{PostgreSQL} binary \textbf{COPY FROM}.}
-            \resumeItem{Containerized with \textbf{Docker} and deployed to \textbf{Railway} with \textbf{OpenAPI} docs; maintained \textbf{sub-millisecond} queries via keyset pagination-IP rate limiting, and engineered a \textbf{SHA-256} idempotency engine.}
+            \resumeItem{Architected \textbf{sub-millisecond} redirects in \textbf{Go}; batched click telemetry via \textbf{PostgreSQL} binary \textbf{COPY FROM}.}
+            \resumeItem{Guaranteed zero duplicate writes via \textbf{SHA-256} idempotency; enforced \textbf{IP rate limiting} and keyset pagination.}
           \resumeItemListEnd
       \resumeProjectHeading
           {\textbf{SaaS Notes: Subscription Note Platform} $|$ \emph{Next.js, TypeScript, Stripe, Prisma, Supabase}}{{\href{https://saas-noteapp.vercel.app/}{\underline{Live Demo}}} $|$ {\href{https://github.com/kyyril/saas-noteapp}{\underline{GitHub}}}}
           \resumeItemListStart
-            \resumeItem{Deployed a fullstack note-taking SaaS for creating and organizing daily notes, securing personal records with field-level \textbf{AES-256-GCM} encryption at rest and \textbf{Prisma} multi-tenant query scoping to prevent IDOR.}
-            \resumeItem{Monetized platform via a 5-note freemium paywall and recurring \textbf{Stripe} subscriptions, automating tier provisioning via idempotent webhooks and \textbf{Server Actions} quota validation to prevent bypass.}
+            \resumeItem{Secured user records with field-level \textbf{AES-256-GCM} encryption at rest and \textbf{Prisma} multi-tenancy against IDOR.}
+            \resumeItem{Automated \textbf{Stripe} subscription provisioning using idempotent webhooks and server-side quota enforcement.}
           \resumeItemListEnd
     \resumeSubHeadingListEnd
 
 \section{Honors \& Certifications}
   \begin{itemize}[leftmargin=12pt, label=\tiny$\bullet$, itemsep=0.5pt, parsep=0pt, topsep=0.3pt]
-    \resumeItem{\textbf{AstraPay Hackathon 2026} -- Finalist (Top 10 nationally): Built real-time \textbf{QRIS} credit scoring for MSMEs.}
-    \resumeItem{\textbf{Certifications}: \textbf{Oracle} Cloud Infrastructure Certified Foundations Associate \href{https://catalog-education.oracle.com/ords/certview/sharebadge_m?id=8B649FA58712B4081E58C95EC3618C77402518C510B850A9C86F02FCB73960A5}{\underline{(Badge)}} $|$ \textbf{Oracle} OCI 2025 AI Foundations Associate \href{https://catalog-education.oracle.com/ords/certview/sharebadge?id=D4510B21F99D88A292FA173EA64DC122B01639350FCE422119EE1C499D08318E}{\underline{(Badge)}} $|$ \textbf{Dicoding}: Back-End JavaScript \href{https://www.dicoding.com/certificates/2VX3K9O0NXYQ}{\underline{(Cred)}} \& Machine Learning Systems \href{https://www.dicoding.com/certificates/53XE16440ZRN}{\underline{(Cred)}}.}
-  \end{itemize}\vspace{-3pt}
+    \resumeItem{\textbf{AstraPay Hackathon 2026} -- Finalist (Top 10): Facilitated working capital access for MSMEs via QRIS scoring.}
+    \resumeItem{\textbf{PIDI DIGDAYA Hackathon 2026} -- Semifinalist (Top 400/2,500+): Cut screening time by 90\%.}
+    \resumeItem{\textbf{Certifications}: \textbf{Oracle} Cloud Infrastructure Certified Foundations Associate \href{https://catalog-education.oracle.com/ords/certview/sharebadge_m?id=8B649FA58712B4081E58C95EC3618C77402518C510B850A9C86F02FCB73960A5}{\underline{(Badge)}} $|$ \textbf{Oracle} OCI 2025 AI Foundations Associate \href{https://catalog-education.oracle.com/ords/certview/sharebadge?id=D4510B21F99D88A292FA173EA64DC122B01639350FCE422119EE1C499D08318E}{\underline{(Badge)}} $|$ Certified \textbf{Meshery} (CNCF Cloud Native) Contributor \href{https://cloud.meshery.io/academy/certificates/dcd71d58-dd35-45d3-86a9-857ac980e08e}{\underline{(Cred)}}.}
+  \end{itemize}\vspace{-2pt}
 
 %-------------------------------------------
 %-----------TECHNICAL SKILLS-----------
@@ -172,3 +173,4 @@
   \end{itemize}
 
 \end{document}
+
