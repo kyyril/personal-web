@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2026.10.23)  22 NOV 2026 12:00
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2026.10.23)  23 NOV 2026 02:13
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**d:/repo/personal-web/frontend/public/resume/Khairil_Rahman_Hakiki_Fullstack.tex
-(d:/repo/personal-web/frontend/public/resume/Khairil_Rahman_Hakiki_Fullstack.tex
+**d:/repo/personal-web/frontend/public/resume/Khairil_Rahman_Hakiki_Corporate.tex
+(d:/repo/personal-web/frontend/public/resume/Khairil_Rahman_Hakiki_Corporate.tex
 LaTeX2e <2025-06-01>
 L3 programming layer <2025-05-26>
 (C:\Users\WorkPlus\AppData\Local\Programs\MiKTeX\tex/latex/base\article.cls
@@ -28,47 +28,14 @@ Package: latexsym 1998/08/17 v2.2e Standard LaTeX package (lasy symbols)
 \symlasy=\mathgroup4
 LaTeX Font Info:    Overwriting symbol font `lasy' in version `bold'
 (Font)                  U/lasy/m/n --> U/lasy/b/n on input line 52.
-) (C:\Users\WorkPlus\AppData\Local\Programs\MiKTeX\tex/latex/base\fontenc.sty
-Package: fontenc 2024/12/21 v2.1c Standard LaTeX package
-) (C:\Users\WorkPlus\AppData\Local\Programs\MiKTeX\tex/latex/lm\lmodern.sty
-Package: lmodern 2015/05/01 v1.6.1 Latin Modern Fonts
-LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  OT1/cmr/m/n --> OT1/lmr/m/n on input line 22.
-LaTeX Font Info:    Overwriting symbol font `letters' in version `normal'
-(Font)                  OML/cmm/m/it --> OML/lmm/m/it on input line 23.
-LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
-(Font)                  OMS/cmsy/m/n --> OMS/lmsy/m/n on input line 24.
-LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
-(Font)                  OMX/cmex/m/n --> OMX/lmex/m/n on input line 25.
-LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  OT1/cmr/bx/n --> OT1/lmr/bx/n on input line 26.
-LaTeX Font Info:    Overwriting symbol font `letters' in version `bold'
-(Font)                  OML/cmm/b/it --> OML/lmm/b/it on input line 27.
-LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
-(Font)                  OMS/cmsy/b/n --> OMS/lmsy/b/n on input line 28.
-LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
-(Font)                  OMX/cmex/m/n --> OMX/lmex/m/n on input line 29.
-LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
-(Font)                  OT1/cmr/bx/n --> OT1/lmr/bx/n on input line 31.
-LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/cmss/m/n --> OT1/lmss/m/n on input line 32.
-LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
-(Font)                  OT1/cmr/m/it --> OT1/lmr/m/it on input line 33.
-LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/cmtt/m/n --> OT1/lmtt/m/n on input line 34.
-LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
-(Font)                  OT1/cmr/bx/n --> OT1/lmr/bx/n on input line 35.
-LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/cmss/bx/n --> OT1/lmss/bx/n on input line 36.
-LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  OT1/cmr/bx/it --> OT1/lmr/bx/it on input line 37.
-LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/cmtt/m/n --> OT1/lmtt/m/n on input line 38.
+) (C:\Users\WorkPlus\AppData\Local\Programs\MiKTeX\tex/latex/preprint\fullpage.sty
+Package: fullpage 1999/02/23 1.1 (PWD)
+\FP@margin=\skip51
 ) (C:\Users\WorkPlus\AppData\Local\Programs\MiKTeX\tex/latex/titlesec\titlesec.sty
 Package: titlesec 2025/01/04 v2.17 Sectioning titles
 \ttl@box=\box53
-\beforetitleunit=\skip51
-\aftertitleunit=\skip52
+\beforetitleunit=\skip52
+\aftertitleunit=\skip53
 \ttl@plus=\dimen149
 \ttl@minus=\dimen150
 \ttl@toksa=\toks17
@@ -95,7 +62,7 @@ Package: verbatim 2024-01-22 v1.5x LaTeX2e package for verbatim enhancements
 ) (C:\Users\WorkPlus\AppData\Local\Programs\MiKTeX\tex/latex/enumitem\enumitem.sty
 Package: enumitem 2025/02/06 v3.11 Customized lists
 \enitkv@toks@=\toks20
-\labelindent=\skip53
+\labelindent=\skip54
 \enit@outerparindent=\dimen154
 \enit@toks=\toks21
 \enit@inbox=\box54
@@ -211,23 +178,23 @@ Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
 )
 Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 285.
 )
-\Hy@SectionHShift=\skip54
+\Hy@SectionHShift=\skip55
 ) (C:\Users\WorkPlus\AppData\Local\Programs\MiKTeX\tex/latex/fancyhdr\fancyhdr.sty
 Package: fancyhdr 2025/02/07 v5.2 Extensive control of page headers and footers
-\f@nch@headwidth=\skip55
-\f@nch@offset@elh=\skip56
-\f@nch@offset@erh=\skip57
-\f@nch@offset@olh=\skip58
-\f@nch@offset@orh=\skip59
-\f@nch@offset@elf=\skip60
-\f@nch@offset@erf=\skip61
-\f@nch@offset@olf=\skip62
-\f@nch@offset@orf=\skip63
-\f@nch@height=\skip64
-\f@nch@footalignment=\skip65
-\f@nch@widthL=\skip66
-\f@nch@widthC=\skip67
-\f@nch@widthR=\skip68
+\f@nch@headwidth=\skip56
+\f@nch@offset@elh=\skip57
+\f@nch@offset@erh=\skip58
+\f@nch@offset@olh=\skip59
+\f@nch@offset@orh=\skip60
+\f@nch@offset@elf=\skip61
+\f@nch@offset@erf=\skip62
+\f@nch@offset@olf=\skip63
+\f@nch@offset@orf=\skip64
+\f@nch@height=\skip65
+\f@nch@footalignment=\skip66
+\f@nch@widthL=\skip67
+\f@nch@widthC=\skip68
+\f@nch@widthR=\skip69
 \@temptokenb=\toks23
 ) (C:\Users\WorkPlus\AppData\Local\Programs\MiKTeX\tex/generic/babel\babel.sty
 Package: babel 2025/05/14 v25.9 The multilingual framework for pdfLaTeX, LuaLaTeX and XeLaTeX
@@ -270,8 +237,8 @@ Package: array 2025/05/19 v2.6i Tabular extension package (FMi)
 \ar@mcellbox=\box55
 \extrarowheight=\dimen161
 \NC@list=\toks24
-\extratabsurround=\skip69
-\backup@length=\skip70
+\extratabsurround=\skip70
+\backup@length=\skip71
 \ar@cellbox=\box56
 )
 \TX@col@width=\dimen162
@@ -298,34 +265,30 @@ Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 \Gm@layouthoffset=\dimen173
 \Gm@layoutvoffset=\dimen174
 \Gm@dimlist=\toks26
- (C:\Users\WorkPlus\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.cfg))
-LaTeX Font Info:    Trying to load font information for T1+lmr on input line 76.
- (C:\Users\WorkPlus\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmr.fd
-File: t1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-) (C:\Users\WorkPlus\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def
+ (C:\Users\WorkPlus\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.cfg)) (C:\Users\WorkPlus\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def
 File: l3backend-pdftex.def 2025-04-14 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count303
-) (Khairil_Rahman_Hakiki_Fullstack.aux)
-\openout1 = `Khairil_Rahman_Hakiki_Fullstack.aux'.
+) (Khairil_Rahman_Hakiki_Corporate.aux)
+\openout1 = `Khairil_Rahman_Hakiki_Corporate.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 76.
-LaTeX Font Info:    ... okay on input line 76.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 76.
-LaTeX Font Info:    ... okay on input line 76.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 76.
-LaTeX Font Info:    ... okay on input line 76.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 76.
-LaTeX Font Info:    ... okay on input line 76.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 76.
-LaTeX Font Info:    ... okay on input line 76.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 76.
-LaTeX Font Info:    ... okay on input line 76.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 76.
-LaTeX Font Info:    ... okay on input line 76.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 76.
-LaTeX Font Info:    ... okay on input line 76.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 76.
-LaTeX Font Info:    ... okay on input line 76.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 71.
+LaTeX Font Info:    ... okay on input line 71.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 71.
+LaTeX Font Info:    ... okay on input line 71.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 71.
+LaTeX Font Info:    ... okay on input line 71.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 71.
+LaTeX Font Info:    ... okay on input line 71.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 71.
+LaTeX Font Info:    ... okay on input line 71.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 71.
+LaTeX Font Info:    ... okay on input line 71.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 71.
+LaTeX Font Info:    ... okay on input line 71.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 71.
+LaTeX Font Info:    ... okay on input line 71.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 71.
+LaTeX Font Info:    ... okay on input line 71.
  (C:\Users\WorkPlus\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count304
@@ -340,10 +303,10 @@ LaTeX Font Info:    ... okay on input line 76.
 \makeMPintoPDFobject=\count309
 \everyMPtoPDFconversion=\toks28
 )
-Package hyperref Info: Link coloring ON on input line 76.
- (Khairil_Rahman_Hakiki_Fullstack.out) (Khairil_Rahman_Hakiki_Fullstack.out)
+Package hyperref Info: Link coloring ON on input line 71.
+ (Khairil_Rahman_Hakiki_Corporate.out) (Khairil_Rahman_Hakiki_Corporate.out)
 \@outlinefile=\write3
-\openout3 = `Khairil_Rahman_Hakiki_Fullstack.out'.
+\openout3 = `Khairil_Rahman_Hakiki_Corporate.out'.
 
 
 *geometry* driver: auto-detecting
@@ -354,19 +317,19 @@ Package hyperref Info: Link coloring ON on input line 76.
 * layout: <same size as paper>
 * layoutoffset:(h,v)=(0.0pt,0.0pt)
 * modes: 
-* h-part:(L,W,R)=(36.135pt, 542.02501pt, 36.135pt)
-* v-part:(T,H,B)=(21.68121pt, 757.3893pt, 15.89948pt)
+* h-part:(L,W,R)=(30.35326pt, 553.58849pt, 30.35326pt)
+* v-part:(T,H,B)=(24.57153pt, 748.71724pt, 21.68121pt)
 * \paperwidth=614.295pt
 * \paperheight=794.96999pt
-* \textwidth=542.02501pt
-* \textheight=757.3893pt
-* \oddsidemargin=-36.135pt
-* \evensidemargin=-36.135pt
-* \topmargin=-87.58878pt
-* \headheight=12.0pt
-* \headsep=25.0pt
+* \textwidth=553.58849pt
+* \textheight=748.71724pt
+* \oddsidemargin=-41.91673pt
+* \evensidemargin=-41.91673pt
+* \topmargin=-47.69846pt
+* \headheight=0.0pt
+* \headsep=0.0pt
 * \topskip=11.0pt
-* \footskip=30.0pt
+* \footskip=0.0pt
 * \marginparwidth=59.0pt
 * \marginparsep=10.0pt
 * \columnsep=10.0pt
@@ -380,64 +343,47 @@ Package hyperref Info: Link coloring ON on input line 76.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 81.
-(C:\Users\WorkPlus\AppData\Local\Programs\MiKTeX\tex/latex/lm\ot1lmr.fd
-File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)
-LaTeX Font Info:    Trying to load font information for OML+lmm on input line 81.
- (C:\Users\WorkPlus\AppData\Local\Programs\MiKTeX\tex/latex/lm\omllmm.fd
-File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)
-LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 81.
- (C:\Users\WorkPlus\AppData\Local\Programs\MiKTeX\tex/latex/lm\omslmsy.fd
-File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)
-LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 81.
- (C:\Users\WorkPlus\AppData\Local\Programs\MiKTeX\tex/latex/lm\omxlmex.fd
-File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <9> on input line 81.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 81.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 81.
-LaTeX Font Info:    Trying to load font information for U+lasy on input line 81.
- (C:\Users\WorkPlus\AppData\Local\Programs\MiKTeX\tex/latex/base\ulasy.fd
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <9> on input line 76.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 76.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 76.
+LaTeX Font Info:    Trying to load font information for U+lasy on input line 76.
+(C:\Users\WorkPlus\AppData\Local\Programs\MiKTeX\tex/latex/base\ulasy.fd
 File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 )
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10.95> on input line 91.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 91.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 94.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 94.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 88.
 
+
+
+Package fancyhdr Warning: \footskip is too small (0.0pt): 
+(fancyhdr)                Make it at least 4.08003pt, for example:
+(fancyhdr)                \setlength{\footskip}{4.08003pt}.
 
 [1
 
-{C:/Users/WorkPlus/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc}{C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc}] (Khairil_Rahman_Hakiki_Fullstack.aux)
+{C:/Users/WorkPlus/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}] (Khairil_Rahman_Hakiki_Corporate.aux)
  ***********
 LaTeX2e <2025-06-01>
 L3 programming layer <2025-05-26>
  ***********
-Package rerunfilecheck Info: File `Khairil_Rahman_Hakiki_Fullstack.out' has not changed.
-(rerunfilecheck)             Checksum: 4BBA9397DD648DA331B611CAC88516CC;731.
+Package rerunfilecheck Info: File `Khairil_Rahman_Hakiki_Corporate.out' has not changed.
+(rerunfilecheck)             Checksum: EE9E0C14274FC3C50CF76A1153EF4A75;809.
  ) 
 Here is how much of TeX's memory you used:
- 11739 strings out of 468225
- 187706 string characters out of 5431520
- 639021 words of memory out of 10000000
- 40088 multiletter control sequences out of 15000+600000
- 695132 words of font info for 84 fonts, out of 8000000 for 9000
+ 11400 strings out of 468225
+ 182816 string characters out of 5431520
+ 640917 words of memory out of 10000000
+ 39786 multiletter control sequences out of 15000+600000
+ 631939 words of font info for 60 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,11n,79p,593b,462s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx10.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmcsc10.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr9.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri10.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy6.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy9.pfb>
-Output written on Khairil_Rahman_Hakiki_Fullstack.pdf (1 page, 204463 bytes).
+ 75i,11n,79p,617b,462s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy9.pfb><C:/Users/WorkPlus/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb>
+Output written on Khairil_Rahman_Hakiki_Corporate.pdf (1 page, 153863 bytes).
 PDF statistics:
- 101 PDF objects out of 1000 (max. 8388607)
- 8 named destinations out of 1000 (max. 500000)
- 49 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 103 PDF objects out of 1000 (max. 8388607)
+ 9 named destinations out of 1000 (max. 500000)
+ 57 words of extra memory for PDF output out of 10000 (max. 10000000)
 
