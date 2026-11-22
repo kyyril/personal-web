@@ -217,7 +217,7 @@ export const projects: Project[] = [
       "Apps Script",
       "Zustand",
     ],
-    live_url: "https://www.toyotarantauprapat.com",
+    live_url: "https://toyotarantauprapat.vercel.app",
     code_repo_url: "",
     type: "Fullstack",
     category: ["Web"],
