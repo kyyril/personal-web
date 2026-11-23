@@ -33,7 +33,7 @@ export const experiences: Experience[] = [
     location: "Padang, Indonesia",
     working: "hybrid",
     startDate: "September 2025",
-    endDate: "January 2026",
+    endDate: "December 2025",
     description:
       "Designed and shipped a 4-service Go/Node.js course platform, and built an MVC ERP backend that automated course scheduling for 20+ staff.",
     technologies: [],
