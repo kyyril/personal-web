@@ -98,8 +98,8 @@
       {TIME Language Centre \textnormal{\small -- 10+ Yr Institution \& Official IDP IELTS Centre}}{September 2025 -- December 2025}
       {Software Engineer Intern}{Padang, Indonesia (Hybrid)}
       \resumeItemListStart
-        \resumeItem{Served as \textbf{de facto Tech Lead} coordinating a \textbf{16-member squad} and client founders; engineered an \textbf{internal ERP system} (\textbf{Node.js}, \textbf{Prisma}), automating class scheduling, attendance tracking, and payroll workflows.}
-        \resumeItem{Architected a separate \textbf{online course platform} using \textbf{event-driven microservices} (\textbf{Golang}, \textbf{Node.js}, \textbf{RabbitMQ}), isolating high-traffic exam workloads from billing and keeping payment operations stable under concurrent load.}
+        \resumeItem{Served as \textbf{de facto Tech Lead} coordinating a \textbf{16-member Agile squad} and founders; engineered an \textbf{internal ERP system} (\textbf{Node.js}, \textbf{Prisma}), automating class scheduling, attendance tracking, and payroll workflows.}
+        \resumeItem{Architected a separate \textbf{online course platform} using \textbf{event-driven microservices} (\textbf{Golang}, \textbf{RabbitMQ Message Broker}), isolating high-traffic exam workloads from billing and keeping payment operations stable under concurrent load.}
         \resumeItem{Integrated \textbf{Xendit} payment gateway in \textbf{Golang} with idempotent webhooks and server-side verification, eliminating checkout tampering and payment discrepancies.}
         \resumeItem{Containerized services with \textbf{Docker} and \textbf{NGINX}; deployed \textbf{Prometheus}, \textbf{Grafana}, and \textbf{Loki} pipelines for system health, latency, and log observability.}
       \resumeItemListEnd 
@@ -110,7 +110,7 @@
       \resumeItemListStart
         \resumeItem{Shipped fullstack features and \textbf{REST APIs} across 2 platforms, delivering multi-provider AI workspaces and healthcare appointment scheduling flows.}
         \resumeItem{Built modular, reusable custom UI components in \textbf{TypeScript}, reducing boilerplate code across client web projects.}
-        \resumeItem{Managed client state with \textbf{Redux Toolkit} and used \textbf{TanStack Query} for server caching and optimistic updates.}
+        \resumeItem{Integrated \textbf{TanStack Query} for server-state caching and optimistic updates, reducing redundant API calls.}
       \resumeItemListEnd
 
     \resumeSubheading
@@ -137,9 +137,9 @@
 \section[Projects]{Projects \hfill \normalfont\footnotesize\raisebox{1.5pt}{Additional projects at \href{https://kiril.is-a.dev/projects}{kiril.is-a.dev/projects}}}
     \resumeSubHeadingListStart
       \resumeProjectHeading
-          {\textbf{Shortlink: Production URL Shortener API} $|$ \emph{Golang, PostgreSQL, sqlc, Docker, Railway}}{{\href{https://shortlink-production-1c53.up.railway.app/docs}{\underline{Live Demo}}} $|$ {\href{https://github.com/kyyril/shortlink}{\underline{GitHub}}}}
+          {\textbf{Shortlink: Production URL Shortener API} $|$ \emph{Golang, PostgreSQL, Redis, Docker, Railway}}{{\href{https://shortlink-production-1c53.up.railway.app/docs}{\underline{Live Demo}}} $|$ {\href{https://github.com/kyyril/shortlink}{\underline{GitHub}}}}
           \resumeItemListStart
-            \resumeItem{Built high-throughput URL redirection in \textbf{Golang}, achieving sub-millisecond routing with non-blocking click telemetry.}
+            \resumeItem{Engineered high-throughput URL redirection in \textbf{Golang} applying \textbf{SOLID} principles, with automated \textbf{unit testing}.}
             \resumeItem{Containerized via \textbf{Docker} and deployed on \textbf{Railway} with live \textbf{Swagger} docs and batch \textbf{PostgreSQL} ingestion.}
           \resumeItemListEnd
       \resumeProjectHeading
@@ -162,9 +162,9 @@
 \section{Technical Skills}
   \begin{itemize}[leftmargin=0in, label={}, itemsep=0.3pt, parsep=0pt, topsep=0.1pt]
     \item\small{
-      \textbf{Languages \& Databases}{: Go (Golang), TypeScript, JavaScript, Python, SQL $|$ PostgreSQL, Supabase, sqlc} \\
-      \textbf{Frameworks \& Libraries}{: Next.js, React, Node.js, Prisma ORM, Redux Toolkit, TanStack Query, Tailwind CSS} \\
-      \textbf{DevOps, Cloud \& Tools}{: Docker, RabbitMQ, NGINX, Prometheus, Grafana, Loki, k6, Git, REST APIs, Swagger}
+      \textbf{Languages \& Databases}{: Go (Golang), TypeScript, JavaScript, Python, SQL $|$ PostgreSQL, Redis (NoSQL), Supabase, sqlc} \\
+      \textbf{Frameworks \& Libraries}{: Next.js, React, Node.js, Prisma ORM, TanStack Query, Tailwind CSS} \\
+      \textbf{DevOps, Cloud \& Tools}{: Docker, RabbitMQ (Message Broker), NGINX, Prometheus, Grafana, Unit Testing, Git, Swagger}
     }
   \end{itemize}
 
