@@ -1,0 +1,163 @@
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[colorlinks=true, urlcolor=RoyalBlue,
+    pdftitle={Khairil Rahman Hakiki Harahap - System Analyst Resume},
+    pdfauthor={Khairil Rahman Hakiki Harahap},
+    pdfsubject={System Analyst Resume}]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\input{glyphtounicode}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Geometry with clean, balanced margins
+\usepackage[letterpaper, left=0.45in, right=0.45in, top=0.44in, bottom=0.40in]{geometry}
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Sections formatting
+\titleformat{\section}{
+  \scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{1.5pt}]
+\titlespacing*{\section}{0pt}{5.5pt}{2.2pt}
+
+% Ensure that generate pdf is machine readable/ATS parsable
+\pdfgentounicode=1
+
+% Custom commands
+\newcommand{\resumeItem}[1]{\item\small{#1}}
+
+\newcommand{\resumeSubheading}[4]{
+  \item
+    \begin{tabular*}{\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-1.2pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+  \item
+    \begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & #2 \\
+    \end{tabular*}\vspace{-1.2pt}
+}
+
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0in, label={}, itemsep=1.2pt, parsep=0pt, topsep=0.5pt]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}\vspace{-1.5pt}}
+\newcommand{\resumeItemListStart}{\begin{itemize}[leftmargin=15pt, label=\tiny$\bullet$, itemsep=1.1pt, parsep=0pt, topsep=0.5pt]}
+\newcommand{\resumeItemListEnd}{\end{itemize}}
+
+%-------------------------------------------
+%%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+%----------HEADING----------
+\begin{center}\vspace*{-3pt}
+    {\LARGE \bfseries Khairil Rahman Hakiki Harahap} \\[2pt]
+    \footnotesize Jakarta, Indonesia $|$ +6282274360915 $|$ \href{mailto:khairil.4hrp@gmail.com}{khairil.4hrp@gmail.com} $|$ \href{https://linkedin.com/in/khairilrahman}{LinkedIn} $|$ \href{https://github.com/kyyril}{GitHub} $|$ \href{https://kiril.is-a.dev}{Portfolio}
+\end{center}\vspace{-5pt}
+
+%-----------PROFESSIONAL SUMMARY-----------
+\section{Summary}
+  \small{\textbf{Technical System Analyst} and Information Systems graduate skilled at translating complex business problems into \textbf{SRS/FRS} specs, relational data models, and scalable technical solutions. Proven in stakeholder analysis at \mbox{\textbf{Auto2000 (Astra)}}, acting as \textbf{Technical Lead} for a cross-functional team, and bridging business with SQL and APIs.}
+
+%-----------EDUCATION-----------
+\section{Education}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {State Islamic University of Imam Bonjol Padang}{August 2022 -- September 2026}
+      {Bachelor of Science in Information Systems (GPA: 3.51/4.00)}{Padang, Indonesia}
+      \resumeItemListStart
+        \resumeItem{\textbf{Relevant Coursework}: Software Engineering, Project Management, Database Systems, UI/UX Design, Statistics.}
+        \resumeItem{\textbf{Undergraduate Thesis}: \emph{Empirical Scaling Analysis of Event-Driven Systems} -- Evaluated reliability across \textbf{34,951 requests} (200 VUs), proving \textbf{58.9\% P95 latency gain} and zero loss across \textbf{14,170 events} via DLQ. \href{https://repository.uinib.ac.id/34986/}{\underline{(Repo)}}}
+      \resumeItemListEnd
+  \resumeSubHeadingListEnd
+
+%-----------EXPERIENCE-----------
+\section{Experience}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {TIME Language Centre \textnormal{\small -- 10+ Yr Institution \& Official IDP IELTS Centre}}{September 2025 -- December 2025}
+      {Software Engineer \& System Analyst Intern (Tech Lead)}{Padang, Indonesia (Hybrid)}
+      \resumeItemListStart
+        \resumeItem{Acted as \textbf{Technical Lead} coordinating a cross-functional Agile team and founders while co-developing an \textbf{internal ERP system}, automating scheduling, room allocation, attendance, and payroll for 20+ staff.}
+        \resumeItem{Designed and built an \textbf{online course platform} via \textbf{event-driven microservices} (\textbf{RabbitMQ}, \textbf{Golang}), isolating high-traffic exam workloads from billing to protect payment reliability.}
+        \resumeItem{Specified and integrated \textbf{Xendit} payment workflows with idempotent webhooks and validation, preventing billing discrepancies.}
+        \resumeItem{Established SLA monitoring and audit trails via \textbf{Prometheus}, \textbf{Grafana}, and \textbf{Loki} to track latency and health.}
+      \resumeItemListEnd 
+
+    \resumeSubheading
+      {CodeAtHome \textnormal{\small -- Software House \& AI Agency}}{April 2025 -- September 2025}
+      {Software Web Developer}{Lampung, Indonesia (Remote)}
+      \resumeItemListStart
+        \resumeItem{Translated client requirements into functional specs and \textbf{REST APIs} for AI workspaces and healthcare scheduling.}
+        \resumeItem{Standardized modular \textbf{TypeScript} component specs and caching flows, reducing UI drift and redundant API calls.}
+        \resumeItem{Executed peer code reviews, bug triage, and functional testing to ensure releases met acceptance criteria.}
+      \resumeItemListEnd
+
+    \resumeSubheading
+      {PT Astra International Tbk - TSO Auto2000}{January 2025 -- March 2025}
+      {System Analyst \& Fullstack Engineer Intern}{Labuhanbatu, Indonesia (Onsite)}
+      \resumeItemListStart
+        \resumeItem{Gathered requirements from sales and admin leads, translating dealership workflows into formal \textbf{SRS/FRS} specs.}
+        \resumeItem{Analyzed vendor software gaps and designed an internal STNK/BPKB app (\textbf{RBAC}, Excel sync, \textbf{WhatsApp API}), eliminating missed renewal deadlines.}
+        \resumeItem{Mapped sales workflows into a dealership web portal featuring Google Sheets CMS, credit calculators, and AI advice.}
+        \resumeItem{Audited \textbf{15 years of legacy records (38k+/year)} and automated \textbf{Python} migration, cutting weeks to minutes.}
+      \resumeItemListEnd
+  \resumeSubHeadingListEnd
+
+%-----------PROJECTS-----------
+\section[Projects]{Projects \hfill \normalfont\footnotesize\raisebox{1.5pt}{Additional projects at \href{https://kiril.is-a.dev/projects}{kiril.is-a.dev/projects}}}
+    \resumeSubHeadingListStart
+      \resumeProjectHeading
+          {\textbf{SaaS Notes: Multi-Tenant System \& Business Rules} $|$ \emph{PostgreSQL, Prisma, Stripe, Next.js}}{{\href{https://saas-noteapp.vercel.app/}{\underline{Live Demo}}} $|$ {\href{https://github.com/kyyril/saas-noteapp}{\underline{GitHub}}}}
+          \resumeItemListStart
+            \resumeItem{Modeled multi-tenant relational schemas with \textbf{IDOR prevention}, \textbf{AES-256-GCM} encryption, and an \textbf{audit log} capturing actions, user IDs, IP addresses, and timestamps.}
+            \resumeItem{Defined business rules enforcing freemium quotas (5-note limit) and idempotent \textbf{Stripe} subscription webhook ledgers.}
+          \resumeItemListEnd
+      \resumeProjectHeading
+          {\textbf{Fluently: Cross-Platform Learning Workflow} $|$ \emph{PostgreSQL, Redis, TypeScript, Gemini AI}}{{\href{https://fluentlyy.vercel.app}{\underline{Live Demo}}} $|$ {\href{https://github.com/kyyril/Fluently}{\underline{GitHub}}}}
+          \resumeItemListStart
+            \resumeItem{Designed an end-to-end 4-step daily learning workflow and gamification state model across web and mobile clients.}
+            \resumeItem{Architected AI conversational evaluation flows and \textbf{Redis}-backed session state in a unified monorepo spec.}
+          \resumeItemListEnd
+    \resumeSubHeadingListEnd
+
+%-----------HONORS & CERTIFICATIONS-----------
+\section{Honors \& Certifications}
+  \begin{itemize}[leftmargin=15pt, label=\tiny$\bullet$, itemsep=0.3pt, parsep=0pt, topsep=0.1pt]
+    \resumeItem{\textbf{AstraPay Hackathon 2026} -- Finalist (Top 10): Designed MSME working-capital eligibility workflow via QRIS scoring.}
+    \resumeItem{\textbf{PIDI DIGDAYA 2026} -- Semifinalist (Top 400/2,500+): Designed anti-fraud candidate screening via work trials.}
+    \resumeItem{\textbf{Certifications}: \textbf{Oracle} OCI Certified Foundations \href{https://catalog-education.oracle.com/ords/certview/sharebadge_m?id=8B649FA58712B4081E58C95EC3618C77402518C510B850A9C86F02FCB73960A5}{\underline{(Badge)}} $|$ Certified \textbf{Meshery} (CNCF) Contributor \href{https://cloud.meshery.io/academy/certificates/dcd71d58-dd35-45d3-86a9-857ac980e08e}{\underline{(Cred)}}.}
+  \end{itemize}\vspace{-3pt}
+
+%-----------TECHNICAL SKILLS-----------
+\section{Skills \& Competencies}
+  \begin{itemize}[leftmargin=0in, label={}, itemsep=0.3pt, parsep=0pt, topsep=0.1pt]
+    \item\small{
+      \textbf{Analysis \& Modeling}{: SRS/FRS, Requirement Gathering, Process Mapping, UML, ERD, Flowcharts, RBAC, Agile, UAT} \\
+      \textbf{Data, APIs \& Systems}{: SQL (PostgreSQL, MySQL), Redis, REST APIs, Swagger/OpenAPI, Microservices, RabbitMQ} \\
+      \textbf{Engineering \& Tools}{: TypeScript, Node.js, Go (Golang), Python, Next.js, Prisma, Docker, Git, Prometheus, Grafana}
+    }
+  \end{itemize}
+
+\end{document}

@@ -1,4 +1,4 @@
-﻿\documentclass[letterpaper,11pt]{article}
+\documentclass[letterpaper,11pt]{article}
 
 \usepackage{latexsym}
 \usepackage[empty]{fullpage}
@@ -23,7 +23,7 @@
 \renewcommand{\footrulewidth}{0pt}
 
 % Geometry with clean, balanced margins
-\usepackage[letterpaper, left=0.42in, right=0.42in, top=0.34in, bottom=0.30in]{geometry}
+\usepackage[letterpaper, left=0.42in, right=0.42in, top=0.33in, bottom=0.28in]{geometry}
 
 \urlstyle{same}
 
@@ -34,8 +34,8 @@
 % Sections formatting
 \titleformat{\section}{
   \scshape\raggedright\large
-}{}{0em}{}[\color{black}\titlerule \vspace{1.2pt}]
-\titlespacing*{\section}{0pt}{2.4pt}{1.0pt}
+}{}{0em}{}[\color{black}\titlerule \vspace{1.1pt}]
+\titlespacing*{\section}{0pt}{2.3pt}{0.9pt}
 
 % Ensure that generate pdf is machine readable/ATS parsable
 \pdfgentounicode=1
@@ -78,7 +78,7 @@
 
 %-----------PROFESSIONAL SUMMARY-----------
 \section{Summary}
-  \small{\textbf{Fullstack Software Engineer} (\textbf{Golang}, \textbf{Node.js}, \textbf{React/Next.js}) with production experience across automotive retail, enterprise ERP, and software house platforms. Led a \textbf{16-member squad}, architected event-driven microservices with payment gateways, deployed \textbf{Docker} pipelines, Top 10 hackathon finalist, and \textbf{merged PRs} into \textbf{Google} \& \textbf{Prometheus}.}
+  \small{\textbf{Fullstack Software Engineer} (\textbf{Golang}, \textbf{Node.js}, \textbf{React/Next.js}) with experience across automotive retail, ERP, and software houses. Acted as \textbf{Technical Lead} for a cross-functional team, architected event-driven microservices, payment gateways, \textbf{Docker} pipelines, Top 10 \textbf{AstraPay} finalist, and \textbf{merged PRs} into \textbf{Google} \& \textbf{Prometheus}.}
 
 %-----------EDUCATION-----------
 \section{Education}
@@ -87,7 +87,7 @@
       {State Islamic University of Imam Bonjol Padang}{August 2022 -- September 2026}
       {Bachelor of Science in Information Systems (GPA: 3.51/4.00)}{Padang, Indonesia}
       \resumeItemListStart
-        \resumeItem{\textbf{Undergraduate Thesis}: \emph{Empirical Scaling Analysis of Event-Driven Systems} (\textbf{Golang}, \textbf{RabbitMQ}, \textbf{k6}) -- Built a benchmark harness evaluating \textbf{34,951 requests} at \textbf{200 VUs}; cut P95 latency \textbf{58.9\% (135.5ms to 55.7ms)}, sustained \textbf{96.56 RPS (0\% error)}; proved zero data loss across \textbf{14,170 events} under broker crashes via DLQ. \href{https://github.com/kyyril/undergraduate-thesis-benchmarks}{\underline{(Repo)}}}
+        \resumeItem{\textbf{Undergraduate Thesis}: \emph{Empirical Scaling Analysis of Event-Driven Systems} (\textbf{Golang}, \textbf{RabbitMQ}, \textbf{k6}) -- Built a benchmark harness evaluating \textbf{34,951 requests} at \textbf{200 VUs}; cut P95 latency \textbf{58.9\% (135.5ms to 55.7ms)}, sustained \textbf{96.56 RPS (0\% error)}; proved zero data loss across \textbf{14,170 events} under broker crashes via DLQ. \href{https://repository.uinib.ac.id/34986/}{\underline{(Repo)}}}
       \resumeItemListEnd
   \resumeSubHeadingListEnd
 
@@ -98,8 +98,8 @@
       {TIME Language Centre \textnormal{\small -- 10+ Yr Institution \& Official IDP IELTS Centre}}{September 2025 -- December 2025}
       {Software Engineer Intern}{Padang, Indonesia (Hybrid)}
       \resumeItemListStart
-        \resumeItem{Served as \textbf{de facto Tech Lead} coordinating a \textbf{16-member Agile squad} and founders; engineered an \textbf{internal ERP system} (\textbf{Node.js}, \textbf{Prisma}), automating class scheduling, attendance tracking, and payroll workflows.}
-        \resumeItem{Architected a separate \textbf{online course platform} using \textbf{event-driven microservices} (\textbf{Golang}, \textbf{RabbitMQ Message Broker}), isolating high-traffic exam workloads from billing and keeping payment operations stable under concurrent load.}
+        \resumeItem{Acted as \textbf{Technical Lead} for a cross-functional Agile team and founders while co-developing an \textbf{internal ERP system} (\textbf{Node.js}, \textbf{Prisma}), automating class scheduling, attendance, and payroll workflows.}
+        \resumeItem{Architected and built a separate \textbf{online course platform} using \textbf{event-driven microservices} (\textbf{Golang}, \textbf{RabbitMQ Message Broker}), isolating exam workloads from billing to keep payments stable under concurrent load.}
         \resumeItem{Integrated \textbf{Xendit} payment gateway in \textbf{Golang} with idempotent webhooks and server-side verification, eliminating checkout tampering and payment discrepancies.}
         \resumeItem{Containerized services with \textbf{Docker} and \textbf{NGINX}; deployed \textbf{Prometheus}, \textbf{Grafana}, and \textbf{Loki} pipelines for system health, latency, and log observability.}
       \resumeItemListEnd 
@@ -118,7 +118,7 @@
       {Fullstack Software Engineer Intern}{Labuhanbatu, Indonesia (Onsite)}
       \resumeItemListStart
         \resumeItem{Gathered requirements from sales and admin leads, translating dealership workflows into \textbf{SRS/FRS} documentation.}
-        \resumeItem{Replaced vendor software with an internal STNK/BPKB reminder app (\textbf{WhatsApp API}, Excel sync), eliminating missed deadline notifications for STNK/BPKB renewals.}
+        \resumeItem{Replaced vendor software with an internal STNK/BPKB app (\textbf{WhatsApp API}, Excel sync), eliminating missed renewals.}
         \resumeItem{Delivered dealership portal (\textbf{Next.js}) with credit calculators and \textbf{Gemini AI} recommendations, driving customer leads.}
         \resumeItem{Eliminated manual data processing across \textbf{15 years of records (38k+/year)} via \textbf{Python}, cutting weeks to minutes.}
       \resumeItemListEnd
@@ -162,9 +162,10 @@
 \section{Technical Skills}
   \begin{itemize}[leftmargin=0in, label={}, itemsep=0.3pt, parsep=0pt, topsep=0.1pt]
     \item\small{
-      \textbf{Languages \& Databases}{: Go (Golang), TypeScript, JavaScript, Python, SQL $|$ PostgreSQL, Redis (NoSQL), Supabase, sqlc} \\
-      \textbf{Frameworks \& Libraries}{: Next.js, React, Node.js, Prisma ORM, TanStack Query, Tailwind CSS} \\
-      \textbf{DevOps, Cloud \& Tools}{: Docker, RabbitMQ (Message Broker), NGINX, Prometheus, Grafana, Unit Testing, Git, Swagger}
+      \textbf{Languages}{: Go (Golang), TypeScript, JavaScript, Python, SQL, Bash} \\
+      \textbf{Frontend}{: HTML/CSS, React.js, Next.js, TanStack Query, Zustand, Tailwind CSS, Chakra UI, Shadcn UI} \\
+      \textbf{Backend \& Databases}{: Node.js, Prisma ORM, GORM, PostgreSQL, MySQL, Redis, RabbitMQ} \\
+      \textbf{DevOps \& Tools}{: Docker, NGINX, Prometheus, Grafana, Loki, Git, GitHub Actions, Swagger}
     }
   \end{itemize}
 
