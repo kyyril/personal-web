@@ -23,7 +23,7 @@ export const PERSONAL_KEYWORDS = [
 ];
 
 export const SEO_DESCRIPTION = {
-    main: "Software Engineer specializing in building scalable, maintainable systems. Combining a strong academic foundation in Information Systems with hands-on experience in full-stack development and clean architecture principles.",
+    main: "Software Engineer and problem solver with an Information Systems background. Experienced in translating complex business workflows into scalable web applications, enterprise internal tools, and reliable distributed systems.",
     projects: "Explore a collection of software engineering projects demonstrating expertise in building scalable, maintainable systems with clean architecture principles.",
     guestbook: "Connect with Khairil Rahman Hakiki through the guestbook. Share your thoughts and join the community of software engineering enthusiasts.",
     chat: "Start a conversation with Khairil's AI assistant. Get insights about software engineering, career advice, or discuss technology and development practices.",

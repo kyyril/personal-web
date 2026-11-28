@@ -1,3 +1,3 @@
 export const HERO_DATA = {
-  bio: "Specializing in building scalable, maintainable systems. Combining a strong academic foundation in Information Systems with hands-on experience in full-stack development and clean architecture principles.",
+  bio: "Software Engineer and problem solver with an Information Systems background. Experienced in translating complex business workflows into scalable web applications, enterprise internal tools, and reliable distributed systems.",
 };

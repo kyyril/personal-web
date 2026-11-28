@@ -39,7 +39,7 @@ const Bio: React.FC = () => {
 
       <div>
         <p className="max-w-[600px] text-muted-foreground lg:text-lg leading-relaxed">
-          Software Engineer focused on Go, backend systems, and distributed systems, with experience building reliable services and contributing to open-source projects.
+          {HERO_DATA.bio}
         </p>
       </div>
     </section>

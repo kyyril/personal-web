@@ -51,7 +51,7 @@ export default function Home() {
         name: "What is Khairil Rahman Hakiki's background?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Khairil Rahman Hakiki is a Software Engineer specializing in building scalable, maintainable systems. He combines a strong academic foundation in Information Systems with hands-on experience in full-stack development and clean architecture principles.",
+          text: "Khairil Rahman Hakiki is a Software Engineer and problem solver. He combines a strong academic foundation in Information Systems with hands-on experience translating complex business workflows into scalable web applications and reliable enterprise systems.",
         },
       },
       {
